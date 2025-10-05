@@ -16,13 +16,13 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('img/noise.png'); /* subtle transparent noise */
+  background-image: url('img/noise.png');
   opacity: 0.05;
   pointer-events: none;
   z-index: 1;
 }
 
-
+/* Timeline container */
 .timeline-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -30,6 +30,7 @@ body::after {
   position: relative;
 }
 
+/* Timeline vertical line */
 .timeline::before {
   content: '';
   position: absolute;
@@ -43,26 +44,34 @@ body::after {
   z-index: 0;
 }
 
+/* Timeline events */
 .timeline-event {
   position: relative;
   margin-bottom: 80px;
 }
 
+/* Timeline item */
 .timeline-item {
   width: 45%;
+  box-sizing: border-box; /* include padding in width */
 }
 
+/* Left item (text right-aligned, padding to avoid crossing center line) */
 .timeline-event.left .timeline-item {
   text-align: right;
   margin-left: auto;
-  padding-right: 60px;
+  padding-right: 80px; /* increased padding for safety */
+  max-width: calc(50% - 40px); /* ensures text does not cross center line */
 }
 
+/* Right item (text left-aligned, padding to avoid crossing center line) */
 .timeline-event.right .timeline-item {
   text-align: left;
-  padding-left: 60px;
+  padding-left: 80px; /* increased padding for safety */
+  max-width: calc(50% - 40px); /* ensures text does not cross center line */
 }
 
+/* Titles */
 .timeline-item h2 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   color: #7e3ff2;
@@ -70,6 +79,7 @@ body::after {
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
+/* Description list */
 .timeline-item ul {
   list-style: none;
   padding-left: 0;
@@ -96,6 +106,7 @@ body::after {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Hover effects */
 .timeline-event:hover .dot {
   transform: translateX(-50%) scale(1.3);
   box-shadow: 0 0 15px #7e3ff2;
@@ -111,18 +122,87 @@ body::after {
   transform: translateX(5px);
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
-  .timeline-event.left .timeline-item,
-  .timeline-event.right .timeline-item {
-    width: 100%;
-    margin: 0;
-    padding: 0 20px;
-    text-align: left;
+  /* Container padding for mobile */
+  .timeline-container {
+    padding: 20px 15px;
+    margin-top: 0;
+    box-sizing: border-box;
   }
 
-  .dot {
-    left: 20px;
+  /* Vertical line on left */
+  .timeline::before {
+    left: 40px;       /* position line for mobile */
+    width: 4px;
     transform: none;
+    top: 0;
+  }
+
+  /* Timeline events stacked full-width */
+  .timeline-event {
+    margin-bottom: 60px;
+    padding-left: 0;   /* reset desktop padding */
+  }
+
+  /* Timeline items stacked vertically */
+  .timeline-item {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 70px;   /* space for dot */
+    padding-right: 15px;  /* prevent overflow */
+    text-align: left;
+    display: flex;
+    flex-direction: column; 
+    position: relative;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+
+  /* Fully override left/right desktop alignment */
+  .timeline-event.left .timeline-item,
+  .timeline-event.right .timeline-item {
+    padding-left: 70px !important;  /* space for dot */
+    margin: 0;
+    text-align: left !important;
+    max-width: 100% !important;
+  }
+
+  /* Dot positioned over the line, slightly below title */
+  .dot {
+    position: absolute;
+    left: 3.5%;   /* align with vertical line */
+    top:20px;
+    transform: none;
+    width: 20px;
+    height: 20px;
+    border-width: 4px;
+    z-index: 2;
+  }
+
+  /* Titles stacked above description */
+  .timeline-item h2 {
+    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+    margin-bottom: 8px;
+  }
+
+  .timeline-item ul {
+    padding-left: 0;
+    margin-top: 0;
+  }
+
+  .timeline-item li {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    margin-bottom: 6px;
+    word-wrap: break-word;
+  }
+
+  /* Remove hover effects for touch devices */
+  .timeline-event:hover .dot,
+  .timeline-event:hover h2,
+  .timeline-event:hover li {
+    transform: none;
+    color: #7e3ff2;
+    text-shadow: none;
   }
 }

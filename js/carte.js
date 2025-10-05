@@ -8,6 +8,10 @@ let scale = 1;
 
 let maxScale = 3;
 
+// For pinch zoom
+let initialDistance = 0;
+let initialScale = 1;
+
 // Dynamically calculate min scale to fit container
 function getMinScale() {
   const scaleX = container.offsetWidth / map.offsetWidth;
@@ -35,7 +39,7 @@ function clampTranslate(x, y, scale) {
 // Disable default image drag
 map.ondragstart = () => false;
 
-// Dragging
+// Dragging with mouse
 container.addEventListener('mousedown', (e) => {
   isDragging = true;
   startX = e.clientX - translateX;
@@ -81,6 +85,61 @@ container.addEventListener('wheel', (e) => {
   // Clamp translation after zoom
   [translateX, translateY] = clampTranslate(translateX, translateY, scale);
   updateTransform();
+});
+
+// ---------- Touch support ----------
+container.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    // Single-finger drag
+    isDragging = true;
+    startX = e.touches[0].clientX - translateX;
+    startY = e.touches[0].clientY - translateY;
+  } else if (e.touches.length === 2) {
+    // Pinch zoom
+    isDragging = false;
+    initialDistance = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+    initialScale = scale;
+  }
+});
+
+container.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  if (e.touches.length === 1 && isDragging) {
+    let newX = e.touches[0].clientX - startX;
+    let newY = e.touches[0].clientY - startY;
+    [translateX, translateY] = clampTranslate(newX, newY, scale);
+    updateTransform();
+  } else if (e.touches.length === 2) {
+    const currentDistance = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+    let zoomFactor = currentDistance / initialDistance;
+    scale = initialScale * zoomFactor;
+
+    const minScale = getMinScale();
+    scale = Math.min(maxScale, Math.max(minScale, scale));
+
+    // Optional: zoom towards midpoint between fingers
+    const rect = container.getBoundingClientRect();
+    const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+    const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+
+    translateX -= (midX / initialScale - midX / scale);
+    translateY -= (midY / initialScale - midY / scale);
+
+    [translateX, translateY] = clampTranslate(translateX, translateY, scale);
+    updateTransform();
+  }
+});
+
+window.addEventListener('touchend', (e) => {
+  if (e.touches.length === 0) {
+    isDragging = false;
+  }
 });
 
 function updateTransform() {

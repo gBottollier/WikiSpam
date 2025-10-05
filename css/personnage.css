@@ -97,14 +97,29 @@
   background: rgba(18, 0, 40, 0.2);
 }
 
-/* Responsive text for smaller screens */
-@media (max-width: 500px) {
+/* ---------- Responsive Behavior ---------- */
+@media (max-width: 1024px) {
+  /* Show description below image */
   .character-info {
-    max-height: 120px;
-    padding: 10px;
+    transform: translateY(0) !important; /* ignore hover */
+    position: relative;                  /* stack below image */
+    max-height: none;                    /* show full content */
+    background: rgba(18,0,40,0.9);
+    border-radius: 20px;                 /* keep rounded corners */
+    margin-top: 10px;                    /* spacing below image */
+    overflow: visible;                   /* let all text show */
   }
 
+  /* Remove hover effects from card */
+  .character-card {
+    transform: none !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  }
+
+  /* Adjust name spacing */
   .character-name {
-    font-size: 1.2rem;
+    margin-bottom: 5px;
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem); /* scales nicely for tablets */
   }
 }
+

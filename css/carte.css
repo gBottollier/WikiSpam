@@ -5,25 +5,28 @@ html, body {
   overflow: hidden;
 }
 
+/* Map container fills viewport minus navbar */
 #map-container {
   width: 100%;
-  height: calc(100vh - 150px); /* subtract navbar height */
+  height: calc(100vh - 150px); /* adjust for navbar height */
   overflow: hidden;
   position: relative;
   cursor: grab;
   background: #000;
 }
 
+/* Map image absolute, keeps JS transform logic */
 #map {
   position: absolute;
   top: 0;
   left: 0;
+  width: auto;
+  height: 100%;  /* fill container height */
+  min-width: 100%; /* ensures no gaps on wide screens */
   user-select: none;
   -webkit-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
   -ms-user-drag: none;
   transform-origin: top left;
-  width: 100%;
-  height: 100%;
 }
