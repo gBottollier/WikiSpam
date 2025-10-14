@@ -226,7 +226,6 @@
 /* ---------- Row Container ---------- */
 .race-row {
   display: flex;
-  align-items: flex-start;
   gap: 2rem;
   max-width: 980px; /* container width */
   width: 90%; /* adapt to screen width */
@@ -241,7 +240,7 @@
   flex: 0 0 300px; /* fixed max width for images */
   height: auto;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .race-img-container img {
