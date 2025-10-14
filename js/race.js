@@ -3,10 +3,10 @@ const races = {
   normal: [
     { display: "Nymphe", file: "nymphe_scaled.webp" },
     { display: "Tokscyth", file: "gnome_scaled.webp" },
-    { display: "Olforgeur", file: "nain_scaled.webp" },
     { display: "Oniyx", file: "oniyx_scaled.webp" },
+    { display: "Olforgeur", file: "nain_scaled.webp" },
     { display: "Etherien", file: "humain_scaled.webp" },
-    { display: "Antropomorphe", file: "antropomorphe_scaled.webp" },
+    { display: "Anthropomorphe", file: "antropomorphe_scaled.webp" },
     { display: "Pixarch", file: "elfe_scaled.webp" },
     { display: "Alphilan", file: "alphilan_scaled.webp" },
     { display: "Natus", file: "natus_scaled.webp" },
