@@ -1,208 +1,294 @@
-/* Background gradient */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: radial-gradient(circle at 50% 50%, #0b001f, #120028 70%, #1c0035 100%);
-  color: #a6f0ff;
-  overflow-x: hidden;
-  position: relative;
-}
-
-/* Optional: subtle noise overlay */
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('img/noise.png');
-  opacity: 0.05;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Timeline container */
 .timeline-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 50px 20px;
   position: relative;
+  background: radial-gradient(ellipse at top, rgba(0, 0, 60, 0.6), #000);
+  padding: 6vh 0;
+  overflow-x: clip;
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Timeline vertical line */
-.timeline::before {
-  content: '';
+/* Center vertical line */
+.timeline-line {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
-  background: #7e3ff2;
-  border-radius: 2px;
+  width: 0.4rem;
+  background: rgba(126, 63, 242, 0.25);
+  border-radius: 0.2rem;
   z-index: 0;
 }
 
-/* Timeline events */
-.timeline-event {
+/* Spacing variable around center line */
+:root {
+  --line-gap: 3vw;
+}
+
+/* Base era container */
+.timeline-era {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin: 18vh 0;
   position: relative;
-  margin-bottom: 80px;
 }
 
-/* Timeline item */
-.timeline-item {
-  width: 45%;
-  box-sizing: border-box; /* include padding in width */
-}
-
-/* Left item (text right-aligned, padding to avoid crossing center line) */
-.timeline-event.left .timeline-item {
-  text-align: right;
-  margin-left: auto;
-  padding-right: 80px; /* increased padding for safety */
-  max-width: calc(50% - 40px); /* ensures text does not cross center line */
-}
-
-/* Right item (text left-aligned, padding to avoid crossing center line) */
-.timeline-event.right .timeline-item {
-  text-align: left;
-  padding-left: 80px; /* increased padding for safety */
-  max-width: calc(50% - 40px); /* ensures text does not cross center line */
-}
-
-/* Titles */
-.timeline-item h2 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  color: #7e3ff2;
-  margin-bottom: 10px;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-/* Description list */
-.timeline-item ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.timeline-item li {
-  font-size: clamp(1rem, 1.1vw, 1.2rem);
-  margin-bottom: 8px;
+/* Era info block (sticky) */
+.era-info {
+  position: sticky;
+  top: 1vh;
+  align-self: flex-start;
+  font-weight: bold;
+  color: var(--accent, #7e3ff2);
+  text-shadow: 0 0 12px rgba(126, 63, 242, 0.5);
+  z-index: 1;
   transition: color 0.3s ease, transform 0.3s ease;
+  will-change: transform;
 }
 
-/* Dot over the line */
-.dot {
-  top: 5%;
+.era-title,
+.era-date,
+.era-duration {
+  margin: 0;
+  padding: 0;
+}
+
+/* Event cards container */
+.timeline-events {
+  display: flex;
+  flex-direction: column;
+  gap: 4vh;
+  align-items: stretch;
+  justify-content: flex-start;
+  position: relative;
+}
+
+/* Left era */
+.timeline-era.left .era-info {
+  order: 0;
+  text-align: right;
+  width: calc(50% - var(--line-gap) / 2);
+  padding-right: 2vw;
+}
+.timeline-era.left .timeline-events {
+  order: 1;
+  width: calc(50% - var(--line-gap) / 2);
+  padding-left: 2vw;
+}
+
+/* Right era */
+.timeline-era.right .era-info {
+  order: 1;
+  text-align: left;
+  width: calc(50% - var(--line-gap) / 2);
+  padding-left: 2vw;
+}
+.timeline-era.right .timeline-events {
+  order: 0;
+  width: calc(50% - var(--line-gap) / 2);
+  padding-right: 2vw;
+}
+
+/* Event cards */
+.event-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 3vh 2vw;
+  box-shadow: 0 0 1.5rem rgba(126, 63, 242, 0.15);
+  opacity: 0;
+  transform: translateY(4vh);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  width: 100%;
+}
+.event-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.event-title {
+  color: #ffb86c;
+  font-size: clamp(1.2rem, 1.4vw, 1.5rem);
+  margin-bottom: 0.5rem;
+}
+.event-desc {
+  color: #c8e8ff;
+  line-height: 1.6;
+  font-size: clamp(1rem, 1vw, 1.1rem);
+}
+
+/* Era title styling */
+.timeline-era.left .era-title {
+  font-size: clamp(1.6rem, 2vw, 2.4rem);
+  background: linear-gradient(90deg, #7e3ff2, #63d0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.3rem;
+}
+.timeline-era.right .era-title {
+  font-size: clamp(1.6rem, 2vw, 2.4rem);
+  background: linear-gradient(90deg, #63d0ff, #7e3ff2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.3rem;
+}
+.era-date,
+.era-duration {
+  display: block;
+  color: #b9dfff;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  margin-top: 0.2rem;
+}
+
+/* Floating year card */
+.scroll-year-card {
+  position: fixed;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 40, 0.8);
+  border: 1px solid rgba(126, 63, 242, 0.4);
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  box-shadow: 0 0 20px rgba(126, 63, 242, 0.3);
+  backdrop-filter: blur(6px);
+  text-align: center;
+  pointer-events: none;
+  z-index: 100;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scroll-year-card::before {
+  content: "";
   position: absolute;
+  top: -1rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
-  background: #a6f0ff;
+  width: 0.6rem;
+  height: 0.6rem;
   border-radius: 50%;
-  border: 4px solid #7e3ff2;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: radial-gradient(circle, #7e3ff2 0%, #63d0ff 60%, transparent 80%);
+  box-shadow: 0 0 20px rgba(126, 63, 242, 0.9), 0 0 40px rgba(126, 63, 242, 0.6);
 }
 
-/* Hover effects */
-.timeline-event:hover .dot {
-  transform: translateX(-50%) scale(1.3);
-  box-shadow: 0 0 15px #7e3ff2;
+.scroll-year-value {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 2.2vw, 3rem);
+  background: linear-gradient(90deg, #7e3ff2, #63d0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(126, 63, 242, 0.5);
 }
 
-.timeline-event:hover h2 {
-  color: #fff;
-  text-shadow: 0 0 10px #a6f0ff;
-}
+/* Responsive */
+@media (max-width: 900px) {
+  :root {
+    --line-gap: 4vw;
+  }
 
-.timeline-event:hover li {
-  color: #fff;
-  transform: translateX(5px);
-}
-
-
-@media (max-width: 768px) {
-  /* Container padding for mobile */
   .timeline-container {
-    padding: 20px 15px;
+    padding: 0;
+  }
+
+  /* Timeline era container */
+  .timeline-era {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10vh 0;
+    width: 100%;
+  }
+
+  .timeline-era:first-of-type {
     margin-top: 0;
-    box-sizing: border-box;
   }
 
-  /* Vertical line on left */
-  .timeline::before {
-    left: 40px;       /* position line for mobile */
-    width: 4px;
-    transform: none;
-    top: 0;
-  }
-
-  /* Timeline events stacked full-width */
-  .timeline-event {
-    margin-bottom: 60px;
-    padding-left: 0;   /* reset desktop padding */
-  }
-
-  /* Timeline items stacked vertically */
-  .timeline-item {
+  /* Ensure era info stays on top */
+  .timeline-era.left .era-info,
+  .timeline-era.right .era-info {
+    order: -1;
     width: 100%;
     max-width: 100%;
-    padding-left: 70px;   /* space for dot */
-    padding-right: 15px;  /* prevent overflow */
-    text-align: left;
+    text-align: center;
+  }
+
+  .timeline-era.left .timeline-events,
+  .timeline-era.right .timeline-events {
+    order: 0;
+    width: 80%;
+    margin-left: 20%;
+  }
+
+  /* Timeline line (middle of left 20% column) */
+  .timeline-line {
+    left: calc(20% / 2);
+    width: 0.3rem;
+  }
+
+  /* Sticky ERA INFO */
+  .era-info {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(126, 63, 242, 0.25);
+    padding: 1.5vh 3vw;
+    margin-bottom: 0;
+    z-index: 10;
+  }
+
+  .era-title {
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+  }
+
+  .era-date,
+  .era-duration {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+  }
+
+  /* Events area */
+  .timeline-events {
+    padding: 0 4vw;
     display: flex;
-    flex-direction: column; 
-    position: relative;
-    box-sizing: border-box;
-    word-wrap: break-word;
+    flex-direction: column;
+    gap: 4vh;
   }
 
-  /* Fully override left/right desktop alignment */
-  .timeline-event.left .timeline-item,
-  .timeline-event.right .timeline-item {
-    padding-left: 70px !important;  /* space for dot */
-    margin: 0;
-    text-align: left !important;
-    max-width: 100% !important;
+  .event-card {
+    width: 100%;
   }
 
-  /* Dot positioned over the line, slightly below title */
-  .dot {
-    position: absolute;
-    left: 3.5%;   /* align with vertical line */
-    top:20px;
-    transform: none;
-    width: 20px;
-    height: 20px;
-    border-width: 4px;
-    z-index: 2;
-  }
-
-  /* Titles stacked above description */
-  .timeline-item h2 {
-    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
-    margin-bottom: 8px;
-  }
-
-  .timeline-item ul {
-    padding-left: 0;
-    margin-top: 0;
-  }
-
-  .timeline-item li {
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
-    margin-bottom: 6px;
-    word-wrap: break-word;
-  }
-
-  /* Remove hover effects for touch devices */
-  .timeline-event:hover .dot,
-  .timeline-event:hover h2,
-  .timeline-event:hover li {
-    transform: none;
-    color: #7e3ff2;
-    text-shadow: none;
-  }
+  /* Floating year card aligned to line column */
+.scroll-year-card {
+    top: 12%;               /* vertical offset */
+    left: auto;             /* remove hard-coded left */
+    transform: none;        /* remove translateX(-50%) */
+    padding: 0.5rem 1rem;
+    background: rgba(10, 10, 25, 0.85);
+    border: 1px solid rgba(126, 63, 242, 0.3);
+    z-index: 100;
 }
+
+
+  .scroll-year-value {
+    display: inline-block;
+    width: 5ch;             /* fixed width for digits */
+    text-align: center;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1rem, 1.5vw, 1.8rem);
+    background: linear-gradient(90deg, #7e3ff2, #63d0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(126, 63, 242, 0.5);
+  }
+
+
+
+

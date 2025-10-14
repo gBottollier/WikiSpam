@@ -1,4 +1,10 @@
 /* ---------- Race Section ---------- */
+.race-lore 
+{
+  background: radial-gradient(ellipse at top, rgba(0,0,60,0.6), #000);
+}
+
+/* ---------- Race Section ---------- */
 .race-section 
 {
   display: flex;
@@ -257,16 +263,16 @@
   margin: 0;
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 700;
-  color: #ffffff;
+  color: #ffb86c;
 }
 
-.race-text p:first-of-type {
+.race-phrase {
   margin: 0.25rem 0 0.5rem 0;
   font-weight: 600;
-  color: #00ffff;
+  color: #63d0ff;
 }
 
-.race-text p:not(:first-of-type) {
+.race-description-text {
   margin: 0.5rem 0 1rem 0;
   color: rgba(255, 255, 255, 0.8);
 }
@@ -287,7 +293,7 @@
   padding: 0;
   background: transparent;
   border: none;
-  color: #00ffff;
+  color: #63d0ff;
   font-weight: 600;
   font-size: 0.9rem;
   text-transform: uppercase;

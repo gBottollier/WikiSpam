@@ -24,7 +24,7 @@ const races = {
 
 const raceDisplayNames = {
   normal: "Mortel",
-  ethereal: "Éthérée"
+  ethereal: "Éthéré"
 };
 
 let resizeTimeout = null;

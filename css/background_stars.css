@@ -1,7 +1,7 @@
 body {
   margin: 0;
   background: radial-gradient(circle at 50% 50%, #0b001f, #120028 70%, #1c0035 100%);
-  overflow-x: hidden;
+  overflow-x: visible;
   position: relative;
 }
 

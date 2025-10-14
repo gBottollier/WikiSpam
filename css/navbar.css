@@ -10,7 +10,7 @@
 html, body {
   height: auto; /* or remove the height:100% */
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: visible;
 }
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -254,13 +254,15 @@ nav.bottom-nav .center-icon img.bottom-logo {
   display: block;
 }
 
+#navbar-placeholder
+{
+  display:none;
+}
+
 /* ---------- Responsive Rules ---------- */
 @media (max-width: 900px) {
   nav.bottom-nav { display: flex; }
   nav.navbar { display: none; }
-  main, .content, body > :not(nav.bottom-nav) {
-    padding-bottom: 70px;
-  }
   
   #butterflyBtn {
     bottom: 90px; /* 70px navbar + 20px above */
