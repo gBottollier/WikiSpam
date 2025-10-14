@@ -187,7 +187,7 @@
   max-width: 980px;         /* content width */
   width: 90%;               /* responsive width */
   margin: 2rem auto;        /* auto horizontal margins to center section */
-  text-align: Left;
+  text-align: justify;
 }
 
 .race-intro-title {
@@ -264,6 +264,9 @@
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 700;
   color: #ffb86c;
+  align-self: flex-start;
+  text-align: left;
+  width: 100%;
 }
 
 .race-phrase {
@@ -273,15 +276,9 @@
 }
 
 .race-description-text {
+  text-align: justify;
   margin: 0.5rem 0 1rem 0;
   color: rgba(255, 255, 255, 0.8);
-}
-
-.race-text h3,
-.race-text p:first-of-type {
-  align-self: flex-start;
-  text-align: left;
-  width: 100%;
 }
 
 .race-text .btn {
