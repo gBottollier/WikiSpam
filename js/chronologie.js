@@ -1,99 +1,190 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const eras = document.querySelectorAll(".timeline-era");
-  const eventCards = document.querySelectorAll(".event-card");
+  // 🔹 Select DOM elements
+  const container = document.querySelector(".timeline-container");
+  const yearDiv = document.querySelector(".timeline-year");
+  const events = Array.from(document.querySelectorAll(".event-card"));
+  const eras = Array.from(document.querySelectorAll(".timeline-era"));
 
-  // === Floating year card ===
-  const yearCard = document.createElement("div");
-  yearCard.classList.add("scroll-year-card");
-  const yearValue = document.createElement("div");
-  yearValue.classList.add("scroll-year-value");
-  yearCard.appendChild(yearValue);
-  document.body.appendChild(yearCard);
+  // =======================
+  // 🔹 Utility Functions
+  // =======================
+  const getOffsetRect = (el) => {
+    const rect = el.getBoundingClientRect();
+    return {
+      left: rect.left + window.scrollX,
+      top: rect.top + window.scrollY,
+      right: rect.right + window.scrollX,
+      bottom: rect.bottom + window.scrollY,
+      width: rect.width,
+      height: rect.height
+    };
+  };
 
-  // === Helpers ===
-  let lastYear = 0;
-  let lastScrollTop = window.scrollY;
+  const createDebugLine = (top, color = "rgba(255,0,0,0.8)", labelText = null) => {
+    const line = document.createElement("div");
+    line.style.position = "absolute";
+    line.style.top = `${Math.round(top)}px`;
+    line.style.left = "0";
+    line.style.width = "100%";
+    line.style.height = "2px";
+    line.style.background = color;
+    line.style.zIndex = "9999";
+    line.style.pointerEvents = "none";
+    document.body.appendChild(line);
 
-  function getCurrentYear() {
-    const scrollTop = window.scrollY;
-    const scrollCenter = scrollTop + window.innerHeight * 0.25;
-    let currentYear = null;
-
-    eras.forEach((era) => {
-      const rect = era.getBoundingClientRect();
-      const top = rect.top + scrollTop;
-      const bottom = rect.bottom + scrollTop;
-      const [start, end] = era.querySelector(".era-date").textContent.match(/\d+/g).map(Number);
-
-      if (scrollCenter >= top && scrollCenter <= bottom) {
-        const progress = (scrollCenter - top) / (bottom - top);
-        currentYear = Math.round(start + (end - start) * progress);
-      }
-    });
-
-    // if still null, pick the first or last era depending on scroll
-    if (currentYear === null) {
-      const firstEraRect = eras[0].getBoundingClientRect();
-      const lastEraRect = eras[eras.length - 1].getBoundingClientRect();
-      const scrollBottom = scrollTop + window.innerHeight;
-
-      if (scrollTop < firstEraRect.top + scrollTop) {
-        const [start] = eras[0].querySelector(".era-date").textContent.match(/\d+/g).map(Number);
-        currentYear = start;
-      } else if (scrollBottom > lastEraRect.bottom + scrollTop) {
-        const [, end] = eras[eras.length - 1].querySelector(".era-date").textContent.match(/\d+/g).map(Number);
-        currentYear = end;
-      } else {
-        currentYear = lastYear || 0;
-      }
+    if (labelText !== null) {
+      const label = document.createElement("div");
+      Object.assign(label.style, {
+        position: "absolute",
+        top: `${Math.round(top) - 10}px`,
+        left: "6px",
+        background: color,
+        color: "#fff",
+        padding: "2px 6px",
+        fontSize: "12px",
+        borderRadius: "3px",
+        zIndex: 10000,
+        pointerEvents: "none"
+      });
+      label.textContent = labelText;
+      document.body.appendChild(label);
     }
+  };
 
-    lastScrollTop = scrollTop;
-    return currentYear;
-  }
-  
-  function updateYearCard(currentYear) {
-  // always update on first load
-  if (currentYear !== lastYear || lastYear === 0) {
-    yearValue.textContent = currentYear.toLocaleString();
-    lastYear = currentYear;
-  }
-}
+  const clearDebug = () => {
+    document.querySelectorAll(".debug-line, .year-line, .year-line-label").forEach(n => n.remove());
+  };
 
-  function updateYearCardPosition() {
-    if (window.innerWidth <= 900)
-    {
-      yearCard.style.transform = "translateX(0)";
-      const timelineLine = document.querySelector(".timeline-line");
-      const rect = timelineLine.getBoundingClientRect();
-      const centerX =  rect.width / 2;
-      yearCard.style.left = `${centerX}px`;
-    }
-    else
-      {
-      yearCard.style.left = "50%"; // desktop center
-      yearCard.style.transform = "translateX(-50%)";
-    }
-  }
-
+  // =======================
+  // 🔹 Event Card Visibility
+  // =======================
   function updateCardVisibility() {
-    eventCards.forEach((card) => {
+    events.forEach(card => {
       const rect = card.getBoundingClientRect();
-      const isVisible = rect.top < window.innerHeight - 100 && rect.bottom > 0;
-      card.classList.toggle("visible", isVisible);
+      const visible = rect.top < window.innerHeight - 120 && rect.bottom > 60;
+      card.classList.toggle("visible", visible);
     });
   }
 
-  function handleScroll() {
-    const currentYear = getCurrentYear();
-    updateYearCard(currentYear);
-    updateCardVisibility();
+  // =======================
+  // 🔹 Year Sticky Logic
+  // =======================
+  function updateYearFromSticky() {
+    if (!events.length) return;
+
+    const measured = events.map(ev => {
+      const r = getOffsetRect(ev);
+      return { top: r.top, year: Number(ev.dataset.year), el: ev };
+    }).sort((a, b) => a.top - b.top);
+
+    const yrRect = getOffsetRect(yearDiv);
+    const yearCenter = yrRect.top + yrRect.height / 2;
+
+    const firstEra = eras[0];
+    const lastEra = eras[eras.length - 1];
+    const eraStart = Number(firstEra?.dataset.start ?? measured[0].year);
+    const eraEnd = Number(lastEra?.dataset.end ?? measured[measured.length - 1].year);
+
+    const lastEvent = measured[measured.length - 1];
+    const lastEventRect = getOffsetRect(lastEvent.el);
+    const lastEventBottom = lastEventRect.bottom;
+
+    let currentYear;
+
+    if (yearCenter <= measured[0].top) {
+      currentYear = eraStart;
+    } else if (yearCenter >= measured[0].top && yearCenter <= lastEvent.top) {
+      for (let i = 0; i < measured.length - 1; i++) {
+        if (yearCenter >= measured[i].top && yearCenter <= measured[i + 1].top) {
+          const prev = measured[i];
+          const next = measured[i + 1];
+          const ratio = (yearCenter - prev.top) / (next.top - prev.top || 1);
+          currentYear = Math.round(prev.year + ratio * (next.year - prev.year));
+          break;
+        }
+      }
+    } else if (yearCenter > lastEvent.top && yearCenter <= lastEventBottom) {
+      const ratio = (yearCenter - lastEvent.top) / (lastEventBottom - lastEvent.top || 1);
+      currentYear = Math.round(lastEvent.year + ratio * (eraEnd - lastEvent.year));
+    } else {
+      currentYear = eraEnd;
+    }
+
+    yearDiv.textContent = currentYear;
+
+    // Update any existing year labels
+    document.querySelectorAll(".year-line-label")
+      .forEach(n => n.textContent = currentYear);
   }
 
-  window.addEventListener("scroll", handleScroll, { passive: true });
-  window.addEventListener("resize", updateYearCardPosition);
+  // =======================
+  // 🔹 Debugging Helpers
+  // =======================
+  function drawDebugLines() {
+    clearDebug();
+    events.forEach(ev => {
+      const r = getOffsetRect(ev);
+      createDebugLine(r.top, "rgba(255,0,0,0.8)", ev.dataset.year);
+    });
+  }
 
-  // initial setup
-  updateYearCardPosition();
-  handleScroll();
+  function drawYearLine() {
+    clearDebug();
+    const yrRect = getOffsetRect(yearDiv);
+    const yearCenter = yrRect.top + yrRect.height / 2;
+
+    // Line
+    createDebugLine(yearCenter, "rgba(0,100,255,0.95)");
+
+    // Label
+    const label = document.createElement("div");
+    Object.assign(label.style, {
+      position: "absolute",
+      top: `${Math.round(yearCenter) - 12}px`,
+      left: "8px",
+      background: "rgba(0,100,255,0.95)",
+      color: "#fff",
+      padding: "2px 6px",
+      fontSize: "12px",
+      borderRadius: "3px",
+      zIndex: 10002,
+      pointerEvents: "none"
+    });
+    label.textContent = yearDiv.textContent || "";
+    label.className = "year-line-label";
+    document.body.appendChild(label);
+  }
+
+  // =======================
+  // 🔹 Initialize
+  // =======================
+  updateCardVisibility();
+  updateYearFromSticky();
+  // drawDebugLines(); // Uncomment if you want debug visualization
+  // drawYearLine();   // Uncomment if you want year line
+
+  // =======================
+  // 🔹 Scroll & Resize Events
+  // =======================
+  window.addEventListener("scroll", () => {
+    updateCardVisibility();
+    updateYearFromSticky();
+  }, { passive: true });
+
+  let resizeTO;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTO);
+    resizeTO = setTimeout(() => {
+      updateCardVisibility();
+      updateYearFromSticky();
+    }, 120);
+  });
+
+  // =======================
+  // 🔹 Cleanup Function
+  // =======================
+  window.removeTimelineDebug = () => {
+    clearDebug();
+    document.querySelectorAll(".year-line-label").forEach(n => n.remove());
+  };
 });
