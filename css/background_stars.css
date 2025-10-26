@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  background: radial-gradient(circle at 50% 50%, #0b001f, #120028 70%, #1c0035 100%);
+  overflow-x: visible;
+  position: relative;
+}
+
+/* Star dust */
+.background-stars {
+  position: fixed;
+  top: 150px; /* offset for navbar */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 150px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  width: 2px; height: 2px;
+  animation: drift linear infinite;
+}
+
+@keyframes drift {
+  0% { transform: translate(0,0); opacity: 0.3; }
+  50% { transform: translate(30px, -50px); opacity: 0.7; }
+  100% { transform: translate(-30px, 50px); opacity: 0.3; }
+}
+
+/* Magical orbs container */
+.magical-orbs {
+  position: fixed;
+  top: 150px; /* offset for navbar */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 150px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Common orb style */
+.orb {
+  position: absolute;
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 40px 10px rgba(255,255,255,0.2);
+  animation: float-orb 12s infinite alternate ease-in-out;
+}
+
+/* Orb colors */
+.orb.fire { background: rgba(255,80,0,0.4); box-shadow: 0 0 60px 15px rgba(255,80,0,0.5);}
+.orb.earth { background: rgba(139,69,19,0.4); box-shadow: 0 0 60px 15px rgba(139,69,19,0.5);}
+.orb.nature { background: rgba(34,139,34,0.4); box-shadow: 0 0 60px 15px rgba(34,139,34,0.5);}
+.orb.water { background: rgba(0,191,255,0.4); box-shadow: 0 0 60px 15px rgba(0,191,255,0.5);}
+.orb.light { background: rgba(255,255,200,0.4); box-shadow: 0 0 60px 15px rgba(255,255,200,0.5);}
+.orb.dark { background: rgba(128,0,128,0.4); box-shadow: 0 0 60px 15px rgba(128,0,128,0.5);}
+
+@keyframes float-orb {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(80px, -80px) scale(1.2); }
+  100% { transform: translate(-80px, 80px) scale(1); }
+}

@@ -1,0 +1,285 @@
+/* === BASE (desktop) === */
+.timeline-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(100vh - 80px);
+  margin-bottom: 0; /* remove old margin */
+  background: radial-gradient(ellipse at top, rgba(0, 0, 60, 0.6), #000);
+  color: #c8e8ff;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+/* Column center line */
+.timeline-column {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 100%;
+  background: rgba(126, 63, 242, 0.25);
+  border-radius: 3px;
+  box-shadow: 0 0 20px rgba(126, 63, 242, 0.5);
+}
+
+/* Sticky year */
+.timeline-year {
+  position: sticky;
+  top: 20px;
+  width: 100%;
+  height: 80px;
+  background: rgba(20, 20, 40, 0.8);
+  border: 1px solid rgba(126, 63, 242, 0.3);
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(126, 63, 242, 0.2);
+  text-align: center;
+  line-height: 80px;
+  color: #7e3ff2;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-shadow: 0 0 10px rgba(126, 63, 242, 0.5);
+  backdrop-filter: blur(6px);
+  z-index: 3;
+}
+
+/* Eras */
+.timeline-era {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 60px 0;
+}
+
+/* Left era */
+.timeline-era.left {
+  width: calc(50% - 70px);
+  margin-right: calc(50% + 70px);
+  text-align: right;
+  padding: 10px 2vw 10px 0;
+}
+
+/* Right era */
+.timeline-era.right {
+  width: calc(50% - 70px);
+  margin-left: calc(50% + 70px);
+  text-align: left;
+  padding: 10px 0 10px 2vw;
+}
+
+/* Sticky era info */
+.era-info {
+  position: sticky;
+  top: 0;
+  background: #1e1e3c; /* solid background instead of semi-transparent */
+  border: 1px solid rgba(126, 63, 242, 0.3);
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(126, 63, 242, 0.2);
+  padding: 8px 2vw;
+  z-index: 4;
+  color: #b9dfff;
+  text-shadow: 0 0 8px rgba(126, 63, 242, 0.4);
+  /* Removed backdrop-filter since transparency no longer needed */
+  font-weight: bold;
+}
+
+.era-title {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+  background: linear-gradient(90deg, #63d0ff, #7e3ff2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.era-date,
+.era-duration {
+  display: block;
+  font-size: 0.9rem;
+  color: #b9dfff;
+}
+
+/* Events */
+.event-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 2vh 2vw;
+  box-shadow: 0 0 1.5rem rgba(126, 63, 242, 0.15);
+  margin: 20px 0;
+  color: #c8e8ff;
+  opacity: 0;
+  transform: translateY(4vh);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  font-weight: bold;
+}
+.event-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.event-title {
+  color: #ffb86c;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-era.left
+{
+  text-align:left;
+}
+
+.event-desc {
+  line-height: 1.6;
+  font-size: 1rem;
+  color: #b9dfff;
+  text-align:justify;
+}
+
+/* Era sections */
+.timeline-era {
+  position: relative; /* parent for absolute image */
+  width: calc(50% - 70px);
+  margin: 60px 0;
+  z-index: 2;
+}
+
+/* Left era: push to left of center column */
+.timeline-era.left {
+  margin-right: calc(50% + 70px);
+  text-align: left;
+}
+
+/* Right era: push to right of center column */
+.timeline-era.right {
+  margin-left: calc(50% + 70px);
+  text-align: left;
+}
+
+/* Era image base styling */
+.era-image {
+  position: absolute;
+  width: 100%; /* match era width */
+  height: 100%;             /* full era height */
+  z-index: 1;
+}
+
+/* Left era → image on the right */
+.timeline-era.left .era-image {
+  left: calc(50vw + 80px); /* place opposite the text */
+}
+
+/* Right era → image on the left */
+.timeline-era.right .era-image {
+  right: calc(50vw + 80px); /* place opposite the text */
+}
+
+/* Image styling */
+.era-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+  display: block;
+
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: cover;
+
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: cover;
+}
+
+/* Debug helpers (optional) */
+.debug-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: red;
+  opacity: 0.2;
+}
+.current-line {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: cyan;
+  z-index: 1000;
+}
+
+/* === MOBILE VIEW (<= 900px) === */
+@media (max-width: 900px) {
+  .timeline-era .era-image {
+    display: none;
+  }
+  
+  .timeline-container {
+    flex-direction: column;
+  }
+
+  /* Column on left edge */
+  .timeline-column {
+    position: fixed;
+    top: 0;
+    left: 0;       /* moved from right to left */
+    right: auto;
+    transform: none;
+    width: 70px;
+    height: 100%;
+  }
+
+  .timeline-line {
+    left: 35px; /* center line now inside the left column */
+    transform: none;
+    width: 4px;
+    background: rgba(126, 63, 242, 0.4);
+  }
+
+  .timeline-year {
+    top: 10px;
+    left: 80px;  /* leave space for left column */
+    right: auto;
+    height: 60px;
+    line-height: 60px;
+    font-size: 1.2rem;
+  }
+
+  /* Eras take full width on right side */
+  .timeline-era,
+  .timeline-era.left,
+  .timeline-era.right {
+    width: calc(100% - 80px);
+    margin: 20px 0 20px 80px; /* push content to the right of left column */
+    text-align: left;
+    padding: 10px;
+  }
+
+  .era-info {
+    border: 1px solid rgba(126, 63, 242, 0.3);
+    border-radius: 1rem;
+  }
+
+  .event-card {
+    min-height: 200px;
+    font-size: 1rem;
+  }
+}

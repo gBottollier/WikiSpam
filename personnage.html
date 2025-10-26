@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPAM LORE</title>
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/personnage.css">
+  <link rel="stylesheet" href="css/background_stars.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+  <!-- Navbar -->
+  
+  <!-- Background -->
+  <div class="background-stars">
+  </div>
+  <!-- Background -->
+  
+  
+<!-- Characters -->
+<main class="characters-container">
+
+  <!-- Background video -->
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="img/char/aeltheria.webm" type="video/webm">
+  </video>
+
+  <!-- Background image per region -->
+  <div class="region-backgrounds">
+    <div class="region-bg active" data-region="aelther" style="background-image: url('img/region/aelther.webp')"></div>
+    <div class="region-bg" data-region="emeldarion" style="background-image: url('img/region/emeldarion.webp')"></div>
+    <div class="region-bg" data-region="hadeir" style="background-image: url('img/region/hadeir.webp')"></div>
+    <div class="region-bg" data-region="lumethia" style="background-image: url('img/region/lumethia.webp')"></div>
+    <div class="region-bg" data-region="nordvinter" style="background-image: url('img/region/nordvinter.webp')"></div>
+    <div class="region-bg" data-region="nyevielh" style="background-image: url('img/region/nyevielh.webp')"></div>
+    <div class="region-bg" data-region="shalzaar" style="background-image: url('img/region/shalzaar.webp')"></div>
+    <div class="region-bg" data-region="vaeloria" style="background-image: url('img/region/vaeloria.webp')"></div>
+  </div>
+  
+  <!-- Emblem vertical carousel -->
+  <div class="emblem-carousel-wrapper">
+    <div class="emblem-carousel">
+      <div class="emblem active"><img src="img/region/aelther_emblem.webp" alt="aelther" loading="lazy"></div>
+      <div class="emblem"><img src="img/region/emeldarion_emblem.webp" alt="emeldarion" loading="lazy"></div>
+      <div class="emblem"><img src="img/region/hadeir_emblem.webp" alt="hadeir" loading="lazy"></div>
+      <div class="emblem"><img src="img/region/lumethia_emblem.webp" alt="lumethia" loading="lazy"></div>
+      <div class="emblem"><img src="img/region/nordvinter_emblem.webp" alt="nordvinter" loading="lazy"></div>
+      <div class="emblem"><img src="img/region/nyevielh_emblem.webp" alt="nyevielh" loading="lazy"></div>
+      <div class="emblem"><img src="img/region/shalzaar_emblem.webp" alt="shalzaar" loading="lazy"></div>
+      <div class="emblem"><img src="img/region/vaeloria_emblem.webp" alt="vaeloria" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="info-container"></div>
+  
+  <!-- Character carousels (one per region) -->
+  <div class="regions-container">
+
+    <!-- AELTHER -->
+    <div class="region active" data-region="aelther">
+      <div class="character-carousel-wrapper">
+          <div class="character-carousel">
+            <div class="character" data-video="img/char/aeltheria.webm" loading="lazy">
+              <img src="img/char/aeltheria.webp" alt="Aeltheria" loading="lazy">
+              <div class="character-info">
+                <h2 class="char-name">Aeltheria</h2>
+                <p class="char-desc">blabla loup.</p>
+              </div>
+            </div>
+            <div class="character" data-video="img/char/aidan.webm" loading="lazy">
+              <img src="img/char/aidan.webp" alt="Aidan" loading="lazy">
+              <div class="character-info">
+                <h2 class="char-name">Aidan</h2>
+                <p class="char-desc">blablabla aidan le feu.</p>
+              </div>
+            </div>
+            <div class="character" data-video="img/char/frost.webm" loading="lazy">
+              <img src="img/char/frost.webp" alt="Frost" loading="lazy">
+              <div class="character-info">
+                <h2 class="char-name">Frost</h2>
+                <p class="char-desc">Moqué dans sa jeunesse pour ses traits animaliers, Frost devient Dragonnier et combat pour sauver les terres maudites.</p>
+              </div>
+            </div>
+            <div class="character" data-video="img/char/gorakar.webm" loading="lazy">
+              <img src="img/char/gorakar.webp" alt="Gorakar" loading="lazy">
+              <div class="character-info">
+                <h2 class="char-name">Gorakar</h2>
+                <p class="char-desc">Part à l’aventure avec son dragon, explore les îles et aide à purifier la Mer Etoilée.</p>
+              </div>
+            </div>
+            <div class="character" data-video="img/char/heraldesse.webm" loading="lazy">
+              <img src="img/char/heraldesse.webp" alt="Heraldesse" loading="lazy">
+              <div class="character-info">
+                <h2 class="char-name">Heraldesse</h2>
+                <p class="char-desc">Communique avec les créatures et accompagne les héros dans leurs quêtes périlleuses.</p>
+              </div>
+            </div>
+            <div class="character" data-video="img/char/lyra.webm" loading="lazy">
+              <img src="img/char/lyra.webp" alt="Lyra" loading="lazy">
+              <div class="character-info">
+                <h2 class="char-name">Lyra</h2>
+                <p class="char-desc">Orpheline de guerre, Lisa apprend la magie et devient Dragonnière, guidant ses pairs et combattant aux côtés de Frost.</p>
+              </div>
+            </div>
+            <div class="character" data-video="img/char/mdt.webm" loading="lazy">
+              <img src="img/char/mdt.webp" alt="MDT" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMELDARION -->
+    <div class="region" data-region="emeldarion">
+      <div class="character-carousel-wrapper">
+        <div class="character-carousel">
+          <div class="character" data-video="img/char/aidan.webm" loading="lazy">
+            <img src="img/char/aidan.webp" alt="Aidan" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HADEIR -->
+    <div class="region" data-region="hadeir">
+      <div class="character-carousel-wrapper">
+        <div class="character-carousel">
+          <div class="character" data-video="img/char/gorakar.webm" loading="lazy">
+            <img src="img/char/gorakar.webp" alt="Gorakar" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LUMETHIA -->
+    <div class="region" data-region="lumethia">
+      <div class="character-carousel-wrapper">
+        <div class="character-carousel">
+          <div class="character" data-video="img/char/lyra.webm" loading="lazy">
+            <img src="img/char/lyra.webp" alt="Lyra" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- NORVINTER -->
+    <div class="region" data-region="nordvinter">
+      <div class="character-carousel-wrapper">
+        <div class="character-carousel">
+          <div class="character" data-video="img/char/frost.webm" loading="lazy">
+            <img src="img/char/frost.webp" alt="Frost" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NYEVIELH -->
+    <div class="region" data-region="nyevielh">
+      <div class="character-carousel-wrapper">
+        <div class="character-carousel">
+          <div class="character" data-video="img/char/mdt.webm" loading="lazy">
+            <img src="img/char/mdt.webp" alt="MDT" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- SHALZAAR -->
+    <div class="region" data-region="shalzaar">
+      <div class="character-carousel-wrapper">
+        <div class="character-carousel">
+          <div class="character" data-video="img/char/mdt.webm" loading="lazy">
+            <img src="img/char/mdt.webp" alt="MDT" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- VAELORIA -->
+    <div class="region" data-region="vaeloria">
+      <div class="character-carousel-wrapper">
+        <div class="character-carousel">
+          <div class="character" data-video="img/char/heraldesse.webm" loading="lazy">
+            <img src="img/char/heraldesse.webp" alt="Heraldesse" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+<!-- Characters -->
+
+
+  <!-- Script -->
+  <script src="js/background_stars.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/personnage.js"></script>
+  <!-- Script -->
+  
+</body>
+</html>
