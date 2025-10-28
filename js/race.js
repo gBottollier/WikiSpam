@@ -12,7 +12,7 @@ const races = {
     { display: "Natus", file: "natus_scaled.webp" },
     { display: "Arsh", file: "arsh_scaled.webp" }
   ],
-  ethereal: [
+  watcher: [
     { display: "Calamité", file: "calamite_scaled.webp" },
     { display: "Abyssal", file: "abyssal_scaled.webp" },
     { display: "Divinité", file: "divinite_scaled.webp" },
@@ -23,8 +23,8 @@ const races = {
 };
 
 const raceDisplayNames = {
-  normal: "Mortel",
-  ethereal: "Éthéré"
+  normal: "Éveillés",
+  watcher: "Veilleurs"
 };
 
 let resizeTimeout = null;
