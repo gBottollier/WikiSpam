@@ -1,24 +1,24 @@
 /* ---------- Global Variables ---------- */
 const races = {
   normal: [
-    { display: "Nymphe", file: "nymphe_scaled.webp" },
-    { display: "Tokscyth", file: "gnome_scaled.webp" },
-    { display: "Oniyx", file: "oniyx_scaled.webp" },
-    { display: "Olforgeur", file: "nain_scaled.webp" },
-    { display: "Etherien", file: "humain_scaled.webp" },
-    { display: "Anthropomorphe", file: "antropomorphe_scaled.webp" },
-    { display: "Pixarch", file: "elfe_scaled.webp" },
-    { display: "Alphilan", file: "alphilan_scaled.webp" },
-    { display: "Natus", file: "natus_scaled.webp" },
+    { display: "Nymphe",         file: "nymphe_scaled.webp",        desc: "nymphe"},
+    { display: "Tokscyth",       file: "gnome_scaled.webp",         desc: "gnome"},
+    { display: "Oniyx",          file: "oniyx_scaled.webp",         desc: "oniyx"},
+    { display: "Olforgeur",      file: "nain_scaled.webp",          desc: "nain"},
+    { display: "Etherien",       file: "humain_scaled.webp",        desc: "humain"},
+    { display: "Anthropomorphe", file: "antropomorphe_scaled.webp", desc: "antropomorphe"},
+    { display: "Pixarch",        file: "elfe_scaled.webp",          desc: "elfe"},
+    { display: "Alphilan",       file: "alphilan_scaled.webp",      desc: "alphilan"},
+    { display: "Natus",          file: "natus_scaled.webp",         desc: "natus"},
   ],
   watcher: [
-    { display: "Calamité", file: "calamite_scaled.webp" },
-    { display: "Arsh", file: "arsh_scaled.webp" },
-    { display: "Dragon", file: "dragon_scaled.webp" },
-    { display: "Divinité", file: "divinite_scaled.webp" },
-    { display: "Abyssal", file: "abyssal_scaled.webp" },
-    { display: "Éternel", file: "eternel_scaled.webp" },
-    { display: "Esprit", file: "esprit_scaled.webp" }
+    { display: "Calamité", file: "calamite_scaled.webp", desc:"calamite"},
+    { display: "Arsh",     file: "arsh_scaled.webp",     desc:"arsh"},
+    { display: "Dhöggeïr",   file: "dragon_scaled.webp",   desc:"dragon"},
+    { display: "Divinité", file: "divinite_scaled.webp", desc:"divinite"},
+    { display: "Abyssal",  file: "abyssal_scaled.webp",  desc:"abyssal"},
+    { display: "Éternel",  file: "eternel_scaled.webp",  desc:"eternel"},
+    { display: "Esprit",   file: "esprit_scaled.webp",   desc:"esprit"}
   ]
 };
 
@@ -236,6 +236,7 @@ function createHoverZones(items, strip, wrapper, line, highlight, layoutData) {
     hoverZone.style.zIndex = "50";
     wrapper.appendChild(hoverZone);
 
+    // ---------- Hover Effects ----------
     const activate = () => {
       const highlightWidth = Math.max(o.img.offsetWidth, o.nameEl.offsetWidth);
       const highlightLeftInsideLine = positions[i] + (o.img.offsetWidth / 2) - (highlightWidth / 2);
@@ -254,8 +255,22 @@ function createHoverZones(items, strip, wrapper, line, highlight, layoutData) {
       o.nameEl.style.color = "rgba(255,255,255,0.6)";
       o.img.style.zIndex = `${items.length - i}`;
     };
+    
+    // ---------- Click to Scroll to Description ----------
+    const handleClick = () => {
+      const raceId = races[currentRace][i].desc;
+      const targetRow = document.getElementById(raceId);
 
+      if (targetRow) {
+        targetRow.scrollIntoView({ behavior: "smooth", block: "center" });
+        targetRow.classList.add("highlight");
+        setTimeout(() => targetRow.classList.remove("highlight"), 1500);
+      }
+    };
+    
+    // ---------- Register event ----------
     [o.img, o.nameEl, hoverZone].forEach(el => {
+      el.addEventListener("click", handleClick);
       el.addEventListener("mouseenter", activate);
       el.addEventListener("mouseleave", deactivate);
     });
