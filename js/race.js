@@ -10,13 +10,13 @@ const races = {
     { display: "Pixarch", file: "elfe_scaled.webp" },
     { display: "Alphilan", file: "alphilan_scaled.webp" },
     { display: "Natus", file: "natus_scaled.webp" },
-    { display: "Arsh", file: "arsh_scaled.webp" }
   ],
   watcher: [
     { display: "Calamité", file: "calamite_scaled.webp" },
-    { display: "Abyssal", file: "abyssal_scaled.webp" },
-    { display: "Divinité", file: "divinite_scaled.webp" },
+    { display: "Arsh", file: "arsh_scaled.webp" },
     { display: "Dragon", file: "dragon_scaled.webp" },
+    { display: "Divinité", file: "divinite_scaled.webp" },
+    { display: "Abyssal", file: "abyssal_scaled.webp" },
     { display: "Éternel", file: "eternel_scaled.webp" },
     { display: "Esprit", file: "esprit_scaled.webp" }
   ]
