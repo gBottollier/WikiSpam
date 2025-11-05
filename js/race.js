@@ -17,13 +17,13 @@ const races = {
     { display: "Dhöggeïr",   file: "dragon_scaled.webp",   desc:"dragon"},
     { display: "Divinité", file: "divinite_scaled.webp", desc:"divinite"},
     { display: "Abyssal",  file: "abyssal_scaled.webp",  desc:"abyssal"},
-    { display: "Éternel",  file: "eternel_scaled.webp",  desc:"eternel"},
+    { display: "Eternel",  file: "eternel_scaled.webp",  desc:"eternel"},
     { display: "Esprit",   file: "esprit_scaled.webp",   desc:"esprit"}
   ]
 };
 
 const raceDisplayNames = {
-  normal: "Éveillés",
+  normal: "Eveillés",
   watcher: "Veilleurs"
 };
 
