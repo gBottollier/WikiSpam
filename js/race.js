@@ -23,7 +23,7 @@ const races = {
 };
 
 const raceDisplayNames = {
-  normal: "Eveillés",
+  normal: "Eveilles",
   watcher: "Veilleurs"
 };
 
