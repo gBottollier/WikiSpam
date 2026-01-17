@@ -181,10 +181,119 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =======================
+  // 🔹 Era Navigation Logic
+  // =======================
+  const eraLinks = document.querySelectorAll(".era-link");
+  const eraSections = document.querySelectorAll(".timeline-era");
+
+  function updateActiveEra() {
+    let currentEraId = "";
+
+    // Find the era currently in view
+    eraSections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      // If the top of the section is somewhat in the upper half of viewport
+      // or if it spans the whole viewport
+      if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+        currentEraId = section.id;
+      }
+    });
+
+    // Fallback: If no section meets the criteria (e.g. between sections? rare), 
+    // keep the last one or find the closest one.
+    // simpler approach: find the one that covers the middle of screen
+    const middleY = window.innerHeight / 2;
+    eraSections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= middleY && rect.bottom >= middleY) {
+        currentEraId = section.id;
+      }
+    });
+
+    eraLinks.forEach(link => {
+      link.classList.toggle("active", link.getAttribute("href") === `#${currentEraId}`);
+    });
+  }
+
+  // Initial check
+  updateActiveEra();
+
+  // Add to scroll listener
+  window.addEventListener("scroll", updateActiveEra, { passive: true });
+
+
+  // =======================
+  // 🔹 Audio Player Logic
+  // =======================
+  const audioControls = document.querySelectorAll(".audio-controls");
+  let currentAudio = null;
+  let currentBtn = null;
+
+  audioControls.forEach(control => {
+    const card = control.closest(".event-card");
+    const audioSrc = card.dataset.audio;
+    const btn = control.querySelector(".audio-btn");
+    const slider = control.querySelector(".volume-slider");
+    const playShape = btn.querySelector(".play-shape");
+    const pauseShape = btn.querySelector(".pause-shape");
+
+    let audio = null;
+
+    btn.addEventListener("click", () => {
+      // If we are playing another audio, pause it
+      if (currentAudio && currentAudio !== audio) {
+        currentAudio.pause();
+        // Reset the previous button icon
+        if (currentBtn) {
+          currentBtn.querySelector(".play-shape").style.display = "block";
+          currentBtn.querySelector(".pause-shape").style.display = "none";
+        }
+      }
+
+      if (!audio) {
+        audio = new Audio(audioSrc);
+        audio.volume = slider.value;
+
+        audio.addEventListener("ended", () => {
+          playShape.style.display = "block";
+          pauseShape.style.display = "none";
+          currentAudio = null;
+        });
+      }
+
+      if (audio.paused) {
+        audio.play().catch(e => console.log("Audio play failed (file missing?):", e));
+        playShape.style.display = "none";
+        pauseShape.style.display = "block";
+        currentAudio = audio;
+        currentBtn = btn;
+      } else {
+        audio.pause();
+        playShape.style.display = "block";
+        pauseShape.style.display = "none";
+        currentAudio = null; // or keep it to resume? logic allows resume
+      }
+    });
+
+    slider.addEventListener("input", (e) => {
+      if (audio) {
+        audio.volume = e.target.value;
+      }
+    });
+
+    // Allow clicking the slider without triggering the play button if bubbling
+    slider.addEventListener("click", (e) => e.stopPropagation());
+  });
+
+  // =======================
   // 🔹 Cleanup Function
   // =======================
   window.removeTimelineDebug = () => {
     clearDebug();
     document.querySelectorAll(".year-line-label").forEach(n => n.remove());
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio = null;
+    }
   };
 });

@@ -5,7 +5,8 @@
   display: flex;
   flex-direction: column;
   padding-bottom: calc(100vh - 80px);
-  margin-bottom: 0; /* remove old margin */
+  margin-bottom: 0;
+  /* remove old margin */
   background: radial-gradient(ellipse at top, rgba(0, 0, 60, 0.6), #000);
   color: #c8e8ff;
   overflow-x: clip;
@@ -87,7 +88,8 @@
 .era-info {
   position: sticky;
   top: 0;
-  background: #1e1e3c; /* solid background instead of semi-transparent */
+  background: #1e1e3c;
+  /* solid background instead of semi-transparent */
   border: 1px solid rgba(126, 63, 242, 0.3);
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(126, 63, 242, 0.2);
@@ -104,6 +106,7 @@
   margin-bottom: 0.3rem;
   background: linear-gradient(90deg, #63d0ff, #7e3ff2);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -128,6 +131,7 @@
   transition: opacity 0.8s ease, transform 0.8s ease;
   font-weight: bold;
 }
+
 .event-card.visible {
   opacity: 1;
   transform: translateY(0);
@@ -139,21 +143,21 @@
   margin-bottom: 0.5rem;
 }
 
-.timeline-era.left
-{
-  text-align:left;
+.timeline-era.left {
+  text-align: left;
 }
 
 .event-desc {
   line-height: 1.6;
   font-size: 1rem;
   color: #b9dfff;
-  text-align:justify;
+  text-align: justify;
 }
 
 /* Era sections */
 .timeline-era {
-  position: relative; /* parent for absolute image */
+  position: relative;
+  /* parent for absolute image */
   width: calc(50% - 70px);
   margin: 60px 0;
   z-index: 2;
@@ -174,19 +178,23 @@
 /* Era image base styling */
 .era-image {
   position: absolute;
-  width: 100%; /* match era width */
-  height: 100%;             /* full era height */
+  width: 100%;
+  /* match era width */
+  height: 100%;
+  /* full era height */
   z-index: 1;
 }
 
 /* Left era → image on the right */
 .timeline-era.left .era-image {
-  left: calc(50vw + 80px); /* place opposite the text */
+  left: calc(50vw + 80px);
+  /* place opposite the text */
 }
 
 /* Right era → image on the left */
 .timeline-era.right .era-image {
-  right: calc(50vw + 80px); /* place opposite the text */
+  right: calc(50vw + 80px);
+  /* place opposite the text */
 }
 
 /* Image styling */
@@ -197,12 +205,12 @@
   border-radius: 1rem;
   display: block;
 
-  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-size: cover;
 
-  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: cover;
@@ -217,6 +225,7 @@
   background: red;
   opacity: 0.2;
 }
+
 .current-line {
   position: fixed;
   left: 0;
@@ -231,7 +240,7 @@
   .timeline-era .era-image {
     display: none;
   }
-  
+
   .timeline-container {
     flex-direction: column;
   }
@@ -240,7 +249,8 @@
   .timeline-column {
     position: fixed;
     top: 0;
-    left: 0;       /* moved from right to left */
+    left: 0;
+    /* moved from right to left */
     right: auto;
     transform: none;
     width: 70px;
@@ -248,7 +258,8 @@
   }
 
   .timeline-line {
-    left: 35px; /* center line now inside the left column */
+    left: 35px;
+    /* center line now inside the left column */
     transform: none;
     width: 4px;
     background: rgba(126, 63, 242, 0.4);
@@ -256,7 +267,8 @@
 
   .timeline-year {
     top: 10px;
-    left: 80px;  /* leave space for left column */
+    left: 80px;
+    /* leave space for left column */
     right: auto;
     height: 60px;
     line-height: 60px;
@@ -268,7 +280,8 @@
   .timeline-era.left,
   .timeline-era.right {
     width: calc(100% - 80px);
-    margin: 20px 0 20px 80px; /* push content to the right of left column */
+    margin: 20px 0 20px 80px;
+    /* push content to the right of left column */
     text-align: left;
     padding: 10px;
   }
@@ -281,5 +294,162 @@
   .event-card {
     min-height: 200px;
     font-size: 1rem;
+  }
+}
+
+/* === Era Navigation Sidebar === */
+/* === Era Navigation Sidebar === */
+/* === Era Navigation Sidebar === */
+.era-nav {
+  position: absolute;
+  top: 60px;
+  right: 5%;
+  z-index: 500;
+  width: fit-content;
+  padding: 0;
+}
+
+.era-nav ul {
+  list-style: none;
+  /* No bullets */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  /* Horizontal */
+  gap: 15px;
+}
+
+.era-nav li {
+  display: block;
+}
+
+.era-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  /* Use a visible color but NO background "dot" */
+  color: rgba(185, 223, 255, 0.4);
+  padding: 5px;
+  transition: all 0.3s ease;
+  /* No background, no border-radius */
+  background: transparent;
+  border-radius: 0;
+}
+
+.era-link:hover {
+  /* Glow effect on icon only, no background */
+  color: #fff;
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 5px rgba(126, 63, 242, 0.8));
+  background: transparent;
+}
+
+/* Active State */
+.era-link.active {
+  color: #7e3ff2;
+  filter: drop-shadow(0 0 8px rgba(126, 63, 242, 1));
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+/* Ensure SVG inherits color */
+.era-link svg {
+  display: block;
+}
+
+/* === Audio Player Controls === */
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.event-header .event-title {
+  margin: 0;
+  /* Remove default margin */
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(126, 63, 242, 0.1);
+  padding: 8px 12px;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.audio-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #7e3ff2;
+  transition: transform 0.2s, color 0.2s;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.audio-btn:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.audio-btn svg {
+  display: block;
+}
+
+.volume-container {
+  display: flex;
+  align-items: center;
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease;
+}
+
+/* Show volume slider on hover of the controls container */
+.audio-controls:hover .volume-container {
+  width: 80px;
+  /* Expand to show slider */
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(185, 223, 255, 0.3);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #7e3ff2;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #7e3ff2;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .era-nav {
+    margin-right: 10px;
+    top: 90px;
   }
 }
