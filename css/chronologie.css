@@ -453,3 +453,57 @@
     top: 90px;
   }
 }
+
+/* === Revision Mode (Comparison UI) === */
+.revision-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.revision-block {
+  position: relative;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: rgba(126, 63, 242, 0.05);
+  border: 1px solid rgba(126, 63, 242, 0.1);
+}
+
+.revision-block.original {
+  border-left: 4px solid rgba(185, 223, 255, 0.3);
+}
+
+.revision-block.proposed {
+  background: rgba(126, 63, 242, 0.1);
+  border-left: 4px solid #7e3ff2;
+}
+
+.revision-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.revision-block.original .revision-label {
+  color: #b9dfff;
+}
+
+.revision-block.proposed .revision-label {
+  color: #7e3ff2;
+}
+
+@media (min-width: 1100px) {
+  .revision-container {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .revision-block {
+    flex: 1;
+  }
+}
