@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPAM LORE — Draft Malédiction des Rois</title>
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/background_stars.css">
+  <link rel="stylesheet" href="css/chronologie.css">
+</head>
+
+<body>
+
+  <div class="background-stars"></div>
+
+  <div class="timeline-container">
+
+    <nav class="era-nav">
+      <ul>
+        <li>
+          <a href="#era-3" class="era-link" data-target="era-3" title="Malédiction des Rois">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+              <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="#era-4" class="era-link" data-target="era-4" title="Âge Prospère">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+              <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="timeline-column">
+      <div class="timeline-line"></div>
+      <div class="timeline-year">Year</div>
+    </div>
+
+    <section class="timeline-era left" id="era-3" data-start="0" data-end="700">
+      <div class="era-info">
+        <h3 class="era-title">LA MALÉDICTION DES ROIS</h3>
+        <span class="era-date">0 à 700</span>
+        <span class="era-duration">Durée : 700 ans</span>
+      </div>
+
+      <div class="timeline-events">
+
+        <!-- 1. Le Grand Cataclysme -->
+        <div class="event-card" data-year="0" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Le Grand Cataclysme</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Les Calamités jaillissent des entrailles de la terre. En quelques jours à peine, le continent unique
+            se fissure, se déchire, se fracasse en une mosaïque d'archipels épars. Des villes millénaires
+            s'engloutissent, des forêts entières disparaissent dans des gouffres soudains, et le ciel lui-même
+            semble pleuvoir de braises et de cendres.
+          </p>
+          <p class="event-desc">
+            La fracture ne s'arrête pas à la surface. Elle réécrit la géographie d'Elther tout entière. Des pans
+            entiers de terres sont projetés dans toutes les directions : certains disparaissent sous les flots,
+            d'autres se retrouvent suspendus entre mer et ciel. Une vaste étendue d'eau obscure envahit le centre
+            du continent fracturé, une mer nouvelle que les survivants appellent la Mer Étoilée pour les lueurs
+            mystérieuses qui y scintillent la nuit. Et depuis les Abysses, attirées par les failles ouvertes,
+            émergent des créatures que le monde n'avait jamais vues, se déversant dans ces nouvelles eaux sombres
+            comme une marée montante de cauchemars.
+          </p>
+          <p class="event-desc">
+            Les Éternels, pris de cours dans leurs Royaumes Célestes, sont pour la plupart dévorés vivants par
+            les Calamités avant d'être emprisonnés en elles pour l'éternité. Quand les titans regagnent les
+            profondeurs dont ils sont issus, il ne reste de la grandiose Shal'Zaar que poussière. Des maladies
+            inconnues se répandent dans les failles béantes et des monstres hantent les cicatrices laissées sur
+            la Surface.
+          </p>
+          <p class="event-desc">
+            La Malédiction des Rois commence.
+          </p>
+        </div>
+
+        <!-- 2. L'Heure des Rois -->
+        <div class="event-card" data-year="0" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">L'Heure des Rois</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Tenus responsables d'avoir suivi aveuglément un Codex d'origine Céleste, les six Rois immortels
+            portent désormais le poids d'une malédiction que nul parmi eux n'avait choisie. Leur immortalité,
+            qui semblait hier un don, devient le fardeau de témoins condamnés à réparer l'irréparable.
+          </p>
+          <p class="event-desc">
+            Chacun regagne ce qui reste de son royaume. Chacun découvre l'étendue de la catastrophe. Et chacun,
+            à sa manière, choisit de faire face. Le Roi de l'Ombre part seul vers la faille qui menace Nyevielh.
+            Le Roi de l'Eau remonte sur les routes qu'il a toujours parcourues, cherchant à mesurer ce que le
+            désastre a épargné. La nouvelle Reine de la Terre fouille les décombres de Shal'Zaar à la recherche
+            de réponses. Le Roi du Feu évalue froidement ce qu'Hadeïr peut encore sauver. Le Roi Lumière
+            disparaît dans le silence qui a toujours accompagné sa doctrine. Le Roi Nature referme la porte de
+            ses laboratoires et consacre tout ce qu'il possède à trouver un remède à ce que le monde commence
+            à appeler la Fanure.
+          </p>
+          <p class="event-desc">
+            Leur malédiction est commune. Leurs épreuves, elles, sont chacune singulières.
+          </p>
+        </div>
+
+        <!-- 3. Malédiction de l'Ombre -->
+        <div class="event-card" data-year="0" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Malédiction de l'Ombre : Le Maelström de Nyevielh</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Habile diplomate et souverain au regard lucide, le Roi de l'Ombre avait été le premier à mettre en
+            garde contre une confiance aveugle dans les écrits du Codex. Il gouvernait avec son épouse, la
+            Duchesse de Nyevielh, dans un équilibre construit sur la parole et le partage du pouvoir plutôt que
+            sur la force brute. Dernier héritier de l'Ombre, il en porte le titre religieusement, gardant la
+            souveraineté de ses terres tandis que sa femme tient les rênes féodales du quotidien.
+          </p>
+          <p class="event-desc">
+            Nyevielh se retrouve en première ligne. Les créatures jaillissant des Abysses se déversent
+            directement dans la Mer Étoilée toute proche, et les frontières du royaume en sont les premières
+            ravagées. Incapable de rester spectateur de la destruction de son peuple, le Roi fait ses adieux à
+            sa famille et part seul vers la faille.
+          </p>
+          <p class="event-desc">
+            Par un effort de volonté qui dure des heures, il fait surgir du fond des eaux une île artificielle,
+            puis tisse autour de la faille un immense vortex montant jusqu'aux Royaumes Célestes. Ce Maelström
+            devient le verrou entre la Surface et l'Abysse, un tourbillon permanent dans lequel se battent à
+            ses côtés des Éternels alliés. Cette création coûte à elle seule l'essentiel de ses forces.
+            Prisonnier de l'île tant que le vortex doit être maintenu, il ne peut rejoindre sa famille que
+            par l'entremise des rêves, glissant dans leurs nuits sous la forme d'un Émissaire, un souffle
+            familier dans l'ombre du sommeil.
+          </p>
+          <p class="event-desc">
+            Il sait pourtant que par l'immortalité qui est la sienne, sa famille cessera un jour de rêver.
+          </p>
+        </div>
+
+        <!-- 4. Malédiction de l'Eau -->
+        <div class="event-card" data-year="10" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Malédiction de l'Eau : Les Contrées de Cristal</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            De tout temps, les Rois de l'Eau ont été des voyageurs. Marchands, navigateurs et artisans
+            parcourant le monde entier, portant les échanges et les langues sur la crête des vagues. Le dernier
+            héritier du titre s'était épris de Lyranna, reine des Alphilans, un peuple marin à la mémoire
+            longue, et avait offert ses connaissances à sa nation pour contribuer aux communications entre les
+            peuples. Une romance que la noblesse Alphilanne, toujours à l'affût d'une occasion, n'avait jamais
+            digérée.
+          </p>
+          <p class="event-desc">
+            Dans les premières semaines qui suivent le cataclysme, le Roi de l'Eau est l'un des seuls souverains
+            à prendre la mer. Les constructions Alphilanes se sont effondrées, les familles dispersées dans la
+            panique. La seule voix qui guide encore est celle de leur doyenne éternelle. Des morceaux entiers du
+            continent fracturé menacent de s'écraser sur ce qui reste de la capitale, mais la doyenne concentre
+            ses pouvoirs pour les maintenir en suspension, transformant ce qui aurait pu être une pluie de
+            pierres meurtrière en un archipel de ruines flottant au-dessus des eaux. C'est pour ce pouvoir de
+            sauver son peuple qu'elle est nommée Reine des Ondes, et c'est elle qui, de tout temps, porte le
+            titre de reine en l'absence d'une désignée.
+          </p>
+          <p class="event-desc">
+            Le Roi mobilise son peuple, soutient la Reine des Ondes de toute son énergie, court des forges
+            Oniyx aux côtes Alphilanes pour rassembler des ressources. Cette absence est précisément ce que
+            certains attendaient. La noblesse orchestre un coup d'État. À son retour, il ne se sent plus le
+            bienvenu dans son propre palais.
+          </p>
+          <p class="event-desc">
+            Il cède ses droits à Lyranna selon les tablettes Alphilanes, le seul acte que les nobles requins ne
+            peuvent contredire. La Reine des Ondes reconnaît la désignation, faisant de Lyranna la seule et
+            unique reine légitime de la nation. Puis il continue de la retrouver loin des regards, dans les récifs de
+            corail
+            entre Lumethia et Vaeloria, là où la politique ne les atteint pas. Lyranna lui donne un fils aux
+            traits marins, qu'ils voient grandir jusqu'à l'adolescence. Puis les orbes viennent à manquer. Il
+            doit repartir en chercher, et Lyranna, qui lit la résolution dans ses yeux, refuse de le laisser
+            partir seul.
+          </p>
+          <p class="event-desc">
+            Sur un vaste fragment isolé du continent, la Mère Dhöggeïr les attend. Elle leur propose un marché :
+            un flux continu d'orbes pour le peuple Alphilan, contre le sceau d'Oniyxia. Lyranna demande si elle
+            aussi peut agir, remettre de l'ordre dans les courants. Le Roi proteste, jugeant trop dangereux de
+            négocier avec un Veilleur Éternel. La gigantesque créature sourit et accepte quand même, offrant à
+            Lyranna le pouvoir de redéfinir la trajectoire des courants, au prix d'un tribut irréversible.
+          </p>
+          <p class="event-desc">
+            Le contrat est scellé. L'ancien marin devient la glace permanente qui recouvre Oniyxia, rebaptisée
+            depuis Contrées de Cristal. Les technologies interdites des Oniyx se retrouvent figées sous
+            d'épaisses couches de glace, ainsi que la Mère Dhöggeïr elle-même, endormie dans un immense pic
+            central. Lyranna devient Dame Navire, condamnée à naviguer sans fin, générant les courants dans son
+            sillage, incapable de s'arrêter. Elle laisse une tablette pour son peuple :
+          </p>
+          <p class="event-desc">
+            <em>"Les orbes redonnent de l'énergie à notre doyenne, apportez-les lui. Les nouveaux courants sont
+              de mon fait, ne pouvant m'arrêter de naviguer je ne vous reverrai plus, je confie l'ensemble de mes
+              pouvoirs à notre fils unique, il saura vous guider comme je l'ai toujours fait.
+              Votre fière Reine Lyranna."</em>
+          </p>
+          <p class="event-desc">
+            Leur fils, plus accepté que son père comme dirigeant malgré sa jeunesse, passe son temps sur le
+            front contre les créatures de la Mer Étoilée. Des groupes s'organisent pour remonter les courants
+            de l'océan profond à la recherche de leur reine. D'autres manigancent dans l'ombre, espérant que
+            le prochain combat du jeune seigneur soit celui de trop.
+          </p>
+        </div>
+
+        <!-- 5. Malédiction de la Terre -->
+        <div class="event-card" data-year="20" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Malédiction de la Terre : L'Extinction de Shal'Zaar</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Les terres de Shal'Zaar avaient toujours été les plus riches du continent. Son Roi, grand prêtre
+            calme et patient, vénéré par son peuple comme un demi-dieu, était le seul souverain capable de
+            communiquer spirituellement avec les Avatars qui l'acceptaient. Il transmettait de génération en
+            génération des secrets que nul autre ne pouvait garder. C'est son héritière qui prend le titre
+            après le Sceau d'Aeltheria, une jeune femme liée d'amitié au Roi de l'Ombre et au Roi Lumière,
+            qui s'efforce de garder contact avec eux malgré l'éparpillement du monde.
+          </p>
+          <p class="event-desc">
+            Dix ans après le Grand Cataclysme, elle reçoit la visite onirique du Roi de l'Ombre. Leur longue
+            conversation fait naître une inquiétude commune : Nebula, l'architecte du Portail, détient encore
+            le Codex Primordial. La Reine Terre tente d'alerter les Avatars, mais tous restent silencieux, sans
+            exception. Ce mutisme anormal amplifie ses craintes. Elle organise une grande chasse pour retrouver
+            Nebula.
+          </p>
+          <p class="event-desc">
+            Elle n'en a pas le temps. Une explosion gigantesque jaillit du nord-ouest, rasant les cultures,
+            pulvérisant les habitations et faisant s'effondrer la capitale dans un immense tourbillon de sable.
+            En un instant, Shal'Zaar est effacée de la carte. Il ne reste que du sable et du vent sur de vastes
+            surfaces désormais inhabitables. Dans l'urgence, elle utilise les pouvoirs de son arme runique pour
+            protéger ce qu'elle peut de son peuple.
+          </p>
+          <p class="event-desc">
+            La rage au ventre, elle part seule vers le foyer de l'explosion. Sur place, elle découvre
+            l'impensable : le sceau du Portail a été forcé. Nebula gît inconsciente sur le sol, le Codex
+            fragmenté à ses côtés. La Reine agit sans hésiter. Son arme runique fait surgir une chaîne de
+            montagnes autour du site, érigée en rempart avec des gardiens mystiques pour tenir le lieu
+            inaccessible. Puis elle récupère le Codex et le divise en deux, une part des Ombres et une part de
+            Lumière, à l'image de ses deux amis.
+          </p>
+          <p class="event-desc">
+            Elle se rend à Nyevielh pour confier le Codex des Ombres à Vladislaus, l'intendant qui veille sur
+            le manoir en l'absence du Roi. Il accepte, reconnaissant l'urgence et la stature de celle qui se
+            tient devant lui. Ce choix lourd lui imposera bientôt une décision qu'il aurait préféré ne jamais
+            avoir à prendre.
+          </p>
+          <p class="event-desc">
+            La Reine retourne dans ce qui reste de Shal'Zaar avec le Codex de Lumière. Elle guide en secret les
+            survivants perdus dans le désert, dissimulée sous des tissus, une silhouette mystérieuse que son
+            peuple surnomme le Gardien des Dunes. Elle refuse d'être reconnue, mais comprend peu à peu que
+            l'immortalité qui est la sienne est peut-être une forme de responsabilité qu'elle n'avait jamais
+            souhaitée. Pendant des années, des créatures de la Mer de Sable, un tourbillon relié aux Abysses,
+            s'attaquent à elle sans relâche, sans doute attirées par l'arme runique et le Codex qu'elle porte.
+          </p>
+        </div>
+
+        <!-- 6. Malédiction du Feu -->
+        <div class="event-card" data-year="30" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Malédiction du Feu : La Cité Infernale d'Hadeïr</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            La cité de Logaïr, bâtie autour d'un volcan en constante activité, était depuis des siècles la
+            fierté d'Hadeïr. Ses forges légendaires avaient permis la fonte des armes runiques elles-mêmes, et
+            les artisans du monde entier s'y rendaient pour profiter de ses prouesses. Le Roi du Feu, grand
+            combattant aimé des Dhöggeïr, avait transmis à son héritier un titre et une flamme. Stratège
+            brillant et créatif, ce dernier portait en lui l'énergie inépuisable de ses ancêtres. On murmurait
+            que la mère de son fils Aidan était une Dhöggeïr ; il n'avait jamais confirmé ni infirmé.
+          </p>
+          <p class="event-desc">
+            Après le Grand Cataclysme, les mouvements tectoniques avaient déstabilisé le mont volcanique. La
+            nation du Feu était préparée à ce genre d'extrêmes : ses technologies stabilisèrent rapidement le
+            pays et Hadeïr reprit son rôle de moteur industriel, soutenant les autres nations en reconstruction.
+            Tout semblait aller pour le mieux. Personne ne vit venir le vrai danger.
+          </p>
+          <p class="event-desc">
+            Une pollution élémactive sournoise, d'origine abyssale, montait des profondeurs du volcan central.
+            Ce que l'on appelle aujourd'hui le Gazpoison infecte les créatures d'affinité Feu, Dhöggeïr comme
+            humanoïdes, les rendant agressives jusqu'à les transformer en bêtes monstrueuses dont la seule
+            volonté est de tuer. La splendeur de Logaïr se ternit à mesure que la folie gagne ses habitants.
+          </p>
+          <p class="event-desc">
+            Le Roi agit avec une lucidité froide. Il sépare sa population en deux groupes, ceux qui possèdent
+            une affinité au Feu et ceux qui n'en ont pas, et évacue d'abord les seconds. Quant aux infectés,
+            il leur demande de transformer la cité en forteresse dont personne ne pourrait sortir, pas même
+            un Dhöggeïr. Une opération suicide d'une ampleur inouïe est menée par les plus courageux pour
+            sceller définitivement les dangers futurs de cette Cité Infernale. Le Roi lui-même, son fils Aidan
+            et bon nombre de ses sujets hantent aujourd'hui ce qui reste des Forges. Les créatures maudites ne
+            semblent pas concernées par le vieillissement.
+          </p>
+          <p class="event-desc">
+            Le nord d'Hadeïr devient un territoire inhospitalier que les expéditions répétées ne parviennent
+            pas à libérer. Le sud, épargné par la pollution et séparé par les montagnes et les savanes, se fait
+            rebaptiser Lumethia par ses habitants. Pour tenir sur le long terme, ils y construisent Drageïrh,
+            une gigantesque forteresse alimentée par les turbines d'un barrage relié à Nordvinter, soutenue par
+            les Dhöggeïr non affiliés au Feu qui refusent d'abandonner leurs terres.
+          </p>
+        </div>
+
+        <!-- 7. Malédiction de la Lumière -->
+        <div class="event-card" data-year="40" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Malédiction de la Lumière : Le Silence du Roi</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            La Nation de la Lumière avait été, durant tout l'Âge des Divinités, l'organisme militaire le plus
+            redoutable d'Elther, non pas par le nombre de ses soldats mais par leur qualité absolue. La Meute :
+            des guerriers d'élite dont la loyauté à leur Roi n'avait d'égale que leur foi en la Louve. Le titre
+            de Roi Lumière ne se transmettait pas par le sang mais par le duel, accordé au meilleur combattant
+            par le souverain lui-même. Une tradition qui forgait des champions là où d'autres nations forgaient
+            des héritiers.
+          </p>
+          <p class="event-desc">
+            Sa doctrine se résumait à une phrase gravée dans toutes les pierres de sa nation : <em>"Si les rêves
+              existent, ce n'est pas pour qu'ils soient vécus."</em> Artiste martial et suivant inconditionnel
+            d'Aeltheria, le dernier Roi Lumière avait choisi d'obéir à son arme runique après le Sceau, contre
+            l'avis de son ami d'enfance, le Roi de l'Ombre, qui lui offrait une autre voie. Leur séparation fut
+            définitive, marquée par une colère froide que ni l'un ni l'autre n'avait jamais su exprimer autrement.
+          </p>
+          <p class="event-desc">
+            Ce qui est arrivé ensuite reste l'un des mystères les plus tenaces d'Elther. Son territoire, la
+            montagne d'Aelther et son Mont Céleste, fut laissé à l'abandon, mais jamais tout à fait seul.
+            Aujourd'hui, cette montagne est le terme de tout pèlerinage, un accès direct vers les Royaumes
+            Célestes pour qui accepte d'en gravir les hauteurs. Un pèlerinage qui commence toujours de la même
+            manière : un rêve, indiquant d'aller écouter le Sage de la Pierre sacrée de Lumethia. Ceux qui
+            refusent l'appel rapportent avoir croisé dans l'ombre de leur nuit un chat étrange aux yeux d'or,
+            une mise en garde silencieuse dont personne ne comprend vraiment l'origine.
+          </p>
+          <p class="event-desc">
+            À l'est d'Emeldarion, une tribu chamanique s'est installée dans le plus grand secret. Elle a bâti
+            en l'honneur de la Louve des structures monumentales et, en leur centre, le plus grand temple jamais
+            érigé sur Elther, visible à des kilomètres dans toutes les directions. Pendant des générations,
+            cette tribu a repoussé tout étranger, les statues de loup dessinant une ligne rouge que nul n'ose
+            franchir. La foudre s'abat régulièrement sur leurs terres, et seuls les récits de quelques voyageurs
+            osent formuler l'hypothèse : peut-être que le Roi Lumière s'est installé là, à veiller en silence
+            sur le bon déroulement du pèlerinage.
+          </p>
+        </div>
+
+        <!-- 8. Malédiction de la Nature -->
+        <div class="event-card" data-year="50" data-end="500" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Malédiction de la Nature : Le Sacrifice du Meridia</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Le royaume de Vaeloria avait toujours été un havre. Ami des Pixarch depuis des millénaires, son Roi
+            Nature, apothicaire érudit et guérisseur autant que gouvernant, partageait remèdes et terres avec
+            les peuples de toute origine, leur offrant refuge et reconstruction. Mais l'Aurore d'Aurelia avait
+            laissé une plaie profonde dans le coeur de Vaeloria. La perte de tant d'amis et d'alliés avait,
+            lentement et presque insidieusement, réorienté la médecine vers la guerre. Le développement des TOX
+            commençait à ronger la population et ses gouvernants, même si la nation continuait par principe de
+            recueillir et soigner les blessés du monde.
+          </p>
+          <p class="event-desc">
+            Dans les semaines qui suivent le Grand Cataclysme, une maladie d'un genre nouveau s'abat sur Elther.
+            Baptisée Fanure, elle tisse en ses victimes un entrelacs d'énergies de Nature et d'Ombre, parasitant
+            l'hôte jusqu'à ce qu'il devienne une créature hostile aux traits végétaux. Le Roi Nature mobilise
+            tout ce qu'il possède, connaissance, ressources et nuits sans sommeil, pour trouver un remède. Il en
+            sera lui-même affecté malgré son immortalité, et voit mourir ses chercheurs un à un. Il ne lui reste
+            plus que son arme runique comme ultime recours, qu'il refusait jusqu'alors d'employer à cette fin.
+          </p>
+          <p class="event-desc">
+            Il y a vingt ans, un messager s'était glissé dans l'un de ses cauchemars, se présentant comme
+            l'Émissaire du Roi de l'Ombre, lui confiant sa situation et lui disant de rappeler le Maelström
+            s'il en avait un jour la nécessité. Ce jour est arrivé. Une nuit, il reprend contact et fait part
+            de sa résolution. Le message qui lui revient est simple : la démarche lui est expliquée, sans
+            argumentation, car le Roi de l'Ombre connaît assez bien son vieux camarade pour savoir que la
+            décision est déjà prise.
+          </p>
+          <p class="event-desc">
+            Le lendemain, devant ses sujets rassemblés sous la pluie battante, le monarque annonce sa volonté
+            de créer un arbre similaire à celui de Gabriel et Lumisaros, une plante gigantesque érigée comme
+            dernier rempart contre la maladie. Il annonce aussi qu'il en payera le prix fort, qu'il ne pourra
+            plus jamais se présenter devant eux. L'audience le salue d'applaudissements. Elle n'oubliera jamais.
+          </p>
+          <p class="event-desc">
+            Dans les jours qui suivent, il disparaît à l'aube, son arme runique à la main, sans laisser de
+            trace. Vaeloria se retrouve sans gouverneur légitime, soumise à elle-même, dans l'incertitude de ce
+            que son souverain a bien pu faire de sa personne. Puis la pousse apparaît.
+          </p>
+          <p class="event-desc">
+            L'arbre prend racine et recouvre l'entièreté d'un puit. Il aspire les maux, synthétise les miasmes
+            de Fanure et les restitue en un air pur et chaleureux. On le nomme le Meridia, et autour de lui se
+            construit une nouvelle capitale portant son nom. Les Vaeloriains guettent, espèrent qu'un jour
+            l'arbre leur parlera. Il ne répond jamais.
+          </p>
+          <p class="event-desc">
+            Puis, un jour, les racines progressent jusqu'à toucher les Abysses. La corruption des profondeurs
+            commence à troubler le Meridia. Des études d'urgence sont lancées. Des expéditions s'enfoncent dans
+            ce que l'on appelle désormais les Racines, un donjon vivant en perpétuel mouvement, pour empêcher le
+            débordement des créatures abyssales, débloquer des zones de vie et chercher un moyen de soigner
+            l'arbre sacré. Une expédition remonte avec une découverte alarmante : une zone élémactive critique
+            palpite au coeur du donjon. Si l'arbre meurt, le reste du monde court à sa perte. Meridia devient
+            alors un passage obligatoire pour d'innombrables pèlerinages, et Vaeloria recrute sans relâche des
+            expéditionnaires capables d'affronter ses profondeurs.
+          </p>
+        </div>
+
+        <!-- 9. Le Rééquilibrage -->
+        <div class="event-card" data-year="50" data-end="700" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Le Rééquilibrage</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Les plaies cicatrisent lentement. Les peuples reconstruisent, forgent de nouveaux liens, réinventent
+            leurs sociétés sur les décombres de l'ancien monde. Les générations se succèdent, s'adaptent, et ce
+            que leurs ancêtres vivaient comme un cataclysme devient pour leurs enfants une simple géographie,
+            une géographie peuplée de ruines mystérieuses et de légendes à moitié oubliées.
+          </p>
+          <p class="event-desc">
+            Mais si le temps apaise, il ne pardonne pas entièrement. Malgré tous leurs sacrifices, les Rois
+            portent dans l'imaginaire collectif le poids de la catastrophe. Leur immortalité, preuve irréfutable
+            de leur lien avec le Codex Céleste, en fait des symboles encombrants. Le titre de Roi élémentaire
+            reste vacant : personne n'y aspire. Les sociétés se reconstruisent autour d'autres structures,
+            d'autres pouvoirs, et les noms des six souverains glissent peu à peu du registre de l'histoire vers
+            celui de la légende.
+          </p>
+          <p class="event-desc">
+            Dans ce monde fragmenté, chaque nation trace sa propre voie. Lumethia et Nordvinter s'allient pour
+            reconquérir Hadeïr sur ses démons de feu. Nyevielh reste fermée, interdite, ses portes scellées :
+            personne n'en revient jamais. Emeldarion prospère, ses terres vastes et riches commerçant avec le
+            monde entier. Shal'Zaar accueille encore les pèlerins au milieu de ses dunes, bien qu'elle continue
+            de repousser les Abyssaux remontant du Sud. Les Alphilans s'isolent dans les profondeurs, ne
+            communiquant qu'à contrecoeur avec Vaeloria. Et Vaeloria, seule nation encore attachée au fil de la
+            diplomatie, s'efforce de maintenir des relations cordiales entre toutes.
+          </p>
+          <p class="event-desc">
+            L'équilibre est fragile. Il tient. Pour l'instant.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="era-image">
+        <img src="img/era/bg_era3.webp">
+      </div>
+    </section>
+
+    <!-- Era 4 -->
+    <section class="timeline-era right" id="era-4" data-start="700" data-end="1000">
+      <div class="era-info">
+        <h3 class="era-title">ÂGE PROSPÈRE</h3>
+        <span class="era-date">700 à 1000</span>
+        <span class="era-duration">Durée : 300 ans</span>
+      </div>
+
+      <div class="timeline-events">
+
+        <div class="event-card" data-year="700" data-end="900" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Les Décennies Parfaites</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Plusieurs siècles après le Sceau d'Aeltheria, les peuples ont oublié jusqu'à la rancœur qu'ils
+            éprouvaient envers les Rois. Les enfants jouent sans surveillance, le monde tourne autour d'un
+            sentiment de liberté généralisé qu'on ne croyait plus possible. Les nations se sont stabilisées et,
+            si certaines continuent d'affronter la malédiction de leurs terres, les routines et habitudes
+            multigénérationnelles ont rendu le quotidien moins anxiogène.
+          </p>
+          <p class="event-desc">
+            La recherche progresse rapidement autour des savoirs Oniyx perdus, les effets secondaires des TOX
+            se réduisent et la magie gagne en accessibilité à mesure que croissent les populations et les
+            moyens de déplacements. Abondance devient la capitale d'Emeldarion, centre économique et culturel
+            qui rayonne sur le monde entier. Les Éveillés ont oublié jusqu'aux Divinités, et ne semblent voir
+            qu'un avenir radieux pour des siècles encore.
+          </p>
+        </div>
+
+        <div class="event-card" data-year="950" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Première Faille Élémentaire</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            La paix ne dure jamais aussi longtemps qu'on l'espère. Les forces anti-Abyssales perdent du terrain,
+            année après année, sans que nul ne veuille regarder les chiffres en face. Les créatures des Abysses
+            gagnent en puissance à mesure que les batailles s'enchaînent, comme si chaque défaite infligée les
+            rendait plus solides.
+          </p>
+          <p class="event-desc">
+            Parmi les Veilleurs, certaines factions troublent ouvertement l'équilibre, et leurs actions
+            résonnent jusque dans les rêves des Éveillés : les cauchemars deviennent plus intenses, les visions
+            plus précises, les rêves ordinaires de plus en plus flous. Les catastrophes naturelles se
+            multiplient. Le monde enregistre ces mauvais présages sans vraiment les entendre, trop confortablement
+            installé dans ses Décennies Parfaites pour vouloir y croire.
+          </p>
+        </div>
+
+        <div class="event-card" data-year="960" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Naissance des Héros</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Aux quatre coins du monde naissent, à quelques années d'intervalle, des enfants bien particuliers.
+            Chacun porte sur le corps une marque de naissance dont la forme rappelle à s'y méprendre les runes
+            gravées sur les armes royales. Ce n'est pas une coïncidence que les anciens reconnaissent, mais une
+            promesse qu'ils ne comprennent pas encore.
+          </p>
+          <p class="event-desc">
+            Chacun de ces enfants grandit avec un pouvoir singulier, accompagné de son propre prix. L'enfant de
+            l'Eau ignore les extrêmes de température et prend des traits animaux selon le climat qui l'entoure,
+            renne dans le froid, lézard dans la chaleur. L'enfant du Feu absorbe les flammes comme une source
+            d'énergie, mais ses nuits sont peuplées de visions du passé et de fièvres qui ne le lâchent pas.
+            L'enfant de la Terre peut augmenter la masse de ses muscles à volonté, au prix d'une absence totale
+            de sens du toucher et d'une faim dévorante. L'enfant de la Nature soigne les blessures et guérit
+            les maladies, subissant en retour une part des dommages sous forme de peine mentale ou de
+            dégénérescence cellulaire. L'enfant de la Lumière communique par la pensée avec tout être doué de
+            conscience, mais chaque usage lui revient des heures plus tard sous la forme d'un mal de tête
+            semblable aux lendemains de fête. L'enfant de l'Ombre reçoit en continu des informations issues
+            des cauchemars, des vérités interdites et des images qui échappent au monde visible, sans jamais
+            pouvoir rêver autrement que hanté.
+          </p>
+          <p class="event-desc">
+            Leur histoire est liée à celle du monde. Pour les actes qu'ils accomplissent dans leur jeunesse,
+            ils sont rapidement reconnus comme Héros par leurs pairs.
+          </p>
+        </div>
+
+        <div class="event-card" data-year="970" data-end="990" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Les Quêtes Héroïques</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Le temps les fait se rencontrer, par paires, comme si quelque chose d'invisible avait décidé de les
+            assembler avant qu'ils ne comprennent pourquoi. Les difficultés d'antan refont surface, mais le
+            monde confortable de l'Âge Prospère n'est pas prêt à les affronter seul. Ce sont les Héros qui
+            s'en chargent, leurs exploits déjà chantés par les troubadours avant même d'être achevés.
+          </p>
+          <p class="event-desc">
+            Les enfants de la Terre et de l'Ombre partent libérer Nyevielh du mal qui la ronge depuis des
+            générations. Ceux du Feu et de l'Eau s'en vont éteindre les flammes corrompues d'Hadeïr et faire
+            fondre la glace qui emprisonne les Contrées de Cristal. Ceux de la Lumière et de la Nature
+            soignent le Meridia et rouvrent les canaux de dialogue entre les peuples. Chaque paire agit comme
+            si elle connaissait sa mission depuis toujours, sans que personne ne lui ait jamais expliqué
+            pourquoi.
+          </p>
+        </div>
+
+        <div class="event-card" data-year="999" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">Ralliement des Peuples</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Quand le dialogue est enfin ouvert entre toutes les nations, la réalité de la situation s'impose
+            avec une brutalité que les Décennies Parfaites avaient réussi à masquer. Les Abysses sont déjà
+            partout sur le continent. Les zones élémactives augmentent. Le ciel se fissure. Personne ne sait
+            comment arrêter ce qui vient, et la paix si chèrement construite ressemble soudain à un édifice
+            bâti sur du sable.
+          </p>
+          <p class="event-desc">
+            Les exploits des Héros ont pourtant redonné quelque chose au monde : une direction. Les informations
+            qu'ils mettent sur la table d'échange entre les peuples mènent à une seule et même conclusion. Il
+            faut reconstruire le Portail et libérer Aeltheria de sa prison onirique. Pour cela, il faudra
+            traverser le Cimetière du Néant. Ensemble, les peuples trouvent la force de faire face aux
+            obstacles sur leur route et de libérer les forces Divines captives.
+          </p>
+        </div>
+
+        <div class="event-card" data-year="1000" data-audio="sound/placeholder.mp3">
+          <div class="event-header">
+            <h4 class="event-title">L'Affrontement Final</h4>
+            <div class="audio-controls">
+              <button class="audio-btn play-icon" title="Play/Pause">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                  <path d="M8 5v14l11-7z" class="play-shape" />
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" class="pause-shape" style="display:none;" />
+                </svg>
+              </button>
+              <div class="volume-container">
+                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+              </div>
+            </div>
+          </div>
+          <p class="event-desc">
+            Aeltheria et les Veilleurs qui l'accompagnent entrent dans une phase de combat qui va décider de
+            l'avenir des Éveillés. Sera-t-il prospère ? Ou est-ce que tout ce qui a été accompli jusqu'alors
+            n'est que texte écrit entre les deux couvertures d'un livre ?
+          </p>
+          <p class="event-desc">
+            Le monde tremble, et la seule chose qu'il reste aux Éveillés d'Elther est de prier. Un chant en
+            choeur monte depuis la Surface, résonnant jusqu'aux Royaumes Célestes, une motivation qui sera
+            peut-être décisive dans le chaos qui se déroule par-delà les nuages. Les Héros sont introuvables
+            durant l'événement, mais tout le monde pense qu'ils sont partis se battre aux côtés de la Louve.
+            Et, pour la première fois depuis longtemps, une pensée pour les Rois germe dans la conscience
+            collective.
+          </p>
+          <p class="event-desc">
+            Même en répétant les mêmes erreurs, petit à petit, nous progressons.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="era-image">
+        <img src="img/era/bg_era4.webp">
+      </div>
+    </section>
+
+  </div>
+
+  <script src="js/background_stars.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/chronologie.js"></script>
+
+</body>
+
+</html>
