@@ -129,7 +129,7 @@
   opacity: 0;
   transform: translateY(4vh);
   transition: opacity 0.8s ease, transform 0.8s ease;
-  font-weight: bold;
+  overflow: hidden;
 }
 
 .event-card.visible {
@@ -152,6 +152,15 @@
   font-size: 1rem;
   color: #b9dfff;
   text-align: justify;
+}
+
+.event-king-img {
+  float: left;
+  width: clamp(160px, 18vw, 280px);
+  height: auto;
+  border-radius: 8px;
+  margin: 0 18px 12px 0;
+  display: block;
 }
 
 /* Era sections */
