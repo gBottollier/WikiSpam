@@ -516,3 +516,24 @@
     flex: 1;
   }
 }
+
+/* === Font épilogue === */
+@font-face {
+  font-family: 'ElthFont';
+  src: url('../font.otf') format('opentype');
+}
+
+.event-title-epic {
+  color: #ffb86c;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.epic-quote {
+  color: #b9dfff;
+  font-size: 1.15rem;
+  text-align: center;
+  margin-top: 1.5rem;
+  line-height: 2.2;
+  opacity: 0.85;
+}
