@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const video = document.getElementById("bg-video");
   const regions = document.querySelectorAll(".region");
   const emblems = Array.from(document.querySelectorAll(".emblem"));
   const emblemCarousel = document.querySelector(".emblem-carousel");
 
-  let activeRegion = "aelther"; // default region
+  let activeRegion = "hadeir"; // default region (first in CSV order)
 
   // ===== Show only the active region =====
 function showRegion(regionName) {
@@ -17,10 +16,13 @@ function showRegion(regionName) {
     }
   });
 
-  // --- Update background ---
+  // --- Update background (lazy-load on first activation) ---
   const regionBackgrounds = document.querySelectorAll('.region-bg');
   regionBackgrounds.forEach(bg => {
     if (bg.dataset.region === regionName) {
+      if (!bg.style.backgroundImage && bg.dataset.bg) {
+        bg.style.backgroundImage = `url('${bg.dataset.bg}')`;
+      }
       bg.classList.add('active');
     } else {
       bg.classList.remove('active');
@@ -63,11 +65,26 @@ function setActiveCharacter(characterEl) {
 
   wrapper.scrollTo({ left: scrollLeft, behavior: "smooth" });
 
-  // Update background video
-  const video = document.getElementById("bg-video");
-  if (characterEl.dataset.video) {
-    video.src = characterEl.dataset.video;
-    video.play().catch(() => {});
+  // ===== Update central character display image (crossfade) =====
+  const charDisplay = document.getElementById("char-display");
+  const charImg = characterEl.querySelector("img");
+  if (charDisplay) {
+    if (charImg) {
+      charDisplay.classList.remove("visible");
+      const newSrc = charImg.src;
+      const img = new Image();
+      img.src = newSrc;
+      img.decode().then(() => {
+        charDisplay.src = newSrc;
+        charDisplay.classList.add("visible");
+      }).catch(() => {
+        charDisplay.src = newSrc;
+        charDisplay.classList.add("visible");
+      });
+    } else {
+      charDisplay.classList.remove("visible");
+      charDisplay.src = "";
+    }
   }
 
   // ===== Update external info-container =====
@@ -131,7 +148,7 @@ function centerActiveCharacter(characterEl) {
   // ===== Emblem click =====
   emblems.forEach(emblem => {
     emblem.addEventListener("click", () => {
-      const regionName = emblem.querySelector("img").alt.toLowerCase();
+      const regionName = emblem.dataset.region || emblem.querySelector("img")?.alt.toLowerCase();
       activeRegion = regionName;
 
       // Update active emblem
@@ -206,7 +223,7 @@ container.addEventListener("wheel", e => {
 
 // Helper to update active emblem
 function updateActiveEmblem(regionName) {
-  const emblem = document.querySelector(`.emblem img[alt="${regionName}"]`)?.parentElement;
+  const emblem = document.querySelector(`.emblem[data-region="${regionName}"]`);
   if (!emblem) return;
   document.querySelector(".emblem.active")?.classList.remove("active");
   emblem.classList.add("active");
@@ -216,9 +233,9 @@ function updateActiveEmblem(regionName) {
   // ===== INITIALIZATION =====
   showRegion(activeRegion);
 
-  const defaultEmblem = document.querySelector(`.emblem img[alt="${activeRegion}"]`);
-  defaultEmblem?.parentElement.classList.add("active");
-  centerActiveEmblem(defaultEmblem.parentElement);
+  const defaultEmblem = document.querySelector(`.emblem[data-region="${activeRegion}"]`);
+  defaultEmblem?.classList.add("active");
+  if (defaultEmblem) centerActiveEmblem(defaultEmblem);
 
   activateFirstCharacter(activeRegion);
 });
