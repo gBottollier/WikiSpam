@@ -173,7 +173,7 @@ nav.bottom-nav {
   display: flex;
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  height: 70px;
+  height: 76px;
   background: var(--bg-dark);
   backdrop-filter: blur(12px);
   border-top: 1px solid var(--glass-border);
@@ -201,11 +201,11 @@ nav.bottom-nav a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
   text-decoration: none;
   color: var(--accent);
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   height: 100%;
   position: relative;
   background: transparent;
@@ -215,7 +215,7 @@ nav.bottom-nav a {
 /* Icon style */
 nav.bottom-nav a .icon {
   font-style: normal;
-  font-size: 1.45rem;
+  font-size: 1.25rem;
   line-height: 1;
   z-index: 1;
 }

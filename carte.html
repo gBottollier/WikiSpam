@@ -30,12 +30,41 @@
       </div>
     </div>
 
-    <p id="map-hint">Survolez un continent pour le découvrir, cliquez pour l'explorer</p>
+    <!-- Mobile-only: swipe through continents one at a time (highlighting
+         each on the full map, with nothing drawn over it) instead of
+         tapping a tiny shape directly; "Zoom in" commits to it. Uses the
+         empty letterbox bars above/below the map: description up top,
+         name + zoom button down bottom. Populated by carte.js from
+         MAP_REGIONS. -->
+    <div id="continent-card-top">
+      <h3 id="continent-card-name"></h3>
+      <p id="continent-card-desc"></p>
+    </div>
+
+    <div id="continent-card-bar">
+      <span id="continent-card-progress"></span>
+      <button id="continent-zoom-in">Zoom +</button>
+    </div>
+
+    <p id="map-hint">
+      <span class="hint-desktop">Survolez un continent pour le découvrir, cliquez pour l'explorer</span>
+      <span class="hint-mobile">Glissez pour parcourir les continents, "Zoom +" pour explorer</span>
+    </p>
 
     <!-- Shown only while zoomed into a region -->
-    <button id="back-btn">&larr; Retour à la carte</button>
-    <h2 id="region-title"></h2>
-    <p id="region-desc"></p>
+    <button id="back-btn">
+      <span class="hint-desktop">&larr; Retour à la carte</span>
+      <span class="hint-mobile">&larr; Zoom −</span>
+    </button>
+    <div id="region-info">
+      <h2 id="region-title"></h2>
+      <p id="region-desc"></p>
+      <!-- Mobile-only: a tappable list of this region's points of
+           interest — small dots scattered on a detail image are hard to
+           find by touch, this is a reliable alternative way to reach the
+           same tooltips. -->
+      <div id="region-poi-list"></div>
+    </div>
 
     <!-- Tooltip -->
     <div id="map-tooltip" class="map-tooltip hidden">

@@ -13,6 +13,14 @@
   overflow-y: visible;
 }
 
+/* Mobile-only "story" mode header/hint (see media query below); without
+   this they're plain unstyled divs/p with default display, visible empty
+   on desktop. */
+#story-header,
+#story-hint {
+  display: none;
+}
+
 /* Column center line */
 .timeline-column {
   position: absolute;
@@ -242,68 +250,6 @@
   height: 2px;
   background: cyan;
   z-index: 1000;
-}
-
-/* === MOBILE VIEW (<= 900px) === */
-@media (max-width: 900px) {
-  .timeline-era .era-image {
-    display: none;
-  }
-
-  .timeline-container {
-    flex-direction: column;
-  }
-
-  /* Column on left edge */
-  .timeline-column {
-    position: fixed;
-    top: 0;
-    left: 0;
-    /* moved from right to left */
-    right: auto;
-    transform: none;
-    width: 70px;
-    height: 100%;
-  }
-
-  .timeline-line {
-    left: 35px;
-    /* center line now inside the left column */
-    transform: none;
-    width: 4px;
-    background: rgba(126, 63, 242, 0.4);
-  }
-
-  .timeline-year {
-    top: 10px;
-    left: 80px;
-    /* leave space for left column */
-    right: auto;
-    height: 60px;
-    line-height: 60px;
-    font-size: 1.2rem;
-  }
-
-  /* Eras take full width on right side */
-  .timeline-era,
-  .timeline-era.left,
-  .timeline-era.right {
-    width: calc(100% - 80px);
-    margin: 20px 0 20px 80px;
-    /* push content to the right of left column */
-    text-align: left;
-    padding: 10px;
-  }
-
-  .era-info {
-    border: 1px solid rgba(126, 63, 242, 0.3);
-    border-radius: 1rem;
-  }
-
-  .event-card {
-    min-height: 200px;
-    font-size: 1rem;
-  }
 }
 
 /* === Era Navigation Sidebar === */
@@ -536,4 +482,260 @@
   margin-top: 1.5rem;
   line-height: 2.2;
   opacity: 0.85;
+}
+
+/* === MOBILE REDESIGN (<= 900px): "story" mode ===
+   One event fills the screen at a time, swiped through to move through
+   history, with a dedicated header for era + this exact event's year
+   (rather than a small badge easy to miss while reading) and a progress
+   bar across the whole chronology. JS (chronologie.js) toggles which
+   single .event-card has .story-active; this just defines how that looks.
+
+   This block is placed at the very end of the file on purpose: several
+   unconditional desktop rules above (.audio-controls, .event-header, etc.)
+   share selectors with overrides here, and an unconditional rule beats a
+   media-query rule of equal specificity when it comes LATER in the
+   source — regardless of which one "looks" more like the override. The
+   .audio-controls{display:none} below was silently losing to the
+   unconditional .audio-controls{display:flex} earlier in the file until
+   this whole block was moved down here. */
+@media (max-width: 900px) {
+  .timeline-era .era-image {
+    display: none;
+  }
+
+  .timeline-container {
+    flex-direction: column;
+  }
+
+  /* Desktop affordances for a layout that no longer exists here. */
+  .timeline-column,
+  .era-nav,
+  .era-info {
+    display: none;
+  }
+
+  .timeline-era,
+  .timeline-era.left,
+  .timeline-era.right {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Only the active event is shown at all, as a fixed panel filling the
+     space below the header+hint (down to the bottom nav, with a little
+     breathing room on all sides rather than going edge-to-edge) — not
+     part of the page's normal scroll flow, so there's no page-level
+     scroll position to fight with when swiping between events.
+     --story-top (header + hint) and --story-header-h are measured and
+     set by chronologie.js to match their real rendered height. */
+  .event-card {
+    display: none;
+  }
+  .event-card.story-active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    top: calc(var(--story-top, 70px) + 8px);
+    bottom: 84px;
+    overflow: hidden;
+    min-height: 0;
+    font-size: 0.95rem;
+    padding: 12px 12px 6px;
+    margin: 0;
+    border-left: none;
+  }
+
+  /* Shown in the dedicated header instead, see #story-year below. */
+  .event-year-badge {
+    display: none;
+  }
+
+  .event-header,
+  .event-king-img {
+    flex-shrink: 0;
+  }
+
+  .event-header {
+    margin-bottom: 6px;
+  }
+
+  .event-title {
+    font-size: 1.1rem;
+  }
+
+  /* All of a card's description paragraphs are grouped into this one
+     wrapper by chronologie.js — it, not the individual paragraphs, is
+     the single scrolling area (title/image stay fixed above it, like the
+     character page's name staying still while its bio scrolls). Giving
+     each paragraph its own flex+scroll independently was the "one
+     scrollbar per paragraph" bug. */
+  .event-desc-wrap {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .event-desc {
+    line-height: 1.6;
+    margin: 0 0 0.8em;
+  }
+  .event-desc:last-child {
+    margin-bottom: 14px;
+  }
+
+  /* Play button + volume slider added real interaction cost (the slider
+     was unreachable on touch anyway, see the fix below it replaces) for
+     little payoff on a phone — dropped here rather than fixed. */
+  .audio-controls {
+    display: none;
+  }
+
+  /* The float:left image (clamp min 160px) left only ~130px for text to
+     wrap into, which is what wrapped it one or two words per line. Stack
+     the image above the text instead. */
+  .event-king-img {
+    float: none;
+    display: block;
+    width: min(60vw, 220px);
+    margin: 0 auto 12px;
+  }
+
+  /* ---------- Story header: era + exact year, always visible ----------
+     One compact row instead of stacked centered lines: era name+range on
+     the left (small, two tight lines), the year on the right as the one
+     bigger element — height stays close to a single line instead of
+     three, so it doesn't eat much of a phone screen permanently. */
+  #story-header {
+    display: none;
+  }
+  #story-header.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: linear-gradient(180deg, #1c1c3a, #14142a);
+    border-bottom: 1px solid rgba(126, 63, 242, 0.4);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Total progress (across the whole chronology) sits at the very top of
+     the header; era progress (within the current chapter, butting up
+     against the content it describes) sits right at its bottom — a
+     visible gap and a different track shade between them stop the two
+     from reading as one bar, which is what made them blend together
+     before. */
+  #story-progress-total {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+
+  #story-progress-era {
+    height: 5px;
+    margin-top: 3px;
+    background: rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+  }
+
+  #story-progress-era-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #63d0ff, #7e3ff2);
+    transition: width 0.3s ease;
+  }
+
+  #story-progress-total-bar {
+    height: 100%;
+    width: 0%;
+    background: rgba(185, 223, 255, 0.6);
+    transition: width 0.3s ease;
+  }
+
+  #story-header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 5px 14px;
+  }
+
+  #story-era-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+  }
+
+  #story-era-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #b9dfff;
+    opacity: 0.75;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  #story-era-date {
+    font-size: 0.62rem;
+    color: rgba(185, 223, 255, 0.5);
+  }
+
+  /* The exact date of *this* event — previously the only visible date
+     anywhere was the era's overall multi-thousand-year range. */
+  #story-year {
+    flex-shrink: 0;
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(126, 63, 242, 0.8);
+  }
+
+  /* ---------- Swipe hint: a small flickering badge between the header and
+     the card (not floating over either), instead of a static line of
+     text — a slow pulse draws the eye on its own, rather than relying on
+     someone reading and registering a sentence. ---------- */
+  #story-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    position: fixed;
+    top: var(--story-header-h, 56px);
+    left: 0;
+    right: 0;
+    z-index: 19;
+    padding: 3px 0;
+    font-size: 0.66rem;
+    color: rgba(185, 223, 255, 0.8);
+    animation: story-hint-flicker 2.2s ease-in-out infinite;
+    transition: opacity 0.3s ease;
+  }
+
+  .story-hint-chevrons {
+    color: #7e3ff2;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  @keyframes story-hint-flicker {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+  }
+
+  #story-hint.done {
+    opacity: 0;
+    pointer-events: none;
+    animation: none;
+  }
 }

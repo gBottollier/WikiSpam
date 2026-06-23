@@ -2,7 +2,7 @@
 .characters-container {
   position: relative;
   width: 100%;
-  height: calc(100vh - clamp(70px, 8vw, 120px));
+  height: calc(100vh - clamp(76px, 8vw, 120px));
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -46,6 +46,16 @@
 
 #char-display.visible {
   opacity: 1;
+}
+
+/* Region name as readable text (desktop relies on recognizing the emblem
+   icon alone); shown only on mobile, see media query below. */
+#region-label {
+  display: none;
+}
+
+#swipe-hint {
+  display: none;
 }
 
 /* === VERTICAL EMBLEM CAROUSEL (LEFT SIDE) === */
@@ -357,5 +367,138 @@
   .emblem img {
     width: 40px;
     height: 40px;
+  }
+}
+
+/* On narrow screens the desktop layout — character art filling most of the
+   width, with the description floating on top of it in a 28%-wide panel,
+   region selector as a thin overlay strip, thumbnails anchored to the
+   bottom — has too many overlapping absolutely-positioned pieces fighting
+   for the same small screen. Below, it becomes a single scrollable column
+   instead: art, then region selector, then description, then thumbnails,
+   each given the full width and its own place in the page. */
+@media (max-width: 900px) {
+  .characters-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: auto;
+    min-height: calc(100vh - 76px);
+    overflow-y: auto;
+    padding: 0.75rem 0 1.5rem;
+    gap: 0.6rem;
+  }
+
+  /* Splash art: same double-gradient elliptical-fade mask as desktop (kept
+     for visual consistency, just at the new mobile box size) — only the
+     background behind it changes, see below. */
+  #char-display {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: 40vh;
+    max-height: 360px;
+    flex-shrink: 0;
+    /* The mask fades the image out before its edges, so the box's own
+       background shows through there — a flat black read as broken/empty,
+       so it's the page's own gradient instead. */
+    background: radial-gradient(ellipse at top, rgba(0, 0, 60, 0.6), #000);
+    /* lets touch swipes on the art reach the JS swipe handler */
+    pointer-events: auto;
+  }
+
+  /* "Which region is this character from": one icon (chipped for contrast
+     against any background art) plus its name, instead of the full
+     14-region desktop selector — region switching on mobile happens by
+     swiping past the first/last character of the current one instead. */
+  #region-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    margin: -2.6rem 0 0 0.75rem;
+    width: fit-content;
+    z-index: 3;
+    padding: 0.3rem 0.9rem 0.3rem 0.3rem;
+    background: rgba(8, 0, 20, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2rem;
+    color: #b9dfff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    letter-spacing: 0.02em;
+  }
+
+  #region-label img {
+    width: 1.6rem;
+    height: 1.6rem;
+    object-fit: contain;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 2px;
+  }
+
+  /* Full region selector and character thumbnails are both replaced by the
+     swipe gesture on mobile (see personnage.js) */
+  .emblem-carousel-wrapper,
+  .character-carousel-wrapper {
+    display: none;
+  }
+
+  .info-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    transform: none;
+    width: 92%;
+    max-width: 92%;
+    /* fixed-ish height card: the description scrolls inside it instead of
+       the card itself growing to fit all the text, which was pushing the
+       rest of the page down by a full screen or more for longer bios */
+    height: 34vh;
+    margin: 0 auto;
+    padding: 1rem 1.1rem;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info-container .char-name {
+    font-size: 1.5rem;
+  }
+
+  .info-container .char-desc {
+    font-size: 0.92rem;
+    overflow-y: auto;
+  }
+
+  .regions-container {
+    width: 100%;
+    flex-shrink: 0;
+    /* the carousel wrapper inside (now display:none) no longer takes up
+       space, so nothing needs to reserve room for it here */
+  }
+
+  #swipe-hint {
+    display: block;
+    text-align: center;
+    font-size: 0.78rem;
+    color: rgba(185, 223, 255, 0.5);
+    margin: 0;
+    max-height: 1.2em;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease;
+  }
+
+  #swipe-hint.done {
+    opacity: 0;
+    max-height: 0;
   }
 }

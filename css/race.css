@@ -178,6 +178,16 @@
   .race-line {
     display: none; /* hide the strip and line as well */
   }
+
+  /* race.js sets an inline height on these (sized to fit the desktop
+     creature images) that survives even after the strip above is hidden,
+     leaving a tall empty gap — only !important can override an inline
+     style, so the override has to live here rather than in race.js. */
+  .race-wrapper,
+  .race-info {
+    height: auto !important;
+    margin: 0 !important;
+  }
 }
 
 /* ---------- Race Intro ---------- */
@@ -435,5 +445,196 @@
 
   .race-row-line {
     width: 100%;
+  }
+}
+
+/* #race-mobile-app is mobile-only; hidden by default so it doesn't render
+   (empty, since race.js only populates it under the mobile breakpoint) on
+   desktop. */
+#race-mobile-app {
+  display: none;
+}
+
+/* === MOBILE REDESIGN (<= 900px): app-like race viewer ===
+   Placed at the very end of the file on purpose -- several selectors here
+   (.race-section, .race-intro, .race-descriptions) are hidden outright,
+   and an unconditional rule for them appearing later in the source would
+   silently win over a media-query rule of equal specificity regardless of
+   which one "looks like" the override; putting this block last avoids
+   that class of bug entirely (it bit the chronologie redesign earlier). */
+@media (max-width: 900px) {
+  /* Hidden, not removed: race.js still reads names/phrases/descriptions
+     out of this markup as its data source. */
+  .race-section,
+  .race-intro,
+  .race-descriptions {
+    display: none;
+  }
+
+  #race-mobile-app {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 76px);
+    overflow: hidden;
+  }
+
+  #race-mobile-tabs {
+    display: flex;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(126, 63, 242, 0.4);
+  }
+
+  .race-mobile-tab {
+    flex: 1;
+    padding: 12px 4px;
+    background: transparent;
+    border: none;
+    color: rgba(185, 223, 255, 0.6);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+
+  .race-mobile-tab.active {
+    color: #00ffff;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    box-shadow: inset 0 -2px 0 #00ffff;
+  }
+
+  /* Position within the current tab's race list — resets to empty on the
+     Présentation tab, which has no list of its own. */
+  #race-progress {
+    flex-shrink: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+
+  #race-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #63d0ff, #7e3ff2);
+    transition: width 0.3s ease;
+  }
+
+  /* A small flickering badge rather than a static line of text — a slow
+     pulse draws the eye on its own, the same pattern used on the
+     chronology page. */
+  #race-hint {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 4px 0;
+    font-size: 0.66rem;
+    color: rgba(185, 223, 255, 0.8);
+    animation: race-hint-flicker 2.2s ease-in-out infinite;
+    transition: opacity 0.3s ease;
+  }
+
+  .race-hint-chevrons {
+    color: #7e3ff2;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  @keyframes race-hint-flicker {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+  }
+
+  #race-hint.done {
+    opacity: 0;
+    pointer-events: none;
+    animation: none;
+  }
+
+  #race-mobile-stage {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Baseline-aligned (align-items:flex-end), like the desktop strip, so
+     taller/shorter reads naturally as taller/shorter instead of just
+     differently sized boxes floating independently. transform/opacity are
+     animated inline by race.js for the slide-between-races effect. */
+  #race-carousel-row {
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    will-change: transform;
+    gap: 14px;
+    height: 34vh;
+    padding: 10px 0;
+  }
+
+  .race-carousel-slot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .race-carousel-slot img {
+    display: block;
+    width: auto;
+    max-width: 28vw;
+    object-fit: contain;
+  }
+
+  .race-carousel-slot.active img {
+    max-width: 50vw;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
+  }
+
+  .race-carousel-slot.prev,
+  .race-carousel-slot.next {
+    opacity: 0.45;
+    cursor: pointer;
+  }
+
+  #race-mobile-card {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0 18px;
+    overflow: hidden;
+  }
+
+  #race-mobile-name {
+    margin: 0;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #fff;
+  }
+
+  #race-mobile-phrase {
+    margin: 4px 0 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #63d0ff;
+  }
+
+  /* The one part that scrolls -- name/phrase/carousel stay fixed above it,
+     same pattern as the character and chronology pages' redesigns. */
+  #race-mobile-desc {
+    flex: 1;
+    overflow-y: auto;
+    text-align: justify;
+    line-height: 1.6;
+    padding-bottom: 16px;
+  }
+
+  #race-mobile-desc p {
+    margin: 0 0 0.8em;
   }
 }

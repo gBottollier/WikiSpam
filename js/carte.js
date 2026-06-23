@@ -12,6 +12,7 @@ const poiLayer = document.getElementById('poi-layer');
 
 const regionTitle = document.getElementById('region-title');
 const regionDesc = document.getElementById('region-desc');
+const poiListEl = document.getElementById('region-poi-list');
 const backBtn = document.getElementById('back-btn');
 
 const tooltip = document.getElementById('map-tooltip');
@@ -26,9 +27,20 @@ let zoomRevealTimer = null;
 const detailImgs = {};   // slug -> <img class="region-detail">
 const bboxes = {};       // slug -> {x0,y0,w,h} normalized over world-img, 8% padded (matches the crop export)
 
-// ---------- Layout: fit world.webp inside its pane (letterboxed) and size
-// world-content to its exact render box, in pixels. JS-measured rather than
-// CSS percentage-of-auto, which doesn't reliably resolve for nested boxes.
+const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+
+// ---------- Layout: size world-content to its exact render box, in pixels.
+// JS-measured rather than CSS percentage-of-auto, which doesn't reliably
+// resolve for nested boxes.
+//
+// Always fits the whole map letterboxed (contain), on mobile too: seeing
+// every continent's full shape and border at once turned out to matter
+// more than filling the screen edge-to-edge — a cover+pan mode was tried
+// here and made that impossible, since only a cropped slice is ever
+// visible at a given moment. The pan-to-explore gesture further down is
+// harmless dead weight in contain mode (there's no overflow to pan,
+// since the whole image already fits) and is left in case a future
+// pinch-zoom wants it.
 function layoutWorld() {
   const pw = worldPane.clientWidth, ph = worldPane.clientHeight;
   const nw = worldImg.naturalWidth || pw, nh = worldImg.naturalHeight || ph;
@@ -37,12 +49,60 @@ function layoutWorld() {
   const w = nw * scale, h = nh * scale;
   worldContent.style.width = `${w}px`;
   worldContent.style.height = `${h}px`;
-  worldContent.style.left = `${(pw - w) / 2}px`;
-  worldContent.style.top = `${(ph - h) / 2}px`;
+  // Re-clamp rather than re-center: a resize/orientation-change shouldn't
+  // throw away wherever the user had panned to.
+  const prevLeft = parseFloat(worldContent.style.left);
+  const prevTop = parseFloat(worldContent.style.top);
+  const minLeft = Math.min(0, pw - w), minTop = Math.min(0, ph - h);
+  worldContent.style.left = `${Number.isFinite(prevLeft) ? Math.max(minLeft, Math.min(0, prevLeft)) : (pw - w) / 2}px`;
+  worldContent.style.top = `${Number.isFinite(prevTop) ? Math.max(minTop, Math.min(0, prevTop)) : (ph - h) / 2}px`;
 }
 if (worldImg.complete && worldImg.naturalWidth) layoutWorld();
 else worldImg.addEventListener('load', layoutWorld);
 window.addEventListener('resize', layoutWorld);
+
+// ---------- World-view touch: swipe between continent cards (mobile) ----------
+// One listener handles both jobs so a single gesture isn't read twice: a
+// horizontal drag switches which continent is highlighted (see the
+// continent-card section further down, which calls renderContinentCard);
+// a tap still needs to reach the region polygon's click handler below, so
+// a drag past a small threshold marks panDidDrag, which that handler
+// checks to ignore the click a real drag produces.
+let panDidDrag = false;
+let onCardSwipe = null; // set once renderContinentCard exists, below
+(() => {
+  let active = false, startX = 0, startY = 0;
+
+  worldPane.addEventListener('touchstart', (e) => {
+    if (!isMobile() || currentSlug || e.touches.length !== 1) return;
+    active = true;
+    panDidDrag = false;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+
+  worldPane.addEventListener('touchmove', (e) => {
+    if (!active || e.touches.length !== 1) return;
+    const dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+    if (!panDidDrag && Math.hypot(dx, dy) > 10) panDidDrag = true;
+  }, { passive: true });
+
+  worldPane.addEventListener('touchend', (e) => {
+    if (!active) return;
+    active = false;
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      onCardSwipe?.(dx < 0 ? 1 : -1);
+    }
+    // panDidDrag is deliberately left as-is here (cleared at the start of
+    // the *next* touchstart instead): the click a tap-or-drag gesture
+    // produces fires asynchronously after touchend, and clearing the flag
+    // on a timer risked a race against that click's own timing.
+  }, { passive: true });
+})();
 
 // ---------- Tooltip ----------
 // Tooltip size only changes when its text changes (on show), never on plain
@@ -96,7 +156,7 @@ function hideTooltip() {
   tooltip.classList.add('hidden');
 }
 
-function attachHoverTooltip(el, getTitle, getDesc, getInvented) {
+function attachHoverTooltip(el, getTitle, getDesc, getInvented, { tapToShow = false } = {}) {
   el.addEventListener('mouseenter', (e) => {
     el.classList.add('hovered');
     showTooltip(getTitle(), getDesc(), e.clientX, e.clientY, getInvented());
@@ -106,7 +166,38 @@ function attachHoverTooltip(el, getTitle, getDesc, getInvented) {
     el.classList.remove('hovered');
     hideTooltip();
   });
+
+  // Touch devices have no hover at all, so without this, tapping a POI
+  // marker did nothing — there's no separate action it should trigger
+  // (unlike a region polygon, which zooms on click), so tapping just
+  // toggles its tooltip instead.
+  if (tapToShow) {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const alreadyShown = el.classList.contains('hovered') && !tooltip.classList.contains('hidden');
+      if (alreadyShown) {
+        el.classList.remove('hovered');
+        hideTooltip();
+        return;
+      }
+      el.classList.add('hovered');
+      const r = el.getBoundingClientRect();
+      showTooltip(getTitle(), getDesc(), r.left + r.width / 2, r.top, getInvented());
+    });
+  }
 }
+
+// Tapping anywhere outside an open marker/POI-chip tooltip dismisses it.
+// Region-shape .hovered is deliberately left alone here: on mobile it
+// marks whichever continent the swipe card is currently on, a persistent
+// selection rather than a transient hover state, so it shouldn't clear
+// just because the user tapped elsewhere (e.g. the "Zoom in" button).
+document.addEventListener('click', () => {
+  if (tooltip.classList.contains('hidden')) return;
+  hideTooltip();
+  poiLayer.querySelectorAll('.poi-marker.hovered').forEach((m) => m.classList.remove('hovered'));
+  document.querySelectorAll('.poi-chip.hovered').forEach((c) => c.classList.remove('hovered'));
+});
 
 // ---------- Bounding boxes (8% padded), matching the offline crop export ----------
 function computeBbox(polygon) {
@@ -128,6 +219,7 @@ function computeBbox(polygon) {
 const fragSvg = document.createDocumentFragment();
 const fragDetail = document.createDocumentFragment();
 const fragPoi = document.createDocumentFragment();
+const polyBySlug = {};
 
 Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
   const bbox = computeBbox(region.polygon);
@@ -138,8 +230,14 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
   poly.setAttribute('points', region.polygon.map(p => p.join(',')).join(' '));
   poly.classList.add('region-shape');
   poly.dataset.slug = slug;
+  polyBySlug[slug] = poly;
   attachHoverTooltip(poly, () => region.name, () => region.description, () => false);
-  poly.addEventListener('click', () => activateRegion(slug));
+  poly.addEventListener('click', () => {
+    // A pan gesture that happened to end over a polygon shouldn't also
+    // zoom into it.
+    if (panDidDrag) return;
+    activateRegion(slug);
+  });
   fragSvg.appendChild(poly);
 
   // High-detail crop, lazily sourced, positioned over its own footprint
@@ -160,7 +258,7 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
     marker.dataset.slug = slug;
     marker.style.left = `${(bbox.x0 + pt.x * bbox.w) * 100}%`;
     marker.style.top = `${(bbox.y0 + pt.y * bbox.h) * 100}%`;
-    attachHoverTooltip(marker, () => pt.name, () => pt.desc, () => !pt.lore);
+    attachHoverTooltip(marker, () => pt.name, () => pt.desc, () => !pt.lore, { tapToShow: true });
     fragPoi.appendChild(marker);
   });
 });
@@ -168,6 +266,40 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
 regionSvg.appendChild(fragSvg);
 detailLayer.appendChild(fragDetail);
 poiLayer.appendChild(fragPoi);
+
+// ---------- Continent cards (mobile): swipe to preview, button to zoom ----------
+// One continent highlighted at a time (the same visual state :hover gives
+// on desktop), nothing drawn over the map itself — swiping moves to the
+// next/previous one, and "Zoom in" is what actually commits to it
+// (tapping the highlighted shape directly still works too, as a shortcut).
+const cardBar = document.getElementById('continent-card-bar');
+const cardNameEl = document.getElementById('continent-card-name');
+const cardProgressEl = document.getElementById('continent-card-progress');
+const zoomInBtn = document.getElementById('continent-zoom-in');
+const regionSlugs = Object.keys(MAP_REGIONS);
+let cardIndex = 0;
+
+function renderContinentCard() {
+  const slug = regionSlugs[cardIndex];
+  const region = MAP_REGIONS[slug];
+  regionSvg.querySelectorAll('.region-shape.hovered').forEach((p) => p.classList.remove('hovered'));
+  polyBySlug[slug].classList.add('hovered');
+  cardNameEl.textContent = region.name;
+  cardProgressEl.textContent = `${cardIndex + 1}/${regionSlugs.length}`;
+}
+
+zoomInBtn?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  activateRegion(regionSlugs[cardIndex]);
+});
+
+if (cardBar) {
+  renderContinentCard();
+  onCardSwipe = (direction) => {
+    cardIndex = Math.max(0, Math.min(cardIndex + direction, regionSlugs.length - 1));
+    renderContinentCard();
+  };
+}
 
 // ---------- Zoom in / out ----------
 function activateRegion(slug) {
@@ -200,8 +332,18 @@ function activateRegion(slug) {
   // hard cap keeps small regions (Nordvinter) from zooming in absurdly far.
   const fitRatio = Math.sqrt((PW / bboxPxW) * (PH / bboxPxH));
   const scale = Math.min(6, Math.max(1.3, 0.8 * fitRatio));
-  const dx = PW / 2 - Lx - scale * (bbox.cx * W);
-  const dy = PH / 2 - Ly - scale * (bbox.cy * H);
+  let dx = PW / 2 - Lx - scale * (bbox.cx * W);
+  let dy = PH / 2 - Ly - scale * (bbox.cy * H);
+
+  // Clamp so the zoom never pulls the map's actual edge in past the
+  // pane's edge, which would reveal #map-stage's plain black background
+  // beyond where the image actually ends — most noticeable for a region
+  // near a corner of the world map, like Contrées de Cristal at the very
+  // top, where centering on it alone could push the view above the map.
+  const maxDx = -Lx, minDx = PW - Lx - scale * W;
+  if (minDx <= maxDx) dx = Math.max(minDx, Math.min(maxDx, dx));
+  const maxDy = -Ly, minDy = PH - Ly - scale * H;
+  if (minDy <= maxDy) dy = Math.max(minDy, Math.min(maxDy, dy));
 
   currentSlug = slug;
   worldContent.style.transitionDuration = `${ZOOM_IN_MS}ms`;
@@ -213,6 +355,28 @@ function activateRegion(slug) {
   regionTitle.textContent = region.name;
   regionDesc.textContent = region.description;
   mapStage.classList.add('zoomed');
+
+  // Mobile POI chip list: a reliable way to reach each marker's tooltip
+  // that doesn't depend on accurately tapping a small dot on the image.
+  if (poiListEl) {
+    poiListEl.innerHTML = '';
+    region.points.forEach((pt) => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'poi-chip' + (pt.lore ? '' : ' invented');
+      chip.textContent = pt.name;
+      chip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const already = chip.classList.contains('hovered');
+        poiListEl.querySelectorAll('.poi-chip.hovered').forEach((c) => c.classList.remove('hovered'));
+        if (already) { hideTooltip(); return; }
+        chip.classList.add('hovered');
+        const r = chip.getBoundingClientRect();
+        showTooltip(pt.name, pt.desc, r.left + r.width / 2, r.top, !pt.lore);
+      });
+      poiListEl.appendChild(chip);
+    });
+  }
 
   // Start loading/decoding the detail image now, in parallel with the zoom,
   // rather than only at reveal time. The first time a region is opened, the
@@ -251,13 +415,24 @@ function resetZoom() {
   if (zoomRevealTimer) { clearTimeout(zoomRevealTimer); zoomRevealTimer = null; }
   if (!currentSlug) return;
   hideTooltip();
+  // Keep the card bar in sync in case the zoom was triggered by tapping a
+  // shape directly rather than via the card + "Zoom in" button — without
+  // this, swiping after returning would resume from a stale index.
+  if (cardBar) {
+    const slugPos = regionSlugs.indexOf(currentSlug);
+    if (slugPos !== -1) cardIndex = slugPos;
+  }
   deactivateCurrent();
   mapStage.classList.remove('zoomed');
   worldContent.style.transitionDuration = `${ZOOM_OUT_MS}ms`;
   worldContent.style.transform = 'scale(1)';
-  // Bring the hoverable overlay back only once the zoom-out transform has
-  // finished, for the same reason it was hidden going in.
-  setTimeout(() => regionSvg.classList.remove('zoomed-in'), ZOOM_OUT_MS + 20);
+  // Bring the hoverable overlay back, and re-highlight the current card's
+  // continent, only once the zoom-out transform has finished, for the
+  // same reason the overlay was hidden going in.
+  setTimeout(() => {
+    regionSvg.classList.remove('zoomed-in');
+    if (cardBar) renderContinentCard();
+  }, ZOOM_OUT_MS + 20);
 }
 
 backBtn.addEventListener('click', resetZoom);

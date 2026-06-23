@@ -16,6 +16,19 @@ function showRegion(regionName) {
     }
   });
 
+  // --- Region name label (mobile-only badge: an icon, reused from the
+  // desktop emblem so there's a single source of truth for the artwork,
+  // plus the name in words since the icon alone doesn't say where a
+  // character is from) ---
+  const regionLabel = document.getElementById('region-label');
+  if (regionLabel) {
+    const emblemImgSrc = document.querySelector(`.emblem[data-region="${regionName}"] img`)?.src;
+    const name = regionName.replace(/-/g, ' ');
+    regionLabel.innerHTML = emblemImgSrc
+      ? `<img src="${emblemImgSrc}" alt="">${name}`
+      : name;
+  }
+
   // --- Update background (lazy-load on first activation) ---
   const regionBackgrounds = document.querySelectorAll('.region-bg');
   regionBackgrounds.forEach(bg => {
@@ -126,6 +139,25 @@ function centerActiveCharacter(characterEl) {
   const carousel = emblemEl.closest(".emblem-carousel");
   if (!carousel) return;
 
+  // Desktop lays this out as a vertical column; the mobile media query
+  // switches it to a horizontal row instead, so the axis to scroll has to
+  // be detected rather than assumed, or this becomes a no-op on mobile
+  // (scrolling top:... on a container with no vertical overflow) — which
+  // left the active region stuck wherever scrollLeft happened to default,
+  // with no indication that other regions existed off-screen.
+  const isRow = getComputedStyle(carousel).flexDirection === "row";
+
+  if (isRow) {
+    const carouselWidth = carousel.clientWidth;
+    const emblemLeft = emblemEl.offsetLeft;
+    const emblemWidth = emblemEl.offsetWidth;
+    let scrollLeft = emblemLeft - carouselWidth / 2 + emblemWidth / 2;
+    const maxScroll = carousel.scrollWidth - carouselWidth;
+    scrollLeft = Math.max(0, Math.min(scrollLeft, maxScroll));
+    carousel.scrollTo({ left: scrollLeft, behavior: "smooth" });
+    return;
+  }
+
   const carouselHeight = carousel.clientHeight;
   const emblemTop = emblemEl.offsetTop;
   const emblemHeight = emblemEl.offsetHeight;
@@ -171,9 +203,10 @@ function centerActiveCharacter(characterEl) {
   
 const container = document.querySelector(".characters-container");
 
-container.addEventListener("wheel", e => {
-  e.preventDefault();
-
+// Shared by wheel (desktop) and swipe (mobile, where the thumbnail strip is
+// hidden in favor of this gesture): move to the next/previous character,
+// wrapping into the next/previous region when stepping past either end.
+function stepCharacter(direction) {
   const activeRegionEl = document.querySelector(".region.active");
   if (!activeRegionEl) return;
 
@@ -183,43 +216,70 @@ container.addEventListener("wheel", e => {
   if (!activeChar) return;
 
   const index = chars.indexOf(activeChar);
-  let newIndex = index;
-
   const regionsList = Array.from(document.querySelectorAll(".region"));
   const currentRegionIndex = regionsList.indexOf(activeRegionEl);
 
-  if (e.deltaY > 0) {
-    // Scroll down -> next character or next region
+  if (direction > 0) {
     if (index < chars.length - 1) {
-      newIndex = index + 1;
+      setActiveCharacter(chars[index + 1]);
     } else {
-      // Next region (wrap to first if at last)
-      const nextRegionIndex = (currentRegionIndex + 1) % regionsList.length;
-      const nextRegion = regionsList[nextRegionIndex];
+      const nextRegion = regionsList[(currentRegionIndex + 1) % regionsList.length];
       showRegion(nextRegion.dataset.region);
       activateFirstCharacter(nextRegion.dataset.region);
       updateActiveEmblem(nextRegion.dataset.region);
-      return;
     }
-  } else if (e.deltaY < 0) {
-    // Scroll up -> previous character or previous region
+  } else if (direction < 0) {
     if (index > 0) {
-      newIndex = index - 1;
+      setActiveCharacter(chars[index - 1]);
     } else {
-      // Previous region (wrap to last if at first)
-      const prevRegionIndex = (currentRegionIndex - 1 + regionsList.length) % regionsList.length;
-      const prevRegion = regionsList[prevRegionIndex];
+      const prevRegion = regionsList[(currentRegionIndex - 1 + regionsList.length) % regionsList.length];
       showRegion(prevRegion.dataset.region);
       const lastChar = prevRegion.querySelector(".character:last-child");
       if (lastChar) setActiveCharacter(lastChar);
       updateActiveEmblem(prevRegion.dataset.region);
-      return;
     }
   }
+}
 
-  // Same region
-  if (newIndex !== index) setActiveCharacter(chars[newIndex]);
+container.addEventListener("wheel", e => {
+  e.preventDefault();
+  stepCharacter(e.deltaY > 0 ? 1 : -1);
 }, { passive: false });
+
+// ===== Touch swipe (mobile): horizontal swipe anywhere on the page
+// switches character, since the thumbnail strip is hidden there in favor
+// of this gesture. Attached to the whole container (not just the splash
+// art) so it works from the description card too — the dx/dy ratio check
+// below is what keeps it from hijacking vertical scrolling inside it. =====
+(() => {
+  const swipeTarget = document.querySelector(".characters-container");
+  if (!swipeTarget) return;
+  let startX = 0, startY = 0, tracking = false;
+
+  swipeTarget.addEventListener("touchstart", e => {
+    if (e.touches.length !== 1) return;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    tracking = true;
+  }, { passive: true });
+
+  swipeTarget.addEventListener("touchend", e => {
+    if (!tracking) return;
+    tracking = false;
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+    // Require a clearly horizontal gesture so vertical page scrolling
+    // (the whole point of the stacked mobile layout) isn't hijacked.
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      stepCharacter(dx < 0 ? 1 : -1);
+      // Once someone's done it once they don't need reminding again —
+      // and since this is just in-memory state, it naturally reappears
+      // on the next page load for first-time visitors.
+      document.getElementById("swipe-hint")?.classList.add("done");
+    }
+  }, { passive: true });
+})();
 
 // Helper to update active emblem
 function updateActiveEmblem(regionName) {

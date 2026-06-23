@@ -82,6 +82,33 @@
       <div class="race-row-line"></div>
     </section>
 
+    <!-- Mobile-only: full app-like viewer — tabs always on screen, a
+         prev/active/next carousel so relative race size stays comparable,
+         and a scrollable description card. Populated by race.js from the
+         same data/markup as the desktop layout below (which is hidden,
+         not removed, on mobile — still the data source). -->
+    <div id="race-mobile-app">
+      <div id="race-mobile-tabs">
+        <button class="race-mobile-tab" data-tab="intro">Présentation</button>
+        <button class="race-mobile-tab" data-tab="normal">Éveillés</button>
+        <button class="race-mobile-tab" data-tab="watcher">Veilleurs</button>
+      </div>
+      <div id="race-progress"><div id="race-progress-bar"></div></div>
+      <div id="race-hint"><span class="race-hint-chevrons">&rsaquo;&rsaquo;&rsaquo;</span> Glissez</div>
+      <div id="race-mobile-stage">
+        <div id="race-carousel-row">
+          <div class="race-carousel-slot prev"><img alt=""></div>
+          <div class="race-carousel-slot active"><img alt=""></div>
+          <div class="race-carousel-slot next"><img alt=""></div>
+        </div>
+        <div id="race-mobile-card">
+          <h3 id="race-mobile-name"></h3>
+          <p id="race-mobile-phrase"></p>
+          <div id="race-mobile-desc"></div>
+        </div>
+      </div>
+    </div>
+
     <!------------ Race Descriptions ------------>
     <section class="race-descriptions">
 

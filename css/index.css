@@ -44,15 +44,20 @@
   gap: 30px;
 }
 .project-card {
+  display: block;
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--glass-border);
   border-radius: 14px;
   padding: 25px;
+  text-decoration: none;
+  color: inherit;
   transition: all 0.3s ease;
 }
-.project-card:hover {
+.project-card:hover,
+.project-card:active {
   transform: translateY(-5px);
   box-shadow: 0 0 18px rgba(0,180,255,0.4);
+  border-color: rgba(0,180,255,0.5);
 }
 
 /* Team */
@@ -92,4 +97,64 @@
 .member-card p {
   color: #b9dfff;
   font-size: 0.9rem;
+}
+
+/* === MOBILE (<= 900px) ===
+   Nothing here was actually broken (the auto-fit grids already collapse
+   to one column on their own), but 100px of vertical padding plus an
+   80px gap between three short sections meant a lot of empty scrolling
+   between them on a phone, and :hover-only feedback (translateY + glow)
+   never shows on touch since there's no hover state to trigger it. */
+@media (max-width: 900px) {
+  .team-lore {
+    gap: 36px;
+    padding: 40px 5%;
+  }
+
+  .team-lore section {
+    padding: 28px 22px;
+  }
+
+  .intro h1 {
+    font-size: 2.1rem;
+  }
+
+  .intro p {
+    font-size: 1rem;
+  }
+
+  .projects h2,
+  .team h2 {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+
+  .project-grid {
+    gap: 16px;
+  }
+
+  .project-card {
+    padding: 18px;
+  }
+
+  .member-grid {
+    gap: 18px;
+  }
+
+  .member-card {
+    padding: 16px;
+    flex-direction: row;
+    width: 100%;
+    text-align: left;
+  }
+
+  .member-card img {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+
+  .member-card h3 {
+    font-size: 1.05rem;
+  }
 }
