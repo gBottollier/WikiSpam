@@ -5,28 +5,239 @@ html, body {
   overflow: hidden;
 }
 
-/* Map container fills viewport minus navbar */
-#map-container {
-  width: 100%;
-  height: calc(100vh - 150px); /* adjust for navbar height */
-  overflow: hidden;
+#map-stage {
   position: relative;
-  cursor: grab;
+  width: 100%;
+  height: calc(100vh - 150px);
+  overflow: hidden;
   background: #000;
 }
 
-/* Map image absolute, keeps JS transform logic */
-#map {
+/* ---------- World pane (always-present zoomable canvas) ---------- */
+#world-pane {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+/* width/height/left/top are computed and set inline by JS (layoutBox) to
+   exactly match world.webp's letterboxed render box, so the SVG overlay's
+   0-1 viewBox and the % positioned layers line up pixel-for-pixel. */
+#world-content {
+  position: absolute;
+  transform-origin: 0 0;
+  /* duration is set inline by JS (1.5s in, 0.5s out — asymmetric on purpose) */
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+}
+
+#world-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#region-detail-layer,
+#region-svg,
+#poi-layer {
   position: absolute;
   top: 0;
   left: 0;
-  width: auto;
-  height: 100%;  /* fill container height */
-  min-width: 100%; /* ensures no gaps on wide screens */
-  user-select: none;
-  -webkit-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  -ms-user-drag: none;
-  transform-origin: top left;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.region-detail {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  opacity: 0;
+  pointer-events: none;
+}
+.region-detail.active { opacity: 1; }
+
+.region-shape {
+  fill: rgba(0, 180, 255, 0.0);
+  stroke: rgba(166, 240, 255, 0.9);
+  stroke-width: 0.0022;
+  stroke-opacity: 0;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.region-shape:hover,
+.region-shape.hovered {
+  fill: rgba(0, 180, 255, 0.32);
+  stroke-opacity: 1;
+  filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.8));
+}
+/* Fully removed from rendering (not just faded) while zoomed in: an SVG
+   stroke layer repainting under an animating ancestor transform is a heavy,
+   non-compositor-only operation and was a main source of zoom jank. */
+#region-svg.zoomed-in {
+  display: none;
+}
+
+#map-hint {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  color: #a6f0ff;
+  background: rgba(8, 0, 32, 0.82);
+  border: 1px solid rgba(166, 240, 255, 0.18);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.3s ease;
+}
+#map-stage.zoomed #map-hint { opacity: 0; }
+
+/* ---------- Points of interest ---------- */
+.poi-marker {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #00ffff 0%, #00b4ff 60%, rgba(0,180,255,0) 100%);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.9), 0 0 2px #fff;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+}
+.poi-marker.active {
+  opacity: 1;
+  pointer-events: auto;
+  animation: poi-pulse 2.2s ease-in-out infinite;
+}
+.poi-marker::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 255, 255, 0.5);
+}
+.poi-marker:hover,
+.poi-marker.hovered {
+  background: radial-gradient(circle, #fff 0%, #7e3ff2 60%, rgba(126,63,242,0) 100%);
+  box-shadow: 0 0 14px rgba(126, 63, 242, 1);
+}
+.poi-marker.invented {
+  background: radial-gradient(circle, #ffd86b 0%, #c98b1f 60%, rgba(201,139,31,0) 100%);
+}
+
+@keyframes poi-pulse {
+  0%, 100% { transform: scale(var(--poi-scale, 1)); }
+  50% { transform: scale(calc(var(--poi-scale, 1) * 1.18)); }
+}
+
+/* ---------- Zoomed-in info panel & back button (sit above the canvas) ---------- */
+#back-btn,
+#region-title,
+#region-desc {
+  position: absolute;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-out;
+}
+#map-stage.zoomed #back-btn,
+#map-stage.zoomed #region-title,
+#map-stage.zoomed #region-desc {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#back-btn {
+  top: 16px;
+  left: 16px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #00ffff;
+  background: rgba(8, 0, 32, 0.85);
+  border: 1px solid rgba(166, 240, 255, 0.25);
+  border-radius: 10px;
+  cursor: pointer;
+}
+#back-btn:hover {
+  background: rgba(126, 63, 242, 0.18);
+  box-shadow: 0 0 14px rgba(126, 63, 242, 0.5);
+}
+
+#region-title {
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 10px 28px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.4rem;
+  color: #00b4ff;
+  text-shadow: 0 0 10px rgba(0, 180, 255, 0.6);
+  background: rgba(8, 0, 32, 0.78);
+  border: 1px solid rgba(166, 240, 255, 0.15);
+  border-radius: 12px;
+}
+
+#region-desc {
+  top: 74px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: min(640px, 86vw);
+  margin: 0;
+  padding: 10px 18px;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: #c8e8ff;
+  text-align: center;
+  background: rgba(8, 0, 32, 0.72);
+  border: 1px solid rgba(166, 240, 255, 0.12);
+  border-radius: 10px;
+}
+
+/* ---------- Tooltip ---------- */
+.map-tooltip {
+  position: fixed;
+  z-index: 50;
+  max-width: 320px;
+  padding: 12px 16px;
+  background: rgba(8, 0, 32, 0.92);
+  border: 1px solid rgba(166, 240, 255, 0.25);
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(0, 180, 255, 0.25);
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.map-tooltip.hidden { opacity: 0; visibility: hidden; }
+
+.map-tooltip h3 {
+  margin: 0 0 6px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+  color: #00ffff;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+.map-tooltip p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #c8e8ff;
+}
+.map-tooltip .invented-tag {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.7rem;
+  color: #ffd86b;
+  opacity: 0.8;
 }

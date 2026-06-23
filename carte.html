@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SPAM LORE</title>
   <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/background_stars.css">
   <link rel="stylesheet" href="css/carte.css">
 </head>
 <body>
@@ -13,16 +14,43 @@
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
   <!-- Navbar -->
-  
+
+  <!-- Background -->
+  <div class="background-stars"></div>
+
   <!-- CARTE -->
-  <div id="map-container">
-    <img src="img/carte.png" alt="Carte SPAM LORE" id="map">
+  <div id="map-stage">
+
+    <div id="world-pane">
+      <div id="world-content">
+        <img id="world-img" src="img/map/world.webp" alt="Carte du monde" draggable="false">
+        <div id="region-detail-layer"></div>
+        <svg id="region-svg" viewBox="0 0 1 1" preserveAspectRatio="none"></svg>
+        <div id="poi-layer"></div>
+      </div>
+    </div>
+
+    <p id="map-hint">Survolez un continent pour le découvrir, cliquez pour l'explorer</p>
+
+    <!-- Shown only while zoomed into a region -->
+    <button id="back-btn">&larr; Retour à la carte</button>
+    <h2 id="region-title"></h2>
+    <p id="region-desc"></p>
+
+    <!-- Tooltip -->
+    <div id="map-tooltip" class="map-tooltip hidden">
+      <h3 id="tooltip-title"></h3>
+      <p id="tooltip-desc"></p>
+    </div>
+
   </div>
   <!-- CARTE -->
-  
+
   <!-- Script -->
+  <script src="js/map-data.js"></script>
   <script src="js/carte.js"></script>
   <script src="js/navbar.js"></script>
+  <script src="js/background_stars.js"></script>
   <!-- Script -->
 
 </body>
