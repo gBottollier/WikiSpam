@@ -424,60 +424,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Swiping the header jumps a whole era at a time (to the first event of
   // the next/previous one) rather than one event — a quick "skip ahead a
-  // chapter" gesture separate from the event-by-event swipe below.
+  // chapter" gesture separate from the event-by-event swipe below. Returns
+  // false at either end of the timeline so the drag-swipe helper knows to
+  // spring back instead of sliding away from content that never changed.
   function stepEra(direction) {
     const active = events[storyIndex];
     const era = active.closest(".timeline-era");
     const eraIndex = eras.indexOf(era);
     const newEraIndex = Math.max(0, Math.min(eraIndex + direction, eras.length - 1));
-    if (newEraIndex === eraIndex) return;
+    if (newEraIndex === eraIndex) return false;
     const firstEvent = eras[newEraIndex].querySelector(".event-card");
-    if (!firstEvent) return;
+    if (!firstEvent) return false;
     storyIndex = events.indexOf(firstEvent);
     renderStory();
+    return true;
   }
 
-  let headerStartX = 0, headerStartY = 0, headerTracking = false;
-  storyHeader.addEventListener("touchstart", e => {
-    if (!storyModeOn || e.touches.length !== 1) return;
-    headerStartX = e.touches[0].clientX;
-    headerStartY = e.touches[0].clientY;
-    headerTracking = true;
-  }, { passive: true });
+  // One event at a time, same return-false-at-the-edge contract as stepEra.
+  function stepEvent(direction) {
+    const next = Math.max(0, Math.min(storyIndex + direction, events.length - 1));
+    if (next === storyIndex) return false;
+    storyIndex = next;
+    renderStory();
+    return true;
+  }
 
-  storyHeader.addEventListener("touchend", e => {
-    if (!storyModeOn || !headerTracking) return;
-    headerTracking = false;
-    const touch = e.changedTouches[0];
-    const dx = touch.clientX - headerStartX;
-    const dy = touch.clientY - headerStartY;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-      // Stops this same gesture also being read as an event-swipe by the
-      // container-level listener below (touch events bubble through it).
-      e.stopPropagation();
-      stepEra(dx < 0 ? 1 : -1);
-      storyHint?.classList.add("done");
-    }
-  }, { passive: true });
+  const getActiveCard = () => document.querySelector(".event-card.story-active");
 
-  let storyStartX = 0, storyStartY = 0, storyTracking = false;
-  container.addEventListener("touchstart", e => {
-    if (!storyModeOn || e.touches.length !== 1) return;
-    storyStartX = e.touches[0].clientX;
-    storyStartY = e.touches[0].clientY;
-    storyTracking = true;
-  }, { passive: true });
+  // Swiping the header only drags the header itself (a bigger, "skip
+  // ahead a chapter" gesture, separate from the card's own one-event-at-
+  // a-time swipe below). It's a fixed-position panel (see the mobile
+  // story-mode CSS), so a plain transform: translateX during the drag is
+  // all dragging it needs.
+  attachDragSwipe(storyHeader, {
+    getDraggables: () => storyModeOn ? [storyHeader] : [],
+    onCommit: (direction) => {
+      const advanced = storyModeOn && stepEra(direction);
+      if (advanced) storyHint?.classList.add("done");
+      return advanced;
+    },
+    stopBubble: true,
+  });
 
-  container.addEventListener("touchend", e => {
-    if (!storyModeOn || !storyTracking) return;
-    storyTracking = false;
-    const touch = e.changedTouches[0];
-    const dx = touch.clientX - storyStartX;
-    const dy = touch.clientY - storyStartY;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-      storyIndex += dx < 0 ? 1 : -1;
-      renderStory();
-      storyHint?.classList.add("done");
-    }
-  }, { passive: true });
+  attachDragSwipe(container, {
+    getDraggables: () => storyModeOn ? [getActiveCard()].filter(Boolean) : [],
+    onCommit: (direction) => {
+      const advanced = storyModeOn && stepEvent(direction);
+      if (advanced) storyHint?.classList.add("done");
+      return advanced;
+    },
+  });
 });

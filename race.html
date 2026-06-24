@@ -7,7 +7,7 @@
   <title>Races – SPAM LORE</title>
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/background_stars.css">
-  <link rel="stylesheet" href="css/race.css">
+  <link rel="stylesheet" href="css/race.css?v=2">
 </head>
 <body>
 
@@ -96,10 +96,18 @@
       <div id="race-progress"><div id="race-progress-bar"></div></div>
       <div id="race-hint"><span class="race-hint-chevrons">&rsaquo;&rsaquo;&rsaquo;</span> Glissez</div>
       <div id="race-mobile-stage">
-        <div id="race-carousel-row">
-          <div class="race-carousel-slot prev"><img alt=""></div>
-          <div class="race-carousel-slot active"><img alt=""></div>
-          <div class="race-carousel-slot next"><img alt=""></div>
+        <!-- Depth carousel: 5 slots (two hidden buffers either side of
+             prev/current/next) whose position/scale/opacity js/race.js
+             interpolates continuously as the user drags, so dragging
+             forward visibly grows the next race from a small back-peek
+             into the large current position while current shrinks back
+             into the prev peek — not just an on/off-screen swap. -->
+        <div id="race-track">
+          <div class="race-peek" data-rel="-2"><img class="race-slide" alt=""></div>
+          <div class="race-peek" data-rel="-1"><img class="race-slide" alt=""></div>
+          <div class="race-peek" data-rel="0"><img class="race-slide" alt=""></div>
+          <div class="race-peek" data-rel="1"><img class="race-slide" alt=""></div>
+          <div class="race-peek" data-rel="2"><img class="race-slide" alt=""></div>
         </div>
         <div id="race-mobile-card">
           <h3 id="race-mobile-name"></h3>
@@ -778,7 +786,7 @@
   </main>
 
   <!-- Scripts -->
-  <script src="js/race.js"></script>
+  <script src="js/race.js?v=3"></script>
   <script src="js/background_stars.js"></script>
   <script src="js/navbar.js"></script>
 </body>

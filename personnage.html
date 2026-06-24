@@ -6,14 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SPAM LORE</title>
   <link rel="stylesheet" href="css/navbar.css">
-  <link rel="stylesheet" href="css/personnage.css">
+  <link rel="stylesheet" href="css/personnage.css?v=10">
   <link rel="stylesheet" href="css/background_stars.css">
 </head>
 <body>
   <div id="navbar-placeholder"></div>
   <div class="background-stars"></div>
   <main class="characters-container">
-    <img id="char-display" src="" alt="" aria-hidden="true">
+    <!-- Mobile: a 3-slot filmstrip (prev/current/next). #char-track is the
+         static viewport (clips with overflow:hidden); #char-strip is what
+         actually gets dragged — it has to be a separate element from the
+         one doing the clipping, or the clip mask would just move along
+         with the content and the neighbors would never be revealed.
+         Desktop only ever shows #char-display (prev/next stay hidden),
+         unchanged from before. -->
+    <div id="char-track">
+      <div id="char-strip">
+        <!-- Each slot is full-width and staggered by translateX(±100%) —
+             100% of *its own* width, i.e. one full box-width, which is
+             what actually keeps prev/current/next a full screen apart.
+             The <img> inside is sized to its own aspect ratio (no
+             left/right margin) and centered within that full-width slot;
+             giving the <img> itself the ±100% stagger doesn't work, since
+             that 100% would resolve against the image's own (much
+             narrower) width instead. -->
+        <div class="char-slot" id="char-slot-prev"><img id="char-display-prev" class="char-slide" alt="" aria-hidden="true" draggable="false"></div>
+        <div class="char-slot" id="char-slot-current"><img id="char-display" class="char-slide" src="" alt="" aria-hidden="true" draggable="false"></div>
+        <div class="char-slot" id="char-slot-next"><img id="char-display-next" class="char-slide" alt="" aria-hidden="true" draggable="false"></div>
+      </div>
+    </div>
     <div id="region-label"></div>
     <p id="swipe-hint">&larr; Glissez sur l'image pour changer de personnage &rarr;</p>
     <div class="region-backgrounds">
@@ -1042,6 +1063,7 @@
     </div>
   </main>
   <script src="js/navbar.js"></script>
-  <script src="js/personnage.js"></script>
+  <script src="js/drag-swipe.js?v=5"></script>
+  <script src="js/personnage.js?v=5"></script>
 </body>
 </html>

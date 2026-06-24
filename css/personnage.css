@@ -48,6 +48,19 @@
   opacity: 1;
 }
 
+/* No-op wrapper on desktop: left position:static (the default) so it
+   never becomes a positioning context of its own — #char-display's own
+   position:absolute keeps resolving against .characters-container
+   exactly as before. (display:contents was tried here first, but
+   absolutely-positioned descendants of a display:contents element are
+   inconsistently supported across browsers, which is exactly what made
+   the prev/next slides fail to render at all.) The prev/next filmstrip
+   neighbors are mobile-only. */
+#char-display-prev,
+#char-display-next {
+  display: none;
+}
+
 /* Region name as readable text (desktop relies on recognizing the emblem
    icon alone); shown only on mobile, see media query below. */
 #region-label {
@@ -390,24 +403,106 @@
     gap: 0.6rem;
   }
 
-  /* Splash art: same double-gradient elliptical-fade mask as desktop (kept
-     for visual consistency, just at the new mobile box size) — only the
-     background behind it changes, see below. */
-  #char-display {
+  /* Splash art filmstrip. #char-track is the static viewport — box size
+     and background live here, and it's this element's overflow:hidden
+     that clips the neighbors out of view at rest. #char-strip is the
+     element js/personnage.js actually drags; it has to be a different
+     element from #char-track, or moving the clip mask along with its own
+     content would mean the neighbors never actually become visible. */
+  #char-track {
+    display: block;
     position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
     width: 100%;
     height: 40vh;
     max-height: 360px;
     flex-shrink: 0;
-    /* The mask fades the image out before its edges, so the box's own
-       background shows through there — a flat black read as broken/empty,
-       so it's the page's own gradient instead. */
-    background: radial-gradient(ellipse at top, rgba(0, 0, 60, 0.6), #000);
+    overflow: hidden;
+    /* Transparent — same as desktop's #char-display, which has no
+       background of its own either and just sits directly on whatever
+       .characters-container/.region-bg show behind it. Each slide below
+       is sized height:100%;width:auto (its own aspect ratio, like
+       desktop), not width:100%, so there's no top/bottom letterbox gap
+       at all — only the left/right margin either side of a narrower
+       image, exactly like desktop already has and isn't an issue there. */
+    background: transparent;
     /* lets touch swipes on the art reach the JS swipe handler */
     pointer-events: auto;
+    /* Without this, mobile browsers darken whatever's under a finger with
+       their own default tap-highlight overlay while it's pressed — easy
+       to mistake for an intentional "dimmed while dragging" effect, but
+       it's just the browser's stock touch feedback, not anything this
+       site's CSS/JS sets. */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* #char-strip fills #char-track exactly; each slide inside it is also
+     absolutely positioned filling the same box, and it's the per-slide
+     transform below that actually staggers them side by side. Dragging
+     #char-strip via transform (back to the default — see js/personnage.js)
+     moves all three together as a single rigid unit. */
+  #char-strip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Each slot is full width (100% of #char-strip, i.e. of #char-track) and
+     staggered by translateX(±100%) — 100% of *its own* width, which is
+     what makes that one full box-width, keeping prev/current/next a
+     full screen apart. This has to be a separate element from the <img>
+     it contains: giving the <img> itself this same ±100% would resolve
+     against the image's own (much narrower, auto-sized) width instead,
+     moving it nowhere near far enough — which is exactly the bug this is
+     fixing (prev/next ending up rendered right next to current instead
+     of off #char-track's clipped viewport). */
+  .char-slot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #char-slot-prev    { transform: translateX(-100%); }
+  #char-slot-current { transform: translateX(0); }
+  #char-slot-next    { transform: translateX(100%); }
+
+  /* Sized like desktop's single #char-display (height:100%, width:auto —
+     its own aspect ratio, not stretched/letterboxed to the box's width),
+     centered the same way desktop centers it: left:50% + translateX(-50%).
+     This does put a transform back on the masked element itself (the
+     darkening-while-dragging tradeoff, left as-is per instruction) — the
+     margin:auto and flex-centering alternatives tried first were meant to
+     avoid exactly that, but neither one actually centered a replaced
+     element reliably in practice. */
+  #char-track .char-slide {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: auto;
+    transform: translateX(-50%);
+    object-fit: contain;
+    opacity: 1;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+    /* iOS's native long-press callout on an <img> (the "Save Image"
+       preview) visibly darkens it the moment it's held, before the menu
+       even appears — that's the dimming during a drag, not anything in
+       this site's own styles. -webkit-user-drag:none stops the OS from
+       also trying to pick the image up as a native drag item. */
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    user-select: none;
+
+    -webkit-mask-image: linear-gradient(to bottom, transparent 4%, black 14%, black 76%, transparent 96%);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-image: linear-gradient(to bottom, transparent 4%, black 14%, black 76%, transparent 96%);
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
   }
 
   /* "Which region is this character from": one icon (chipped for contrast

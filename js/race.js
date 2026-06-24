@@ -294,26 +294,26 @@ window.addEventListener("load", () => {
   layoutRaceStrip();
 });
 
-/* ---------- Mobile: app-like viewer (tabs + size-comparison carousel + card) ----------
+/* ---------- Mobile: app-like viewer (tabs + depth carousel + card) ----------
    The desktop strip (hover to preview, click to scroll to it) doesn't work
    on touch and is hidden on mobile, which left 9 Éveillés / 7 Veilleurs
    with no way to find a specific one besides scrolling past all of them,
    and no way to compare sizes since only one was ever on screen. Below:
-   always-visible tabs (Présentation / Éveillés / Veilleurs), a
-   prev/active/next carousel row so relative race size stays visible (each
-   image at a height scaled from its real pixel size, the same numbers the
-   desktop strip uses), and a description card with the body text
-   scrolling internally. Content is read from the existing desktop markup
-   (hidden, not removed, on mobile) rather than duplicated. */
+   always-visible tabs (Présentation / Éveillés / Veilleurs), a 5-slot
+   depth carousel (prev/current/next visible, two hidden buffers either
+   side) whose position/scale/opacity js/race.js interpolates continuously
+   as the user drags — so dragging forward visibly grows the next race
+   from a small back-peek into the large current position while current
+   shrinks back into the prev peek, rather than just sliding on/off
+   screen — and a description card with the body text scrolling
+   internally. Content is read from the existing desktop markup (hidden,
+   not removed, on mobile) rather than duplicated. */
 (() => {
   const app = document.getElementById("race-mobile-app");
   if (!app) return;
 
   const tabs = Array.from(document.querySelectorAll(".race-mobile-tab"));
-  const carouselRow = document.getElementById("race-carousel-row");
-  const slotPrev = document.querySelector(".race-carousel-slot.prev img");
-  const slotActive = document.querySelector(".race-carousel-slot.active img");
-  const slotNext = document.querySelector(".race-carousel-slot.next img");
+  const track = document.getElementById("race-track");
   const nameEl = document.getElementById("race-mobile-name");
   const phraseEl = document.getElementById("race-mobile-phrase");
   const descEl = document.getElementById("race-mobile-desc");
@@ -321,26 +321,76 @@ window.addEventListener("load", () => {
   const hint = document.getElementById("race-hint");
   const introHTML = document.querySelector(".race-intro-text")?.innerHTML || "";
 
+  // peeks[rel] = the slot showing the race at raceIndex+rel. -2/2 are
+  // hidden buffers just past the visible -1/1 peeks, ready to grow into
+  // view as soon as a drag starts toward them.
+  const peeks = {};
+  document.querySelectorAll(".race-peek").forEach((el) => {
+    peeks[Number(el.dataset.rel)] = { el, img: el.querySelector(".race-slide") };
+  });
+
   const allNaturalH = Object.values(races).flat().map(r => r.naturalH);
   const globalMin = Math.min(...allNaturalH);
   const globalMax = Math.max(...allNaturalH);
   const ACTIVE_MIN_VH = 12, ACTIVE_MAX_VH = 30;
-  const SIDE_SCALE = 0.65; // neighbors are visibly secondary, not equal-weight
 
   // The whole sequence swiped through is one continuous line: the intro,
   // then every Éveillé, then every Veilleur — swiping past the last race
   // of one tab moves into the next tab rather than stopping there.
   const TAB_ORDER = ["intro", "normal", "watcher"];
 
-  function heightFor(naturalH, scale = 1) {
+  // Real pixel height the race is drawn at, scaled into the carousel's vh
+  // range — so a Natus still visibly dwarfs an Esprit even at peek size,
+  // the same numbers the desktop strip uses for the same comparison.
+  function heightFor(naturalH) {
     const vh = ACTIVE_MIN_VH + ((naturalH - globalMin) / (globalMax - globalMin)) * (ACTIVE_MAX_VH - ACTIVE_MIN_VH);
-    return `${vh * scale}vh`;
+    return `${vh}vh`;
+  }
+
+  // Resting look at each relative position — keyed by distance from
+  // center, interpolated between for the fractional positions a live drag
+  // passes through. 0: full size, front and center. 1: the visible peek.
+  // 2: fully transparent, parked just past the peek as a buffer.
+  const STOPS = {
+    0: { x: 0, scale: 1, opacity: 1 },
+    1: { x: 36, scale: 0.6, opacity: 0.5 },
+    2: { x: 58, scale: 0.35, opacity: 0 },
+  };
+  const lerp = (a, b, t) => a + (b - a) * t;
+  function styleAt(idx) {
+    const clamped = Math.max(-2, Math.min(2, idx));
+    const sign = clamped < 0 ? -1 : 1;
+    const a = Math.abs(clamped);
+    const lo = Math.floor(a), hi = Math.min(2, Math.ceil(a));
+    const t = hi === lo ? 0 : (a - lo) / (hi - lo);
+    const loS = STOPS[lo], hiS = STOPS[hi];
+    return {
+      x: sign * lerp(loS.x, hiS.x, t),
+      scale: lerp(loS.scale, hiS.scale, t),
+      opacity: lerp(loS.opacity, hiS.opacity, t),
+    };
+  }
+
+  // f is "how far advanced toward the next race" — 0 at rest, ±1 at a
+  // full committed step. Applied to every slot at once: at f=1, what was
+  // at rel 1 (the next peek) now renders with styleAt(0) (full size,
+  // centered), what was at rel 0 now renders with styleAt(-1) (shrunk
+  // back to the prev peek), and so on down the line.
+  function applyForF(f, withTransition) {
+    [-2, -1, 0, 1, 2].forEach((rel) => {
+      const el = peeks[rel]?.el;
+      if (!el) return;
+      el.style.transition = withTransition ? "transform 0.2s ease, opacity 0.2s ease" : "none";
+      const s = styleAt(rel - f);
+      el.style.transform = `translateX(${s.x}vw) scale(${s.scale})`;
+      el.style.opacity = s.opacity;
+    });
   }
 
   let activeTab = "intro";
   let raceIndex = 0;
 
-  function setSlot(imgEl, data, scale) {
+  function setSlot(imgEl, data) {
     if (!data) {
       imgEl.removeAttribute("src");
       imgEl.style.visibility = "hidden";
@@ -349,7 +399,7 @@ window.addEventListener("load", () => {
     imgEl.style.visibility = "visible";
     imgEl.src = `img/race/${data.file}`;
     imgEl.alt = data.display;
-    imgEl.style.height = heightFor(data.naturalH, scale);
+    imgEl.style.height = heightFor(data.naturalH);
   }
 
   function renderRaceTab() {
@@ -358,10 +408,9 @@ window.addEventListener("load", () => {
     raceIndex = Math.max(0, Math.min(raceIndex, list.length - 1));
     const data = list[raceIndex];
 
-    carouselRow.style.display = "flex";
-    setSlot(slotPrev, list[raceIndex - 1], SIDE_SCALE);
-    setSlot(slotActive, data, 1);
-    setSlot(slotNext, list[raceIndex + 1], SIDE_SCALE);
+    track.style.display = "block";
+    [-2, -1, 0, 1, 2].forEach((rel) => setSlot(peeks[rel].img, list[raceIndex + rel]));
+    applyForF(0, false);
 
     const row = document.getElementById(data.desc);
     nameEl.textContent = data.display;
@@ -373,7 +422,7 @@ window.addEventListener("load", () => {
   }
 
   function renderIntroTab() {
-    carouselRow.style.display = "none";
+    track.style.display = "none";
     nameEl.textContent = "Races du Monde";
     phraseEl.textContent = "";
     descEl.innerHTML = introHTML;
@@ -383,6 +432,7 @@ window.addEventListener("load", () => {
 
   function render() {
     tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === activeTab));
+    resetCardDrag();
     if (activeTab === "intro") renderIntroTab();
     else renderRaceTab();
   }
@@ -399,79 +449,114 @@ window.addEventListener("load", () => {
   // One step in the continuous intro→Éveillés→Veilleurs sequence. Crossing
   // a tab boundary lands on the first race of the next one (or last, going
   // backwards) rather than just stopping at the edge of the current tab.
+  // Returns false at either end of the whole sequence so the touch
+  // handler below knows to spring back instead of relabeling slots with
+  // content that never actually changed.
   function stepPage(direction) {
     if (activeTab !== "intro") {
       const list = races[activeTab];
       const newIndex = raceIndex + direction;
       if (newIndex >= 0 && newIndex < list.length) {
-        slideCarousel(direction, () => {
-          raceIndex = newIndex;
-          renderRaceTab();
-        });
-        return;
+        raceIndex = newIndex;
+        renderRaceTab();
+        return true;
       }
     }
     const tabPos = TAB_ORDER.indexOf(activeTab);
     const newTabPos = tabPos + direction;
-    if (newTabPos < 0 || newTabPos >= TAB_ORDER.length) return; // already at either end
+    if (newTabPos < 0 || newTabPos >= TAB_ORDER.length) return false; // already at either end
     activeTab = TAB_ORDER[newTabPos];
     if (activeTab !== "intro") {
       switchRace(activeTab);
       raceIndex = direction > 0 ? 0 : races[activeTab].length - 1;
     }
     render();
+    return true;
   }
 
-  // Slides the carousel row out and back in around the content swap, so a
-  // swipe reads as the next race sliding into place rather than an instant
-  // jump-cut — only used for in-tab steps, since the carousel itself is
-  // hidden going into/out of the intro tab anyway.
-  let slideTimer = null;
-  function slideCarousel(direction, applyChange) {
-    if (carouselRow.style.display === "none") {
-      applyChange();
-      return;
-    }
-    if (slideTimer) clearTimeout(slideTimer);
-    const shift = (carouselRow.offsetWidth || 240) / 3;
-    carouselRow.style.transition = "transform 0.2s ease, opacity 0.2s ease";
-    carouselRow.style.transform = `translateX(${direction > 0 ? -shift : shift}px)`;
-    carouselRow.style.opacity = "0.4";
-    slideTimer = setTimeout(() => {
-      applyChange();
-      carouselRow.style.transition = "none";
-      carouselRow.style.transform = "translateX(0)";
-      carouselRow.style.opacity = "1";
-      requestAnimationFrame(() => { carouselRow.style.transition = ""; });
-    }, 200);
+  // The intro tab has no carousel at all (it's hidden there) — the card
+  // itself stands in for "the image" there instead, with a plain
+  // translateX+fade drag/snap rather than the depth carousel's
+  // per-slot interpolation.
+  const card = document.getElementById("race-mobile-card");
+  function applyCardDrag(dx, withTransition) {
+    if (!card) return;
+    card.style.transition = withTransition ? "transform 0.2s ease, opacity 0.2s ease" : "none";
+    card.style.transform = dx === 0 && !withTransition ? "" : `translateX(${dx}px)`;
+    card.style.opacity = dx === 0 && !withTransition ? "" : String(Math.max(0.3, 1 - Math.abs(dx) / viewWidth));
   }
-
-  // Tapping a peeking neighbor jumps straight to it.
-  document.querySelector(".race-carousel-slot.prev")?.addEventListener("click", () => stepPage(-1));
-  document.querySelector(".race-carousel-slot.next")?.addEventListener("click", () => stepPage(1));
+  // Always cleared on every render — otherwise a leftover drag transform/
+  // opacity from the intro card would still be sitting on it the next
+  // time it's reused to show a race's name/phrase/description.
+  function resetCardDrag() {
+    if (!card) return;
+    card.style.transition = "none";
+    card.style.transform = "";
+    card.style.opacity = "";
+  }
 
   // Swipe anywhere on the page — including inside the description's own
-  // vertical scroll — moves through the sequence. The dx/dy ratio check
-  // is what keeps a normal vertical scroll of the text from being read as
-  // a page-swipe.
-  let startX = 0, startY = 0, tracking = false;
-  app.addEventListener("touchstart", e => {
+  // vertical scroll — drives the carousel's depth transition continuously
+  // on a race tab (see applyForF above, not just a binary on/off-screen
+  // swap), or drags the card itself on the intro tab. The dx/dy ratio
+  // check is what keeps a normal vertical scroll of the text from being
+  // read as a page-swipe.
+  let startX = 0, startY = 0, tracking = false, decided = null, viewWidth = 0;
+
+  app.addEventListener("touchstart", (e) => {
     if (e.touches.length !== 1) return;
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
     tracking = true;
+    decided = null;
   }, { passive: true });
 
-  app.addEventListener("touchend", e => {
+  app.addEventListener("touchmove", (e) => {
+    if (!tracking || e.touches.length !== 1) return;
+    const dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+    if (decided === null) {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+      decided = Math.abs(dx) > Math.abs(dy) * 1.5 ? "h" : "v";
+      if (decided === "h") viewWidth = app.clientWidth || window.innerWidth;
+    }
+    if (decided !== "h") return;
+    if (track.style.display === "none") applyCardDrag(dx, false);
+    else applyForF(Math.max(-1, Math.min(1, -dx / viewWidth)), false);
+  }, { passive: true });
+
+  app.addEventListener("touchend", (e) => {
     if (!tracking) return;
     tracking = false;
+    if (decided !== "h") { decided = null; return; }
+    decided = null;
+
+    const onIntro = track.style.display === "none";
     const touch = e.changedTouches[0];
     const dx = touch.clientX - startX;
-    const dy = touch.clientY - startY;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-      stepPage(dx < 0 ? 1 : -1);
-      hint?.classList.add("done");
+    const committed = Math.abs(dx) > Math.max(40, viewWidth * 0.18);
+
+    if (!committed) {
+      if (onIntro) applyCardDrag(0, true);
+      else applyForF(0, true);
+      return;
     }
+
+    const direction = dx < 0 ? 1 : -1;
+    if (onIntro) applyCardDrag(direction > 0 ? -viewWidth : viewWidth, true);
+    else applyForF(direction, true); // finish the rest of the way to a full step
+    setTimeout(() => {
+      const advanced = stepPage(direction);
+      if (!advanced) {
+        if (onIntro) applyCardDrag(0, true);
+        else applyForF(0, true);
+        return;
+      }
+      hint?.classList.add("done");
+      // render() (via stepPage) already relabeled every slot's content
+      // for the new raceIndex/tab and reset both the carousel's f and the
+      // card's drag transform — there's nothing left to animate here.
+    }, 200);
   }, { passive: true });
 
   render();

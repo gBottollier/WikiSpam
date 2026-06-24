@@ -118,7 +118,8 @@ html, body {
    under the mobile breakpoint below, since desktop already has the full
    map plus hover to discover borders. */
 #continent-card-top,
-#continent-card-bar {
+#continent-card-bar,
+#map-swipe-hint {
   display: none;
 }
 @media (max-width: 900px) {
@@ -196,6 +197,42 @@ html, body {
      sitting right next to it. */
   #map-hint {
     display: none;
+  }
+
+  /* Small flickering badge right below the description, inside
+     #continent-card-top — same pattern as the other pages' swipe hints (a
+     slow pulse draws the eye on its own, rather than relying on someone
+     reading a sentence). It's a normal-flow child there, not absolutely
+     positioned, so it always sits right after the description text
+     regardless of how long that text is. World view only; the zoomed
+     view has its own POI chips, no swipe-between-continents gesture to
+     hint at there — but #continent-card-top is already hidden whenever
+     zoomed (see above), so this needs no separate rule for that. */
+  #map-swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 6px;
+    font-size: 0.66rem;
+    color: rgba(185, 223, 255, 0.8);
+    pointer-events: none;
+    animation: map-hint-flicker 2.2s ease-in-out infinite;
+    transition: opacity 0.3s ease;
+  }
+  .map-hint-chevrons {
+    color: #7e3ff2;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+  @keyframes map-hint-flicker {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+  }
+  #map-swipe-hint.done {
+    opacity: 0;
+    pointer-events: none;
+    animation: none;
   }
 }
 
@@ -404,6 +441,59 @@ html, body {
     content: '';
     position: absolute;
     inset: -13px;
+  }
+
+  /* Tiny dots are unreliable to tap directly on a touch screen, and the
+     chip list above is the one reliable path to a POI's info now — so the
+     dot itself no longer responds to taps at all here, only to the chip
+     that selects it (see .poi-marker.hovered below, reused as the
+     "selected" look). */
+  .poi-marker.active {
+    pointer-events: none;
+  }
+
+  /* Fixed bottom card showing whichever POI chip is currently selected —
+     steady location instead of a floating tooltip that would jump around
+     depending on which chip was tapped. */
+  #poi-detail-card {
+    display: none;
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 14px;
+    z-index: 9;
+    max-height: 30vh;
+    overflow-y: auto;
+    padding: 10px 14px;
+    background: rgba(8, 0, 32, 0.85);
+    border: 1px solid rgba(166, 240, 255, 0.18);
+    border-radius: 14px;
+  }
+  #poi-detail-card.active {
+    display: block;
+  }
+  #poi-detail-name {
+    margin: 0 0 4px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 0.95rem;
+    color: #00ffff;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+  }
+  #poi-detail-desc {
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #c8e8ff;
+  }
+  #poi-detail-card .invented-tag {
+    display: none;
+    margin-top: 6px;
+    font-size: 0.68rem;
+    color: #ffd86b;
+    opacity: 0.8;
+  }
+  #poi-detail-card .invented-tag.shown {
+    display: inline-block;
   }
 }
 

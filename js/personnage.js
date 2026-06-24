@@ -106,6 +106,47 @@ function setActiveCharacter(characterEl) {
   if (infoContainer && charInfo) {
     infoContainer.innerHTML = charInfo.innerHTML;
   }
+
+  // Mobile filmstrip: keep the prev/next preview slides in sync with
+  // whichever character just became active (harmless no-op on desktop,
+  // where those two slides stay hidden).
+  updateCharTrackNeighbors();
+}
+
+// ===== Mobile splash-art filmstrip (prev/current/next, dragged as one
+// unit — see the swipe block below) =====
+function getCharImgSrc(characterEl) {
+  return characterEl?.querySelector("img")?.src || "";
+}
+
+// Mirrors stepCharacter's own next/prev + region-wrap lookup, but purely
+// read-only — used to fill the neighbor slides ahead of any actual swipe.
+function peekCharacter(direction) {
+  const activeRegionEl = document.querySelector(".region.active");
+  if (!activeRegionEl) return null;
+  const carousel = activeRegionEl.querySelector(".character-carousel");
+  const chars = Array.from(carousel.children);
+  const activeChar = carousel.querySelector(".character.active");
+  if (!activeChar) return null;
+  const index = chars.indexOf(activeChar);
+  const regionsList = Array.from(document.querySelectorAll(".region"));
+  const currentRegionIndex = regionsList.indexOf(activeRegionEl);
+
+  if (direction > 0) {
+    if (index < chars.length - 1) return chars[index + 1];
+    const nextRegion = regionsList[(currentRegionIndex + 1) % regionsList.length];
+    return nextRegion.querySelector(".character");
+  }
+  if (index > 0) return chars[index - 1];
+  const prevRegion = regionsList[(currentRegionIndex - 1 + regionsList.length) % regionsList.length];
+  return prevRegion.querySelector(".character:last-child");
+}
+
+function updateCharTrackNeighbors() {
+  const prevImg = document.getElementById("char-display-prev");
+  const nextImg = document.getElementById("char-display-next");
+  if (prevImg) prevImg.src = getCharImgSrc(peekCharacter(-1));
+  if (nextImg) nextImg.src = getCharImgSrc(peekCharacter(1));
 }
 
 
@@ -249,36 +290,43 @@ container.addEventListener("wheel", e => {
 // ===== Touch swipe (mobile): horizontal swipe anywhere on the page
 // switches character, since the thumbnail strip is hidden there in favor
 // of this gesture. Attached to the whole container (not just the splash
-// art) so it works from the description card too — the dx/dy ratio check
-// below is what keeps it from hijacking vertical scrolling inside it. =====
+// art) so it works from the description card too. Only the splash art
+// filmstrip (#char-strip, inside the static clipped #char-track viewport)
+// moves — the info card stays put. Since the prev/next slides are already
+// pre-positioned right beside the current one, dragging the strip itself
+// is enough to reveal whichever neighbor the user is dragging toward,
+// live, before they even release. =====
 (() => {
   const swipeTarget = document.querySelector(".characters-container");
   if (!swipeTarget) return;
-  let startX = 0, startY = 0, tracking = false;
+  const charStrip = document.getElementById("char-strip");
 
-  swipeTarget.addEventListener("touchstart", e => {
-    if (e.touches.length !== 1) return;
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    tracking = true;
-  }, { passive: true });
-
-  swipeTarget.addEventListener("touchend", e => {
-    if (!tracking) return;
-    tracking = false;
-    const touch = e.changedTouches[0];
-    const dx = touch.clientX - startX;
-    const dy = touch.clientY - startY;
-    // Require a clearly horizontal gesture so vertical page scrolling
-    // (the whole point of the stacked mobile layout) isn't hijacked.
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-      stepCharacter(dx < 0 ? 1 : -1);
+  attachDragSwipe(swipeTarget, {
+    getDraggables: () => [charStrip].filter(Boolean),
+    onCommit: (direction) => {
+      // Cyclic (wraps across regions both ways), so this never reaches a
+      // real dead end — always treated as a successful step.
+      stepCharacter(direction);
+      // The track-slide above already completed the full visual
+      // transition (the neighbor slide lands exactly where the current
+      // one started) — #char-display's own async crossfade in
+      // setActiveCharacter would otherwise leave it briefly showing the
+      // old character right as the track snaps back to rest, so its src
+      // is forced in sync here instead of waiting on that.
+      const display = document.getElementById("char-display");
+      const activeChar = document.querySelector(".character.active");
+      if (display && activeChar) {
+        display.src = getCharImgSrc(activeChar);
+        display.classList.add("visible");
+      }
       // Once someone's done it once they don't need reminding again —
       // and since this is just in-memory state, it naturally reappears
       // on the next page load for first-time visitors.
       document.getElementById("swipe-hint")?.classList.add("done");
-    }
-  }, { passive: true });
+      return true;
+    },
+    instantSettle: true,
+  });
 })();
 
 // Helper to update active emblem

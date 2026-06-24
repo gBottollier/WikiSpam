@@ -7,7 +7,7 @@
   <title>SPAM LORE</title>
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/background_stars.css">
-  <link rel="stylesheet" href="css/carte.css">
+  <link rel="stylesheet" href="css/carte.css?v=2">
 </head>
 <body>
 
@@ -39,6 +39,11 @@
     <div id="continent-card-top">
       <h3 id="continent-card-name"></h3>
       <p id="continent-card-desc"></p>
+      <!-- Small flickering badge right below the description, same
+           pattern as the other pages' swipe hints — fades out once
+           someone's swiped once (in-memory only, so it's back for the
+           next visitor). -->
+      <div id="map-swipe-hint"><span class="map-hint-chevrons">&rsaquo;&rsaquo;&rsaquo;</span> Glissez</div>
     </div>
 
     <div id="continent-card-bar">
@@ -66,6 +71,16 @@
       <div id="region-poi-list"></div>
     </div>
 
+    <!-- Mobile-only: fixed bottom card for whichever POI chip is selected
+         above — replaces a floating tooltip (which would jump to a
+         different spot depending on which chip was tapped) with one
+         steady location. Tapping the same chip again hides it. -->
+    <div id="poi-detail-card">
+      <h4 id="poi-detail-name"></h4>
+      <p id="poi-detail-desc"></p>
+      <span id="poi-detail-tag" class="invented-tag">Lieu supposé (non confirmé par le lore)</span>
+    </div>
+
     <!-- Tooltip -->
     <div id="map-tooltip" class="map-tooltip hidden">
       <h3 id="tooltip-title"></h3>
@@ -77,7 +92,8 @@
 
   <!-- Script -->
   <script src="js/map-data.js"></script>
-  <script src="js/carte.js"></script>
+  <script src="js/drag-swipe.js?v=5"></script>
+  <script src="js/carte.js?v=1"></script>
   <script src="js/navbar.js"></script>
   <script src="js/background_stars.js"></script>
   <!-- Script -->

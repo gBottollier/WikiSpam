@@ -560,44 +560,44 @@
     overflow: hidden;
   }
 
-  /* Baseline-aligned (align-items:flex-end), like the desktop strip, so
-     taller/shorter reads naturally as taller/shorter instead of just
-     differently sized boxes floating independently. transform/opacity are
-     animated inline by race.js for the slide-between-races effect. */
-  #race-carousel-row {
+  /* Depth carousel viewport — clips with overflow:hidden so the two
+     hidden buffer slots (data-rel="-2"/"2") never show beyond its edges. */
+  #race-track {
     flex-shrink: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    will-change: transform;
-    gap: 14px;
+    position: relative;
+    width: 100%;
     height: 34vh;
-    padding: 10px 0;
+    overflow: hidden;
   }
 
-  .race-carousel-slot {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    min-width: 0;
+  /* Each slot is full width; js/race.js sets its actual transform (X
+     offset + scale) and opacity inline, continuously, as the drag
+     progresses — what's here is just the resting (no-drag) state for
+     each relative position, used as the baseline the JS interpolates
+     from/to. data-rel 0 is full-size/centered/opaque; ±1 are the visible
+     peeks (smaller, dimmer); ±2 are fully transparent buffers held just
+     past the peeks, ready to grow into view mid-drag. */
+  .race-peek {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  .race-carousel-slot img {
+  /* height is set inline by js/race.js (heightFor(), scaled from the
+     race's real pixel height — same numbers the desktop strip uses, kept
+     here so a Natus still visibly dwarfs an Esprit even at peek size) —
+     width:auto preserves its aspect ratio at that height. */
+  .race-slide {
     display: block;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
     width: auto;
-    max-width: 28vw;
+    transform: translateX(-50%);
     object-fit: contain;
-  }
-
-  .race-carousel-slot.active img {
-    max-width: 50vw;
     filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
-  }
-
-  .race-carousel-slot.prev,
-  .race-carousel-slot.next {
-    opacity: 0.45;
-    cursor: pointer;
   }
 
   #race-mobile-card {
