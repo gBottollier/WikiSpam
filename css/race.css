@@ -474,7 +474,17 @@
   #race-mobile-app {
     display: flex;
     flex-direction: column;
+    /* vh is the *largest possible* viewport, as if the browser's own
+       address bar/toolbar were never there — on a real phone that's
+       taller than what's actually visible, so this box (and the bottom
+       nav reservation baked into it) ran past the real fold, hiding the
+       last bit of scrollable text below the nav bar. Doesn't reproduce
+       in a desktop browser's responsive mode, which doesn't simulate
+       that dynamic browser-chrome behavior. dvh tracks the real visible
+       viewport instead; the vh line stays first as a fallback for
+       browsers that don't support dvh yet. */
     height: calc(100vh - 76px);
+    height: calc(100dvh - 76px);
     overflow: hidden;
   }
 

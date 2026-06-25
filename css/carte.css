@@ -19,7 +19,16 @@ html, body {
    bar, or the map ends up floating in a big block of empty space. */
 @media (max-width: 900px) {
   #map-stage {
+    /* vh is the largest-possible viewport (ignoring the browser's own
+       address bar/toolbar), which overshoots what's actually visible on
+       a real phone — the bottom card (in world view) and the POI detail
+       card (when zoomed) are both anchored to *this* box's bottom edge,
+       so when it ran taller than the real visible area, both ended up
+       partly hidden behind the bottom nav. dvh tracks the real visible
+       viewport instead; vh stays first as a fallback for browsers
+       without dvh support. */
     height: calc(100vh - 76px);
+    height: calc(100dvh - 76px);
   }
 }
 

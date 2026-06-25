@@ -329,9 +329,15 @@ window.addEventListener("load", () => {
     peeks[Number(el.dataset.rel)] = { el, img: el.querySelector(".race-slide") };
   });
 
-  const allNaturalH = Object.values(races).flat().map(r => r.naturalH);
-  const globalMin = Math.min(...allNaturalH);
-  const globalMax = Math.max(...allNaturalH);
+  // Éveillés and Veilleurs are independent scales, not one joined range —
+  // a Calamité shouldn't read as "small" just because it's shorter than
+  // the tallest Natus; each tab's tallest member fills the same max
+  // height as the other tab's tallest member.
+  const minMaxByTab = {};
+  Object.entries(races).forEach(([key, list]) => {
+    const heights = list.map(r => r.naturalH);
+    minMaxByTab[key] = { min: Math.min(...heights), max: Math.max(...heights) };
+  });
   const ACTIVE_MIN_VH = 12, ACTIVE_MAX_VH = 30;
 
   // The whole sequence swiped through is one continuous line: the intro,
@@ -340,10 +346,12 @@ window.addEventListener("load", () => {
   const TAB_ORDER = ["intro", "normal", "watcher"];
 
   // Real pixel height the race is drawn at, scaled into the carousel's vh
-  // range — so a Natus still visibly dwarfs an Esprit even at peek size,
-  // the same numbers the desktop strip uses for the same comparison.
-  function heightFor(naturalH) {
-    const vh = ACTIVE_MIN_VH + ((naturalH - globalMin) / (globalMax - globalMin)) * (ACTIVE_MAX_VH - ACTIVE_MIN_VH);
+  // range using its own tab's min/max — so e.g. a Natus still visibly
+  // dwarfs an Esprit within Éveillés, the same numbers the desktop strip
+  // uses for the same comparison, independently of Veilleurs' own range.
+  function heightFor(naturalH, tabKey) {
+    const { min, max } = minMaxByTab[tabKey];
+    const vh = ACTIVE_MIN_VH + ((naturalH - min) / (max - min || 1)) * (ACTIVE_MAX_VH - ACTIVE_MIN_VH);
     return `${vh}vh`;
   }
 
@@ -390,7 +398,7 @@ window.addEventListener("load", () => {
   let activeTab = "intro";
   let raceIndex = 0;
 
-  function setSlot(imgEl, data) {
+  function setSlot(imgEl, data, tabKey) {
     if (!data) {
       imgEl.removeAttribute("src");
       imgEl.style.visibility = "hidden";
@@ -399,7 +407,7 @@ window.addEventListener("load", () => {
     imgEl.style.visibility = "visible";
     imgEl.src = `img/race/${data.file}`;
     imgEl.alt = data.display;
-    imgEl.style.height = heightFor(data.naturalH);
+    imgEl.style.height = heightFor(data.naturalH, tabKey);
   }
 
   function renderRaceTab() {
@@ -409,7 +417,7 @@ window.addEventListener("load", () => {
     const data = list[raceIndex];
 
     track.style.display = "block";
-    [-2, -1, 0, 1, 2].forEach((rel) => setSlot(peeks[rel].img, list[raceIndex + rel]));
+    [-2, -1, 0, 1, 2].forEach((rel) => setSlot(peeks[rel].img, list[raceIndex + rel], activeTab));
     applyForF(0, false);
 
     const row = document.getElementById(data.desc);
