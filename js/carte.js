@@ -186,12 +186,23 @@ function hidePoiDetailCard() {
 }
 
 function attachHoverTooltip(el, getTitle, getDesc, getInvented, { tapToShow = false } = {}) {
+  // Mobile browsers commonly simulate a "hover" from a long-press (before
+  // the actual tap/click fires), which without this guard popped the
+  // tooltip and the region's bright border highlight open just from
+  // holding a finger down — discovery on mobile is meant to happen only
+  // through the swipe card / POI chips, with a tap still reaching the
+  // region's own click-to-zoom listener below unaffected by this.
   el.addEventListener('mouseenter', (e) => {
+    if (isMobile()) return;
     el.classList.add('hovered');
     showTooltip(getTitle(), getDesc(), e.clientX, e.clientY, getInvented());
   });
-  el.addEventListener('mousemove', (e) => queueTooltipMove(e.clientX, e.clientY));
+  el.addEventListener('mousemove', (e) => {
+    if (isMobile()) return;
+    queueTooltipMove(e.clientX, e.clientY);
+  });
   el.addEventListener('mouseleave', () => {
+    if (isMobile()) return;
     el.classList.remove('hovered');
     hideTooltip();
   });
@@ -430,13 +441,20 @@ function activateRegion(slug) {
   const safeCY = topReserve + safePH / 2;
 
   const bboxPxW = bbox.w * W, bboxPxH = bbox.h * H;
+  // Fit against the *full* pane height, not safePH — fitting tightly
+  // against the shorter safe area (tried previously) left no slack once
+  // the view also had to shift to center within that area, which for a
+  // region near a corner of the world map (Nordvinter, Contrées de
+  // Cristal) pushed some of its own POI markers into the reserved strips
+  // (hidden behind the title/chip block) or even past the pane's edge —
+  // the exact "too much zoom, can't see every point" the safe zone was
+  // never meant to cause. Generous slack here means there's room left to
+  // shift toward safeCY below without dragging real content into it.
   // Geometric mean of the two fit ratios: fills the pane better than a
   // strict "contain" fit for elongated regions (Hadeir, Lumethia), while a
   // hard cap keeps small regions (Nordvinter) from zooming in absurdly far.
-  // 0.92 (was 0.8) for a noticeably closer-in fit — less empty margin
-  // around the region than before.
-  const fitRatio = Math.sqrt((PW / bboxPxW) * (safePH / bboxPxH));
-  const scale = Math.min(6, Math.max(1.3, 0.92 * fitRatio));
+  const fitRatio = Math.sqrt((PW / bboxPxW) * (PH / bboxPxH));
+  const scale = Math.min(6, Math.max(1.3, 0.85 * fitRatio));
   let dx = PW / 2 - Lx - scale * (bbox.cx * W);
   let dy = safeCY - Ly - scale * (bbox.cy * H);
 

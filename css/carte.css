@@ -541,3 +541,20 @@ html, body {
   color: #ffd86b;
   opacity: 0.8;
 }
+
+/* Placed last on purpose (same reasoning as the other mobile blocks in
+   this file): mobile browsers commonly apply :hover from a long-press,
+   before the actual tap/click fires — without this, a long press on a
+   continent popped its bright border highlight open the same way real
+   mouse hover does on desktop, even though discovery here is meant to
+   happen only through the swipe card. .region-shape.hovered (the
+   persistent swipe-card selection) is untouched, only the native :hover
+   pseudo-class is reset back to the resting look. Tapping still reaches
+   the region's click-to-zoom listener regardless of any of this. */
+@media (max-width: 900px) {
+  .region-shape:hover {
+    fill: rgba(0, 180, 255, 0.0);
+    stroke-opacity: 0.45;
+    filter: none;
+  }
+}
