@@ -441,20 +441,26 @@ function activateRegion(slug) {
   const safeCY = topReserve + safePH / 2;
 
   const bboxPxW = bbox.w * W, bboxPxH = bbox.h * H;
-  // Fit against the *full* pane height, not safePH — fitting tightly
-  // against the shorter safe area (tried previously) left no slack once
-  // the view also had to shift to center within that area, which for a
-  // region near a corner of the world map (Nordvinter, Contrées de
-  // Cristal) pushed some of its own POI markers into the reserved strips
-  // (hidden behind the title/chip block) or even past the pane's edge —
-  // the exact "too much zoom, can't see every point" the safe zone was
-  // never meant to cause. Generous slack here means there's room left to
-  // shift toward safeCY below without dragging real content into it.
-  // Geometric mean of the two fit ratios: fills the pane better than a
-  // strict "contain" fit for elongated regions (Hadeir, Lumethia), while a
-  // hard cap keeps small regions (Nordvinter) from zooming in absurdly far.
-  const fitRatio = Math.sqrt((PW / bboxPxW) * (PH / bboxPxH));
-  const scale = Math.min(6, Math.max(1.3, 0.85 * fitRatio));
+  // Centering only moves the bbox's *center* into the safe band — it
+  // doesn't stop the bbox's own top/bottom edges (where a POI marker can
+  // sit, not just at its center) from reaching past that band into the
+  // reserved strips once scaled. The geometric-mean "fill the pane
+  // better than strict contain" fit deliberately overshoots one
+  // dimension for a tighter look (that's the whole point of using it
+  // instead of a strict min), and when that overshoot landed in the
+  // vertical dimension, it's exactly what pushed a region's own POI
+  // markers into the reserved strips or off the pane for a region near a
+  // corner of the world map (Nordvinter, Contrées de Cristal) — the
+  // "missing point of interest" bug. heightFitScale below is the most
+  // the bbox can ever be scaled while still fitting inside safePH
+  // *outright* (not just its center) — capping to it guarantees that,
+  // while geoMeanScale still gets to fill the width tightly whenever
+  // doing so doesn't also need more vertical room than safePH allows.
+  const widthFitScale = PW / bboxPxW;
+  const heightFitScale = safePH / bboxPxH;
+  const geoMeanScale = Math.sqrt(widthFitScale * heightFitScale);
+  const fitScale = Math.min(geoMeanScale, heightFitScale);
+  const scale = Math.min(6, Math.max(1.3, 0.85 * fitScale));
   let dx = PW / 2 - Lx - scale * (bbox.cx * W);
   let dy = safeCY - Ly - scale * (bbox.cy * H);
 
