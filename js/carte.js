@@ -413,14 +413,18 @@ function activateRegion(slug) {
 
   // On mobile the title/chip block (#region-info, anchored top) and the
   // POI detail card a chip tap can open (#poi-detail-card, anchored
-  // bottom, up to 30vh tall) sit directly over the map rather than in an
-  // empty letterbox bar the way the world view's continent card does —
-  // so the "pane" markers should actually be centered/fit within is
-  // shorter than the full height, by however much those two reserve.
+  // bottom) sit directly over the map rather than in an empty letterbox
+  // bar the way the world view's continent card does — so the "pane"
+  // markers should actually be centered/fit within is shorter than the
+  // full height, by however much those two reserve.
   let topReserve = 0, bottomReserve = 0;
   if (isMobile()) {
     topReserve = regionInfoEl.offsetHeight + 28;
-    bottomReserve = PH * 0.32; // covers the detail card's 30vh cap plus margin
+    // A typical short (1-3 line) description, not the detail card's full
+    // 30vh cap — reserving the rare worst case measurably cost zoom level
+    // on every region to guard against a description that's usually much
+    // shorter than that.
+    bottomReserve = Math.min(PH * 0.18, 110);
   }
   const safePH = Math.max(80, PH - topReserve - bottomReserve);
   const safeCY = topReserve + safePH / 2;
@@ -429,8 +433,10 @@ function activateRegion(slug) {
   // Geometric mean of the two fit ratios: fills the pane better than a
   // strict "contain" fit for elongated regions (Hadeir, Lumethia), while a
   // hard cap keeps small regions (Nordvinter) from zooming in absurdly far.
+  // 0.92 (was 0.8) for a noticeably closer-in fit — less empty margin
+  // around the region than before.
   const fitRatio = Math.sqrt((PW / bboxPxW) * (safePH / bboxPxH));
-  const scale = Math.min(6, Math.max(1.3, 0.8 * fitRatio));
+  const scale = Math.min(6, Math.max(1.3, 0.92 * fitRatio));
   let dx = PW / 2 - Lx - scale * (bbox.cx * W);
   let dy = safeCY - Ly - scale * (bbox.cy * H);
 
@@ -439,9 +445,17 @@ function activateRegion(slug) {
   // beyond where the image actually ends — most noticeable for a region
   // near a corner of the world map, like Contrées de Cristal at the very
   // top, where centering on it alone could push the view above the map.
+  // The top/bottom bounds below allow that reveal specifically within the
+  // reserved strips (topReserve/bottomReserve), since the title/chip
+  // block and detail card already paint over that area regardless, so
+  // black space there is invisible — without this carve-out, the clamp
+  // was fighting the safe-zone centering above for any region whose bbox
+  // ran out of image content to push toward safeCY before its true edge
+  // hit the pane's literal edge, pulling the rendering back up
+  // underneath the title bar it was supposed to stay clear of.
   const maxDx = -Lx, minDx = PW - Lx - scale * W;
   if (minDx <= maxDx) dx = Math.max(minDx, Math.min(maxDx, dx));
-  const maxDy = -Ly, minDy = PH - Ly - scale * H;
+  const maxDy = topReserve - Ly, minDy = PH - bottomReserve - Ly - scale * H;
   if (minDy <= maxDy) dy = Math.max(minDy, Math.min(maxDy, dy));
 
   currentSlug = slug;
