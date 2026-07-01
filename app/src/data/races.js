@@ -1,0 +1,186 @@
+// Généré depuis race.html — ne pas éditer à la main.
+export const raceIntro = {
+  "title": "Races du Monde",
+  "paragraphs": [
+    "Chaque être a sa place quelque part, qu'il soit de la Surface ou d’ailleurs. Les Eveillés peuplent forêts, montagnes, villes et campagnes de la Surface. Vous y rencontrerez des Nymphes insectoïdes espiègles, des Oniyx ingénieux au ronron prétentieux, de grands et amicaux Pixarch aux ailes majestueuses, des Alphilans impressionnants peuplant les océans, de petits aventuriers alchimistes Tokscyth, des concepteurs trapus Olforgeur, de rares tribus de Natus, et bien sûr de nombreux humains. Tous et toutes forment la population Etherienne.",
+    "Chaque race possède ses propres traits, talents et histoires. Elles ont façonné le monde, ses richesses et sa magie dans un objectif commun : survivre face au déséquilibre élémentaire. Les peuples et nations sont riches de technologies et d’aventures épiques, depuis la création du monde par les divinités jusqu’à l’indépendance des Eveillés.",
+    "Les Divinités se situent bien plus haut que les cieux, au-delà des Royaumes Célestes, qui eux-mêmes abritent les Eternels. Un Eternel suit les dogmes et volontés de sa divinité en tant qu’avatar, créé pour répondre aux besoins insufflés par son maître lors de sa création. Les Eternels font partie des races supérieures, dont certaines sont prisonnières des Abysses ou sous la responsabilité d’un des six Royaumes Célestes, générateurs élémentaires naturels.",
+    "D’autres races supérieures, comme les Calamités ou les Esprits, sont responsables de la structuration de la Surface. Sans volonté ni libre arbitre, ils agissent comme des outils de façonnage. Enfin, il y a les Dhöggeïr, des êtres neutres de très grande taille capables de changer d’apparence, mais qui préfèrent leur corps gigantesque à quatre pattes, couvert d’écailles et doté d’énormes ailes de chauve-souris. Imposants, ils protègent le vivant des conflits interespèces supérieures et servent d’arbitres lors des nombreuses batailles entre Eternels.",
+    "Toutes ces forces mystiques influencent la Surface, dont l’évolution est cruciale pour sa préservation. Explorez les contrées d’Etheria pour y découvrir ses peuples, ses conflits, ses héros et ses légendes. Laissez-vous emporter par cet univers techno-magique, peuplé de récits héroïques remplis de choix et de sacrifices."
+  ]
+}
+
+export const raceGroups = [
+  {
+    "key": "normal",
+    "label": "Éveillés",
+    "races": [
+      {
+        "id": "nymphe",
+        "display": "Nymphe",
+        "title": "Nymphe",
+        "phrase": "Première des races nées du bâton de Gabriel.",
+        "file": "nymphe_scaled.webp",
+        "naturalH": 286,
+        "img": "img/race/nymphe.webp",
+        "html": "<p>Les Nymphes sont des humanoïdes de très petite taille aux traits insectoïdes. Leur apparence et leur comportement est très enfantin. Leur taille les rend agiles et discrètes. Joueuses et espiègles, elles s’amusent sans limite à leurs farces.</p><p>Elles ont un profond respect pour la Nature qu'elles régulent à longueur de journée suivant les enseignements Pixarch. Les légendes racontent que les Nymphes naissent et meurent avec l'espace naturel dont elles ont la charge. Avec leurs faibles pouvoirs élémentaires, elles s'attachent à un arbre, à une clairière, ou à un champ, qu'elles aident à faire grandir, mûrir, et vivre au quotidien.</p><p>L'aspect multicolor de l'immense Forêt de Vaelor est dû à la forte présence de Nymphes. Certaines plus farceuses que d'autres vont préférer vivre dans le Bouha d'Azeel au Nord-Ouest de Vaeloria, tandis que les plus vicieuses et malicieuses se trouvent dans la Forêt Rêveuse de Nyevielh. Il est, autrement, extrêmement rare de trouver des Nymphes ailleurs qui ne soient pas gardiennes d'un monument naturel important tel que l'Arbre des Mystères au centre des Îles Esseulées, ou encore les Marais'Cage au Sud d'Emeldarion.</p><p>Surnommées enfants de Gabriel, elles sont très ressemblantes aux Pixarch en version miniature.</p>"
+      },
+      {
+        "id": "gnome",
+        "display": "Tokscyth",
+        "title": "Tokscyth",
+        "phrase": "Intrépides petits aventuriers, chercheurs, et chimistes incomparables.",
+        "file": "gnome_scaled.webp",
+        "naturalH": 536,
+        "img": "img/race/gnome.webp",
+        "html": "<p>Les Tokscyth sont dotés d’une pilosité faciale abondante qui les aide à la réflexion lorsqu'ils la frottent. De nature curieuse, ils sont de fins archéologues indispensables dans les recherches et la découverte de gisements en tout genre. Ils ont du nez pour les expériences et adorent mélanger tout type de produit et matériaux pour obtenir des effets en tout genre. Le produit de ces mixtures, ils l'ont baptisé TOX.</p><p>Leur présence est assez limitée dans le monde, ils sont surtout présents à Lumethia et Vaeloria dans les laboratoires de recherche, sinon en Emeldarion et Shal'Zaar dans les zones minières de collecte. L'Artisan des Heures est le Tokscyth le plus reconnu pour ses inventions innovantes et farfelues.</p><p>Alchimistes et explorateurs hors pair, ils utilisent souvent leurs propres machineries créatives comme monture. Cela leur donne plus de hauteur et de discutable prestance dans leurs déplacements. Leur monture est souvent d'apparence batracienne, un animal aux fluides appréciés des Tokscyth.</p><p>Leur faible nombre est compensé par la qualité de leur travail. Ils sont des alliés précieux à avoir ainsi que des personnages incontournables d'aventures et nouvelles découvertes. Leur sens de la curiosité et de l’invention fait d’eux des alliés précieux et des personnages incontournables dans les aventures et découvertes du monde.</p>"
+      },
+      {
+        "id": "oniyx",
+        "display": "Oniyx",
+        "title": "Oniyx",
+        "phrase": "Race magique disparue, espèce nocturne travailleuse et inventive.",
+        "file": "oniyx_scaled.webp",
+        "naturalH": 736,
+        "img": "img/race/oniyx.webp",
+        "html": "<p>Curieux, ingénieux, cultivés, tels sont les adjectifs qu'un Oniyx utilisera modestement pour se décrire. Les Oniyx ont une apparence féline comprenant oreilles, queue et pelage, sur un petit corps humanoïde. Ils se tiennent sur deux jambes et ont des mains préhensibles leur permettant l'usage d'outils.</p><p>Inventeurs de la Technomagie, ils fusionnent science et magie pour créer divers artefacts et machines de guerre rivalisant avec les puissants Eternels. Des yeux perçants, un esprit vif, et une analyse de pointe leur permettent la meilleure organisation de groupe et un traitement particulier des données qu'ils savent manipuler et enregistrer à leur guise. Et si jamais un disque dur n'a plus de place, la mémoire photographique des Oniyx leur suffit largement.</p><p>Les Oniyx manipulent l'espace et les éléments, ils peuvent créer des portails et des réserves élémentaires dont la plus connue est l'orbe Oniyx, invention que les Olforgeurs essayent en vain de reproduire. Leur savoir, et le reste de leurs technologies les plus abouties, sont aujourd'hui prisonniers de la glace et font partie des plus grands mystères du passé.</p><p>Ces mystères sont gardés par l'environnement froid et hostile des Contrées de Cristal, enfoui loin de toute civilisation et protégés par la forte présence des plus puissants Dhöggeïr. La forte implication des Oniyx dans la guerre contre les Eternels, et leur capacité à les sceller, a fait d'eux une cible prioritaire et déclenché l'évènement de la Chasse aux Oniyx.</p><p>Leur dernière création, mélange des connaissances de Pyrosolain et Lumisaros, fut le Paguroniyx, une arme de destruction massive aujourd'hui scellée dans les Abysses. L'arme fut si puissante qu'elle a permis à elle seule de faire diversion face aux Eternels et ainsi passer à une nouvelle ère, loin des guerres mais tout de même une ère de survie.</p><p>Ils sont aujourd'hui considérés comme éteints et les quelques survivants restent silencieux et cachés, éloignés de la civilisation ou vivant aux côtés d'Anthropomorphes.</p>"
+      },
+      {
+        "id": "nain",
+        "display": "Olforgeur",
+        "title": "Olforgeur",
+        "phrase": "Robustes combattants, gaillards, et artisans, qui adorent dépasser les limites.",
+        "file": "nain_scaled.webp",
+        "naturalH": 936,
+        "img": "img/race/nain.webp",
+        "html": "<p>Les Olforgeurs sont légèrement plus petits que les humains mais bien plus larges d'épaule. La race compte parmi les plus grands maîtres d'armes et artisans de par sa longévité et sa dextérité dans les exercices physiques et éprouvants. Ils façonnent les matériaux et maîtrisent les armes avec un savoir-faire exceptionnel transmis d'Olforgeur en Olforgeur, génération après génération.</p><p>Les Olforgeurs ont hérité de travaux Oniyx et essayent au mieux de retrouver cette technologie perdue ayant appartenu aux amis de leurs ancêtres. Ce sont de passionnés débrouillards très à cheval sur la tradition et le respect des aînés.</p><p>Originaires des régions de Hadeir et Lumethia, ils quittent rarement les zones riches et civilisées. Sans eux, les technologies du monde moderne ne pourraient point fonctionner. On les trouve dans toutes les villes à des postes importants.</p><p>Toujours prêts à dépasser leurs limites physiques et mentales, ils sont rarement pécuniaires et préfèrent voir la marchandise d'eux-mêmes plutôt que passer par une quelconque sous-traitance.</p>"
+      },
+      {
+        "id": "humain",
+        "display": "Etherien",
+        "title": "Etherien",
+        "phrase": "Polyvalents, ils prospèrent et écrivent l'histoire.",
+        "file": "humain_scaled.webp",
+        "naturalH": 1036,
+        "img": "img/race/humain.webp",
+        "html": "<p>Les Humains, ou Etheriens, ont toujours été reconnaissables par leur nombre et leur adaptabilité. Il existe au moins un Etherien expert d'un domaine, même le plus exotique. Au fil des âges, ils ont exploré et construit diverses cultures s'inspirant de leurs divinités de prédilection. Les Etheriens n'ont pas de croyance fixe en une divinité, ils choisiront celui qui leur est le plus profitable dans leur environnement de prédilection et adaptent leurs croyances, et les donations, en conséquence.</p><p>Après l'évènement de la Malédiction des Rois, beaucoup se seront tournés vers les pèlerinages, un moyen simple et efficace pour eux de savoir comment leur vie doit être vécue suivant les légendes sur Lyra et Orion. D'une énergie débordante, leur arrivée en tant que race sur le monde accéléra tout le développement civilisationnel, inspirant ainsi Oniyx, Olforgeurs, et Tokscyth. Même les Alphilans et les Pixarch ne sont pas restés insensibles à leur oisiveté.</p><p>Bien que très souvent rattachés à la Terre, les Etheriens ont un panel très vaste d'affinités magiques, leurs gènes évoluant en quelques générations. Les grandes actions qu'ils entreprennent sont parfois bonnes, parfois mauvaises, et souvent naïves. Leur vie de courte durée les rend plus rêveurs et motivés à faire quelque chose d'incroyable.</p><p>Grâce à eux, les cités et villes peuvent profiter de styles architecturaux uniques, mélange de sciences et de magies aux visuels gréco-romains, français, nordiques, orientaux, roumains, et bien d'autres encore. Tout est bon pour laisser une trace dans le monde, ce qui fait d'eux de grands leaders et bâtisseurs de civilisations complexes, mais aussi, maladroitement et injustement, les responsables de beaucoup de maux.</p>"
+      },
+      {
+        "id": "antropomorphe",
+        "display": "Anthropomorphe",
+        "title": "Anthropomorphe",
+        "phrase": "Animaux transformés en humanoïdes, liés à une tribu élémentaire.",
+        "file": "antropomorphe_scaled.webp",
+        "naturalH": 1286,
+        "img": "img/race/antropomorphe.webp",
+        "html": "<p>Les Anthropomorphes sont des animaux ayant acquis une forme humanoïde grâce à l’usage du bâton de Gabriel. Chaque Métamorphose nécessite une orbe Oniyx monoélément dont l’intégralité de la charge élémentaire s’épuise à la naissance d’un Anthropomorphe. Selon l’animal d’origine, l’apparence de l’Anthropomorphe varie. Certaines de leurs capacités animales sont conservées, mais souvent amoindries au profit de caractéristiques humanoïdes favorisant le développement d’une société anthropomorphique et la pratique de la magie.</p><p>Les Anthropomorphes vivent ensemble au sein de tribus chamaniques rassemblées autour d’un élément totem, celui qui leur a donné naissance. Contrairement aux Nymphes, nées de la volonté de Gabriel, la création des Anthropomorphes et leur histoire relèvent du pur hasard, fruit d’une succession d’événements.</p><p>Originaires des Îles Esseulées, les Anthropomorphes doivent leur existence à l’Enchanteresse Sylvaine, qu’ils considèrent pour certains comme leur mère. L’Enchanteresse, l’une des dernières Pixarch encore en vie, avait besoin d’une main-d’œuvre solide afin de protéger l’héritage Pixarch présent sur les Îles Esseulées contre la curiosité néfaste des gens du bas. Elle donna alors naissance à une tribu anthropomorphique reptilienne issue d’espèces aux qualités de gardiens exemplaires, que l’on trouve en abondance sur les îles volantes.</p><p>Lorsque l’Enchanteresse quitta les îles, les avis sur l’utilisation du bâton commencèrent à diverger. Les suiveurs de Croc ne souhaitaient pas d’autres espèces que les reptiles et n’aspiraient pas à quitter le territoire, tandis que les suiveurs d’Amphibian désiraient la liberté et voulaient offrir à d’autres animaux la possibilité de jouir d’un corps et d'un esprit humanoïde.</p><p>La victoire revint finalement à Amphibian, à la suite d’un long combat des chefs. Le bâton servit alors à donner naissance à la tribu de l’eau en Emeldarion, avec la bénédiction du dragon Emeraldoth. Les nouveaux arrivants éveillèrent la curiosité de Keria, qui obtint à son tour le droit d’utiliser le bâton pour fonder sa propre tribu autour du feu.</p><p>Le bâton fut ensuite prêté librement de chef en chef, mais revint toujours entre les mains de l’Evocateur : un Anthropomorphe désigné pour ne jamais le perdre et, un jour, le rendre à l’Enchanteresse.</p>"
+      },
+      {
+        "id": "elfe",
+        "display": "Pixarch",
+        "title": "Pixarch",
+        "phrase": "Race magique disparue, espèce diurne énergétique et rêveuse.",
+        "file": "elfe_scaled.webp",
+        "naturalH": 1286,
+        "img": "img/race/elfe.webp",
+        "html": "<p>Altruistes, empathiques, protecteurs et curieux, les Pixarch sont reconnus comme les amis du vivant. Leurs traits raciaux se distinguent en de longues oreilles pointues et une magnifique paire d’ailes d'insecte ailé adaptées à leur grande taille. Leurs ailes leur permettent de voler le jour et de communier entre eux la nuit. Ils possèdent la capacité d’emmagasiner l’énergie élémentaire ambiante afin d’utiliser la magie dès leur plus jeune âge et sans la présence de catalyseur.</p><p>En tant qu’espèce diurne, ils entretiennent un lien profond avec les éléments du Feu, de la Lumière et de la Nature, à l’opposé des Oniyx, attachés aux trois autres éléments.</p><p>La bonté des Pixarch les conduisit un jour à se sacrifier pour la préservation des races Eveillés, à une époque où la guerre entre Eternels avait dépassé toute mesure. Aurelia, la reine des Pixarch, utilisa l’énergie vitale de ses suivants dans l’ultime sacrifice de la race, mettant un terme à la guerre la plus sanglante... hélas, pour une courte durée. Cet événement, connu sous le nom de « l’Aurore d’Aurelia », engendra une haine profonde des Eveillés envers les Veilleurs. Ainsi, alors que ce sacrifice devait ramener la paix, il déclencha au contraire une longue chaîne de réactions vengeresses.</p><p>Aeltheria et la reine Dhöggeïr, toutes deux touchées par la disparition de leur amie et de cette race essentielle à la préservation de l’équilibre élémentaire, préparèrent alors le monde à un nouveau cycle.</p>"
+      },
+      {
+        "id": "alphilan",
+        "display": "Alphilan",
+        "title": "Alphilan",
+        "phrase": "Ensemble d'espèces civilisées aquatiques habitant la mer Nimbée.",
+        "file": "alphilan_scaled.webp",
+        "naturalH": 1286,
+        "img": "img/race/alphilan.webp",
+        "html": "<p>Les Alphilans possèdent une apparence humanoïde pour la moitié supérieure de leur corps, souvent ornée d’algues, d’écailles ou de coraux. Leur moitié inférieure prend quant à elle la forme d’une espèce aquatique, telle qu’une queue de dauphin ou des tentacules. Vivant depuis des millénaires sous l’autorité d’un conseil des espèces aquatiques aux tendances aristocratiques, conservatrices et matriarcales, les Alphilans ne sont guère ouverts aux autres peuples de la Surface. Ils construisent leurs habitats en harmonie avec la faune et la flore aquatiques et sont extrêmement sensibles à la pollution de leurs eaux.</p><p>Lorsque leur souveraine Lyrana tomba amoureuse d’un Ethérien, avec qui elle partagea une partie de ses pouvoirs et de son destin, une nouvelle vision de la Surface s’ouvrit aux Alphilans. Mais cet unique roi, aujourd’hui disparu aux côtés de leur reine, ne fit que renforcer leur conservatisme. À la suite des lourdes pertes causées par les actions des peuples de la Surface, les Alphilans devinrent extrêmement exigeants et froids à l’égard des autres nations.</p><p>Le Souverain des Marées, fils de Lyrana, ne cessa jamais de combattre pour laver l’honneur de son père et de sa mère, tous deux disparus. Ses efforts et son courage lui offrirent la possibilité d’entamer des négociations avec la Surface, notamment avec Vaeloria, afin d’éviter tout risque lié à la séclusion Alphilanne.</p>"
+      },
+      {
+        "id": "natus",
+        "display": "Natus",
+        "title": "Natus",
+        "phrase": "Race née au début de la nouvelle ère, ses tribus sont primitives, fortes et territoriales.",
+        "file": "natus_scaled.webp",
+        "naturalH": 1536,
+        "img": "img/race/natus.webp",
+        "html": "<p>Les Natus sont, à s’y méprendre, semblables à des gorilles. Leur taille imposante et leur physique surdéveloppé sont soutenus par de puissantes mains qu’ils posent au sol. Leur pelage dense est parfaitement adapté aux environnements souvent extrêmes dans lesquels ils vivent. De nature intimidante, le Natus agit rarement avec agressivité sans raison.</p><p>Organisés en tribus, ils possèdent leur propre langue et leurs coutumes, faisant d’eux une race civilisée à part entière plutôt qu’un simple animal. En respect mutuel avec les nomades de Nordvinter, la tribu des Hibernatus aide parfois les jeunes humains à traverser les Monts Nomades. Les Desernatus de Shal’Zaar, quant à eux, se montrent bien plus hostiles : ils érigent des totems pour marquer leur territoire et dissuader les intrus imprudents de s’y aventurer.</p>"
+      }
+    ]
+  },
+  {
+    "key": "watcher",
+    "label": "Veilleurs",
+    "races": [
+      {
+        "id": "calamite",
+        "display": "Calamité",
+        "title": "Calamité",
+        "phrase": "Outils divins ayant façonné le monde, sous forme de serpent titanesques",
+        "file": "calamite_scaled.webp",
+        "naturalH": 800,
+        "img": "img/race/calamite.webp",
+        "html": "<p>Afin de construire un monde équilibré pour ses enfants, la déesse primordiale fabriquera leurs cousins, des créatures sans volonté propre nommées Calamités par les Eveillés. Leur seule fonction est alors la distribution élémentaire, comme des pinceaux différents à la peinture monochrome capable de façonner l'air, la terre, l'eau, le feu, la lumière et l'obscurité.</p><p>Les fondations construites à partir de leurs immenses pouvoirs donnent la possibilité à la vie de subsister dans l'infinité de l'univers. Une fois leur tâche accomplie, elles se cachent sous la surface du monde, tissant alors la frontière du monde Onirique au plus profond de l’Abysse.</p><p>Lors du grand Cataclysme, les Calamités ont été utilisées une seconde fois par Aeltheria afin de fragmenter le continent unique de l'ancien temps et faciliter l'équilibrage des éléments. De nouvelles bases ont été formées et les Eveillés ont énormément souffert de cet épisode, laissant derrière lui des stigmates vécues comme des malédictions.</p>"
+      },
+      {
+        "id": "arsh",
+        "display": "Arsh",
+        "title": "Arsh",
+        "phrase": "Race magique d'arbres animés par une des énergies élémentaires.",
+        "file": "arsh_scaled.webp",
+        "naturalH": 599,
+        "img": "img/race/arsh.webp",
+        "html": "<p>Les Arshs sont issus d’une graine de vie nourrie par l’harmonie des éléments, qui leur confère pensée, mouvement et expression. Ils communiquent par télépathie avec les autres créatures et possèdent une sagesse millénaire.</p><p>La présence d’un Arsh révèle la stabilité magique d’une région ou témoigne du temps où celle-ci sut préserver son équilibre naturel. Leur taille varie selon l’arbre à l’origine de leur éveil.</p><p>Leur existence a suscité l’intérêt des Pixarch et des Oniyx, fascinés par leur aptitude à emmagasiner et canaliser l’énergie élémentaire. Les orbes Oniyx s’inspirent d’ailleurs directement de leur graine de vie. De nombreux cercles druidiques ont vu le jour construits autour d'eux.</p><p>Leur comportement change d’un lieu à l’autre : farceurs à Azeel, agressifs à Nyevielh, pacifiques à Vaeloria, et bien d’autres encore. Incapables de se reproduire, les Arshs veillent au maintien de l’équilibre qui les a vus naître, dans l’espoir qu’un jour d’autres êtres comme eux puissent bourgeonner.</p><p>La Saule Ardente est aujourd'hui l'Arsh la plus remarquable par ses capacités, mais aussi par le vaste écosystème qu'elle a su créer autour du feu et des plantes de la forêt Détwin.</p>"
+      },
+      {
+        "id": "dragon",
+        "display": "Dhöggeïr",
+        "title": "Dhöggeïr",
+        "phrase": "Grand arbitre des batailles entre Eternels et protecteur du vivant.",
+        "file": "dragon_scaled.webp",
+        "naturalH": 400,
+        "img": "img/race/dragon.webp",
+        "html": "<p>Les Dhöggeïr sont d’immenses reptiles quadrupèdes, souvent dotés de vastes ailes pouvant doubler ou tripler leur envergure afin de supporter leur propre poids. Ancienne puissance limitant les dégâts des guerres entre Eternels, ils ont leur propre dialecte et société basée sur un puissant langage runique. Ils parlent très bien les langues humanoïdes dont ils peuvent prendre l'apparence.</p><p>Quelques rares et puissants anciens Dhöggeïr tels que Aldrin ou Emeraldoth ont quitté les Contrées de Cristal, loin de leur mère prisonnière de l'immense Pic de Glace, afin de préserver le monde des désastres qui ont suivi le grand Cataclysme. La plupart de ceux restés autour du Pic sont devenus territoriaux, amoureux des trésors parsemés dans toutes les Contrées de Cristal, regroupant ainsi de nombreuses orbes Oniyx dans leurs nids.</p><p>Ils s’attachent rarement aux autres créatures, cependant ils accepteront les humains élus des tribus de Nordvinter comme partenaires prophétisés comme futurs libérateurs de leur mère.</p><p>Chaque Dhöggeïr, une fois à l'âge adulte, pond un unique œuf qu'il laisse à la protection d'un gardien ou d'une bonne cachette. Si un Dhöggeïr est défait, il naît à nouveau de son propre œuf, la plupart de ses souvenirs revenant avec l'âge. Ces œufs sont réputés indestructibles, contenant jusqu'à trois éléments harmonieux.</p><p>Ils ont servi de base à la recherche et au développement Oniyx dans la conception des orbes magiques. Il est fort probable que l'instinct des Dhöggeïr les plus jeunes crée cette attirance envers les orbes.</p>"
+      },
+      {
+        "id": "divinite",
+        "display": "Divinité",
+        "title": "Divinité",
+        "phrase": "Puissances absolues, mythiques, primordiales, originaires du Chaos élémentaire.",
+        "file": "divinite_scaled.webp",
+        "naturalH": 300,
+        "img": "img/race/divinite.webp",
+        "html": "<p>Les Divinités sont des entités physiquement indescriptibles, créatrices ou destructrices, vertueuses ou corruptrices, elles influencent le monde et ses habitants par leurs doctrines.</p><p>Elles guident par l'intermédiaire des Éternels, suiveurs de leur Avatar, Héraut choisi pour accueillir la conscience de la Divinité au prix de son libre arbitre.</p><p>Le corps des Divinités reste toujours extérieur au monde afin d'en éviter la simple destruction par leur présence.</p><p>Chaque Divinité possède sa propre culture, ses propres envies, qu’elle impose aux Éternels et au reste du monde.</p><p>Aujourd'hui, les Divinités n'ont plus la possibilité de projeter leur conscience dans un Éternel Avatar, le monde leur est rendu inaccessible.</p><p>Toutefois, certaines, mécontentes de la situation, cherchent et trouvent des failles responsables de la fin de l'Ère Prospère.</p>"
+      },
+      {
+        "id": "abyssal",
+        "display": "Abyssal",
+        "title": "Abyssal",
+        "phrase": "Créatures cauchemardesques soumises aux aléa du chaos élémentaire.",
+        "file": "abyssal_scaled.webp",
+        "naturalH": 267,
+        "img": "img/race/abyssal.webp",
+        "html": "<p>Les Abyssaux, ou Cauchemars, sont des monstres que l'on dit nés de l’Abysse, domaine divin souterrain. Leurs formes varient selon le corps d'origine de l'Abyssal : Ils peuvent être un objet très ancien soumis à une forte quantité élémentaire plusieurs années ; Une créature restée trop longtemps dans une zone élémactive perdant son libre arbitre ; Un Cauchemar ayant réussi à s'échapper du monde Onirique, origine du nom Abyssal.</p><p>Leur existence reste toutefois propre à une puissante radiation magique dite élémactive. L'origine de ces zones est propre aux Abysses qui n'ont pas le même équilibrage que la Surface. C'est un environnement non propice à la vie, et les créatures qui s'y trouvent n'ont pas l'intelligence pour en sortir... Du moins pas seules. Ces créatures vivent par la destruction, le déséquilibre, la corruption... Le chaos.</p><p>Dans l'ancien temps, durant l’Âge des Divinités, les chercheurs ont creusé jusqu'à tomber sur une vaste zone souterraine au semblant vide. Ils y ont fait la rencontre de créatures abominables et y perdront un nombre d'hommes et de ressources trop importants pour justifier la continuité des recherches. La régence de Shal'Zaar fera alors ériger un grand temple fortifié, témoin des dangers souterrains. Une des plus puissantes créations Oniyx y sera postée : protecteur du site de recherche aujourd'hui en ruine, il veille à ce que la porte des Abysses reste impénétrable.</p><p>Suite au grand Cataclysme, la Surface a été fortement fragilisée, créant plusieurs accès aux Abysses. Des fléaux maintiennent les régions en lutte perpétuelle pour leur survie : Dans l'immensité du désert de Shal'Zaar, les Chasseurs de Monstres affrontent diverses abominations ; Dans les Racines de l'arbre de Vaeloria, la Guilde envoie divers groupes organisés dans les profondeurs ; À la frontière entre la Mer Nimbée et la Mer Etoilée, les peuples Alphilans sont en guerre continue ; Dans les steppes ardentes d'Hadeir, les factions militaires avancées de Dragheir essayent de récupérer leurs terres occupées par le fléau.</p><p>Quand bien même ces créatures soient dépourvues d'intelligence, quelque chose les attire à la Surface. Certains érudits craignent même qu'ils suivent les directives d'une entité joueuse et malicieuse tapie dans les profondeurs abyssales, à cause d'attaques précises et répétées. Qui sait... Peut-être n'est-ce que le fruit du hasard.</p>"
+      },
+      {
+        "id": "eternel",
+        "display": "Eternel",
+        "title": "Eternel",
+        "phrase": "Hérauts des Divinités et première de leurs créations.",
+        "file": "eternel_scaled.webp",
+        "naturalH": 133,
+        "img": "img/race/eternel.webp",
+        "html": "<p>Les Eternels sont des êtres à l'équilibre élémentaire parfait, sans forme physique précise. Ils apparaissent aux autres créatures de la manière qu'ils souhaitent. Créés par leur Divinité, ils ont pour rôle de transmettre ou de faire appliquer la volonté divine. Ils disposent d’un libre arbitre, sauf pour ceux servant d'Avatar à une Divinité. Ils résident pour la majorité dans les Royaumes Célestes, au-dessus des monts et des nuages.</p><p>Leur forte activité par le passé, durant l’Âge des Divinités, a conduit au grand Cataclysme : Certains furent emprisonnés dans les Abysses ; D'autres aident les Esprits à maintenir l’équilibre élémentaire à la Surface ; Quelques-uns participent au déroulement du pèlerinage des Eveillés ; Le reste se bat contre les plus puissantes créatures parvenant à s’échapper des Abysses.</p><p>Chacun est en accord avec les doctrines de sa Divinité créatrice, mais leur libre arbitre crée une pluralité de pensées sur la ou les manières de procéder, engendrant ainsi des alliances et des conflits entre Eternels, même après l'accalmie due au grand Cataclysme.</p><p>Il n'est pas impossible, bien qu’extrêmement rare, qu’un Eveillé réussisse à atteindre un stade élémentaire suffisamment fort et équilibré pour devenir un Eternel.</p>"
+      },
+      {
+        "id": "esprit",
+        "display": "Esprit",
+        "title": "Esprit",
+        "phrase": "Récents outils divins préservant l'équilibre élémentaire, sous forme animale.",
+        "file": "esprit_scaled.webp",
+        "naturalH": 100,
+        "img": "img/race/esprit.webp",
+        "html": "<p>Animés par un besoin de préservation de l'équilibre élémentaire, les Esprits s'endorment ou vivent une vie animale simulée jusqu'à la prochaine déterioration ou apparition de zone élémactive à leur portée.</p><p>Leur comportement est machinal, sans émotion, comme les Calamités, ils n'ont pas de libre arbitre. Leur apparence animale est destinée à tromper les Eveillés.</p><p>Leur origine méconnue est une île gigantesque qui s'était déplacée dans le monde entier juste après le grand Cataclysme. Un évènement qui a permis aux régions, souvent très centrées sur un élément en particulier, de trouver une certaine pérennité.</p><p>Leur activité est signe d'une grave perturbation telle que la présence d'une zone élémactive.</p>"
+      }
+    ]
+  }
+]
