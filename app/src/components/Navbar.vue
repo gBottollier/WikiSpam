@@ -160,26 +160,25 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); clearTim
   filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.7));
 }
 
-/* ---------- Bottom nav (mobile) ---------- */
+/* ---------- Bottom nav (mobile) : barre flottante "pill" ---------- */
 .bottom-nav {
   display: none;
   position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: var(--bottom-nav-h);
-  background: var(--bg-dark);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--glass-border);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 24px);
+  max-width: 440px;
+  height: 60px;
+  padding: 0 8px;
+  background: rgba(10, 0, 40, 0.6);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(126, 63, 242, 0.25);
   z-index: 10000;
   align-items: center;
   justify-content: space-around;
-}
-.bottom-nav::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 3px;
-  background: rgba(126, 63, 242, 0.3);
 }
 .bottom-nav a {
   flex: 1;
@@ -189,27 +188,39 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); clearTim
   justify-content: center;
   gap: 2px;
   text-decoration: none;
-  color: var(--accent);
+  color: #7fa0d8;
   font-weight: 700;
-  font-size: 0.72rem;
-  height: 100%;
+  font-size: 0.66rem;
+  height: 46px;
+  margin: 0 2px;
+  border-radius: 18px;
   position: relative;
+  transition: color 0.2s ease, background 0.2s ease;
 }
-.bottom-nav a .icon { font-style: normal; font-size: 1.25rem; line-height: 1; }
-.bottom-nav a:hover { background: rgba(126, 63, 242, 0.12); }
-.bottom-nav a.router-link-active { background: rgba(126, 63, 242, 0.18); }
-.bottom-nav a.router-link-active::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-bright), var(--cyan));
+.bottom-nav a .icon { font-style: normal; font-size: 1.2rem; line-height: 1; transition: transform 0.2s ease, filter 0.2s ease; }
+.bottom-nav a.router-link-active {
+  color: #fff;
+  background: rgba(126, 63, 242, 0.28);
 }
-.bottom-nav .center-icon { flex: 1; display: flex; justify-content: center; align-items: center; transform: translateY(-2px); }
-.bottom-nav .center-icon img.bottom-logo { max-height: 44px; width: auto; }
-/* la logo centrale ne doit pas être "active" en permanence */
+.bottom-nav a.router-link-active .icon {
+  transform: translateY(-1px) scale(1.12);
+  filter: drop-shadow(0 0 6px var(--cyan));
+}
+/* Logo central */
+.bottom-nav .center-icon {
+  flex: 0 0 auto;
+  width: 52px;
+  margin: 0 2px;
+  background: transparent;
+}
+.bottom-nav .center-icon img.bottom-logo {
+  max-height: 40px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(126, 63, 242, 0.55));
+  transition: transform 0.2s ease;
+}
+.bottom-nav .center-icon:active img.bottom-logo { transform: scale(0.92); }
 .bottom-nav .center-icon.router-link-active { background: transparent; }
-.bottom-nav .center-icon.router-link-active::before { display: none; }
 
 /* ---------- Butterfly ---------- */
 .butterfly-btn {
@@ -234,6 +245,6 @@ onBeforeUnmount(() => { window.removeEventListener('scroll', onScroll); clearTim
 @media (max-width: 900px) {
   .navbar { display: none; }
   .bottom-nav { display: flex; }
-  .butterfly-btn { bottom: 90px; right: 20px; }
+  .butterfly-btn { bottom: calc(var(--bottom-nav-h) + 14px); right: 20px; }
 }
 </style>

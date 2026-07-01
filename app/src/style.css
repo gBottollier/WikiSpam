@@ -9,7 +9,8 @@
   --text: #c8e8ff;
 
   --nav-h: clamp(70px, 8vw, 120px);
-  --bottom-nav-h: 76px;
+  /* Empreinte de la barre flottante mobile (hauteur + marge basse) */
+  --bottom-nav-h: 86px;
 
   color-scheme: dark;
 }
