@@ -10,61 +10,61 @@ export const regions = [
         "name": "Esprit Feu",
         "img": "img/char/esprit-feu.webp",
         "alt": "Esprit Feu",
-        "html": ""
+        "html": "<p>Alors que le continent unique vient de se fracturer, l'esprit du feu passa des journées entières à calmer le déséquilibre ardent de Hadeïr.</p><p>Vaillant et plein d'énergie, il se promènerait dans les zones élémactives de feu. Des zones qu'il éteint inlassablement afin de préserver l'équilibre élémentaire sans doute.</p><p>On l'a aperçu à de rares occasions avec les soldats de Dragheïr. Les témoins parlent d'une forme canidée là où nul n'oserait mettre les pieds.</p>"
       },
       {
         "name": "Pyro",
         "img": "img/char/pyro.webp",
         "alt": "Pyro",
-        "html": ""
+        "html": "<p>Alors que la corruption s'étend entre les murs de la cité de Logaïr, Pyro, le plus grand aviateur de son temps, fidèle vassal du Roi du feu, s'occupa de l'évacuation des civils non infectés.</p><p>Les livres d'histoire racontent ces derniers moments qui, font aujourd'hui de lui une des grandes figures salvatrice au sein de Dragheïr. Alors qu'il entamait sa douloureuse transformation abyssale, il scella les portes de la cité des forges devant lui.</p><p>Aujourd'hui maudit aux côtés de son Roi, Pyro, sous la redoutable forme d'un phénix, habite encore la ville que l'on a renommée cité infernale.</p>"
       },
       {
         "name": "Aidan",
         "img": "img/char/aidan.webp",
         "alt": "Aidan",
-        "html": ""
+        "html": "<p>Les cours d'histoire de l'école militaire de Dragheïr parlent souvent d'Aidan. Enfant de l'héritier de l'arme runique du Feu, Il suivait dignement les traces de son père.</p><p>Maître de ses propres arts martiaux, il était aussi compétent en langue Dhöggeïr. Ses capacités ont pu être enregistrées. Elles servent de fondement à l'entraînement de leurs soldats.</p><p>Aujourd'hui aux côtés de son père, Aidan habite la cité Infernale sous forme d'Abyssal humanoïde. Lisa témoigne régulièrement de ses rêves. Elle y incarne Aidan dans son quotidien passé. Mais aussi, parfois, dans sa souffrance actuelle.</p>"
       },
       {
         "name": "Sbire des flammes",
         "img": "img/char/sbire-des-flammes.webp",
         "alt": "Sbire des flammes",
-        "html": ""
+        "html": "<p>Dans la grande forge de Logaïr, de gigantesques créatures brassaient la lave du Mont Vulcain.</p><p>Le travail unique des Sbires des flammes, qu'aucun ne pourrait répliquer à de telles températures, rendait l'artisanat de Hadeïr prospère et incontournable.</p><p>En-dehors d'Oniyxia, c'est la ville préférée des Oniyx. De nombreux Olforgeurs travaillent les matériaux aux côtés d'artisants passionnés.</p><p>Sans les Sbires des flammes, jamais les armes runiques n'auraient pu être forgées. Ils ont fait de Logaïr la meilleure forge du monde en son temps.</p>"
       },
       {
         "name": "Dragon de la cité infernale",
         "img": "img/char/dragon-de-la-cite-infernal.webp",
         "alt": "Dragon de la cité infernale",
-        "html": ""
+        "html": "<p>Au centre du volcan du Mont Vulcain vivait un puissant Dhöggeïr. Son nid a servi à l'installation des structures de la cité de Logaïr. La grande cité des forges s'est alors construite peu à peu sous sa bienveillance. Une relation de confiance inter-espèces avec les différents Roi du feu était à l'œuvre. Les Rois apprennent chacun leur tour la langue à leurs héritiers afin de communiquer avec lui.</p><p>Nous ne savons toujours pas ce qui lui est arrivé suite à la corruption par le Feu. . Mais l'état de Hadeïr ne laisse rien présager de bon. Beaucoup pensent qu'il a pris la forme d'un Dragon abyssale.</p>"
       },
       {
         "name": "Dragon des Braises Forestières",
         "img": "img/char/dragon-des-braise-forestiere.webp",
         "alt": "Dragon des Braises Forestières",
-        "html": ""
+        "html": "<p>Nous avons que peu d'informations sur Hadeïr en-dehors de Dragheïr.</p><p>On sait que la Saule Ardente de la forêt Détwin est une entité à protéger. Elle est capable de purifier les créatures atteintes par la corruption. Un espoir pour Hadeïr qui ne peut pas se mouvoir. Elle nécessite une protection face aux Abyssaux.</p><p>Un bastion Eltherien se trouve à l'intérieur de la forêt Détwin. L'objectif étant de repousser les Abyssaux loin de l'entité salvatrice.</p><p>Le Dragon est la plus grande menace abyssale existante connue. Certains Döggheïr affiliés au Feu sont devenus de puissants Dragons corrompus dans la région. En repousser un tient du miracle qui a déjà coûté la vie de nombreux soldats.</p>"
       },
       {
         "name": "Logidrake l'ignatius",
         "img": "img/char/ignatus-le-dragon-flamme.webp",
         "alt": "Logidrake l'ignatius",
-        "html": ""
+        "html": "<p>Dans la lutte contre la corruption du Feu on retrouve beaucoup d'Abyssaux. Ces créatures s'extirpent des entrailles de la terre par les coulées de lave du Mont Vulcain.</p><p>Les Ignatius sont de puissants serpents géants. Ils rôdent proche des courants de lave et se multiplient dans tout Hadeïr. Ils empêchent le passage des bataillons et rivalisent avec les puissants Dhöggeïr. Leurs écailles servent à la conception d'armes et armures.</p><p>Parmis ces Ignatius, un seul serait l'origine de cette invasion. Un Logidrake, cible prioritaire avec l'espoir d'un jour atteindre Logaïr.</p>"
       },
       {
         "name": "Roi feu",
         "img": "img/char/roi-feu.webp",
         "alt": "Roi feu",
-        "html": ""
+        "html": "<p>Être Roi d'un élément est un titre honorifique. Il indique une haute responsabilité dans l'équilibre élémentaire.</p><p>Les Rois ont fait équiper leurs héritiers d'une arme runique. Conformément aux textes du Codex Primordial selon Faerylia, Ces armes allaient permettre de sceller les Divinités et d'obtenir la liberté.</p><p>Le Roi du feu avait un fonctionnement héréditaire de transmission de son titre. L'arme et la clé de la Cité des forges sont alors confiées au cadet. Le dernier héritier et son fils Aidan se sont sacrifiés face à la corruption du feu de Hadeïr.</p>"
       },
       {
         "name": "Épine Médusine",
         "img": "img/char/epine-medusine.webp",
         "alt": "Épine Médusine",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Sur les côtes nord de Hadeïr, on peut voir voler des méduses enflammées jusqu'au centre de la Mer Embrasée. Leur corps chaud permet leur ascension avant de retomber lentement dans l'eau. Sous l'eau elles emmagasinent la chaleur pour recommencer leur cycle hebdomadaire. Les Lézards ignés, importés d'Emeldarion, et les Epines médusines créent un spectacle nocturne grandiose. Une fierté nationale, objet de nombreux festivals.</p>"
       },
       {
         "name": "Faerylia Tisseuse du Chaos",
         "img": "img/char/faerylia.webp",
         "alt": "Faerylia Tisseuse du Chaos",
-        "html": ""
+        "html": "<p>Faerylia était connue comme la personne la plus cultivée et érudite de Shal'Zaar.</p><p>Vassale du Roi de la terre, elle maîtrisait la magie et les écrits comme nul autre. Elle a été capable de décrypter, seule, le Codex Primordial.</p><p>Le temps a démontré qu'elle ne donnait que peu du contenu réel du grimoire. Elle indiqua précisément comment sceller les Divinités. En commençant par la forge des armes runiques, puis la construction du portail.</p><p>Après avoir tenté de faire sien des pouvoirs proche des divininités. Elle sera punie par la destruction de sa terre natale. La Tisseuse du Chaos est la sorcière la plus recherchée.</p>"
       }
     ]
   },
@@ -78,121 +78,121 @@ export const regions = [
         "name": "Sorcière Pyrokinétique",
         "img": "img/char/sorciere-pyrokinetique.webp",
         "alt": "Sorcière Pyrokinétique",
-        "html": ""
+        "html": "<p>De nos jours dans les contrées sauvages du Nord d'Emeldarion, vit un peuple chaman dirigé par la sage Keria.</p><p>Ce peuple cultive les plantes et élève des animaux, tous affiliés et nourris par l'élément du Feu. De nombreux stages de l'académie militaire de Dragheïr opèrent dans cette région.</p><p>La Sorcière Pyrokinétique, directrice de cette prestigieuse école, chercha un moyen d'entraîner ses élèves face à la corruption du feu. Elle trouva alors un accord avec Keria.</p>"
       },
       {
         "name": "Prisonniere de la machine",
         "img": "img/char/prisonniere-de-la-machine.webp",
         "alt": "Prisonniere de la machine",
-        "html": ""
+        "html": "<p>Il existe beaucoup de références sur les races de l'ancien temps, une espèce ancestrale humanoïde de petite taille aux traits félins en faisant parti. Aujourd'hui disparue, on garde en mémoire leur courage et leur sacrifice.</p><p>Dans la lutte contre les Eternels, l'ensemble des communautés Oniyx créèrent une entité de chaos contrôlé, la Prisonnière de la machine.</p><p>Frappé par une telle arme, un Eternel est scellé dans la sphère. Essentiellement constitué de magie, un prisonnier est conservé en état de sommeil profond. Sa capacité régénérative devient source d'énergie inépuisable. Alimentant encore l'autonomie des usines Oniyx, piégées dans la glace des Contrées de Cristal.</p>"
       },
       {
         "name": "Keria",
         "img": "img/char/keria.webp",
         "alt": "Keria",
-        "html": ""
+        "html": "<p>De nos jours au Nord d'Emeldarion s'élèvent de magnifiques épis, les pousses de Bleh arrosées par le feu des Flammeveilles.</p><p>Ces champs sont dirigés d'une main de maître par les chamans de la tribu de Keria. En discutant avec elle on découvre une étrange Pixarch qui ne cache pas ses origines. Elle est équipée de catalyseurs élémentaires du Feu dont certains modifient son apparence. Ces illusions lui permettent de masquer ses stigmates du passé nous dit-elle.</p><p>Très ouverte à la discussion, elle offre ses connaissances à quiconque souhaite s'en abreuver. Elle calme les tensions entre les tribus de la région avec sagesse et altruisme.</p>"
       },
       {
         "name": "Loutre Intrépide",
         "img": "img/char/loutre-intrepide.webp",
         "alt": "Loutre Intrépide",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Au nord d'Emeldarion, on peut voir ces loutres descendre depuis les Contrées de Cristal, en passant par Abondance avant de remonter le cours d'eau pour recommencer leur folle descente.</p><p>On peut même les voir, parfois, accrochées à des orbes qu'elles remontent des fonds marins, un comportement étrange que les Alphilans gardent secrets.</p>"
       },
       {
         "name": "Scruteur de sommets",
         "img": null,
         "alt": "Scruteur de sommets",
-        "html": ""
+        "html": "<p>Des Eternels pour la préservation de la Surface sont apparu après certaines catastrophes. Leur objectif est d'éviter que ne se répètent les erreurs commises.</p><p>Protecteur des ruines d'un gigantesque chantier du passé, le Scruteur peut être observé non loin des Chutes d'Ether au sud-ouest d'Emeldarion, ou au nord-ouest de Shal'Zaar.</p><p>Certains pèlerins qui l'auront aperçu y voient un bon présage. D'autres l'ayant confronté ne sont plus là pour témoigner.</p>"
       },
       {
         "name": "Leviathan des Cieux",
         "img": "img/char/leviathan-des-cieux.webp",
         "alt": "Leviathan des Cieux",
-        "html": ""
+        "html": "<p>La mort n'existe pas en Elther, l'Abysse mélange les rêves et cauchemars des Eveillés purgeant les âmes damnées. Construire de nouvelles âmes par le rêve purifiées par le cauchemar.</p><p>Des agents Eternels occupent les Abysses pour en maintenir l'état fluctuant stable. Le Leviathan des Cieux est l'un d'entre eux, il tisse les bulles de chaque rêve individuel dans son sillage. S'il devait un jour s'arrêter ou disparaître, les Eveillés seraient condamnés à ne connaître que le cauchemar durant leur sommeil.</p>"
       },
       {
         "name": "Dragosaure Céleste",
         "img": "img/char/dragosaure-celeste.webp",
         "alt": "Dragosaure Céleste",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Des créatures incroyables peuplent les îles Esseulées, amat d'îles volantes au-dessus de la Mer Nimbée. Des espèces parmis lesquelles on y retrouverait le Dragosaure Céleste.</p><p>On observe ses nids sur les falaises du continent d'Aelther. Une fois adultes, ils se rendent sur les îles flottantes. Nul ne sait pourquoi ils y vont, pour le moment.</p>"
       },
       {
         "name": "Yotaru Gardefeuille",
         "img": "img/char/yotaru-gardefeuille.webp",
         "alt": "Yotaru Gardefeuille",
-        "html": ""
+        "html": "<p>Sir Gardefeuille est une Nymphe au service du Dhöggeïr Emeraldoth. Ce dernier n'étant pas des plus éloquents, Yotaru lui servait de messager et interprète.</p><p>Courageux et avenant, il aura beaucoup sacrifié de sa personne pour répondre aux besoins de son ami lézard.</p><p>Aujourd'hui, dans les Marais'Cage au sud d'Emeldarion, il veille à ce que les pèlerins respectent les règles de la zone. Nul ne doit quitter la route ou poser pied à terre. Guidés par une telle légende vivante, les pèlerins s'y conforment gracieusement.</p>"
       },
       {
         "name": "Tisseuse de Mots",
         "img": "img/char/tisseuse-de-mots.webp",
         "alt": "Tisseuse de Mots",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Les Tisseuses de Mots habitent la jungle tropicale de Presolda au sud-est d'Emeldarion. Elles sont parmi les plus grandes menaces animales.</p><p>Ces araignées géantes produisent des sons de proies attirant leurs prédateurs. Une fois piégées dans sa toile, elles lui servent de stock de nourriture.</p>"
       },
       {
         "name": "Soigneuse Astrale des Bois",
         "img": "img/char/soigneuse-astrale-des-bois.webp",
         "alt": "Soigneuse Astrale des Bois",
-        "html": ""
+        "html": "<p>La disparition Pixarch a laissé un lourd héritage aux Anthropomorphes. la Soigneuse Astrale témoigne de la survie des protecteurs de l'arbre des mystères. Elle peut être croisée dans la forêt de Vaelor. Elle recherche le &quot;bâton de Gabriel&quot; un artefact capable de métamorphose.</p><p>Dérobé suite à un conflit interne ayant coûté la vie au Samouraï Croc. Alors qu'elle était absente lors de l'épidémie de Fanure, elle aura confié le bâton à son second qui le perdit en duel singulier. Tout ce qu'elle sait du responsable c'est qu'il est probablement quelque part en Vaeloria.</p>"
       },
       {
         "name": "Maître Amphibian",
         "img": "img/char/maitre-amphibian.webp",
         "alt": "Maître Amphibian",
-        "html": ""
+        "html": "<p>Originaire des îles Esseulées, un maître martial Anthropomorphe en possession d'un artefact de métamorphose, s'est installé au nord-ouest d'Emeldarion.</p><p>Amphibian donna vie à de noimbreux habitants du village. Ce sanctuaire chamanique se développe alors avec l'aide de Keria. En échange de terres, le reptilien a utilisé le bâton pour aider Keria à développer sa tribu du feu.</p><p>Si on lui demande pourquoi avoir quitté les îles volantes, Il répond toujours que c'est l'histoire d'une amitié brisée. D'idéaux divergeant, qu'il regrette à mesure que le temps passe.</p>"
       },
       {
         "name": "Godlur Gardien des Monts",
         "img": "img/char/godlur-gardien-des-monts.webp",
         "alt": "Godlur Gardien des Monts",
-        "html": ""
+        "html": "<p>Godlur fut la première créature artificielle de Gabriel et Lumisaros.</p><p>Protecteur de la capitale Pixarch face aux Eternels les plus belliqueux. Puissant golem profitant de la photosynthèse pour charger ses orbes Oniyx intégrées, il est capable de fonctionner de jour comme de nuit.</p><p>Beaucoup le décrivaient comme indestructible, Est-il encore en fonction quelque part ? Peut-être qu'il agit encore au centre des îles Esseulées ?</p>"
       },
       {
         "name": "Maitresse des teintes",
         "img": "img/char/maitresse-des-teintes.webp",
         "alt": "Maitresse des teintes",
-        "html": ""
+        "html": "<p>On raconte la naissance de six enfants nés avec une rune sur la main.</p><p>À Abondance, au quartier des plaisirs Katrobu, les Sans-nom essayent de se trouver un avenir.</p><p>Un jeune garnement peint l'entièreté de la ville chaque jour. Fuyant les autorités au quotidien, ses peintures firent venir de nombreux touristes. La Maîtresse des teintes devint alors une célébrité aux fans du monde entier. Elle aurait des visions de ses cauchemars et ne connaîtrait pas le rêve. Elle les peindrait pour les extérioriser et protéger son mental.</p>"
       },
       {
         "name": "Commando Gerz",
         "img": "img/char/commando-gerz.webp",
         "alt": "Commando Gerz",
-        "html": ""
+        "html": "<p>De nos jours dans les contrées sauvages du Nord d'Emeldarion, vis un peuple chaman dirigé par la sage Keria.</p><p>Ce peuple cultive les plantes et élève des animaux, tous affiliés et nourris par l'élément du feu. De nombreux stages de l'académie militaire de Dragheïr opèrent dans cette région. Ces stages ont pour but d'apprendre à comprendre l'élément du feu.</p><p>Gerz, un ancien commando, y a pris sa retraite. Ami de la directrice de l'école militaire, il accepta d'accueillir les étudiants dans son ranch pour qu'ils puissent être formés.</p>"
       },
       {
         "name": "Souris des blés",
         "img": "img/char/souris-des-bles.webp",
         "alt": "Souris des blés",
-        "html": ""
+        "html": "<p>De nos jours dans les contrées sauvages du Nord d'Emeldarion, vis un peuple chaman dirigé par la sage Keria.</p><p>Ce peuple cultive les plantes et élève des animaux, tous affiliés et nourris par l'élément du feu. Parmi ces animaux, certains ont reçu la bénédiction du bâton de métamorphose. Devenus Anthropomorphe, les Souris des blés contribuent au fonctionnement du village. Excellentes cultivatrices, ces ouvrières s'assurent de la qualité irréprochable du bleh. Elles évitent que leurs congénères animaux ou les corbeaux ne détruisent pas trop les récoltes.</p>"
       },
       {
         "name": "Félin Errant",
         "img": "img/char/felin-errant.webp",
         "alt": "Félin Errant",
-        "html": ""
+        "html": "<p>La capitale économique d'Emeldarion, Abondance, est aussi bien la plus riche en ressources naturelles que culturelles. Vous pouvez y voir la diversité populaire.</p><p>Choisir de vivre dans cette ville segmentée n'est pas aisé. Souvent mal informés, les habitants finissent en quête de service.</p><p>La zone est dirigée par plusieurs entreprises. Les plus fructueuses font partie du conseil présidant la ville. Des clans comme le Félin Errant se forment en quête d'ascension au pouvoir. Celui-ci accueil des Anthropomorphes, les informes et les loges.</p>"
       },
       {
         "name": "Shinobi Éclairant",
         "img": "img/char/shinobi-eclairant.webp",
         "alt": "Shinobi Éclairant",
-        "html": ""
+        "html": "<p>À l'est d'Emeldarion vit une tribu martiale très territoriale. Le peu que l'on sait d'eux sont de fortes représentations de loups. La foudre semble s'abattre constamment sur leur région. Les chercheurs pensent que le Roi de la lumière et ses descendants y auraient élu domicile.</p><p>La théorie n'a jamais pu être confirmée. Une faille spatiale s'ouvre toujours devant quiconque franchie la limite des totems canins. Vivy apparaît systématiquement en première. Suivie de ses Shinobi éclairant. Bataillon masqué et visiblement surentraîné.</p>"
       },
       {
         "name": "Chaman fongique",
         "img": "img/char/chaman-fongique.webp",
         "alt": "Chaman fongique",
-        "html": ""
+        "html": "<p>Originaire des îles Esseulées, un maître martial Anthropomorphe en possession d'un artefact magique, c'est installé au nord-ouest d'Emeldarion.</p><p>Un jour, le bâton mal surveillé aura été utilisé sur un champignon. La magie opérant correctement, le fongique prit forme humanoïde.</p><p>Le nouvel être morphique, en remerciement, proposa des cultures adictives très particulières qui font un tabac à Abondance. Cette nouvelle agriculture permit aux chamans de l'eau de prospérer.</p>"
       },
       {
         "name": "Mélodie des Divinités",
         "img": "img/char/melodie-des-divinites.webp",
         "alt": "Mélodie des Divinités",
-        "html": ""
+        "html": "<p>Elther n'existerait pas sans Divinité, le vivant est le fruit d'un travail de création Divine.</p><p>Les créateurs ont tous leurs propres œuvres et doctrines. Le langage runique utilisé par ces êtres suprêmes est une partition incompréhensible. Seule l'apparence de certaines runes demeure accessible aux habitants de la Surface.</p><p>La Mélodie des Divinités est un chant religieux qui a traversé les âges. L'oeuvre remercie le divin. Les psaumes incompréhensibles du chant sont étudiés pour mieux comprendre le texte.</p>"
       },
       {
         "name": "Baleine astrale",
         "img": "img/char/baleine-astrale.webp",
         "alt": "Baleine astrale",
-        "html": ""
+        "html": "<p>Abondance accueil un grand nombre de peintures. Parmis elle on retrouve la Baleine astrale. La peinture au sol fait l'objet de débâts.</p><p>La Maîtresse des Teintes utilise la ville entière comme sa toile vierge. Elle y attire ainsi de nombreux visiteurs. La Baleine astrale est sa peinture la plus marquante.</p><p>Certains pensent que c'est une représentation du pèlerinage. Les pèlerins s'y identifient en quête de leur Eternel au Mont Céleste. D'autres, pensent qu'elle est en lien avec la créature volante au sud-ouest d'Emeldarion. La Maîtresse des Teintes quant à elle reste discrète sur l'origine de ses idées.</p>"
       }
     ]
   },
@@ -206,79 +206,79 @@ export const regions = [
         "name": "Pyrosolain",
         "img": "img/char/pyrosolain.webp",
         "alt": "Pyrosolain",
-        "html": ""
+        "html": "<p>L'espèce ancestrale Oniyx était dirigée par un grand chef du nom de Pyrosolain. Son peuple disparu en rébellion face aux divinités. Les écrits de Lumethia gardent en mémoire son courage et ses nombreux sacrifices.</p><p>Aidé par son second, Lumisaros, il est l'inventeur des orbes magiques au nom de son espèce, On en utilise encore aujourd'hui sans savoir les manufacturer alors on en prend soin. Il a créé de nombreuses armes et défenses contre la folie divine de l'ancien temps. Aujourd'hui, ses créations sont prisonnières des contrées de cristal à l'est de Nordvinter.</p>"
       },
       {
         "name": "Félin Éruptif",
         "img": "img/char/pecheur-de-feu.webp",
         "alt": "Félin Éruptif",
-        "html": ""
+        "html": "<p>On sait des récits historiques que les Oniyx n'étaient pas qu'inventeurs. Certains utilisaient leur intelligence afin de partir à l'aventure.</p><p>Le plus connu fut Lumisaros, impossible pour lui de rester sur une chaise. Il est en charge du développement des relations d'Oniyxia. Il fait parti d'un groupe aventurier connu sous le nom de déviants.</p><p>Le Pêcheur de Feu est l'un d'entre eux, né avec une rare affiliation élémentaire pour son espèce. L'aventure en mer était un de ses plus grands rêves. Lumisaros lui aura construit des vaisseaux pour traverser l'océan. Ils sont aujourd'hui au port de Lumethia. La peinture de l'Oniyx heureux se trouve dans chaque cabine du capitaine.</p>"
       },
       {
         "name": "Amber",
         "img": "img/char/ameru.webp",
         "alt": "Amber",
-        "html": ""
+        "html": "<p>La grande cité forteresse militaire de Dragheïr, un barrage entre l'océan et la Mer Embrasée, un lieu de partage entre Eltheriens et Dhöggeïrs, une ville riche en symboles à la noble culture martiale.</p><p>Amber est l'un d'entre eux, elle est une représentation féminine, guerrière maîtrisant l'eau et le feu représentant l'alliance entre Hadeïr et Nordvinter.</p><p>La légende raconte qu'un jour, deux héros que tout oppose réussiront à libérer Hadeïr des flammes. Ils purifieront le Mont Vulcain et libereront la mère des Döggheïr. Amber est une figure charismatique et combative.</p>"
       },
       {
         "name": "Blaze",
         "img": "img/char/blaze.webp",
         "alt": "Blaze",
-        "html": ""
+        "html": "<p>La grande cité forteresse militaire de Dragheïr, un barrage entre l'océan et la Mer Embrasée, un lieu de partage entre Eltheriens et Dhöggeïrs, une ville riche en symboles à la noble culture martiale.</p><p>Blaze est l'un d'entre eux, il est une représentation masculine, mage maîtrisant l'eau et le feu représentant l'alliance entre Hadeïr et Nordvinter.</p><p>La légende raconte qu'un jour, deux héros que tout oppose réussiront à libérer Hadeïr des flammes. Ils purifieront le Mont Vulcain et libereront la mère des Döggheïr. Blaze est une figure sage et appaisante.</p>"
       },
       {
         "name": "Esprit Eau",
         "img": "img/char/esprit-eau.webp",
         "alt": "Esprit Eau",
-        "html": ""
+        "html": "<p>Alors que le continent unique vient de se fracturer, l'esprit de l'eau passa des journées entières à ralentir la glace des Contrées de Cristal.</p><p>En activité dans un immense lac de Nordvinter, il est le seul esprit clairement visible et accessible à une large population. Cette particularité ne manque pas d'attirer de nombreux voyageurs.</p><p>Toutefois, perturber l'activité d'un esprit a un prix que Lycaria, Ombre du Blanc, est prête à faire payer afin que personne ne dérange le petit canidé aquatique.</p>"
       },
       {
         "name": "Le compagnon des esprits",
         "img": "img/char/le-compagnon-des-esprits.webp",
         "alt": "Le compagnon des esprits",
-        "html": ""
+        "html": "<p>Autour du lac de l'Esprit de l'Eau, des petits rongeurs ont élu domicile.</p><p>Les compagnons des esprits jouent et semblent y communiquer avec des papillons. Ces curieux petits animaux ne fuient pas la présence d'Eltherien, au contraire. Ils sont devenu une mascotte de la région montagneuse nord de Vaeloria. Ce paisible écosystème a trouvé son équilibre loin de tout prédateur. Ces petites boules de poils gardent certainement un secret au fond de leurs terriers. Mais, Lycaria veille à ce que personne ne trouble la tranquillité du lac.</p>"
       },
       {
         "name": "Baleine farceuse",
         "img": "img/char/baleine-farceuse.webp",
         "alt": "Baleine farceuse",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Depuis l'Océan des Profondeurs se déplacent des bancs de cétacés particuliers. Les Baleines Farceuses sont des créatures taquines avec les bateaux de Lumethia. Elles ne manquent pas de faire croire à un renversement de bateau en guise de salut.</p><p>Leurs déplacements sont un phénomène étrange. On les voit faire un aller-retour entre l'Océan des Profondeurs et la Mer Nimbé. Il y a un rapport évident avec le peuple Alphilan, mais le mystère reste entier.</p>"
       },
       {
         "name": "Hibernatus &quot;nom disponible&quot;",
         "img": "img/char/hibernatus.webp",
         "alt": "Hibernatus &quot;nom disponible&quot;",
-        "html": ""
+        "html": "<p>Les Natus sont une nouvelle espèce tribale composée de peu d'individus. Ils sont très attachés à leur territoire et semblent cultiver leur propre croyance. Leur intellect supérieur les différencies de simples animaux.</p><p>Dans les Monts Nomades de Nordvinter, ou dans le désert brûlant de Shal'Zaar, on peut en trouver des bien différents et leurs villages.</p><p>Les Hibernatus de Nordvinter accueillent parfois les aventuriers frigorifiés contre des histoires.</p>"
       },
       {
         "name": "Dame Navire",
         "img": "img/char/dame-navire.webp",
         "alt": "Dame Navire",
-        "html": ""
+        "html": "<p>Parmis les Eternels, Esprits, et autres entités mythiques, nous retrouvons la Dame Navire. Cet être à part entière crée les courants et évite le débordement des eaux.</p><p>Une demi-déesse que l'on peut apercevoir le temps d'un clignement d'œil en suivant les courants. De nombreux marins épris de sa beauté et ses secrets sont parti en quête de la Dame. Mais les routes les plus dangereuses ne font pas de cadeaux aux plus intrépides.</p><p>Ce gâchis de navires et de vies fit interdire par traité l'utilisation de bateaux pour traquer la Dame. Les historiens supposent des quelques indices laissés qu'il s'agit de la Reine Alphilane.</p>"
       },
       {
         "name": "Frost &amp; Glacier",
         "img": "img/char/frost-glacier.webp",
         "alt": "Frost &amp; Glacier",
-        "html": ""
+        "html": "<p>On raconte la naissance de six enfants nés avec une rune sur la main.</p><p>À Nordvinter, Au sein de la grande tribu guerrière des Nords, le fils du chef Frost est né avec d'étranges traits animaliers. Malgré une habilité à résister au froid, même le plus intense, il subit beaucoup de harcèlement. La mort de ses parents ne lui donnera pas plus d'autorité. Ce n'est qu'une fois son pèlerinage achevé qu'il fut respecté.</p><p>Aujourd'hui, il est le maître du prince Dhöggeïr: Glacier. Il est aussi le vice-président du conseil de l'école militaire de Dragheïr. Il y est reconnu pour ses exploits.</p>"
       },
       {
         "name": "Lisa la dragonniere &quot;nom disponible&quot;",
         "img": "img/char/lisa-la-dragonniere.webp",
         "alt": "Lisa la dragonniere &quot;nom disponible&quot;",
-        "html": ""
+        "html": "<p>On raconte la naissance de six enfants nés avec une rune sur la main.</p><p>À Dragheïr, les bas-fonds voient de nombreux orphelins de guerre lutter pour leur survie. Cette atroce méritocratie militaire, commençant dès le plus jeune âge, a fait naître Lisa. Enfant, elle a montré des capacités de combat sans égal en plus d'une maîtrise du langage Dhöggeïr.</p><p>Une famille noble, celle de Pyra, décida de l'adopter pour ces prouesses. Ses études sont financées et elle devient présidente du conseil de l'académie militaire.</p>"
       },
       {
         "name": "Guerrier des Neiges",
         "img": "img/char/guerrier-des-neiges.webp",
         "alt": "Guerrier des Neiges",
-        "html": ""
+        "html": "<p>A la disparition du Roi du Feu, les peuples de Nordvinter se sont fortement militarisés en soutien de Hadeïr.</p><p>Les Guerriers des Neiges profitent des conditions extrêmes, de froid du continent et de chaleur de la mer intérieure, pour se bâtir un physique de combat sans pareil dans la population Eltherienne.</p><p>Ils sont la fierté de Dragheïr et l'équivalent actuel de la meute du Roi de la lumière d'antan.</p>"
       },
       {
         "name": "Ashtarae Lycaria",
         "img": "img/char/ashtarae-lycaria.webp",
         "alt": "Ashtarae Lycaria",
-        "html": ""
+        "html": "<p>Alors que l'esprit de l'eau débute sa fonction régulatrice, Lycaria constata la surpopulation autour du lac de l'esprit.</p><p>Au sein de Nordvinter, alors que l'esprit contre la progression des Contrées de Cristal, L'Eternel prit une forme entre Anthropomorphe et Pixarch aux runes gravées sur le corps. Son aura rappelle sa proximité avec la volonté divine.</p><p>Elle veille à ce que personne n'abuse de son indulgence. Elle aspire à la tranquillité du lac et ses alentours.</p>"
       }
     ]
   },
@@ -292,61 +292,61 @@ export const regions = [
         "name": "Catimimi",
         "img": "img/char/catimini.webp",
         "alt": "Catimimi",
-        "html": ""
+        "html": "<p>Les chaînes Drako'vish s'étendent au Nord de Lumethia. Elles forment une frontière avec Hadeïr, terre des Grands Lions.</p><p>Cette région a subit une forte corruption par le Feu. Les créatures touchées et infectées n'ont souvent qu'un seul espoir, la Saule ardente du bois Détwin. Catimimi faisait partie des jeunes lions infectés.</p><p>Sauvé de peu par la Saule, Il conte souvent l'histoire de son roi l'amenant jusqu'au bois. Catimimi fut témoin de la fin du combat entre ses congénères. Il est aujourd'hui chargé de protéger Leo.</p>"
       },
       {
         "name": "Roi des flammes ardentes",
         "img": "img/char/roi-des-flammes-ardentes.webp",
         "alt": "Roi des flammes ardentes",
-        "html": ""
+        "html": "<p>Les chaînes Drako'vish s'étendent au Nord de Lumethia. Elles forment une frontière avec Vaeloria, terre des Grands Lions.</p><p>Subissant une forte vague de corruption par le Feu, [le Roi des flammes ardentes et son clan devaient se trouver de nouvelles terres. Il c'est vu obligé de déplacer ses sujets sur les terres d'Aurora.</p><p>Son corps, corrompu par le Feu; prit l'apparence d'un Eltherien. Aurora lui refusa tout territoire et débute alors une violente guerre. La Savane nord de Lumethia les a vu s'affronter des jours durant. Une guerre qui se termina par la mort tragique d'un ami commun aux clans, Sylvan.</p>"
       },
       {
         "name": "Fleurmarine",
         "img": "img/char/fleumarine.webp",
         "alt": "Fleurmarine",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Au bord des côtes ouest de Lumethia, on peut apercevoir des groupements d'algues provenant de l'Océan des Profondeurs. Ces plages sont interdites à cause de Fleurmarines très agressives pouvant s'y être installées.</p><p>Ces anguilles de mer sont assez redoutées des pêcheurs. Toutefois, elles sont un mets délicat, spécialité des ports de Lumethia.</p>"
       },
       {
         "name": "Hippocampe Nimbé",
         "img": "img/char/hippocampe-nimbe.webp",
         "alt": "Hippocampe Nimbé",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Au bord des côtes Sud de la nouvelle Vaeloria, on peut apprécier les eaux claires de la Mer Nimbée. L'hippocampe est l'animal emblématique de cette immense étendue d'eau.</p><p>Les mâles portent les œufs féconds et les femelles protègent à l'aide de leurs ailes dorsales. Les Alphilans les utilisent afin de prévenir de leur présence à la surface de l'eau. Ignorer ce signal peut engendrer un conflit dangereux non-souhaitable.</p>"
       },
       {
         "name": "Sylvan protecteur de la verdure",
         "img": "img/char/sylvan-protecteur-de-la-verdure.webp",
         "alt": "Sylvan protecteur de la verdure",
-        "html": ""
+        "html": "<p>Les chaînes Drako'vish s'étendent au Nord de Lumethia. Elles forment une frontière avec Vaeloria, terre des Grands Lions.</p><p>Alors que Sylvan était absent pour ses besoins d'érudition, Il recueillit un enfant abandonné lors de son voyage, Leo. Apprenant la guerre sanglante entre ses amis d'enfance, Catimimi le pressa pour stopper le combat.</p><p>Subissant des dégâts mortels, une accalmie tant convoitée opère. Ses dernières paroles appelent à prendre soin de Leo. Le sacrifice de Sylvan mit fin à cette guerre.</p>"
       },
       {
         "name": "Aldrin &amp; Gorakar",
         "img": "img/char/aldryn-gorakar.webp",
         "alt": "Aldrin &amp; Gorakar",
-        "html": ""
+        "html": "<p>On raconte la naissance de six enfants nés avec une rune sur la main.</p><p>À Lumethia, non loin de la pierre du sage sacrée, une famille noble en soif d'aventures donna naissance à Gorakar. Cette famille a longtemps rêvé d'aventure jusqu'au jour où leur rêve les appela à pèleriner. Appelé au centre des îles Esseulées, le jeune aventurier s'en alla pour rejoindre Aldrin.</p><p>Ses parents au voyage différent ont alors fait appel au plus érudit des Tokscyth. Avec sa machine volante révolutionnaire, ils partiront à la rencontre d'un puissant Döggheïr au centre des îles volantes.</p>"
       },
       {
         "name": "Gnome aventurier",
         "img": "img/char/gnome-aventurier.webp",
         "alt": "Gnome aventurier",
-        "html": ""
+        "html": "<p>Tous les Tokscyth ne sont pas qu'alchimistes. Certains sont plus intéressés par le goût de l'aventure.</p><p>Ils contribuent fortement à l'avancée des recherches de leurs congénères. Leurs connaissances en plantes, minerais et champignons ont permis de développer les TOX. Une substance aux effets aléatoires pas toujours secondaires.</p><p>Les aventuriers de cette espèce sont des casse-cou de petite taille originaire de Hadeïr. Bravant monts et marées dans un effort de recherche du meilleur pour leurs créations.</p>"
       },
       {
         "name": "Artisan des heures",
         "img": "img/char/artisan-des-heures.webp",
         "alt": "Artisan des heures",
-        "html": ""
+        "html": "<p>Le monde a bien besoin d'un chercheur, un vrai, le plus grand de tous les Tokscyth et objectivement le plus beau.</p><p>L'Artisan des heures est un grand inventeur sans pareil. Un voyageur du monde observant et contant ses aventures en un seul livre.</p><p>Originaire de Lumethia, il a créé une superbe machine volante qui lui permettra d'atteindre le centre des îles Esseulées. Un rêve d'étude complémentaire qui parfait ses connaissances irréprochables.</p>"
       },
       {
         "name": "Forgeron du Fer",
         "img": "img/char/maitre-thronebeur.webp",
         "alt": "Forgeron du Fer",
-        "html": ""
+        "html": "<p>Les livres d'histoires racontent que les artisans se spécialisaient dans une activité, une société fonctionnant par l'efficacité du nombre et la confiance de son prochain.</p><p>Les Olforgeurs sont des êtres trapus, à peine plus petits que des Eltheriens et bien carrés d'épaules. Ils ont toujours été associés aux Oniyx par passion artisanale commune.</p><p>Le Forgeron du Fer est une légende. Son histoire garde en mémoire, autour d'un bon verre, les camarades tombés au combat. Elle est un remerciement du partage des connaissances multigénérationnelles. Il aurait été un ami proche de Pyrosolain.</p>"
       },
       {
         "name": "Léo",
         "img": "img/char/leo.webp",
         "alt": "Léo",
-        "html": ""
+        "html": "<p>Les chaînes Drako'vish s'étendent au Nord de Lumethia. Elles forment une frontière avec Vaeloria et Hadeïr, terre des Grands Lions.</p><p>Alors que les lions s'affrontent dans la savane nord, Sylvan décède d'une ultime bataille. Suite au sacrifice de cet ami commun, les chefs de clan écoutent sa dernière volonté et acceptent la paix. Ils s'occupent alors de Leo.</p><p>Malgré un intérêt grandissant pour les Eltheriens qui lui ressemblent, Leo considère les Grands Lions comme sa famille. Il travaille à ce qu'ils soient vu tel une espère à part entière à l'instar des Natus.</p>"
       }
     ]
   },
@@ -360,103 +360,103 @@ export const regions = [
         "name": "Apprentie de la Mort",
         "img": "img/char/apprentie-de-la-mort.webp",
         "alt": "Apprentie de la Mort",
-        "html": ""
+        "html": "<p>La mort n'existe pas en Elther, l'Abysse mélange les rêves et cauchemars des Eveillés purgeant les âmes damnées. Construire de nouvelles âmes par le rêve purifiées par le cauchemar.</p><p>Des agents Eternels occupent les Abysses avec une tâche divine de nettoyage macabre. Celle que l'on nomme Faucheuse de cauchemars, régule la surpopulation de cauchemars ne trouvant pas la paix intérieur, coupant court à leur simple existence néfaste au cycle imposé par les divinités.</p>"
       },
       {
         "name": "Souverain des flammes",
         "img": "img/char/souverain-des-flammes.webp",
         "alt": "Souverain des flammes",
-        "html": ""
+        "html": "<p>Les créateurs du monde n'ont pas de forme descriptible, ils sont probablement des outils divins. Mais, leur apparition historique aux traits apocalyptiques leur donna le nom de Calamités.</p><p>Leur travail autant créateur que destructeur achevé, les Calamités résident dans l'Abysse où, dormantes, elles séparent le monde matériel du monde onirique.</p><p>Le souverain des flammes est une créature gigantesque, de forme serpentine semblable aux Ignatius. En Hadeïr, les Eltheriens le tiennent responsable de la corruption du Feu.</p>"
       },
       {
         "name": "Scorch, le Lézard Igné",
         "img": "img/char/scorch-le-lezard-igne.webp",
         "alt": "Scorch, le Lézard Igné",
-        "html": ""
+        "html": "<p>De nos jours dans les contrées sauvages du Nord d'Emeldarion, vis un peuple chaman dirigé par la sage Keria.</p><p>Ils cultivent les plantes et élève des animaux, tous affiliés et nourris par l'élément du feu. Les Scorch sont de petits lézards ignés. Ils ont un rôle de préservation de l'écosystème aquatique.</p><p>Ils se nourrissent de polluant de l'eau, minéral comme végétal. Ils sèchent l'aliment dans leur grande bouche. Puis ils le brûlent dans leur estomac. Cette digestion particulière peut engendrer des rots enflammés.</p>"
       },
       {
         "name": "La Chimère Brassechair &quot;nom disponible&quot;",
         "img": "img/char/chimere-brassechair.webp",
         "alt": "La Chimère Brassechair",
-        "html": ""
+        "html": "<p>Les monstres abyssaux ont une forme horrifique indescriptible. Ces créatures démoniaques ont pu être rencontrées durant l'expédition Oniyx. Une aventure horrifique dans les profondeurs du temple de Zaar'Phahl en Shal'Zaar.</p><p>La progression du groupe dans les Abysses s'accompagnait d'un sentiment d'inconfort. Les sens trompés de toute part, le groupe fini par apercevoir un cristal d'énergie pure. Cette rare trouvaille n'était en réalité qu'un piège grossier tendu par un monstre. L'Abyssal décimera un bon quart du groupe avec amusement avant de s'en lacer.</p>"
       },
       {
         "name": "Souverain des Chutes d'Éther",
         "img": "img/char/souverain-des-chutes-d-ether.webp",
         "alt": "Souverain des Chutes d'Éther",
-        "html": ""
+        "html": "<p>Les créateurs du monde n'ont pas de forme descriptible, ils sont probablement des outils divins. Mais, leur apparition historique aux traits apocalyptiques leur donna le nom de Calamités.</p><p>Leur travail autant créateur que destructeur terminé, les Calamités résident dans l'Abysse où, dormantes, elles séparent le monde matériel du monde onirique.</p><p>Le souverain des Chutes d'Ether est une créature gigantesque, de forme serpentine qui, jaillissant de l'eau depuis les Abysses, a fait se fissurer le continent unique en de multiples fragments. Cet événement est connu sous le nom de Grand Cataclysme.</p>"
       },
       {
         "name": "Archonte aux Mille Yeux &quot;nom disponible&quot;",
         "img": "img/char/archonte-au-milles-yeux.webp",
         "alt": "Archonte aux Mille Yeux",
-        "html": ""
+        "html": "<p>Les monstres abyssaux ont une forme horrifique indescriptible. Ces créatures démoniaques ont pu être rencontrées durant l'expédition Oniyx. Une aventure horrifique dans les profondeurs du temple de Zaar'Phahl en Shal'Zaar.</p><p>La progression du groupe dans les Abysses fut éprouvante. Des membres ont vu des yeux rouge vif apparaître sur leur peau. On ne sait pas à quoi aurait pu être dû ce phénomène, peut-être une contamination. Rongés par des envies meurtrières, ils devinrent de dangereux zombies hyperactifs.</p>"
       },
       {
         "name": "Regent des abysses",
         "img": "img/char/regent-des-abysses.webp",
         "alt": "Regent des abysses",
-        "html": ""
+        "html": "<p>La mort n'existe pas en Elther, l'Abysse mélange les rêves et cauchemars des Eveillés afin de purger les âmes damnées. Permettant de façonner de nouvelles âmes purifiées par le rêve, les regrets doivent être purgés par le cauchemar.</p><p>Ce système n'est pas du goût de certaines créatures. Le Régent des abysses est une puissante créature de la famille des Logidrakes. De puissantes abominations serpentines capables de contrôler des hordes d'Abyssaux. Ils sévissent aux quatre coins du monde avec une coordination inquiétante. Celui-ci a été repéré au Sud de Shal'Zaar. Il semble être responsable des Abyssaux remontés à la Surface.</p>"
       },
       {
         "name": "Essence Spectrale",
         "img": "img/char/essence-spectrale.webp",
         "alt": "Essence Spectrale",
-        "html": ""
+        "html": "<p>Les monstres abyssaux ont une forme horrifique indescriptible. Ces créatures démoniaques ont pu être rencontrées durant l'expédition Oniyx. Une aventure horrifique dans les profondeurs du temple de Zaar'Phahl en Shal'Zaar.</p><p>Le groupe cherchant à sortir des Abysses rencontra des Essences Spectrales. Difficile d'en décrire la forme, mais elles indiquèrent la direction de la sortie. Ces guides inespérés fauchaient les monstres comme le blé. Leur épée se nourrissait du chaos élémentaire du lieu. Les spectres contenaient l'Abysse en dehors de la Surface.</p>"
       },
       {
         "name": "Chat de l'autre-coté",
         "img": "img/char/chat-de-l-autre-cote.webp",
         "alt": "Chat de l'autre-coté",
-        "html": ""
+        "html": "<p>Depuis le début des pèlerinages, un chat similaire aux panthères imaginaires apparaît en rêve. Il indique toujours l'emplacement du grand sage de la pierre sacrée. Le sud de Lumethia est alors le point de départ de tout pèlerinage.</p><p>Au début de ces rêves prémonitoires, personne ne comprenait clairement le message. Le Chat de l'autre côté apparaissait physiquement devant ceux qui ignoraient l'appel. Il est en réalité une demande avant d'être un avertissement. Le pèlerinage se doit de commencer. Sinon la personne est une menace à l'équilibre élémentaire.</p>"
       },
       {
         "name": "Mange-Cauchemars",
         "img": "img/char/mange-cauchemard.webp",
         "alt": "Mange-Cauchemars",
-        "html": ""
+        "html": "<p>La mort n'existe pas en Elther, l'Abysse mélange les rêves et cauchemars des Eveillés purgeant les âmes damnées. Construire de nouvelles âmes par le rêve purifiées par le cauchemar.</p><p>Certaines âmes corrompues conservent leur mémoire. Elles profitent des failles oniriques pour posséder une créature.</p><p>Échappant à la Faucheuse de cauchemars, les Mange-Cauchemars se présentent comme ami pour leur proie. Une fois complètement possédée, la victime mute jusqu'à ce qu'il ait le contrôle total dessus.</p>"
       },
       {
         "name": "Paguroniyx",
         "img": "img/char/paguroniyx.webp",
         "alt": "Paguroniyx",
-        "html": ""
+        "html": "<p>Selon de nombreux récits historiques, la guerre entre les espèces magiques supérieures et les Eternels faisait rage.</p><p>Équipés de leurs meilleurs armements, mêlant magie élémentaire et technologie de destruction massive, les Oniyx ont obtenu le temps nécessaire au sceau des Divinités.</p><p>La machine la plus redoutable, Paguroniyx, était pilotée par Pyrosolain. Nul ne sait où se trouve cette machine aujourd'hui. Peut-être prisonnière de la glace des contrées de cristal ? Ou peut-être qu'elle a coulé dans les profondeurs océaniques ? .</p>"
       },
       {
         "name": "Cimeterre du néant",
         "img": "img/char/cimetiere-du-neant.webp",
         "alt": "Cimeterre du néant",
-        "html": ""
+        "html": "<p>La mort n'existe pas en Elther, l'Abysse mélange les rêves et cauchemars des Eveillés purgeant les âmes damnées. Construire de nouvelles âmes par le rêve purifiées par le cauchemar.</p><p>La Cimeterre du néant est une peinture au nom de la Calamité de l'ombre. Elle y affronte la Faucheuse de cauchemars dans l'ancienne Azeel. La peinture est dans de nombreuses églises du monde. Elle inspire sur le devoir et le sacrifice pour le bien commun.</p>"
       },
       {
         "name": "Gazpoison Flottant",
         "img": "img/char/gazpoison-flottant.webp",
         "alt": "Gazpoison Flottant",
-        "html": ""
+        "html": "<p>La corruption par le Feu de Hadeïr se caractérise par son Gazpoison. Cet élément elemactif puissant se déplaçant au gré du vent est responsable de nombreux maux. Les créatures qui entrent en contact avec la brume se retrouvent fortement affectées par la folie. Des cellules d'Ombre et de Feu se mélangent afin de créer des créatures abyssales immortelles.</p><p>La brume mortelle a pour origine le centre du Mont Vulcain. Là où les armes runiques des Rois ont été forgées. Les dépôts étudiés provenant du fond de certaines eaux indiquent une origine sous terraine. Ce dépôt est analysé comme matière organique...</p>"
       },
       {
         "name": "Squall l'Émissaire des Cauchemars",
         "img": "img/char/squall-l-emissaire-des-cauchemars.webp",
         "alt": "Squall l'Émissaire des Cauchemars",
-        "html": ""
+        "html": "<p>En Elther il est normal d'avoir peur de dormir, le moindre cauchemar ou rêve pouvant changer le reste de notre vie.</p><p>Ces représentations oniriques se retrouvent hantées par différentes apparitions prémonitoires. l'Émissaire des cauchemars est une puissante créature salvatrice. Elle apparaît lors des nuits les plus épouvantables et meurtrières afin d'en extirper les dormeurs. Il vient souvent accompagné d'un message. Pour l'avoir rencontré, sa voix est surprenament féminine.</p>"
       },
       {
         "name": "Porte-Lanterne &quot;nom disponible&quot;",
         "img": "img/char/porte-lanterne.webp",
         "alt": "Porte-Lanterne &quot;nom disponible&quot;",
-        "html": ""
+        "html": "<p>Les monstres abyssaux ont une forme horrifique indescriptible. Ces créatures démoniaques ont pu être rencontrées durant l'expédition Oniyx. Une aventure horrifique dans les profondeurs du temple de Zaar'Phahl en Shal'Zaar.</p><p>La progression du groupe dans les Abysses fut éprouvante. Des membres ont vu leurs affaires et vivres volés, des ressources indispensables à leur survie. La créature invisible s'en amusait. Le périple était encore plus horrifique à mesure que la faim augmentait. Certains se mirent à manger ce qu'ils n'auraient jamais dû.</p>"
       },
       {
         "name": "Aristocrate Nebulaire",
         "img": "img/char/aristocrate-nebulaire.webp",
         "alt": "Aristocrate Nebulaire",
-        "html": ""
+        "html": "<p>La mort n'existe pas en Elther, l'Abysse mélange les rêves et cauchemars des Eveillés purgeant les âmes damnées. Construire de nouvelles âmes par le rêve purifiées par le cauchemar.</p><p>Des agents Eternels occupent les Abysses pour en maintenir l'état fluctuant stable. Celle que l'on nomme Aristocrate Nébulaire, fixe les failles oniriques des deux mondes. Avec une maîtrise parfaite des runes divines, elle tisse la frontière entre les mondes.</p>"
       },
       {
         "name": "Crapaud des Étoiles",
         "img": "img/char/crapaud-des-etoiles.webp",
         "alt": "Crapaud des Étoiles",
-        "html": ""
+        "html": "<p>Après la fissure du continent unique, une gigantesque mer interne se forme avec de multiples îles.</p><p>Certaines maintenues en l'air par une force inconnue au-dessus de la Mer Nimbée. D'autres sont de vraies îles inaccessibles par la présence d'Abyssaux. Le Crapaud des Étoiles est l'un de ces monstres. En un simple croassement qui fait écho, l'ensemble des marins se retrouvent endormis. Les moins aptes au combat dans le monde onirique se voient dévorés. Au risque de devenir une mouche au dîner d'un batracien géant, Nyevielh est rendue inaccessible à cause des risques d'apparition de Crapaud des Étoiles.</p>"
       }
     ]
   },
@@ -470,55 +470,55 @@ export const regions = [
         "name": "Vladislaus",
         "img": "img/char/vladislaus.webp",
         "alt": "Vladislaus",
-        "html": ""
+        "html": "<p>Trésorier de Nyevielh, Vladislaus, s'occupait de la plupart des documents pour son régent. Philosophe et chercheur de renom, il est l'ami d'enfance des Rois de la Terre et de l'Ombre.</p><p>Alors que les cauchemars rendent ses terres inhabitables, il se voit confier des fragments du Codex. Vladislaus fait construire un manoir aux pièces mobiles. Impossible de s'y déplacer sans suivre des paternes précis.</p><p>La duchesse et certains servants ont désiré le suivre. Le Codex est fortement protégé des cauchemars depuis des siècles. Personne ne sait ce qu'il est advenu d'eux... Sont-ils encore en vie ?</p>"
       },
       {
         "name": "Murmures du Corail Noir",
         "img": "img/char/murmures-du-corail-noir.webp",
         "alt": "Murmures du Corail Noir",
-        "html": ""
+        "html": "<p>Les nombreux dépôts de Gazpoison dans la Mer Embrasée créèrent un fond noir pétrole. Sans l'importation de Scortch à Dragheïr, la pollution se serait étendue. Une catastrophe qui aurait rendue la forge innopérante.</p><p>Parfois, alors que les jeunes de Nordvinter effectuent leur pèlerinage, ils tombent sur un monticule de chair putride et de roche imprégnée de substance visqueuse. Ces créatures aux multiples polypes ne sont pas en capacité de se mouvoir. Sans volonté et portées par les vents, elles ne représentent pas une menace pour la ville. Toutefois, les Galères Abyssales sont un risque élevé pour la traversée de la Mer Embrasée..</p>"
       },
       {
         "name": "Luminaire Abyssal",
         "img": "img/char/luminaire-abyssal.webp",
         "alt": "Luminaire Abyssal",
-        "html": ""
+        "html": "<p>Après la fissure du continent unique, une gigantesque mer interne se forme avec de multiples îles.</p><p>Certaines sont maintenues en l'air par une force inconnue au-dessus de la Mer Nimbée. D'autres sont de vraies îles inaccessibles par la présence de monstres abyssaux. Le Luminaire fait partie de ces monstres, Sa lumière attire les personnes présentes sur les bâteaux. De nombreux individus ce seraient jetés à l'eau attirés par des illusions. Les Luminaires sont d'effroyables créatures qui ont fait fermé plusieurs voies maritimes. Nyevielh est rendue innaccessible à cause des risques d'apparition de Luminaire Abyssal.</p>"
       },
       {
         "name": "Cerf des Couleurs Funèbres",
         "img": "img/char/cerf-des-couleurs-funebres.webp",
         "alt": "Cerf des Couleurs Funèbres",
-        "html": ""
+        "html": "<p>Dans l'effroyable Forêt Rêveuse de Nyevielh, se trouve un Eternel corrompu par la puissance abyssale de la fracture de la Mer Etoilée.</p><p>Lorsque votre vision gagne des couleurs, et que l'eau de la rivière vous semble buvable, l'herbe confortable et l'air respirable, fuyez ! Votre vie en dépend.</p><p>Il n'y a nul besoin de se poser de questions concernant cette forêt, si le moindre protocole existe pour les malheureux qui osent la pénétrer, au moins respectez les indications.</p>"
       },
       {
         "name": "Esprit Ombre",
         "img": "img/char/esprit-ombre.webp",
         "alt": "Esprit Ombre",
-        "html": ""
+        "html": "<p>Alors que le continent unique vient de se fracturer, l'esprit de l'ombre passe des journées entières à chasser les cauchemards de Nyevielh.</p><p>Son activité violente et effroyable lui a donné une apparence des plus hostiles, les rares Eltheriens encore en vie préfèrent ne pas le croiser car sa proie n'est jamais loin.</p><p>Une statue en bois a été construite en son honneur à Port Rhyezeal, elle y est entretenue comme idole protectrice de Nyevielh et épouventail à abominations.</p>"
       },
       {
         "name": "Devoreur de Faune",
         "img": "img/char/devoreur-de-faune.webp",
         "alt": "Devoreur de Faune",
-        "html": ""
+        "html": "<p>Dans l'effroyable Forêt Rêveuse de Nyevielh, se trouve des mutations cauchemardesques de la faune, faute à la puissance abyssale de la fracture de la Mer Etoilée.</p><p>Attention aux buissons de grande taille, il peuvent abriter des dévoreurs de faune en cachette de leurs proies.</p><p>Il n'y a nul besoin de se poser de questions concernant cette forêt, si le moindre protocole existe pour les malheureux qui osent la pénétrer, au moins respectez les indications.</p>"
       },
       {
         "name": "Frost de la Toundra",
         "img": "img/char/frost-de-la-toundra.webp",
         "alt": "Frost de la Toundra",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Les Renards masqués, fidèles du Roi de l'ombre, ont élu domicile dans les montagnes à l'Est de Nyevielh. Ces créatures entraînées portent un masque en signe de loyauté. Elles affrontent les abyssaux rôdant autour de leur territoire.</p><p>Cette région est trop froide pour que beaucoup d'Eltheriens y vivent. Mais, les gardiens canidés s'assurent de leur sécurité.</p>"
       },
       {
         "name": "Roi ombre",
         "img": "img/char/roi-ombre.webp",
         "alt": "Roi ombre",
-        "html": ""
+        "html": "<p>Être Roi d'un élément est un titre honorifique. Il indique une haute responsabilité dans l'équilibre élémentaire.</p><p>Les Rois ont fait équiper leurs héritiers d'une arme runique. Conformément aux textes du Codex Primordial selon Faerylia, Ces armes allaient permettre de sceller les Divinités et d'obtenir la liberté.</p><p>Les Roi de l'ombre et de lumière avaient une relation diplomatique. La fissure du continent unique créa une rupture net entre les deux héritiers. Nyevielh devint une zone hostile obligeant l'héritier de l'Ombre à un combat perpétuel. Ces terres maudites sont un cauchemar à ciel ouvert qu'il convient de ne jamais visiter.</p>"
       },
       {
         "name": "Lueur d'Espoir",
         "img": "img/char/lueur-de-desespoir-dame-foudre.webp",
         "alt": "Lueur d'Espoir",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Les Lueurs d'Espoir sont les seules créatures neutres de la forêt de Nyevielh, elles indiqueraient le chemin du manoir de Vladislaus. Leur présence est aussi signe de l'absence de monstres abyssaux à proximité.</p><p>Il n'y a nul besoin de se poser de questions concernant cette forêt, si le moindre protocole existe pour les malheureux qui osent la pénétrer, au moins respectez les indications.</p>"
       }
     ]
   },
@@ -532,79 +532,79 @@ export const regions = [
         "name": "Ignea &quot;nom disponible&quot;",
         "img": "img/char/ignea.webp",
         "alt": "Ignea &quot;nom disponible&quot;",
-        "html": ""
+        "html": "<p>Alors que Vaeloria se remet durement de la disparition du Roi de la Nature, au nord-ouest, le clan de brigands Sengo y régnait avec terreur.</p><p>Ignéa, vivait paisiblement avec sa famille nomade. Un jour, alors qu'elle se cachait du danger, elle observa les brigands tuer l'ensemble de ses proches. Elle passa sa vie en quête de vengeance, à s'entraîner et se battre. Traquant le chef du clan, elle libéra plusieurs villages. Obtenant alors, son convoité duel à mort. Elle le remporta malgré moult stratagèmes sournois. Elle devint alors cheffe du clan avant de le réformer en l'actuelle guilde d'aventuriers de Vaeloria.</p>"
       },
       {
         "name": "Blancheur Aquatique",
         "img": "img/char/blancheur-aquatique.webp",
         "alt": "Blancheur Aquatique",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Dans les récifs de coraux entre Lumethia et Vaeloria, où se sont installées des populations Alphilanes. On y trouve des Axolotls amateurs de musique et de peinture.</p><p>Nombreuses sont les Blancheurs Aquatiques à traverser la Mer Nimbée pour rejoindre Abondance. On les voit y apprécier l'ambiance riche de diverses cultures.</p>"
       },
       {
         "name": "Esprit Nature",
         "img": "img/char/esprit-nature.webp",
         "alt": "Esprit Nature",
-        "html": ""
+        "html": "<p>Alors que le continent unique vient de se fracturer, l'esprit de la nature passe des journées entières à lutter contre Fanure.</p><p>Aujourd'hui, il essaye de préserver le Meridia du flétrissement. Ce grand arbre de vie est le symbole de Vaeloria. L'esprit œuvre dans les profondeurs insondables de ses racines. On peut parfois percevoir ses aboiements dans ce labyrinthe chaotique.</p><p>Les quelques aventuriers bravant les Racines sont régulièrement soumis à des zones élemactives. Celles-ci semblent effacées par le passage du canidé indiquant un nouveau chemin.</p>"
       },
       {
         "name": "Lapin Plume",
         "img": "img/char/lapin-plume.webp",
         "alt": "Lapin Plume",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Les Lapins Plume sont parmi les rongeurs du désert les plus faciles à apprivoiser. Ils entretiennent une relation de confiance fusionnelle avec les tribus du désert de Shal'Zaar. Capables de percevoir le danger comme nulle autre créature du désert et de voler, ils sont le compagnon animal idéal d'un chasseur de monstre. Lorsqu'un lapin plume s'affole, les Abyssaux ne sont jamais très loin.</p>"
       },
       {
         "name": "Esprit de la Faune",
         "img": "img/char/esprit-de-la-faune.webp",
         "alt": "Esprit de la Faune",
-        "html": ""
+        "html": "<p>Alors que le continent unique vient de se fracturer, le déséquilibre environnemental ne pouvait pas se réguler facilement. Pour cause, une activité élemactive bien trop importante après les guerres divines.</p><p>L'Eternel, surnommé à tort Esprit de la faune, prit une responsabilité de régularisation. Il s'occupe de répondre aux besoins des espèces vivantes à la Surface. Le rencontrer est excessivement rare à moins d'être sa cible.</p><p>Attention de ne pas le déranger dans son activité. Il sait punir les braconniers sans la moindre pitié par ses puissants pouvoirs.</p>"
       },
       {
         "name": "Chouette polychrome",
         "img": "img/char/chouette-polychrome.webp",
         "alt": "Chouette polychrome",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>La Chouette Polychrome est un animal incontournable du sud de Vaeloria, on peut l'entendre en chasse dans les bois par un son atypique rappelant la roulette d'un casino.</p><p>Ses plumes récoltées au sol le matin servent à remplir les oreillers afin de porter chance. La savoir dans un bois proche indique que la forêt est saine, leur présence est très appréciée par les Vaeloriens.</p>"
       },
       {
         "name": "Princesse Meridia",
         "img": "img/char/princesse-meridia.webp",
         "alt": "Princesse Meridia",
-        "html": ""
+        "html": "<p>Meridia est aujourd'hui une cité prospère. Le conseil s'occupe des relations diplomatiques étrangères. C'est le seul pays qui a la chance d'échanger avec les Alphilans.</p><p>La princesse nommée d'après l'arbre sacré, Meridia, s'intéressait grandement au peuple de la mer. Sur les côtes sud, elle rencontra le Seigneur des marées blessé. Elle prit soin de lui et ils y cultivèrent leur amour. Leur lien créa une relation entre les deux peuples.</p><p>Aujourd'hui, la Princesse guerrière mène au front avec son mari. Elle est un nouvel espoir face aux Abyssaux de la Mer Étoilée.</p>"
       },
       {
         "name": "Girafe Florale",
         "img": "img/char/girafe-florale.webp",
         "alt": "Girafe Florale",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>La Girafe Florale est la monture favorite des pèlerins. Ils peuvent faire pousser des récoltes sur la robe de leur Girage en quelques jours.</p><p>En Vaeloria, ce noble animal permet d'avoir un potager mobile disponible en toute circonstances, une famille digne de ce nom possède sa propre Girafe Florale.</p>"
       },
       {
         "name": "Gabriel",
         "img": "img/char/gabriel.webp",
         "alt": "Gabriel",
-        "html": ""
+        "html": "<p>Les livres d'histoires racontent cette légende sous de multiples facettes: L'Eternel ayant donné naissance aux Pixarch Aurelia et sa première création, Gabriel. Les deux partageant leur destin avec celui de leur peuple.</p><p>L'un était un grand inventeur et le meilleur ami de l'Oniyx Lumisaros. Tout deux ont créé de nombreuses révolutions du quotidien et artefacts de légende. On déplore la disparition des des grands ailés lors de l'Aurore d'Aurelia. Certains sont toutefois resté malgré l'évènement tel le Roi de la Nature ou Keria.</p>"
       },
       {
         "name": "Roi nature",
         "img": "img/char/roi-nature.webp",
         "alt": "Roi nature",
-        "html": ""
+        "html": "<p>Être Roi d'un élément est un titre honorifique. Il indique une haute responsabilité dans l'équilibre élémentaire.</p><p>Les Rois ont fait équiper leurs héritiers d'une arme runique. Cependant, le seul Roi sans héritier est celui de la Nature. Ce Pixarch aux ailes mystérieusement arrachées c'est lui-même lié à l'arme. Conformément aux textes du Codex Primordial selon Faerylia, Ces armes allaient permettre de sceller les Divinités et d'obtenir la liberté.</p><p>Il a régné sur Vaeloria pendant des siècles. Quand la maladie de Fanure apparut, il donna sa vie dans la création du Meridia.</p>"
       },
       {
         "name": "Verdelune, licorne du Sous-Bois",
         "img": "img/char/verdelune-licorne-du-sous-bois.webp",
         "alt": "Verdelune, licorne du Sous-Bois",
-        "html": ""
+        "html": "<p>Alors que le continent unique vient de se fracturer, le déséquilibre environnemental ne pouvait pas se réguler facilement. Pour cause, une activité élemactive bien trop importante d'après-guerre divine.</p><p>L'Eternel Verdelune prit une responsabilité de régulation. Il s'occupe de répondre aux besoins des plantes grandissantes à la Surface. Le rencontrer est excessivement rare et annonciateur de bonnes récoltes.</p><p>Attention de ne pas le déranger dans son activité, Sa disparition, dit-on, ferait flétrir les cultures et pollue les eaux.</p>"
       },
       {
         "name": "Croqueur de Fruits Verdoyant",
         "img": "img/char/croqueur-des-fruits-verdoyant.webp",
         "alt": "Croqueur de Fruits Verdoyant",
-        "html": ""
+        "html": "<p>Après que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Le Croqueur est un herbivore de Vaeloria friand de fruits à peine poussés tombés au sol. Très peu actif en général, son ventre lui permet de faire des réserves pour les périodes sans fruit. Même si, parfois, on les retrouve dans des entrepôts à nourriture en saison froide.</p>"
       },
       {
         "name": "Wyrm des Dunes Cornu",
         "img": "img/char/wyrm-des-dunes-cornu.webp",
         "alt": "Wyrm des Dunes Cornu",
-        "html": ""
+        "html": "<p>Après que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Les Wyrms sont une faune hostile des régions de Shal'Zaar; Entre le serpent et le ver des sables, ces immenses créatures transforment le sable en cristal. Ces mines créées par leur activité sont nommées Dunes Cornues.</p><p>Apprendre à les éviter et les affronter est le quotidien de la région de Shal'Azd'Hun. Les cristaux sont une ressource rare et précieuse pour les chasseurs de monstre, leur pureté permet d'y insérer n'importe quel élément.</p>"
       }
     ]
   },
@@ -618,43 +618,43 @@ export const regions = [
         "name": "Apprenti évocateur",
         "img": "img/char/apprenti-evocateur.webp",
         "alt": "Apprenti évocateur",
-        "html": ""
+        "html": "<p>Originaire des îles Esseulées, un maître martial Anthropomorphe en possession d'un artefact magique, c'est installé au nord-ouest d'Emeldarion.</p><p>Avec son artefact, Amphibian donna vie à de noimbreux habitants du village chamanique de l'eau, Avec le temps, ses élèves les plus talentueux finissent par le surpasser... Il organise alors un tournoi de succession, &quot;le vainqueur remporte le bâton morphique&quot;.</p><p>L'apprenti évocateur, motivé à rendre sa famille Anthropomorphe, sort vainqueur et nouveau chef de la tribu. Il fait construire des points d'eau adaptés à de nouvelles faunes.</p>"
       },
       {
         "name": "Poulpe Parleur",
         "img": "img/char/poulpe-parleur.webp",
         "alt": "Poulpe Parleur",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Certaines zones peu profondes de l'Océan sont en réalité le domaine d'un poulpe géant. Ces pieuvres non-agressives envers les bateaux de Lumethia sont toutefois territoriales. Leurs tentacules sortent de l'eau pour émettre un son d'alerte indiquant la présence du poulpe. Les navires qui ignorent l'avertissement se retrouvent au fond de l'eau.</p><p>Un seul accident est répertorié datant de l'ancien temps. Aujourd'hui, ces créatures servent de point de repère en mer afin de tracer des routes.</p>"
       },
       {
         "name": "Jeunesse d'Aldrin",
         "img": "img/char/jeunesse-d-aldryn.webp",
         "alt": "Jeunesse d'Aldrin",
-        "html": ""
+        "html": "<p>Depuis des temps immémoriaux, les Dhöggeïr naissent de grands oeufs en haut de montagne. Ces créatures de légendes sont les arbitres des combats entre Eternels afin de protéger la Surface.</p><p>Aldrin et Emeraldoth sont les premiers-nés. Ils ont souvent été en désaccord bien que frères du même œuf.</p><p>Alors que le continent unique se retrouve fragmenté, les deux auront protégé le vivant avec l'intégralité de leurs pouvoirs. Vaeloria du Sud est renommée Emeldarion en leur hommage. Aldrin aurait trouvé sommeil sur les Îles Esseulées et son frère au Marais'Cage d'Emeldarion.</p>"
       },
       {
         "name": "Le Transporteur Sauvage",
         "img": "img/char/le-transporteur-sauvage.webp",
         "alt": "Le Transporteur Sauvage",
-        "html": ""
+        "html": "<p>Après que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Le Transporteur de Shal'Zaar, à l'état sauvage, est une des rares créatures capables de lutter face à la menace Abyssale du désert. Ses capacités en font un animal de choix à apprivoiser pour le combat ou les marchandises. Les chasseurs de monstre vivent en harmonie avec des troupeaux de Transporteurs.</p>"
       },
       {
         "name": "L'Épine d'Amour",
         "img": "img/char/epine-d-amour.webp",
         "alt": "L'Épine d'Amour",
-        "html": ""
+        "html": "<p>Après que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>l'Epine d'Amour est un hérisson aux épines réputées hallucinogènes. Très utilisés dans les recherches sur les TOX afin d'en réduire les effets secondaires. On retrouve maintenant que peu de ces échidnés en Vaeloria.</p><p>Toutefois, les pèlerins témoignent en rencontrer sur leur chemin en Emeldarion et Aelther. Des discussions sont en cours afin de réintroduire l'espèce dans son habitat naturel.</p>"
       },
       {
         "name": "Bleu-mange-cailloux",
         "img": "img/char/bleu-mange-cailloux.webp",
         "alt": "Bleu-mange-cailloux",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Le Bleu mange-caillou est un petit dinosaure des jungles de Presolda. Ses œufs sont couvés par la chaleur des grottes au sud d'Emeldarion. Ils survivent seuls ou avec leur fratrie et se nourrissent de minerais et de roches en tout genre. Leur évolution adulte dépend de leur régime alimentaire.</p><p>Sont répertoriés les Dragosaures Célestes d'Aelther et des Dunes de Shal'Zaar. Ces derniers sont apprivoisés comme monture des chasseurs de monstre.</p>"
       },
       {
         "name": "Lums",
         "img": "img/char/lums.webp",
         "alt": "Lums",
-        "html": ""
+        "html": "<p>Lums est une chanteuse reconnue d'Abondance. Ses spectacles tournent autour de ses deux personalités et de sa curiosité pour la Mer Étoilée. Les étoiles et la mer sont ses inspirations favorites.</p><p>Originaire du bar Kabutrop qui c'est aussi occupé de la Maîtresse des Teintes, Les deux autrices s'apprécient telles des soeurs malgré leurs différents.</p><p>La prochaine tournée de la chanteuse &quot;Thalassophobia&quot; est un spectacle de son et lumière. Elle est accompagnée exceptionnellement par l'art de la Maîtresse des Teintes sur plusieurs chants. Une tournée qui semble annoncer un évènement majeur dans la carrière d'une des deux.</p>"
       }
     ]
   },
@@ -668,85 +668,85 @@ export const regions = [
         "name": "Voyageur des crêtes",
         "img": "img/char/voyageur-de-cretes.webp",
         "alt": "Voyageur des crêtes",
-        "html": ""
+        "html": "<p>Dans les Contrées de Cristal Est de Nordvinter, des humanoïdes accompagnés de loups ont été aperçus à de multiples reprises.</p><p>Ces voyageurs de sommets glacés semblent faire du repérage dans la zone gelée. Ils ont déjà attaqué plusieurs chantiers visant à libérer les technologies Oniyx de la glace. Depuis, personne n'ose recommencer sous peine de représailles. Ils semblent pacifiques envers les jeunes de Nordvinter en quête de leur Dhöggeïr.</p><p>On ignore tout de leur origine. Leur équipement ésotérique laisse croire qu'ils viennent d'Emeldarion.</p>"
       },
       {
         "name": "Sanglier doré",
         "img": "img/char/sanglier-dore.webp",
         "alt": "Sanglier doré",
-        "html": ""
+        "html": "<p>Après que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Le Sanglier doré fait partie de la faune habitant les forêts d'Aelther. On le croise surtout au pied du Mont Céleste où il se nourrit d'or et de racines. Ce régime renforce son ossature riche en la matière et le rend assez dangereux à provoquer.</p><p>Les pèlerins ont pour règle de s'y nourrir exclusivement de Chenilles mielleuses. Ainsi, les espèces du continent sont préservées du braconnage.</p>"
       },
       {
         "name": "Vivy",
         "img": "img/char/vivy.webp",
         "alt": "Vivy",
-        "html": ""
+        "html": "<p>À l'est d'Emeldarion vit une tribu martiale très territoriale. Le peu que l'on sait d'eux sont de fortes représentations de loups. La foudre semble s'abattre constamment sur leur région. Les chercheurs pensent que le Roi de la lumière et ses descendants y auraient élu domicile.</p><p>La théorie n'a jamais pu être confirmée. Une faille spatiale s'ouvre toujours devant quiconque franchie la limite des totems canins. Vivy apparaît systématiquement en première. Suivie de ses Shinobi, elle menace d'attaquer quiconque irait plus loin sur les terres de la Meute.</p>"
       },
       {
         "name": "Codex des Maux Ancestraux",
         "img": "img/char/codex-des-maux-ancestraux.webp",
         "alt": "Codex des Maux Ancestraux",
-        "html": ""
+        "html": "<p>Abondance accueil un grand nombre de peintures historiques. Parmis elle on retrouve le Codex des Maux Ancestraux.</p><p>Les Rois scellant les divinités sont tenus responsables. Leur action est une malédiction qui a contribué à la libération des Abysses. L'événement aura donné lieu à une période funeste nommée Malédiction des Rois.</p><p>Aujourd'hui, on sait qu'ils n'ont en réalité joué qu'un rôle tragique sur un grand échiquier. Cette peinture haineuse a été refaite par la Maîtresse des Teintes en désaccord avec l'artiste. Selon elle, il faut rendre hommage aux héros oubliés. Le codex est un sujet de conversation international.</p>"
       },
       {
         "name": "Esprit lumiere",
         "img": "img/char/esprit-lumiere.webp",
         "alt": "Esprit lumiere",
-        "html": ""
+        "html": "<p>Alors que le continent unique vient de se fracturer, l'esprit de la lumière passe des journées entières à guider jusqu'au Mont Céleste d'Aelther.</p><p>Son activité sociale en relation avec les pèlerins en fait la mascotte parfaite. Avant la grande ascension sur les sentiers et villages d'Okaemi, les pèlerins sont toujours ravis de s'occuper de lui. On peut le voir parfois intimider ceux qui dérogent aux règles du continent.</p>"
       },
       {
         "name": "Fleur de vie",
         "img": "img/char/fleur-de-vie.webp",
         "alt": "Fleur de vie",
-        "html": ""
+        "html": "<p>Après l'abandon d'Aelther par le Roi de la Lumière, des fleurs au potentiel curatif ont commencé à pousser sur le Mont Céleste. Certains pèlerins les cueillent malgré les interdictions et échouent leur pèlerinage. Cela leur permet toutefois de soigner un proche ou de gagner leur vie à Abondance.</p><p>La plus grande des Fleurs de vie est au sommet de la plus haute montagne. Celle-ci est composée de gigantesques pétales et ne s'ouvre jamais. Tout le monde se demande ce qu'il peut y avoir à l'intérieur.</p><p>Un élu pourra-t-il un jour l'ouvrir ? Y a-t-il un remède miraculeux à l'intérieur ?</p>"
       },
       {
         "name": "Dragon ciel",
         "img": "img/char/dragon-ciel.webp",
         "alt": "Dragon ciel",
-        "html": ""
+        "html": "<p>Effectuer le grand pèlerinage jusqu'au sommet du Mont Céleste est maintenant la norme.</p><p>Chaque pèlerin ayant réussi est accueilli, par-delà les nuages, par un Eternel validant son dur labeur et le récompensant de sa réussite.</p><p>Quelques rares personnes ont pu témoigner avoir rencontré la Calamité de lumière, Dragon ciel. La bénédiction de ces personnes suffit comme seule preuve de la véracité de leurs propos. Cette possibilité a conduit en la réalisation d'une grande fresque au sol à Abondance.</p>"
       },
       {
         "name": "Rongeur nuageux",
         "img": "img/char/rongeur-nuageux.webp",
         "alt": "Rongeur nuageux",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Les Rongeurs nuageux peuvent être croisés sur les nuages du Mont Céleste. Ils en mangent telle de la barbe à papa. Espèce invasive des Royaumes Célestes des Eternels, certains cumulonimbus se retrouvent détachés de leur royaume pour parcourir le ciel.</p>"
       },
       {
         "name": "Oisillons de Midas",
         "img": "img/char/oisillons-de-midas.webp",
         "alt": "Oisillons de Midas",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Les Oisillons dorés seraient les rejetons des Lueurs d'espoir. On n'a pas encore pu le démontrer à cause de la difficulté des restrictions d'Aelther. La faune et la flore y sont difficiles à observer.</p><p>Leur nid est haut perché à la hauteur des plus grands arbres. Ils ne deviennent visibles que lors de l'ascension du Mont Céleste, lorsque la cime est rendue à hauteur d'œil.</p>"
       },
       {
         "name": "Le Gamin des Étoiles",
         "img": "img/char/gamin-des-etoiles.webp",
         "alt": "Le Gamin des Étoiles",
-        "html": ""
+        "html": "<p>Rare sont les déplacements spatio-temporels dont nous pouvons témoigner. Le Gamin des Étoiles crée des failles similaires à celles de Vivy. Il apparaît seul sur les plages d'Aelther loin des chemins de pèlerin.</p><p>Il semble rester aux alentours des côtes ouest. Il y affronte des monstres abyssaux sortant de la Mer Étoilée. Ses pouvoirs surnaturels et combats spectaculaires laissent sans voix. Son jeune âge apparent et ses pouvoirs questionnent sur son origine. Personne n'ose le déranger, suivant les directives imposées sur le continent d'Aelther.</p>"
       },
       {
         "name": "Gardien Vert",
         "img": "img/char/gardien-vert.webp",
         "alt": "Gardien Vert",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Le Gardien Vert est un lézard fortement attaché à son arbre de vie. Jeune, il quitte le nid pour choisir un arbuste qu'il protègera toute sa vie. Il se nourri de la sève, de plantes et insectes invasifs. Il aide l'arbre à bourgeonner et étendre ses racines. Le Gardien Vert est originaire de Lumethia mais a été importé en Vaeloria et Emeldarion.</p>"
       },
       {
         "name": "Codex des Sorts Lumineux",
         "img": "img/char/codex-des-sorts-lumineux.webp",
         "alt": "Codex des Sorts Lumineux",
-        "html": ""
+        "html": "<p>Abondance accueil un grand nombre de peintures. Parmis elle on retrouve le Codex des Sorts Lumineux fraichement peint.</p><p>Les Rois scellant les divinités sont tenus responsables. Leur action est une malédiction qui a contribué à la libération des Abysses. L'événement aura donné lieu à une période funeste nommée Malédiction des Rois.</p><p>Aujourd'hui, on sait qu'ils n'ont en réalité joué qu'un rôle tragique sur un grand échiquier. Cette peinture bienveillante est une reconstitution des Maux Ancestraux, refaite par la Maîtresse des Teintes. Selon elle, il faut rendre hommage aux héros oubliés.</p>"
       },
       {
         "name": "Dragonnet des Lumières",
         "img": "img/char/dragonnet-des-lumieres.webp",
         "alt": "Dragonnet des Lumières",
-        "html": ""
+        "html": "<p>La mort n'existe pas en Elther, l'Abysse mélange les rêves et cauchemars des Eveillés purgeant les âmes damnées. Construire de nouvelles âmes par le rêve purifiées par le cauchemar.</p><p>Des agents Eternels occupent les Abysses pour en maintenir l'état fluctuant stable. Le Dragonnet des Lumières se charge du contenu des rêves du monde onirique. Il crée les échanges entre le corps et le subconscient des Éveillés. Ce procédé complexe permettrait la création de nouvelles âmes. Certains défauts laissent penser qu'il ne fait pas bien son travail.</p>"
       },
       {
         "name": "Roi lumiere",
         "img": "img/char/roi-lumiere.webp",
         "alt": "Roi lumiere",
-        "html": ""
+        "html": "<p>Être Roi d'un élément est un titre honorifique. Il indique une haute responsabilité dans l'équilibre élémentaire.</p><p>Les Rois ont fait équiper leurs héritiers d'une arme runique. Conformément aux textes du Codex Primordial selon Faerylia, Ces armes allaient permettre de sceller les Divinités et d'obtenir la liberté.</p><p>Les Roi de l'ombre et de lumière avaient une relation diplomatique. La fissure du continent unique créa une rupture net entre les deux héritiers. Aelther fut abandonnée par l'héritier de la lumière. Il ne laissa derrière lui que des indications de pèlerinage.</p>"
       }
     ]
   },
@@ -760,7 +760,7 @@ export const regions = [
         "name": "Roi eau",
         "img": "img/char/roi-eau.webp",
         "alt": "Roi eau",
-        "html": ""
+        "html": "<p>Être Roi d'un élément est un titre honorifique. Il indique une haute responsabilité dans l'équilibre élémentaire.</p><p>Les Rois ont fait équiper leurs héritiers d'une arme runique. Conformément aux textes du Codex Primordial selon Faerylia, Ces armes allaient permettre de sceller les Divinités et d'obtenir la liberté.</p><p>Le Roi de l'eau, marchand nomade, avait pour tradition d'éduquer un disciple sur les eaux et les marchés.</p><p>Le dernier héritier, mari de la reine Alphilane, est porté disparu avec sa femme, la piste remonte jusqu'aux Contrées de Cristal.</p>"
       }
     ]
   },
@@ -774,19 +774,19 @@ export const regions = [
         "name": "Lame de la forêt",
         "img": "img/char/lame-de-la-foret.webp",
         "alt": "Lame de la forêt",
-        "html": ""
+        "html": "<p>Les Lames de la forêt sont un peuple Nymphe qui protégeaient les bois Pixarch. Souvent gardiennes d'un arbre unique ou d'une clairière de forêt, elles profitaient des petits plaisirs de la vie et aimaient beaucoup les farces. Elles étaient de redoutables guerrières.</p><p>Aujourd'hui, on ne sait pas si ce peuple est encore en activité. On imagine que les Lames résident au sein des îles Esseulées, Nos recherches nous permettront de savoir s'il y a des survivants de l'espèce.</p>"
       },
       {
         "name": "Zombie floral",
         "img": "img/char/zombie-floral.webp",
         "alt": "Zombie floral",
-        "html": ""
+        "html": "<p>Il y a fort longtemps, Gabriel et Lumisaros ont construit un arbre mystérieux au sein de la capitale Pixarch. L'arbre permettait de récupérer l'énergie élemactive en surplus afin d'assainir l'environnement.</p><p>Aujourd'hui, les ruines sont fragmentées en un archipel volant au-dessus de la Mer Nimbée. Ces Îles Esseulées sont un rêve d'expédition des chercheurs. L'arbre est théorisé responsable de l'apparition de Zombies floraux. De forme humanoïde et dans un état végétatif. Ils tombent au compte goutte des hauteurs des îles et sont ramenés sur les côtes de Vaeloria. Ils sont de faibles monstres abyssaux et un excellent sujet de recherche.</p>"
       },
       {
         "name": "Panthère imaginaire",
         "img": "img/char/panthere-imaginaire.webp",
         "alt": "Panthère imaginaire",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>La Panthère Imaginaire se téléporte par le biais de failles spatiales similaires à celles de Vivy. Ces failles sont tracées en direction du point d'arrivée par l'un des yeux présent sur son corps. On la retrouve parfois sur les plages de Vaeloria où elle se laisse observer. Elle semble y faire la navette avec les îles Esseulées.</p><p>La panthère est neutre, même si son apparence laisse croire une corruption élémentaire.</p>"
       }
     ]
   },
@@ -800,37 +800,37 @@ export const regions = [
         "name": "Esprit Terre",
         "img": "img/char/esprit-terre.webp",
         "alt": "Esprit Terre",
-        "html": ""
+        "html": "<p>Alors que le continent unique vient de se fracturer, l'esprit de la terre passe ses journées à combattre dans le désert corrompu de Shal'Zaar.</p><p>En activité constante, il abreuve les mines en matériaux, et combat des Abyssaux. On peut constater le résultat de certaines longues batailles.</p><p>Quelques chasseurs de monstre ont eu la chance de l'apercevoir en action. Racontant avec passion leur combat aux côtés du brave loup des sables.</p>"
       },
       {
         "name": "Zayd",
         "img": "img/char/zayd.webp",
         "alt": "Zayd",
-        "html": ""
+        "html": "<p>On raconte la naissance de six enfants nés avec une rune sur la main.</p><p>À Shal'Zaar, au sein des dunes, les tribus de chasseurs préparent leurs traques.</p><p>Pour défendre les enfants et non-combattants, les adolescents les plus doués sont entraînés jour et nuit. Parmi eux, il y a Zayd, un guerrier dont la force ignore les lois de la physique. Le jeune homme est capable de multiplier sa densité musculaire. Toutefois, il consomme énormément d'énergie et a besoin de beaucoup manger. Il est donc responsable de ses propres repas. Lorsqu'il est enfin à l'âge adulte, une figure importante du désert est venue le récupérer pour en faire son disciple.</p>"
       },
       {
         "name": "Cornu mythologique",
         "img": "img/char/cornu-mythologique.webp",
         "alt": "Cornu mythologique",
-        "html": ""
+        "html": "<p>Quelque part perdu dans les terres désertiques de Shal'Zaar, une puissante créature à l'apparence de taureau semble en chasse.</p><p>Sa simple présence force la plupart des chasseurs de monstre à fuir. Certains, ayant été pétrifiés par la terreur de l'aura du bovin, témoignent de l'indifférence de l'Abyssal qui se dirige toujours dans une autre direction.</p><p>Des chercheurs Tokscyth ont suivi son parcours, un tour complet du continent, comportement qui inquiète si cette chose finie par trouver ce qu'elle traque de manière inépuisable.</p>"
       },
       {
         "name": "Roi terre",
         "img": "img/char/roi-terre.webp",
         "alt": "Roi terre",
-        "html": ""
+        "html": "<p>Être Roi d'un élément est un titre honorifique. Il indique une haute responsabilité dans l'équilibre élémentaire.</p><p>Les Rois ont fait équiper leurs héritiers d'une arme runique. Conformément aux textes du Codex Primordial selon Faerylia, Ces armes allaient permettre de sceller les Divinités et d'obtenir la liberté.</p><p>Le Roi de la terre était un héraut porte parole d'Eternels, Phahl'Aon de Shal'Zaar, étendue la plus riche et la plus en avance de l'ancien temps. Lors de la chute du royaume, il disparut sans laisser de traces.</p>"
       },
       {
         "name": "Protecteur des ruines",
         "img": "img/char/protecteur-des-ruines.webp",
         "alt": "Protecteur des ruines",
-        "html": ""
+        "html": "<p>Les monstres abyssaux ont une forme horrifique indescriptible. Ces créatures démoniaques ont pu être rencontrées durant l'expédition Oniyx. Une aventure horrifique dans les profondeurs du temple de Zaar'Phahl en Shal'Zaar.</p><p>La progression du groupe dans les Abysses terminée, les survivants se pressèrent de faire faire sceller le site d'excavation du temple. Une fortification massive fut mise en place pour qu'aucun Abyssal ne sorte. Une créature artificielle Oniyx fut construite en parallèle. Une puissante et immense création qui ne protège plus que des ruines.</p>"
       },
       {
         "name": "Héraldesse Serpentine",
         "img": "img/char/heraldesse-serpentine.webp",
         "alt": "Héraldesse Serpentine",
-        "html": ""
+        "html": "<p>On raconte la naissance de six enfants nés avec une rune sur la main.</p><p>À Shal'Zaar, dans un village de chasseurs de monstre, une jeune fille est capable de communiquer mentalement. Dès qu’elle établit un lien, ses yeux semblent injectés d'un liquide violacé.</p><p>Avec l'aide de son pouvoir, elle dressa des créatures parmi les plus terrifiantes de la jungle de Presolda. Serpents tropicaux et autres dinosaures qui profitent aux chasseurs de monstre. Pour toutes ses prouesses, elle obtint le titre de Heraldesse, une envoyée divine rappelant la régente disparue.</p>"
       }
     ]
   },
@@ -844,19 +844,19 @@ export const regions = [
         "name": "Spectre Canin",
         "img": "img/char/spectre-canin.webp",
         "alt": "Spectre Canin",
-        "html": ""
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Dans la région d'Azeel dont le bois s'étend sur les terres au nord-ouest de Vaeloria, on peut y trouver des créatures non-agressives dont l'objectif est de faire peur.</p><p>Le Bouha devient alors un lieu touristique pour ses tests de courage ou encore à son Spectre Canin. Il prend la forme du dernier compagnon animal que vous avez aimé, vous permettant de lui dire adieu une dernière fois.</p>"
       },
       {
         "name": "Complices de la Forêt",
         "img": null,
         "alt": "Complices de la Forêt",
-        "html": ""
+        "html": "<p>Dans la région d'Azeel dont le bois s'étend au nord-ouest de Vaeloria, on peut y trouver des créatures non-agressives dont l'objectif simple est de faire peur.</p><p>Le Bouha devient alors un lieu touristique pour ses tests de courage. Orchestrés par les Complices de la forêt, des créatures dont la plus imposante serait une Alphilane. Le test offre un parcours personnalisé au sein de la forêt. Personne ne connaît la raison de ces services gratuits. Un secret bien gardé derrière des chants fredonnées dénués de toute parole.</p>"
       },
       {
         "name": "Veilleur nocturne",
         "img": "img/char/veilleur-nocturne.webp",
         "alt": "Veilleur nocturne",
-        "html": ""
+        "html": "<p>Dans la région d'Azeel dont le bois s'étend au nord-ouest de Vaeloria, on peut y trouver des créatures non-agressives dont l'objectif simple est de faire peur.</p><p>Le Bouha devient alors un lieu touristique pour ses tests de courage. L'épreuve y est surveillée par le Veilleur nocturne. Si un visiteur panique dangereusement, ce puissant hibou apparaît.</p><p>Il ramène les personnes en zone sûre. Il parle aussi très bien la langue commune. Sa puissance magique porte un lourd secret qu'il ne révèlera jamais.</p>"
       }
     ]
   },
@@ -870,7 +870,7 @@ export const regions = [
         "name": "Aeltheria Mère Primordiale",
         "img": "img/char/aeltheria-mere-primordiale.webp",
         "alt": "Aeltheria Mère Primordiale",
-        "html": ""
+        "html": "<p>Elther n'existerait pas sans Divinité, le vivant est le fruit d'un travail de création Divine.</p><p>Aeltheria est la créatrice de toute Divinité, son apparence préférée serait celle de la louve, ce qui en fait un animal sacré et hautement respecté d'Elther.</p><p>Le jour du Grand Cataclysme, les peuples Eveillés se sont alliés pour sceller les Divinités, la créature scellée était une louve géante.</p><p>Il existe beaucoup de théories. Mais, toutes s'accordent pour faire le rapprochement avec Aeltheria. Faerylia est hautement recherchée afin d'être interrogée sur ses possibles réponses sur le sujet.</p>"
       }
     ]
   }
