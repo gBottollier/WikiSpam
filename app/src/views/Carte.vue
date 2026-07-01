@@ -85,7 +85,10 @@ function layoutWorld() {
   world.ly = (ph - world.h) / 2
 }
 
-// Cadrage d'une région (repris de l'original) — réutilisable au resize.
+// Cadrage d'une région — réutilisable au resize.
+// On réserve la place du panneau de description (à droite sur PC, en bas sur
+// mobile) pour que la région soit cadrée dans la zone RESTÉE VISIBLE, et on
+// utilise un "contain" strict pour que toute la région + tous ses POI tiennent.
 function frameRegion(slug, animate) {
   const b = bboxes[slug]
   const W = world.w, H = world.h, Lx = world.lx, Ly = world.ly
@@ -93,16 +96,24 @@ function frameRegion(slug, animate) {
   const PW = pane.clientWidth, PH = pane.clientHeight
   if (!W || !H || !PW || !PH) return
 
-  const widthFitScale = PW / (b.w * W)
-  const heightFitScale = PH / (b.h * H)
-  const geoMeanScale = Math.sqrt(widthFitScale * heightFitScale)
-  const fitScale = Math.min(geoMeanScale, heightFitScale)
-  const scale = Math.min(6, Math.max(1.3, 0.85 * fitScale))
-  let dx = PW / 2 - Lx - scale * (b.cx * W)
-  let dy = PH / 2 - Ly - scale * (b.cy * H)
-  const maxDx = -Lx, minDx = PW - Lx - scale * W
+  const mobile = window.matchMedia('(max-width: 900px)').matches
+  const rightReserve = mobile ? 0 : Math.min(360, PW * 0.34)
+  const bottomReserve = mobile ? Math.min(PH * 0.42, 240) : 0
+  const safePW = Math.max(140, PW - rightReserve)
+  const safePH = Math.max(140, PH - bottomReserve)
+  const safeCX = safePW / 2
+  const safeCY = safePH / 2
+
+  const widthFit = safePW / (b.w * W)
+  const heightFit = safePH / (b.h * H)
+  const scale = Math.min(6, 0.92 * Math.min(widthFit, heightFit))
+
+  let dx = safeCX - Lx - scale * (b.cx * W)
+  let dy = safeCY - Ly - scale * (b.cy * H)
+  // Empêcher un vide au-delà des bords de l'image dans la zone visible.
+  const maxDx = -Lx, minDx = safePW - Lx - scale * W
   if (minDx <= maxDx) dx = Math.max(minDx, Math.min(maxDx, dx))
-  const maxDy = -Ly, minDy = PH - Ly - scale * H
+  const maxDy = -Ly, minDy = safePH - Ly - scale * H
   if (minDy <= maxDy) dy = Math.max(minDy, Math.min(maxDy, dy))
 
   curScale.value = scale

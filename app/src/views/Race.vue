@@ -15,40 +15,36 @@ const group = computed(() => raceGroups.find((g) => g.key === activeTab.value) |
 const races = computed(() => (group.value ? group.value.races : []))
 const maxH = computed(() => (races.value.length ? Math.max(...races.value.map((r) => r.naturalH)) : 1))
 
+// Hauteur de référence de la plus grande race. On réduit pour tenir dans
+// la largeur, mais jamais en dessous de H_MIN : à ce stade on laisse plutôt
+// défiler horizontalement (barre masquée) — plus lisible que du minuscule.
 const BASE_H = 300
+const H_MIN = 155
+const effBaseH = ref(BASE_H)
 function itemHeight(r) {
-  return Math.max(24, Math.round((r.naturalH / maxH.value) * BASE_H))
+  return Math.max(18, Math.round((r.naturalH / maxH.value) * effBaseH.value))
 }
 
-// --- Ajustement de la bande pour tenir sans scroll ---
 const stripOuter = ref(null)
 const stripInner = ref(null)
-const scale = ref(1)
-const tx = ref(0)
-const outerH = ref(BASE_H + 40)
 let ro = null
-
-const innerStyle = computed(() => ({
-  transform: `translate(${tx.value}px, 0) scale(${scale.value})`,
-  transformOrigin: '0 0',
-}))
 
 function fitStrip() {
   const o = stripOuter.value
   const inner = stripInner.value
   if (!o || !inner) return
-  // offsetWidth/Height = layout size AVANT transform (fiable même scalé)
-  const contentW = inner.offsetWidth
-  const contentH = inner.offsetHeight
+  const contentW = inner.scrollWidth
   const availW = o.clientWidth
-  const k = contentW > 0 ? Math.min(1, availW / contentW) : 1
-  scale.value = k
-  tx.value = Math.max(0, (availW - contentW * k) / 2)
-  outerH.value = Math.ceil(contentH * k)
+  if (contentW <= 0 || availW <= 0) return
+  // largeur ∝ hauteur → hauteur cible pour tenir dans availW
+  let target = effBaseH.value * (availW / contentW)
+  target = Math.min(BASE_H, Math.max(H_MIN, target))
+  if (Math.abs(target - effBaseH.value) > 0.5) effBaseH.value = target
 }
 
 function scheduleFit() {
-  nextTick(() => requestAnimationFrame(fitStrip))
+  // deux passes : le recalcul change les hauteurs, on affine ensuite
+  nextTick(() => requestAnimationFrame(() => { fitStrip(); requestAnimationFrame(fitStrip) }))
 }
 
 watch(activeTab, () => {
@@ -100,12 +96,8 @@ function selectRace(id) {
     <template v-else>
       <section class="size-compare" aria-label="Comparaison des tailles">
         <p class="compare-hint">Tailles comparées à l'échelle · touchez une race pour la découvrir</p>
-        <div ref="stripOuter" class="strip-outer" :style="{ height: outerH + 'px' }">
-          <div
-            ref="stripInner"
-            class="strip-inner"
-            :style="innerStyle"
-          >
+        <div ref="stripOuter" class="strip-outer">
+          <div ref="stripInner" class="strip-inner">
             <button
               v-for="r in races"
               :key="r.id"
@@ -212,13 +204,21 @@ function selectRace(id) {
   margin-bottom: 44px;
 }
 .compare-hint { text-align: center; color: #9fc4ec; font-size: 0.85rem; margin: 0 0 12px; }
-.strip-outer { position: relative; width: 100%; overflow: hidden; }
+.strip-outer {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;          /* centre la bande quand elle tient */
+  scrollbar-width: none;       /* Firefox : pas de scrollbar */
+  -webkit-overflow-scrolling: touch;
+}
+.strip-outer::-webkit-scrollbar { display: none; }  /* WebKit : pas de scrollbar */
 .strip-inner {
-  display: flex;
+  display: inline-flex;
   align-items: flex-end;
   gap: clamp(10px, 2vw, 30px);
-  width: max-content;
-  transform-origin: 0 0;
+  padding-bottom: 4px;
 }
 .strip-item {
   flex: 0 0 auto;
