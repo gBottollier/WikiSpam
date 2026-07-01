@@ -1,12 +1,50 @@
+/* ===== Thème global SPAM Lore ===== */
 :root {
+  --accent: #00b4ff;
+  --accent-bright: #7e3ff2;
+  --cyan: #00ffff;
+  --bg-dark: rgba(10, 0, 40, 0.95);
+  --glass: rgba(10, 0, 40, 0.35);
+  --glass-border: rgba(166, 240, 255, 0.15);
+  --text: #c8e8ff;
+
+  --nav-h: clamp(70px, 8vw, 120px);
+  --bottom-nav-h: 76px;
+
   color-scheme: dark;
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+
 * { box-sizing: border-box; }
-body {
+
+html, body {
   margin: 0;
-  background: #070a12;
-  color: #e6ecff;
+  padding: 0;
+  overflow-x: hidden;
 }
-a { color: #9fb4ff; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--accent);
+  background: radial-gradient(circle at 50% 50%, #0b001f, #120028 70%, #1c0035 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+a { color: var(--accent); }
+
 h1, h2, h3 { line-height: 1.2; }
+
+img { max-width: 100%; }
+
+/* Le contenu passe au-dessus du fond étoilé */
+#app { position: relative; z-index: 1; }
+
+/* Sur mobile, laisser la place à la bottom-nav fixe */
+@media (max-width: 900px) {
+  .app-main { padding-bottom: calc(var(--bottom-nav-h) + 16px); }
+}
+
+/* Accessibilité : réduire les animations si demandé */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+}
