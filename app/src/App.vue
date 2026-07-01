@@ -1,12 +1,16 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { computed } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 import BackgroundStars from './components/BackgroundStars.vue'
+
+const route = useRoute()
+const showNav = computed(() => !route.meta.hideNav)
 </script>
 
 <template>
   <BackgroundStars />
-  <Navbar />
+  <Navbar v-if="showNav" />
   <main class="app-main">
     <RouterView v-slot="{ Component }">
       <transition name="fade" mode="out-in">

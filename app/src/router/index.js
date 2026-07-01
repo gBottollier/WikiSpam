@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 // Hash history => URLs du type …/WikiSpam/app/#/race
 // Aucune config serveur nécessaire, marche partout sur GitHub Pages.
 const routes = [
+  { path: '/login', name: 'login', component: () => import('../views/Login.vue'), meta: { public: true, hideNav: true, title: 'Accès' } },
   { path: '/', name: 'home', component: Home, meta: { title: 'SPAM Lore' } },
   { path: '/race', name: 'race', component: () => import('../views/Race.vue'), meta: { title: 'Races' } },
   { path: '/carte', name: 'carte', component: () => import('../views/Carte.vue'), meta: { title: 'Carte' } },
@@ -16,6 +17,13 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   scrollBehavior: () => ({ top: 0 }),
+})
+
+// Accès restreint : même logique que le site statique (sessionStorage 'sw').
+router.beforeEach((to) => {
+  if (!to.meta.public && sessionStorage.getItem('sw') !== '1') {
+    return { name: 'login', query: { r: to.fullPath } }
+  }
 })
 
 router.afterEach((to) => {
