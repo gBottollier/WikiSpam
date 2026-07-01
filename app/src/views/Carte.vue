@@ -45,6 +45,21 @@ const activePoiObj = computed(() =>
   current.value && activePoi.value !== null ? current.value.points[activePoi.value] : null
 )
 
+// Contenu du panneau d'info — position identique en survol et en zoom.
+const panelInfo = computed(() => {
+  if (current.value) {
+    if (activePoiObj.value) {
+      return { title: activePoiObj.value.name, text: activePoiObj.value.desc, invented: !activePoiObj.value.lore }
+    }
+    if (hovered.value && hovered.value.key !== currentSlug.value) {
+      return { title: hovered.value.name, text: 'Cliquer (ou molette avant) pour explorer cette région.', hint: true }
+    }
+    return { title: current.value.name, text: current.value.description }
+  }
+  if (hovered.value) return { title: hovered.value.name, text: hovered.value.description }
+  return null
+})
+
 const contentStyle = computed(() => ({
   width: world.w + 'px',
   height: world.h + 'px',
@@ -148,6 +163,20 @@ function selectPoi(i) {
   activePoi.value = activePoi.value === i ? null : i
 }
 
+// Molette : zoom-out => sortir du mode zoom ; zoom-in sur une région survolée
+// (vue monde) => y entrer. Petit verrou pour éviter les oscillations.
+let wheelLock = 0
+function onWheel(e) {
+  const now = Date.now()
+  if (now < wheelLock) return
+  if (currentSlug.value) {
+    if (e.deltaY > 0) { wheelLock = now + 600; resetZoom() }
+  } else if (hoveredKey.value && e.deltaY < 0) {
+    wheelLock = now + 600
+    activateRegion(hoveredKey.value)
+  }
+}
+
 function onResize() {
   layoutWorld()
   if (currentSlug.value) frameRegion(currentSlug.value, false)
@@ -171,7 +200,7 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
     </header>
 
     <!-- Fenêtre de carte -->
-    <div ref="paneEl" class="world-pane">
+    <div ref="paneEl" class="world-pane" @wheel.prevent="onWheel">
       <div class="world-content" :style="contentStyle">
         <img ref="worldImgEl" :src="worldImg" alt="Carte du monde" class="world-img" draggable="false" @load="layoutWorld">
 
@@ -186,13 +215,13 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
           draggable="false"
         >
 
-        <svg class="region-svg" :class="{ hidden: current }" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg class="region-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
           <polygon
             v-for="r in regions"
             :key="'p-' + r.key"
             :points="polyPoints(r)"
             class="region-poly"
-            :class="{ hot: hoveredKey === r.key }"
+            :class="{ hot: hoveredKey === r.key && r.key !== currentSlug, current: r.key === currentSlug }"
             @mouseenter="hoveredKey = r.key"
             @mouseleave="hoveredKey = null"
             @click="activateRegion(r.key)"
@@ -212,22 +241,12 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
         </template>
       </div>
 
-      <!-- Survol (monde, desktop) -->
-      <div v-if="!current && hovered" class="hover-hint">
-        <strong>{{ hovered.name }}</strong><span>{{ hovered.description }}</span>
-      </div>
-
-      <!-- Description (zoom) : à droite sur PC, en bas sur mobile -->
-      <aside v-if="current" class="desc-overlay">
-        <template v-if="activePoiObj">
-          <h3>{{ activePoiObj.name }}</h3>
-          <p>{{ activePoiObj.desc }}</p>
-          <span v-if="!activePoiObj.lore" class="invented-tag">Lieu supposé (non confirmé par le lore)</span>
-        </template>
-        <template v-else>
-          <h3>{{ current.name }}</h3>
-          <p>{{ current.description }}</p>
-        </template>
+      <!-- Panneau d'info unifié : même position en survol et en zoom
+           (à droite sur PC, en bas sur mobile) -->
+      <aside v-if="panelInfo" class="info-panel">
+        <h3>{{ panelInfo.title }}</h3>
+        <p :class="{ hint: panelInfo.hint }">{{ panelInfo.text }}</p>
+        <span v-if="panelInfo.invented" class="invented-tag">Lieu supposé (non confirmé par le lore)</span>
       </aside>
     </div>
 
@@ -291,7 +310,9 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
 .region-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .region-svg.hidden { pointer-events: none; opacity: 0; }
 .region-poly { fill: rgba(0, 180, 255, 0); stroke: rgba(0, 180, 255, 0); stroke-width: 0.4; cursor: pointer; transition: fill 0.2s, stroke 0.2s; }
-.region-poly:hover, .region-poly.hot { fill: rgba(0, 180, 255, 0.22); stroke: var(--cyan); }
+.region-poly.hot { fill: rgba(0, 180, 255, 0.22); stroke: var(--cyan); }
+.region-poly:hover:not(.current) { fill: rgba(0, 180, 255, 0.22); stroke: var(--cyan); }
+.region-poly.current { pointer-events: none; }  /* la région en cours ne capte pas le survol */
 
 .poi-marker { position: absolute; width: 26px; height: 26px; background: none; border: none; padding: 0; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
 .poi-marker.shown { opacity: 1; pointer-events: auto; }
@@ -300,24 +321,8 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
 .poi-marker.active .poi-dot { background: #fff; transform: scale(1.6); box-shadow: 0 0 16px var(--cyan); }
 .poi-marker.invented .poi-dot { background: var(--accent-bright); box-shadow: 0 0 10px var(--accent-bright); }
 
-/* Survol monde */
-.hover-hint {
-  position: absolute;
-  left: 14px; bottom: 14px; right: 14px;
-  background: rgba(8, 2, 26, 0.82);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 10px 14px;
-  backdrop-filter: blur(8px);
-  display: flex; flex-direction: column; gap: 2px;
-  pointer-events: none;
-}
-.hover-hint strong { color: var(--accent); }
-.hover-hint span { color: var(--text); font-size: 0.88rem; line-height: 1.4; }
-@media (hover: none) { .hover-hint { display: none; } }
-
-/* Description en zoom */
-.desc-overlay {
+/* Panneau d'info unifié : même position en survol et en zoom */
+.info-panel {
   position: absolute;
   right: 16px; top: 50%; transform: translateY(-50%);
   width: min(320px, 40vw);
@@ -328,9 +333,12 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
   border-radius: 14px;
   padding: 16px;
   backdrop-filter: blur(10px);
+  pointer-events: none;              /* survol : la souris passe vers la carte */
 }
-.desc-overlay h3 { color: var(--accent); margin: 0 0 10px; }
-.desc-overlay p { color: var(--text); line-height: 1.6; margin: 0; }
+.info-panel.interactive { pointer-events: auto; }   /* zoom : scroll du texte possible */
+.info-panel h3 { color: var(--accent); margin: 0 0 10px; }
+.info-panel p { color: var(--text); line-height: 1.6; margin: 0; }
+.info-panel p.hint { color: #9fc4ec; font-style: italic; }
 .invented-tag { display: inline-block; margin-top: 10px; font-size: 0.78rem; color: #d7b6ff; border: 1px dashed rgba(126, 63, 242, 0.6); border-radius: 8px; padding: 2px 8px; }
 
 /* Barre de pastilles */
@@ -363,7 +371,7 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
 /* Mobile */
 @media (max-width: 900px) {
   .map-stage { height: calc(100dvh - var(--bottom-nav-h)); }
-  .desc-overlay {
+  .info-panel {
     right: 12px; left: 12px; top: auto; bottom: 12px; transform: none;
     width: auto; max-height: 40%;
   }
