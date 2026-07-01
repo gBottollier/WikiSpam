@@ -6,7 +6,6 @@ import { asset } from '../lib/assets.js'
 const regions = Object.entries(MAP_REGIONS).map(([key, v]) => ({ key, ...v }))
 const worldImg = asset('img/map/world.webp')
 
-// Bounding boxes (8% padded) — identiques à l'export des crops de région.
 function computeBbox(polygon) {
   let minX = 1, minY = 1, maxX = 0, maxY = 0
   for (const [x, y] of polygon) {
@@ -27,7 +26,6 @@ regions.forEach((r) => { bboxes[r.key] = computeBbox(r.polygon) })
 const ZOOM_IN_MS = 1400
 const ZOOM_OUT_MS = 500
 
-// Refs / état
 const paneEl = ref(null)
 const worldImgEl = ref(null)
 const world = reactive({ w: 0, h: 0, lx: 0, ly: 0 })
@@ -37,8 +35,8 @@ const currentSlug = ref(null)
 const revealed = ref(null)
 const curScale = ref(1)
 const hoveredKey = ref(null)
-const activePoi = ref(null)          // index dans la région courante
-const loaded = reactive({})          // slug -> true (détail chargé)
+const activePoi = ref(null)
+const loaded = reactive({})
 let revealTimer = null, ro = null
 
 const hovered = computed(() => regions.find((r) => r.key === hoveredKey.value) || null)
@@ -87,38 +85,40 @@ function layoutWorld() {
   world.ly = (ph - world.h) / 2
 }
 
+// Cadrage d'une région (repris de l'original) — réutilisable au resize.
+function frameRegion(slug, animate) {
+  const b = bboxes[slug]
+  const W = world.w, H = world.h, Lx = world.lx, Ly = world.ly
+  const pane = paneEl.value
+  const PW = pane.clientWidth, PH = pane.clientHeight
+  if (!W || !H || !PW || !PH) return
+
+  const widthFitScale = PW / (b.w * W)
+  const heightFitScale = PH / (b.h * H)
+  const geoMeanScale = Math.sqrt(widthFitScale * heightFitScale)
+  const fitScale = Math.min(geoMeanScale, heightFitScale)
+  const scale = Math.min(6, Math.max(1.3, 0.85 * fitScale))
+  let dx = PW / 2 - Lx - scale * (b.cx * W)
+  let dy = PH / 2 - Ly - scale * (b.cy * H)
+  const maxDx = -Lx, minDx = PW - Lx - scale * W
+  if (minDx <= maxDx) dx = Math.max(minDx, Math.min(maxDx, dx))
+  const maxDy = -Ly, minDy = PH - Ly - scale * H
+  if (minDy <= maxDy) dy = Math.max(minDy, Math.min(maxDy, dy))
+
+  curScale.value = scale
+  transMs.value = animate ? ZOOM_IN_MS : 0
+  transform.value = `translate(${dx}px, ${dy}px) scale(${scale})`
+}
+
 function activateRegion(slug) {
   if (currentSlug.value === slug) return
   if (revealTimer) { clearTimeout(revealTimer); revealTimer = null }
   revealed.value = null
   hoveredKey.value = null
   activePoi.value = null
-
-  const b = bboxes[slug]
-  const W = world.w, H = world.h, Lx = world.lx, Ly = world.ly
-  const pane = paneEl.value
-  const PW = pane.clientWidth, PH = pane.clientHeight
-
-  const bboxPxW = b.w * W, bboxPxH = b.h * H
-  const widthFitScale = PW / bboxPxW
-  const heightFitScale = PH / bboxPxH
-  const geoMeanScale = Math.sqrt(widthFitScale * heightFitScale)
-  const fitScale = Math.min(geoMeanScale, heightFitScale)
-  const scale = Math.min(6, Math.max(1.3, 0.85 * fitScale))
-  let dx = PW / 2 - Lx - scale * (b.cx * W)
-  let dy = PH / 2 - Ly - scale * (b.cy * H)
-
-  const maxDx = -Lx, minDx = PW - Lx - scale * W
-  if (minDx <= maxDx) dx = Math.max(minDx, Math.min(maxDx, dx))
-  const maxDy = -Ly, minDy = PH - Ly - scale * H
-  if (minDy <= maxDy) dy = Math.max(minDy, Math.min(maxDy, dy))
-
   loaded[slug] = true
-  curScale.value = scale
   currentSlug.value = slug
-  transMs.value = ZOOM_IN_MS
-  transform.value = `translate(${dx}px, ${dy}px) scale(${scale})`
-
+  frameRegion(slug, true)
   revealTimer = setTimeout(() => {
     if (currentSlug.value === slug) revealed.value = slug
   }, ZOOM_IN_MS + 20)
@@ -137,28 +137,33 @@ function selectPoi(i) {
   activePoi.value = activePoi.value === i ? null : i
 }
 
+function onResize() {
+  layoutWorld()
+  if (currentSlug.value) frameRegion(currentSlug.value, false)
+}
+
 onMounted(() => {
   const img = worldImgEl.value
   if (img && img.complete && img.naturalWidth) layoutWorld()
-  ro = new ResizeObserver(() => { if (!currentSlug.value) layoutWorld() })
+  ro = new ResizeObserver(onResize)
   if (paneEl.value) ro.observe(paneEl.value)
 })
 onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
 </script>
 
 <template>
-  <div class="map-stage" :class="{ zoomed: currentSlug }">
-    <h1 v-if="!currentSlug" class="carte-title">Carte du Monde</h1>
-    <p v-if="!currentSlug" class="carte-hint">
-      <span class="d">Survolez un continent pour le découvrir, cliquez pour zoomer.</span>
-      <span class="m">Touchez un continent pour zoomer.</span>
-    </p>
+  <div class="map-stage">
+    <!-- Header (hauteur constante => pas de décalage entre monde/zoom) -->
+    <header class="map-header">
+      <button v-if="current" class="back-btn" @click="resetZoom">← Carte</button>
+      <h1>{{ current ? current.name : 'Carte du Monde' }}</h1>
+    </header>
 
+    <!-- Fenêtre de carte -->
     <div ref="paneEl" class="world-pane">
       <div class="world-content" :style="contentStyle">
         <img ref="worldImgEl" :src="worldImg" alt="Carte du monde" class="world-img" draggable="false" @load="layoutWorld">
 
-        <!-- Crops de détail par région -->
         <img
           v-for="r in regions"
           :key="'d-' + r.key"
@@ -170,8 +175,7 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
           draggable="false"
         >
 
-        <!-- Polygones cliquables (vue monde) -->
-        <svg class="region-svg" :class="{ hidden: currentSlug }" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg class="region-svg" :class="{ hidden: current }" viewBox="0 0 100 100" preserveAspectRatio="none">
           <polygon
             v-for="r in regions"
             :key="'p-' + r.key"
@@ -184,7 +188,6 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
           />
         </svg>
 
-        <!-- Marqueurs POI -->
         <template v-for="r in regions" :key="'m-' + r.key">
           <button
             v-for="(p, i) in r.points"
@@ -197,63 +200,65 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
           ><span class="poi-dot"></span></button>
         </template>
       </div>
+
+      <!-- Survol (monde, desktop) -->
+      <div v-if="!current && hovered" class="hover-hint">
+        <strong>{{ hovered.name }}</strong><span>{{ hovered.description }}</span>
+      </div>
+
+      <!-- Description (zoom) : à droite sur PC, en bas sur mobile -->
+      <aside v-if="current" class="desc-overlay">
+        <template v-if="activePoiObj">
+          <h3>{{ activePoiObj.name }}</h3>
+          <p>{{ activePoiObj.desc }}</p>
+          <span v-if="!activePoiObj.lore" class="invented-tag">Lieu supposé (non confirmé par le lore)</span>
+        </template>
+        <template v-else>
+          <h3>{{ current.name }}</h3>
+          <p>{{ current.description }}</p>
+        </template>
+      </aside>
     </div>
 
-    <!-- Vue monde : info survol -->
-    <div v-if="!currentSlug" class="world-hint">
-      <template v-if="hovered"><h2>{{ hovered.name }}</h2><p>{{ hovered.description }}</p></template>
-      <p v-else class="muted">Survolez ou touchez un continent.</p>
-    </div>
-
-    <!-- Vue zoomée : overlays -->
-    <button v-if="current" class="back-btn" @click="resetZoom">← Carte</button>
-
-    <aside v-if="current" class="panel panel-left">
-      <h4>Lieux d'intérêt</h4>
-      <div class="poi-list">
+    <!-- Barre de pastilles (hauteur constante) : continents / lieux -->
+    <div class="chips-bar">
+      <template v-if="!current">
+        <button v-for="r in regions" :key="r.key" class="chip" @click="activateRegion(r.key)">{{ r.name }}</button>
+      </template>
+      <template v-else>
         <button
           v-for="(p, i) in current.points"
           :key="i"
-          class="poi-btn"
+          class="chip"
           :class="{ active: activePoi === i, invented: !p.lore }"
           @click="selectPoi(i)"
-        ><span class="poi-btn-dot"></span>{{ p.name }}</button>
-      </div>
-    </aside>
-
-    <aside v-if="current" class="panel panel-right">
-      <template v-if="activePoiObj">
-        <h3>{{ activePoiObj.name }}</h3>
-        <p>{{ activePoiObj.desc }}</p>
-        <span v-if="!activePoiObj.lore" class="invented-tag">Lieu supposé (non confirmé par le lore)</span>
+        >{{ p.name }}</button>
+        <span v-if="!current.points.length" class="chips-empty">Aucun lieu répertorié</span>
       </template>
-      <template v-else>
-        <h3>{{ current.name }}</h3>
-        <p>{{ current.description }}</p>
-        <p class="muted">Sélectionnez un lieu.</p>
-      </template>
-    </aside>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .map-stage {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - var(--nav-h));
   max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(14px, 3vw, 34px) clamp(10px, 3vw, 36px) 24px;
+  padding: 10px clamp(10px, 3vw, 34px) 12px;
+  overflow: hidden;
 }
-.carte-title { text-align: center; font-size: clamp(1.7rem, 5vw, 2.8rem); text-shadow: 0 0 14px var(--accent-bright); margin: 0 0 6px; }
-.carte-hint { text-align: center; color: #9fc4ec; margin: 0 0 14px; }
-.carte-hint .m { display: none; }
-@media (hover: none) { .carte-hint .d { display: none; } .carte-hint .m { display: inline; } }
 
-/* Pane = fenêtre fixe dans laquelle la carte zoome (aucun scroll) */
+.map-header { display: flex; align-items: center; gap: 14px; flex: 0 0 auto; height: 52px; }
+.map-header h1 { font-size: clamp(1.3rem, 3.5vw, 2.2rem); text-shadow: 0 0 12px var(--accent-bright); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.back-btn { background: var(--glass); border: 1px solid var(--glass-border); color: var(--accent); border-radius: 10px; padding: 8px 15px; cursor: pointer; font-weight: 700; white-space: nowrap; }
+.back-btn:hover { box-shadow: 0 0 12px rgba(0, 180, 255, 0.4); color: #fff; }
+
 .world-pane {
   position: relative;
-  width: 100%;
-  height: calc(100vh - var(--nav-h) - 150px);
-  min-height: 320px;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: hidden;
   border-radius: 16px;
   border: 1px solid var(--glass-border);
@@ -269,13 +274,7 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
 }
 .world-img { width: 100%; height: 100%; display: block; user-select: none; }
 
-.region-detail {
-  position: absolute;
-  object-fit: fill;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
+.region-detail { position: absolute; object-fit: fill; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
 .region-detail.active { opacity: 1; }
 
 .region-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -283,82 +282,79 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
 .region-poly { fill: rgba(0, 180, 255, 0); stroke: rgba(0, 180, 255, 0); stroke-width: 0.4; cursor: pointer; transition: fill 0.2s, stroke 0.2s; }
 .region-poly:hover, .region-poly.hot { fill: rgba(0, 180, 255, 0.22); stroke: var(--cyan); }
 
-.poi-marker {
-  position: absolute;
-  width: 26px; height: 26px;
-  background: none; border: none; padding: 0; cursor: pointer;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.35s ease;
-}
+.poi-marker { position: absolute; width: 26px; height: 26px; background: none; border: none; padding: 0; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
 .poi-marker.shown { opacity: 1; pointer-events: auto; }
 .poi-dot { display: block; width: 14px; height: 14px; margin: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); transition: transform 0.2s, background 0.2s; }
 .poi-marker:hover .poi-dot { transform: scale(1.4); }
 .poi-marker.active .poi-dot { background: #fff; transform: scale(1.6); box-shadow: 0 0 16px var(--cyan); }
 .poi-marker.invented .poi-dot { background: var(--accent-bright); box-shadow: 0 0 10px var(--accent-bright); }
 
-/* World hover info */
-.world-hint {
-  background: var(--bg-dark);
-  border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  padding: 16px 20px;
-  margin-top: 16px;
-  min-height: 76px;
-}
-.world-hint h2 { color: var(--accent); margin: 0 0 6px; font-size: 1.25rem; }
-.world-hint p { color: var(--text); line-height: 1.55; margin: 0; }
-.muted { color: #7fa8d8; }
-
-/* Overlays en vue zoomée */
-.back-btn {
+/* Survol monde */
+.hover-hint {
   position: absolute;
-  top: clamp(18px, 4vw, 44px);
-  left: clamp(16px, 4vw, 46px);
-  z-index: 20;
-  background: rgba(10, 0, 40, 0.75);
-  border: 1px solid var(--glass-border);
-  color: var(--accent);
-  border-radius: 10px;
-  padding: 9px 16px;
-  cursor: pointer;
-  font-weight: 700;
-  backdrop-filter: blur(8px);
-}
-.back-btn:hover { box-shadow: 0 0 12px rgba(0, 180, 255, 0.4); color: #fff; }
-
-.panel {
-  position: absolute;
-  z-index: 15;
+  left: 14px; bottom: 14px; right: 14px;
   background: rgba(8, 2, 26, 0.82);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  backdrop-filter: blur(8px);
+  display: flex; flex-direction: column; gap: 2px;
+  pointer-events: none;
+}
+.hover-hint strong { color: var(--accent); }
+.hover-hint span { color: var(--text); font-size: 0.88rem; line-height: 1.4; }
+@media (hover: none) { .hover-hint { display: none; } }
+
+/* Description en zoom */
+.desc-overlay {
+  position: absolute;
+  right: 16px; top: 50%; transform: translateY(-50%);
+  width: min(320px, 40vw);
+  max-height: calc(100% - 32px);
+  overflow-y: auto;
+  background: rgba(8, 2, 26, 0.85);
   border: 1px solid var(--glass-border);
   border-radius: 14px;
   padding: 16px;
   backdrop-filter: blur(10px);
-  max-height: calc(100% - 120px);
-  overflow-y: auto;
 }
-.panel-left { left: clamp(16px, 4vw, 46px); top: 50%; transform: translateY(-50%); width: min(230px, 34vw); }
-.panel-right { right: clamp(16px, 4vw, 46px); top: 50%; transform: translateY(-50%); width: min(320px, 40vw); }
-.panel h4, .panel h3 { color: var(--accent); margin: 0 0 12px; }
-.panel p { color: var(--text); line-height: 1.6; }
-.poi-list { display: flex; flex-direction: column; gap: 8px; }
-.poi-btn { display: flex; align-items: center; gap: 10px; text-align: left; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 10px; color: var(--text); padding: 9px 12px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s ease; }
-.poi-btn:hover { border-color: rgba(0, 180, 255, 0.5); }
-.poi-btn.active { background: rgba(0, 180, 255, 0.16); border-color: rgba(0, 180, 255, 0.6); color: #fff; }
-.poi-btn-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); flex: 0 0 auto; }
-.poi-btn.invented .poi-btn-dot { background: var(--accent-bright); box-shadow: 0 0 8px var(--accent-bright); }
+.desc-overlay h3 { color: var(--accent); margin: 0 0 10px; }
+.desc-overlay p { color: var(--text); line-height: 1.6; margin: 0; }
 .invented-tag { display: inline-block; margin-top: 10px; font-size: 0.78rem; color: #d7b6ff; border: 1px dashed rgba(126, 63, 242, 0.6); border-radius: 8px; padding: 2px 8px; }
 
-/* Mobile : panneaux en bas, plus compacts */
+/* Barre de pastilles */
+.chips-bar {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 12px 2px 4px;
+  scrollbar-width: thin;
+}
+.chip {
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.chip:hover { box-shadow: 0 0 10px rgba(126, 63, 242, 0.5); }
+.chip.active { background: rgba(0, 180, 255, 0.2); border-color: rgba(0, 180, 255, 0.6); color: #fff; }
+.chip.invented { border-style: dashed; }
+.chips-empty { color: #7fa8d8; padding: 8px; }
+
+/* Mobile */
 @media (max-width: 900px) {
-  .world-pane { height: calc(100vh - var(--bottom-nav-h) - 160px); }
-  .panel-left, .panel-right {
-    top: auto; transform: none;
-    bottom: 12px;
-    max-height: 34%;
-    width: calc(50% - 20px);
+  .map-stage { height: calc(100dvh - var(--bottom-nav-h)); }
+  .desc-overlay {
+    right: 12px; left: 12px; top: auto; bottom: 12px; transform: none;
+    width: auto; max-height: 40%;
   }
-  .panel-left { left: 12px; }
-  .panel-right { right: 12px; }
 }
 </style>

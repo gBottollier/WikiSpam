@@ -24,17 +24,27 @@ function itemHeight(r) {
 const stripOuter = ref(null)
 const stripInner = ref(null)
 const scale = ref(1)
+const tx = ref(0)
 const outerH = ref(BASE_H + 40)
 let ro = null
+
+const innerStyle = computed(() => ({
+  transform: `translate(${tx.value}px, 0) scale(${scale.value})`,
+  transformOrigin: '0 0',
+}))
 
 function fitStrip() {
   const o = stripOuter.value
   const inner = stripInner.value
   if (!o || !inner) return
-  const contentW = inner.scrollWidth
+  // offsetWidth/Height = layout size AVANT transform (fiable même scalé)
+  const contentW = inner.offsetWidth
+  const contentH = inner.offsetHeight
   const availW = o.clientWidth
-  scale.value = contentW > 0 ? Math.min(1, availW / contentW) : 1
-  outerH.value = Math.ceil(inner.scrollHeight * scale.value)
+  const k = contentW > 0 ? Math.min(1, availW / contentW) : 1
+  scale.value = k
+  tx.value = Math.max(0, (availW - contentW * k) / 2)
+  outerH.value = Math.ceil(contentH * k)
 }
 
 function scheduleFit() {
@@ -94,7 +104,7 @@ function selectRace(id) {
           <div
             ref="stripInner"
             class="strip-inner"
-            :style="{ transform: `scale(${scale})` }"
+            :style="innerStyle"
           >
             <button
               v-for="r in races"
@@ -206,11 +216,9 @@ function selectRace(id) {
 .strip-inner {
   display: flex;
   align-items: flex-end;
-  justify-content: center;
   gap: clamp(10px, 2vw, 30px);
-  transform-origin: top center;
   width: max-content;
-  margin: 0 auto;
+  transform-origin: 0 0;
 }
 .strip-item {
   flex: 0 0 auto;
