@@ -155,9 +155,9 @@ onBeforeUnmount(() => observer && observer.disconnect())
 /* ---------- Timeline ---------- */
 .timeline {
   position: relative;
-  max-width: 1100px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: clamp(30px, 5vw, 70px) clamp(16px, 5vw, 40px) 80px;
+  padding: clamp(20px, 3vw, 50px) clamp(8px, 2.5vw, 32px) 70px;
 }
 .timeline::before {
   content: '';
@@ -203,9 +203,9 @@ onBeforeUnmount(() => observer && observer.disconnect())
 .era-duration { display: block; color: #9fc4ec; font-size: 0.85rem; }
 
 /* Events */
-.events { position: relative; display: flex; flex-direction: column; gap: 28px; }
-.event { position: relative; width: 50%; padding-right: 40px; }
-.event.right { margin-left: 50%; padding-right: 0; padding-left: 40px; }
+.events { position: relative; display: flex; flex-direction: column; gap: 24px; }
+.event { position: relative; width: 50%; padding-right: 26px; }
+.event.right { margin-left: 50%; padding-right: 0; padding-left: 26px; }
 .event-node {
   position: absolute;
   top: 22px;
@@ -265,9 +265,9 @@ onBeforeUnmount(() => observer && observer.disconnect())
   .era-dot { width: 38px; height: 38px; }
   .era-dot .era-dot-label { display: none; }
 
-  .timeline::before { left: 18px; }
-  .event, .event.right { width: 100%; margin-left: 0; padding-left: 44px; padding-right: 0; }
-  .event-node, .event.right .event-node { left: 11px; right: auto; }
+  .timeline::before { left: 13px; }
+  .event, .event.right { width: 100%; margin-left: 0; padding-left: 30px; padding-right: 0; }
+  .event-node, .event.right .event-node { left: 6px; right: auto; }
   .king-img { float: none; display: block; width: 100%; max-width: 220px; margin: 0 auto 14px; }
 }
 </style>
