@@ -1,0 +1,12 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #070a12;
+  color: #e6ecff;
+}
+a { color: #9fb4ff; }
+h1, h2, h3 { line-height: 1.2; }

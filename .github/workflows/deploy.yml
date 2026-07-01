@@ -1,0 +1,68 @@
+name: Deploy site (static + Vue app) to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# Permissions requises par le déploiement Pages officiel
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un seul déploiement à la fois
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build Vue app
+        working-directory: app
+        run: |
+          npm install
+          npm run build
+
+      - name: Assemble le site (racine statique + /app)
+        run: |
+          mkdir -p _site
+          # Copie tout le site statique existant SAUF la source Vue et le dossier de build
+          rsync -a \
+            --exclude='/_site' \
+            --exclude='/app' \
+            --exclude='/.git' \
+            --exclude='/.github' \
+            --exclude='/node_modules' \
+            ./ _site/
+          # Place l'app Vue compilée sous /app
+          mkdir -p _site/app
+          rsync -a app/dist/ _site/app/
+          # Empêche Jekyll de toucher aux fichiers (sécurité)
+          touch _site/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
