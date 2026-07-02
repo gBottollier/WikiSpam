@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -ioE \"<a [^>]{0,300}>[^<]{0,5}<div class=\\\\\"css-1dc77b4\\\\\"><img alt=\\\\\"Dodge bet\\\\\"[^>]{0,400}>\" ./crocodyle_index.html)",
+      "Bash(grep -ioE \"href=\\\\\"[^\\\\\"]*\\\\\"[^>]{0,2000}krokwar\" ./crocodyle_index.html)",
+      "Bash(python -c ' *)",
+      "Bash(head -n 299 js/race.js)",
+      "Read(//tmp/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}

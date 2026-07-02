@@ -7,24 +7,24 @@
 // that comparison visible one race at a time.
 const races = {
   normal: [
-    { display: "Nymphe",         file: "nymphe_scaled.webp",        desc: "nymphe",        naturalH: 286 },
-    { display: "Tokscyth",       file: "gnome_scaled.webp",         desc: "gnome",          naturalH: 536 },
-    { display: "Oniyx",          file: "oniyx_scaled.webp",         desc: "oniyx",          naturalH: 736 },
-    { display: "Olforgeur",      file: "nain_scaled.webp",          desc: "nain",           naturalH: 936 },
-    { display: "Etherien",       file: "humain_scaled.webp",        desc: "humain",         naturalH: 1036 },
-    { display: "Anthropomorphe", file: "antropomorphe_scaled.webp", desc: "antropomorphe",  naturalH: 1286 },
-    { display: "Pixarch",        file: "elfe_scaled.webp",          desc: "elfe",           naturalH: 1286 },
-    { display: "Alphilan",       file: "alphilan_scaled.webp",      desc: "alphilan",       naturalH: 1286 },
-    { display: "Natus",          file: "natus_scaled.webp",         desc: "natus",          naturalH: 1536 },
+    { display: "Nymphe", file: "nymphe_scaled.webp", desc: "nymphe", naturalH: 286 },
+    { display: "Tokscyth", file: "gnome_scaled.webp", desc: "gnome", naturalH: 536 },
+    { display: "Oniyx", file: "oniyx_scaled.webp", desc: "oniyx", naturalH: 736 },
+    { display: "Olforgeur", file: "nain_scaled.webp", desc: "nain", naturalH: 936 },
+    { display: "Eltherien", file: "humain_scaled.webp", desc: "humain", naturalH: 1036 },
+    { display: "Anthropomorphe", file: "antropomorphe_scaled.webp", desc: "antropomorphe", naturalH: 1286 },
+    { display: "Pixarch", file: "elfe_scaled.webp", desc: "elfe", naturalH: 1286 },
+    { display: "Alphilan", file: "alphilan_scaled.webp", desc: "alphilan", naturalH: 1286 },
+    { display: "Natus", file: "natus_scaled.webp", desc: "natus", naturalH: 1536 },
   ],
   watcher: [
-    { display: "Calamité", file: "calamite_scaled.webp", desc:"calamite",  naturalH: 800 },
-    { display: "Arsh",     file: "arsh_scaled.webp",     desc:"arsh",      naturalH: 599 },
-    { display: "Dhöggeïr",   file: "dragon_scaled.webp",   desc:"dragon",  naturalH: 400 },
-    { display: "Divinité", file: "divinite_scaled.webp", desc:"divinite", naturalH: 300 },
-    { display: "Abyssal",  file: "abyssal_scaled.webp",  desc:"abyssal",   naturalH: 267 },
-    { display: "Eternel",  file: "eternel_scaled.webp",  desc:"eternel",   naturalH: 133 },
-    { display: "Esprit",   file: "esprit_scaled.webp",   desc:"esprit",    naturalH: 100 }
+    { display: "Calamité", file: "calamite_scaled.webp", desc: "calamite", naturalH: 800 },
+    { display: "Arsh", file: "arsh_scaled.webp", desc: "arsh", naturalH: 599 },
+    { display: "Dhöggeïr", file: "dragon_scaled.webp", desc: "dragon", naturalH: 400 },
+    { display: "Divinité", file: "divinite_scaled.webp", desc: "divinite", naturalH: 300 },
+    { display: "Abyssal", file: "abyssal_scaled.webp", desc: "abyssal", naturalH: 267 },
+    { display: "Eternel", file: "eternel_scaled.webp", desc: "eternel", naturalH: 133 },
+    { display: "Esprit", file: "esprit_scaled.webp", desc: "esprit", naturalH: 100 }
   ]
 };
 
@@ -68,7 +68,7 @@ function switchRace(raceKey) {
 
   // update button active state
   document.querySelectorAll(".race-buttons .button").forEach(b => b.classList.remove("active"));
-  document.querySelector(`.race-buttons .button:nth-child(${Object.keys(races).indexOf(raceKey)+1})`)?.classList.add("active");
+  document.querySelector(`.race-buttons .button:nth-child(${Object.keys(races).indexOf(raceKey) + 1})`)?.classList.add("active");
 
   // update race strip
   layoutRaceStrip();
@@ -223,7 +223,7 @@ function createHoverZones(items, strip, wrapper, line, highlight, layoutData) {
   const stripRect = strip.getBoundingClientRect();
   const lineRect = line.getBoundingClientRect();
 
-  const hoverTop = 0; 
+  const hoverTop = 0;
   const hoverHeight = maxItemVisualHeight + lineRect.height;
 
   items.forEach((o, i) => {
@@ -261,7 +261,7 @@ function createHoverZones(items, strip, wrapper, line, highlight, layoutData) {
       o.nameEl.style.color = "rgba(255,255,255,0.6)";
       o.img.style.zIndex = `${items.length - i}`;
     };
-    
+
     // ---------- Click to Scroll to Description ----------
     const handleClick = () => {
       const raceId = races[currentRace][i].desc;
@@ -273,7 +273,7 @@ function createHoverZones(items, strip, wrapper, line, highlight, layoutData) {
         setTimeout(() => targetRow.classList.remove("highlight"), 1500);
       }
     };
-    
+
     // ---------- Register event ----------
     [o.img, o.nameEl, hoverZone].forEach(el => {
       el.addEventListener("click", handleClick);
