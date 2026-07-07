@@ -112,7 +112,7 @@ export const regions = [
       },
       {
         "name": "Scruteur de sommets",
-        "img": "img/char/leviathan-des-cieux.webp",
+        "img": "img/char/scruteur-des-sommets.webp",
         "alt": "Scruteur de sommets",
         "html": "<p>Des Eternels pour la préservation de la Surface sont apparu après certaines catastrophes. Leur objectif est d'éviter que ne se répètent les erreurs commises.</p><p>Protecteur des ruines d'un gigantesque chantier du passé, le Scruteur peut être observé non loin des Chutes d'Ether au sud-ouest d'Emeldarion, ou au nord-ouest de Shal'Zaar.</p><p>Certains pèlerins qui l'auront aperçu y voient un bon présage. D'autres l'ayant confronté ne sont plus là pour témoigner.</p>"
       },
@@ -270,7 +270,7 @@ export const regions = [
       },
       {
         "name": "Amber",
-        "img": "img/char/ameru.webp",
+        "img": "img/char/amber.webp",
         "alt": "Amber",
         "html": "<p>La grande cité forteresse militaire de Dragheïr, un barrage entre l'océan et la Mer Embrasée, un lieu de partage entre Eltheriens et Dhöggeïrs, une ville riche en symboles à la noble culture martiale.</p><p>Amber est l'un d'entre eux, elle est une représentation féminine, guerrière maîtrisant l'eau et le feu représentant l'alliance entre Hadeïr et Nordvinter.</p><p>La légende raconte qu'un jour, deux héros que tout oppose réussiront à libérer Hadeïr des flammes. Ils purifieront le Mont Vulcain et libereront la mère des Döggheïr. Amber est une figure charismatique et combative.</p>"
       },
@@ -400,7 +400,7 @@ export const regions = [
     "characters": [
       {
         "name": "Leviathan des Cieux",
-        "img": null,
+        "img": "img/char/leviathan-des-cieux.webp",
         "alt": "Leviathan des Cieux",
         "html": "<p>La mort n'existe pas en Elther, l'Abysse mélange les rêves et cauchemars des Eveillés purgeant les âmes damnées. Construire de nouvelles âmes par le rêve purifiées par le cauchemar.</p><p>Des agents Eternels occupent les Abysses pour en maintenir l'état fluctuant stable. Le Leviathan des Cieux est l'un d'entre eux, il tisse les bulles de chaque rêve individuel dans son sillage. S'il devait un jour s'arrêter ou disparaître, les Eveillés seraient condamnés à ne connaître que le cauchemar durant leur sommeil.</p>"
       },
@@ -534,7 +534,7 @@ export const regions = [
       },
       {
         "name": "Lueur d'Espoir",
-        "img": "img/char/lueur-de-desespoir-dame-foudre.webp",
+        "img": "img/char/lueur-espoir.webp",
         "alt": "Lueur d'Espoir",
         "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Les Lueurs d'Espoir sont les seules créatures neutres de la forêt de Nyevielh, elles indiqueraient le chemin du manoir de Vladislaus. Leur présence est aussi signe de l'absence de monstres abyssaux à proximité.</p><p>Il n'y a nul besoin de se poser de questions concernant cette forêt, si le moindre protocole existe pour les malheureux qui osent la pénétrer, au moins respectez les indications.</p>"
       }
@@ -847,7 +847,7 @@ export const regions = [
       },
       {
         "name": "Complices de la Forêt",
-        "img": null,
+        "img": "img/char/complice-de-la-foret.png",
         "alt": "Complices de la Forêt",
         "html": "<p>Dans la région d'Azeel dont le bois s'étend au nord-ouest de Vaeloria, on peut y trouver des créatures non-agressives dont l'objectif simple est de faire peur.</p><p>Le Bouha devient alors un lieu touristique pour ses tests de courage. Orchestrés par les Complices de la forêt, des créatures dont la plus imposante serait une Alphilane. Le test offre un parcours personnalisé au sein de la forêt. Personne ne connaît la raison de ces services gratuits. Un secret bien gardé derrière des chants fredonnées dénués de toute parole.</p>"
       },
