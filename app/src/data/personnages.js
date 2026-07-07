@@ -61,12 +61,6 @@ export const regions = [
         "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Sur les côtes nord de Hadeïr, on peut voir voler des méduses enflammées jusqu'au centre de la Mer Embrasée. Leur corps chaud permet leur ascension avant de retomber lentement dans l'eau. Sous l'eau elles emmagasinent la chaleur pour recommencer leur cycle hebdomadaire. Les Lézards ignés, importés d'Emeldarion, et les Epines médusines créent un spectacle nocturne grandiose. Une fierté nationale, objet de nombreux festivals.</p>"
       },
       {
-        "name": "Faerylia Tisseuse du Chaos",
-        "img": "img/char/faerylia.webp",
-        "alt": "Faerylia Tisseuse du Chaos",
-        "html": "<p>Faerylia était connue comme la personne la plus cultivée et érudite de Shal'Zaar.</p><p>Vassale du Roi de la terre, elle maîtrisait la magie et les écrits comme nul autre. Elle a été capable de décrypter, seule, le Codex Primordial.</p><p>Le temps a démontré qu'elle ne donnait que peu du contenu réel du grimoire. Elle indiqua précisément comment sceller les Divinités. En commençant par la forge des armes runiques, puis la construction du portail.</p><p>Après avoir tenté de faire sien des pouvoirs proche des divininités. Elle sera punie par la destruction de sa terre natale. La Tisseuse du Chaos est la sorcière la plus recherchée.</p>"
-      },
-      {
         "name": "Sorcière Pyrokinétique",
         "img": "img/char/sorciere-pyrokinetique.webp",
         "alt": "Sorcière Pyrokinétique",
@@ -93,12 +87,6 @@ export const regions = [
     "emblem": "img/region/emeldarion_emblem.webp",
     "characters": [
       {
-        "name": "Prisonniere de la machine",
-        "img": "img/char/prisonniere-de-la-machine.webp",
-        "alt": "Prisonniere de la machine",
-        "html": "<p>Il existe beaucoup de références sur les races de l'ancien temps, une espèce ancestrale humanoïde de petite taille aux traits félins en faisant parti. Aujourd'hui disparue, on garde en mémoire leur courage et leur sacrifice.</p><p>Dans la lutte contre les Eternels, l'ensemble des communautés Oniyx créèrent une entité de chaos contrôlé, la Prisonnière de la machine.</p><p>Frappé par une telle arme, un Eternel est scellé dans la sphère. Essentiellement constitué de magie, un prisonnier est conservé en état de sommeil profond. Sa capacité régénérative devient source d'énergie inépuisable. Alimentant encore l'autonomie des usines Oniyx, piégées dans la glace des Contrées de Cristal.</p>"
-      },
-      {
         "name": "Keria",
         "img": "img/char/keria.webp",
         "alt": "Keria",
@@ -115,12 +103,6 @@ export const regions = [
         "img": "img/char/scruteur-des-sommets.webp",
         "alt": "Scruteur de sommets",
         "html": "<p>Des Eternels pour la préservation de la Surface sont apparu après certaines catastrophes. Leur objectif est d'éviter que ne se répètent les erreurs commises.</p><p>Protecteur des ruines d'un gigantesque chantier du passé, le Scruteur peut être observé non loin des Chutes d'Ether au sud-ouest d'Emeldarion, ou au nord-ouest de Shal'Zaar.</p><p>Certains pèlerins qui l'auront aperçu y voient un bon présage. D'autres l'ayant confronté ne sont plus là pour témoigner.</p>"
-      },
-      {
-        "name": "Dragosaure Céleste",
-        "img": "img/char/dragosaure-celeste.webp",
-        "alt": "Dragosaure Céleste",
-        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Des créatures incroyables peuplent les îles Esseulées, amat d'îles volantes au-dessus de la Mer Nimbée. Des espèces parmis lesquelles on y retrouverait le Dragosaure Céleste.</p><p>On observe ses nids sur les falaises du continent d'Aelther. Une fois adultes, ils se rendent sur les îles flottantes. Nul ne sait pourquoi ils y vont, pour le moment.</p>"
       },
       {
         "name": "Yotaru Gardefeuille",
@@ -327,6 +309,12 @@ export const regions = [
         "img": "img/char/voyageur-de-cretes.webp",
         "alt": "Voyageur des crêtes",
         "html": "<p>Dans les Contrées de Cristal Est de Nordvinter, des humanoïdes accompagnés de loups ont été aperçus à de multiples reprises.</p><p>Ces voyageurs de sommets glacés semblent faire du repérage dans la zone gelée. Ils ont déjà attaqué plusieurs chantiers visant à libérer les technologies Oniyx de la glace. Depuis, personne n'ose recommencer sous peine de représailles. Ils semblent pacifiques envers les jeunes de Nordvinter en quête de leur Dhöggeïr.</p><p>On ignore tout de leur origine. Leur équipement ésotérique laisse croire qu'ils viennent d'Emeldarion.</p>"
+      },
+      {
+        "name": "Prisonniere de la machine",
+        "img": "img/char/prisonniere-de-la-machine.webp",
+        "alt": "Prisonniere de la machine",
+        "html": "<p>Il existe beaucoup de références sur les races de l'ancien temps, une espèce ancestrale humanoïde de petite taille aux traits félins en faisant parti. Aujourd'hui disparue, on garde en mémoire leur courage et leur sacrifice.</p><p>Dans la lutte contre les Eternels, l'ensemble des communautés Oniyx créèrent une entité de chaos contrôlé, la Prisonnière de la machine.</p><p>Frappé par une telle arme, un Eternel est scellé dans la sphère. Essentiellement constitué de magie, un prisonnier est conservé en état de sommeil profond. Sa capacité régénérative devient source d'énergie inépuisable. Alimentant encore l'autonomie des usines Oniyx, piégées dans la glace des Contrées de Cristal.</p>"
       }
     ]
   },
@@ -377,12 +365,6 @@ export const regions = [
         "img": "img/char/leo.webp",
         "alt": "Léo",
         "html": "<p>Les chaînes Drako'vish s'étendent au Nord de Lumethia. Elles forment une frontière avec Vaeloria et Hadeïr, terre des Grands Lions.</p><p>Alors que les lions s'affrontent dans la savane nord, Sylvan décède d'une ultime bataille. Suite au sacrifice de cet ami commun, les chefs de clan écoutent sa dernière volonté et acceptent la paix. Ils s'occupent alors de Leo.</p><p>Malgré un intérêt grandissant pour les Eltheriens qui lui ressemblent, Leo considère les Grands Lions comme sa famille. Il travaille à ce qu'ils soient vu tel une espère à part entière à l'instar des Natus.</p>"
-      },
-      {
-        "name": "Oisillons de Midas",
-        "img": "img/char/oisillons-de-midas.webp",
-        "alt": "Oisillons de Midas",
-        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Les Oisillons dorés seraient les rejetons des Lueurs d'espoir. On n'a pas encore pu le démontrer à cause de la difficulté des restrictions d'Aelther. La faune et la flore y sont difficiles à observer.</p><p>Leur nid est haut perché à la hauteur des plus grands arbres. Ils ne deviennent visibles que lors de l'ascension du Mont Céleste, lorsque la cime est rendue à hauteur d'œil.</p>"
       },
       {
         "name": "Gardien Vert",
@@ -621,13 +603,6 @@ export const regions = [
     ]
   },
   {
-    "key": "autres",
-    "name": "Autres",
-    "bg": "img/region/autres.webp",
-    "emblem": "img/region/autres_emblem.webp",
-    "characters": []
-  },
-  {
     "key": "aelther",
     "name": "Aelther",
     "bg": "img/region/aelther.webp",
@@ -674,6 +649,12 @@ export const regions = [
         "img": "img/char/roi-lumiere.webp",
         "alt": "Roi lumiere",
         "html": "<p>Être Roi d'un élément est un titre honorifique. Il indique une haute responsabilité dans l'équilibre élémentaire.</p><p>Les Rois ont fait équiper leurs héritiers d'une arme runique. Conformément aux textes du Codex Primordial selon Faerylia, Ces armes allaient permettre de sceller les Divinités et d'obtenir la liberté.</p><p>Les Roi de l'ombre et de lumière avaient une relation diplomatique. La fissure du continent unique créa une rupture net entre les deux héritiers. Aelther fut abandonnée par l'héritier de la lumière. Il ne laissa derrière lui que des indications de pèlerinage.</p>"
+      },
+      {
+        "name": "Oisillons de Midas",
+        "img": "img/char/oisillons-de-midas.webp",
+        "alt": "Oisillons de Midas",
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Les Oisillons dorés seraient les rejetons des Lueurs d'espoir. On n'a pas encore pu le démontrer à cause de la difficulté des restrictions d'Aelther. La faune et la flore y sont difficiles à observer.</p><p>Leur nid est haut perché à la hauteur des plus grands arbres. Ils ne deviennent visibles que lors de l'ascension du Mont Céleste, lorsque la cime est rendue à hauteur d'œil.</p>"
       }
     ]
   },
@@ -768,6 +749,12 @@ export const regions = [
         "img": "img/char/panthere-imaginaire.webp",
         "alt": "Panthère imaginaire",
         "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>La Panthère Imaginaire se téléporte par le biais de failles spatiales similaires à celles de Vivy. Ces failles sont tracées en direction du point d'arrivée par l'un des yeux présent sur son corps. On la retrouve parfois sur les plages de Vaeloria où elle se laisse observer. Elle semble y faire la navette avec les îles Esseulées.</p><p>La panthère est neutre, même si son apparence laisse croire une corruption élémentaire.</p>"
+      },
+      {
+        "name": "Dragosaure Céleste",
+        "img": "img/char/dragosaure-celeste.webp",
+        "alt": "Dragosaure Céleste",
+        "html": "<p>Alors que le monde semble avoir retrouvé l'équilibre élémentaire, on peut observer la nature et son adaptation à l'environnement comme jamais auparavant.</p><p>Des créatures incroyables peuplent les îles Esseulées, amat d'îles volantes au-dessus de la Mer Nimbée. Des espèces parmis lesquelles on y retrouverait le Dragosaure Céleste.</p><p>On observe ses nids sur les falaises du continent d'Aelther. Une fois adultes, ils se rendent sur les îles flottantes. Nul ne sait pourquoi ils y vont, pour le moment.</p>"
       }
     ]
   },
@@ -830,6 +817,12 @@ export const regions = [
         "img": "img/char/heraldesse-serpentine.webp",
         "alt": "Héraldesse Serpentine",
         "html": "<p>On raconte la naissance de six enfants nés avec une rune sur la main.</p><p>À Shal'Zaar, dans un village de chasseurs de monstre, une jeune fille est capable de communiquer mentalement. Dès qu’elle établit un lien, ses yeux semblent injectés d'un liquide violacé.</p><p>Avec l'aide de son pouvoir, elle dressa des créatures parmi les plus terrifiantes de la jungle de Presolda. Serpents tropicaux et autres dinosaures qui profitent aux chasseurs de monstre. Pour toutes ses prouesses, elle obtint le titre de Heraldesse, une envoyée divine rappelant la régente disparue.</p>"
+      },
+      {
+        "name": "Faerylia Tisseuse du Chaos",
+        "img": "img/char/faerylia.webp",
+        "alt": "Faerylia Tisseuse du Chaos",
+        "html": "<p>Faerylia était connue comme la personne la plus cultivée et érudite de Shal'Zaar.</p><p>Vassale du Roi de la terre, elle maîtrisait la magie et les écrits comme nul autre. Elle a été capable de décrypter, seule, le Codex Primordial.</p><p>Le temps a démontré qu'elle ne donnait que peu du contenu réel du grimoire. Elle indiqua précisément comment sceller les Divinités. En commençant par la forge des armes runiques, puis la construction du portail.</p><p>Après avoir tenté de faire sien des pouvoirs proche des divininités. Elle sera punie par la destruction de sa terre natale. La Tisseuse du Chaos est la sorcière la plus recherchée.</p>"
       }
     ]
   },
@@ -847,7 +840,7 @@ export const regions = [
       },
       {
         "name": "Complices de la Forêt",
-        "img": "img/char/complice-de-la-foret.png",
+        "img": "img/char/complice-de-la-foret.webp",
         "alt": "Complices de la Forêt",
         "html": "<p>Dans la région d'Azeel dont le bois s'étend au nord-ouest de Vaeloria, on peut y trouver des créatures non-agressives dont l'objectif simple est de faire peur.</p><p>Le Bouha devient alors un lieu touristique pour ses tests de courage. Orchestrés par les Complices de la forêt, des créatures dont la plus imposante serait une Alphilane. Le test offre un parcours personnalisé au sein de la forêt. Personne ne connaît la raison de ces services gratuits. Un secret bien gardé derrière des chants fredonnées dénués de toute parole.</p>"
       },
