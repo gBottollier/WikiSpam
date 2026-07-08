@@ -258,6 +258,36 @@ function computeBbox(polygon) {
   return { x0, y0, w, h, cx: x0 + w / 2, cy: y0 + h / 2 };
 }
 
+// ---------- Edit mode (drag-to-place POIs) ----------
+// Enabled with ?edit=1 (or #edit): unlocked (green) markers become
+// draggable, positions persist in localStorage so an accidental reload
+// doesn't lose them, and a side panel prints the coordinates to hand back
+// so they can be written into map-data.js and locked (turned blue).
+const EDIT_MODE = new URLSearchParams(location.search).has('edit')
+  || location.hash.replace('#', '') === 'edit';
+const POI_EDIT_KEY = 'poiEdits';
+
+function loadPoiEdits() {
+  try { return JSON.parse(localStorage.getItem(POI_EDIT_KEY)) || {}; }
+  catch { return {}; }
+}
+function savePoiEdits(edits) {
+  try { localStorage.setItem(POI_EDIT_KEY, JSON.stringify(edits)); } catch {}
+}
+// Apply any saved drags onto the data before markers are built, so a
+// reload shows points where they were last dragged (in either mode —
+// what you see is what will be committed).
+const poiEdits = loadPoiEdits();
+Object.entries(poiEdits).forEach(([slug, pts]) => {
+  const region = MAP_REGIONS[slug];
+  if (!region) return;
+  pts.forEach((saved) => {
+    const pt = region.points.find((p) => p.name === saved.name);
+    if (pt) { pt.x = saved.x; pt.y = saved.y; }
+  });
+});
+if (EDIT_MODE) document.body.classList.add('edit-mode');
+
 // ---------- Build world overlay: polygons, detail images, POI markers ----------
 const fragSvg = document.createDocumentFragment();
 const fragDetail = document.createDocumentFragment();
@@ -299,7 +329,7 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
   const markers = [];
   region.points.forEach((pt) => {
     const marker = document.createElement('div');
-    marker.className = 'poi-marker' + (pt.lore ? '' : ' invented');
+    marker.className = 'poi-marker' + (pt.lore ? '' : ' invented') + (pt.locked ? '' : ' unplaced');
     marker.dataset.slug = slug;
     marker.style.left = `${(bbox.x0 + pt.x * bbox.w) * 100}%`;
     marker.style.top = `${(bbox.y0 + pt.y * bbox.h) * 100}%`;
@@ -483,6 +513,7 @@ function activateRegion(slug) {
   if (minDy <= maxDy) dy = Math.max(minDy, Math.min(maxDy, dy));
 
   currentSlug = slug;
+  if (EDIT_MODE) updateEditorPanel(slug);
   worldContent.style.transitionDuration = `${ZOOM_IN_MS}ms`;
   worldContent.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
 
@@ -537,6 +568,7 @@ function resetZoom() {
     if (slugPos !== -1) cardIndex = slugPos;
   }
   deactivateCurrent();
+  if (EDIT_MODE) updateEditorPanel(null);
   mapStage.classList.remove('zoomed');
   worldContent.style.transitionDuration = `${ZOOM_OUT_MS}ms`;
   worldContent.style.transform = 'scale(1)';
@@ -550,3 +582,131 @@ function resetZoom() {
 }
 
 backBtn.addEventListener('click', resetZoom);
+
+// ---------- Edit mode: drag markers, persist, print coordinates ----------
+// Everything below is inert unless ?edit=1. Function declarations are
+// hoisted, so activateRegion/resetZoom above can call updateEditorPanel.
+let poiEditor = null, poiEditorTextarea = null, poiEditorTitle = null, poiEditorStatus = null;
+
+function pointLocalFromClient(slug, clientX, clientY) {
+  // world-content carries the live zoom transform, so its on-screen rect
+  // already reflects the current scale/translate — normalize against it,
+  // then undo the region's bbox mapping to get the point's [0-1] coords
+  // over its own crop (the inverse of the marker placement in the build).
+  const bbox = bboxes[slug];
+  const r = worldContent.getBoundingClientRect();
+  const worldX = (clientX - r.left) / r.width;
+  const worldY = (clientY - r.top) / r.height;
+  const x = Math.min(1, Math.max(0, (worldX - bbox.x0) / bbox.w));
+  const y = Math.min(1, Math.max(0, (worldY - bbox.y0) / bbox.h));
+  return { x, y };
+}
+
+function placeMarker(marker, slug, pt) {
+  const bbox = bboxes[slug];
+  marker.style.left = `${(bbox.x0 + pt.x * bbox.w) * 100}%`;
+  marker.style.top = `${(bbox.y0 + pt.y * bbox.h) * 100}%`;
+}
+
+function persistPoint(slug, pt) {
+  const edits = loadPoiEdits();
+  const list = edits[slug] || (edits[slug] = []);
+  const existing = list.find((p) => p.name === pt.name);
+  if (existing) { existing.x = pt.x; existing.y = pt.y; }
+  else list.push({ name: pt.name, x: pt.x, y: pt.y });
+  savePoiEdits(edits);
+}
+
+function updateEditorPanel(slug) {
+  if (!poiEditor) return;
+  if (!slug || !MAP_REGIONS[slug]) {
+    poiEditorTitle.textContent = 'Mode édition';
+    poiEditorTextarea.value = 'Zoomez dans une région pour placer ses points.';
+    poiEditorStatus.textContent = '';
+    return;
+  }
+  const region = MAP_REGIONS[slug];
+  poiEditorTitle.textContent = `Mode édition — ${region.name}`;
+  const lines = region.points.map(
+    (pt) => `${pt.name}\t${pt.x.toFixed(4)}\t${pt.y.toFixed(4)}`
+  );
+  poiEditorTextarea.value = `# ${slug}\n` + lines.join('\n');
+  poiEditorStatus.textContent = '';
+}
+
+function attachMarkerDrag(marker, slug, pt) {
+  marker.addEventListener('pointerdown', (e) => {
+    if (!document.body.classList.contains('edit-mode')) return;
+    if (currentSlug !== slug) return;
+    e.preventDefault();
+    e.stopPropagation();
+    hideTooltip();
+    marker.classList.add('dragging');
+    marker.setPointerCapture(e.pointerId);
+
+    const onMove = (ev) => {
+      const { x, y } = pointLocalFromClient(slug, ev.clientX, ev.clientY);
+      pt.x = x; pt.y = y;
+      placeMarker(marker, slug, pt);
+      if (poiEditor) {
+        // Live-update just this point's line in the textarea.
+        updateEditorPanel(slug);
+      }
+    };
+    const onUp = (ev) => {
+      marker.classList.remove('dragging');
+      marker.releasePointerCapture?.(e.pointerId);
+      marker.removeEventListener('pointermove', onMove);
+      marker.removeEventListener('pointerup', onUp);
+      persistPoint(slug, pt);
+      updateEditorPanel(slug);
+      if (poiEditorStatus) poiEditorStatus.textContent = `« ${pt.name} » placé (${pt.x.toFixed(4)}, ${pt.y.toFixed(4)})`;
+    };
+    marker.addEventListener('pointermove', onMove);
+    marker.addEventListener('pointerup', onUp);
+  });
+}
+
+function buildEditorPanel() {
+  poiEditor = document.createElement('div');
+  poiEditor.id = 'poi-editor';
+  poiEditor.innerHTML =
+    '<h4></h4>' +
+    '<p class="hint">Glissez les points verts pour les placer. Copiez les coordonnées et renvoyez-les.</p>' +
+    '<textarea readonly spellcheck="false"></textarea>' +
+    '<div class="poi-editor-btns">' +
+    '<button type="button" data-act="copy">Copier</button>' +
+    '<button type="button" data-act="reset">Réinitialiser région</button>' +
+    '</div>' +
+    '<div class="poi-editor-status"></div>';
+  document.body.appendChild(poiEditor);
+  poiEditorTitle = poiEditor.querySelector('h4');
+  poiEditorTextarea = poiEditor.querySelector('textarea');
+  poiEditorStatus = poiEditor.querySelector('.poi-editor-status');
+
+  poiEditor.querySelector('[data-act="copy"]').addEventListener('click', async () => {
+    const text = poiEditorTextarea.value;
+    try { await navigator.clipboard.writeText(text); poiEditorStatus.textContent = 'Copié dans le presse-papiers.'; }
+    catch { poiEditorTextarea.select(); document.execCommand('copy'); poiEditorStatus.textContent = 'Copié.'; }
+  });
+
+  poiEditor.querySelector('[data-act="reset"]').addEventListener('click', () => {
+    if (!currentSlug) return;
+    const edits = loadPoiEdits();
+    delete edits[currentSlug];
+    savePoiEdits(edits);
+    poiEditorStatus.textContent = 'Sauvegardes locales effacées pour cette région. Rechargez pour revoir les positions du fichier.';
+  });
+
+  updateEditorPanel(currentSlug);
+}
+
+if (EDIT_MODE) {
+  buildEditorPanel();
+  Object.entries(markersBySlug).forEach(([slug, markers]) => {
+    markers.forEach((marker, i) => {
+      const pt = MAP_REGIONS[slug].points[i];
+      if (pt) attachMarkerDrag(marker, slug, pt);
+    });
+  });
+}

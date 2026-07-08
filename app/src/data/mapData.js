@@ -7,32 +7,36 @@ export const MAP_REGIONS = {
   "description": "Continent volcanique domine par le Mont Vulcain et la grande cite-forge de Logair, ancien fief du Roi du Feu. Aujourd'hui largement corrompu par le Feu, c'est une terre de cendres et de creatures abyssales, ou subsistent de derniers bastions de resistance.",
   "points": [
    {
-    "name": "Mont Vulcain",
+    "name": "Cité Infernale de Logaïr / Mt Vulcain",
     "lore": true,
-    "desc": "Volcan abritant le nid d'un puissant Dhoggeir et le coeur de la corruption du Feu ; les armes runiques des Rois y furent forgees.",
-    "x": 0.5542,
-    "y": 0.5257
+    "desc": "",
+    "x": 0.5534,
+    "y": 0.3302,
+    "locked": true
    },
    {
-    "name": "Logair, cite des forges",
+    "name": "Forêt enflammée Détwin",
     "lore": true,
-    "desc": "Grande cite-forge batie autour du Mont Vulcain, renommee « cite infernale » depuis sa chute.",
-    "x": 0.618,
-    "y": 0.6137
+    "desc": "",
+    "x": 0.2136,
+    "y": 0.5153,
+    "locked": true
    },
    {
-    "name": "Foret Detwin",
+    "name": "Ruines Oniyx",
     "lore": true,
-    "desc": "Abrite la Saule Ardente, entite capable de purifier la corruption, protegee par un bastion Eltherien.",
-    "x": 0.6154,
-    "y": 0.4619
+    "desc": "",
+    "x": 0.6886,
+    "y": 0.1616,
+    "locked": true
    },
    {
-    "name": "Mer Embrasee",
+    "name": "Chaines Drako'vish",
     "lore": true,
-    "desc": "Mer interieure aux cotes nord ou volent les Epines Medusines, theatre de festivals nocturnes celebres.",
-    "x": 0.5542,
-    "y": 0.5873
+    "desc": "",
+    "x": 0.7336,
+    "y": 0.6918,
+    "locked": true
    }
   ],
   "slug": "hadeir",
@@ -298,23 +302,34 @@ export const MAP_REGIONS = {
    {
     "name": "Le Bouha",
     "lore": true,
-    "desc": "Lieu touristique forestier ou se deroulent des parcours de courage hantes par des creatures inoffensives.",
-    "x": 0.4902,
-    "y": 0.39
+    "desc": "",
+    "x": 0.738,
+    "y": 0.2334,
+    "locked": true
    },
    {
-    "name": "Repaire du Spectre Canin",
+    "name": "Cimetière du Néant",
     "lore": true,
-    "desc": "Creature du bois prenant la forme d'un animal de compagnie disparu, attraction surnaturelle du Bouha.",
-    "x": 0.865,
-    "y": 0.1654
+    "desc": "",
+    "x": 0.4801,
+    "y": 0.5798,
+    "locked": true
    },
    {
-    "name": "Veille du Hibou Nocturne",
+    "name": "Les Pentes du Souvenir",
     "lore": true,
-    "desc": "Un hibou magique veille sur les visiteurs en detresse pendant les epreuves nocturnes.",
-    "x": 0.2231,
-    "y": 0.6827
+    "desc": "",
+    "x": 0.2795,
+    "y": 0.7115,
+    "locked": true
+   },
+   {
+    "name": "Village d'Alween",
+    "lore": true,
+    "desc": "",
+    "x": 0.6344,
+    "y": 0.0984,
+    "locked": true
    }
   ],
   "slug": "azeel",
@@ -590,25 +605,36 @@ export const MAP_REGIONS = {
   "description": "Vaste etendue glacee et hostile recouvrant l'ancienne cite technologique d'Oniyxia, scellee sous la glace par le Roi de l'Eau. Elle emprisonne a la fois des technologies interdites et l'Eternelle elle-meme, gardee par de puissants Dhoggeir.",
   "points": [
    {
-    "name": "Pic de Glace",
+    "name": "Grottes Hybernatus",
     "lore": true,
-    "desc": "Plus haute montagne de la region ou le Roi de l'Eau s'est endormi pour l'eternite apres avoir scelle Oniyxia.",
-    "x": 0.8111,
-    "y": 0.08
+    "desc": "",
+    "x": 0.3964,
+    "y": 0.2266,
+    "locked": true
    },
    {
-    "name": "Ruines d'Oniyxia",
+    "name": "Lac de l'esprit",
     "lore": true,
-    "desc": "Cite Oniyx ensevelie sous la glace, abritant des technologies interdites et la Mere Dhoggeir captive.",
-    "x": 0.8286,
-    "y": 0.1374
+    "desc": "",
+    "x": 0.4314,
+    "y": 0.4048,
+    "locked": true
    },
    {
-    "name": "Nids des Dhoggeir",
+    "name": "Haut Pic Doggheïr",
     "lore": true,
-    "desc": "Repaires des anciens dragons restes sur place, accumulant tresors et orbes Oniyx dans leurs antres.",
-    "x": 0.7697,
-    "y": 0.08
+    "desc": "",
+    "x": 0.7855,
+    "y": 0.2606,
+    "locked": true
+   },
+   {
+    "name": "Terre des Loups",
+    "lore": true,
+    "desc": "",
+    "x": 0.7273,
+    "y": 0.6709,
+    "locked": true
    }
   ],
   "slug": "contrees-de-cristal",
@@ -870,36 +896,7 @@ export const MAP_REGIONS = {
  "vaeloria": {
   "name": "Vaeloria",
   "description": "Terre verdoyante consacree a la Nature, dominee par le grand arbre sacre Meridia. Le Roi de la Nature y est mort en creant cet arbre pour combattre une terrible maladie, faisant de Vaeloria le seul royaume en contact diplomatique avec les Alphilans.",
-  "points": [
-   {
-    "name": "Meridia",
-    "lore": true,
-    "desc": "Cite prospere portant le nom de l'arbre sacre, siege du conseil diplomatique et residence de la Princesse Meridia.",
-    "x": 0.3774,
-    "y": 0.5531
-   },
-   {
-    "name": "L'Arbre Meridia",
-    "lore": true,
-    "desc": "Arbre de vie cree par le sacrifice du Roi de la Nature pour combattre un fletrissement mortel.",
-    "x": 0.2968,
-    "y": 0.4307
-   },
-   {
-    "name": "Les Racines",
-    "lore": true,
-    "desc": "Labyrinthe souterrain insondable ou erre l'Esprit de la Nature, seme de zones elementaires changeantes.",
-    "x": 0.357,
-    "y": 0.4627
-   },
-   {
-    "name": "Chaines du Nord",
-    "lore": true,
-    "desc": "Frontiere avec Lumethia, theatre de la guerre entre clans de lions qui couta la vie a Sylvan.",
-    "x": 0.3518,
-    "y": 0.5154
-   }
-  ],
+  "points": [],
   "slug": "vaeloria",
   "polygon": [
    [
@@ -1195,36 +1192,7 @@ export const MAP_REGIONS = {
  "lumethia": {
   "name": "Lumethia",
   "description": "Region cotiere et savaniere marquee par les chaines montagneuses Drako'vish, peuplee de Grands Lions, d'Olforgeurs et de Tokscyth erudits. Ses ports accueillent une peche prospere malgre les dangereuses Fleurmarines.",
-  "points": [
-   {
-    "name": "Chaines Drako'vish",
-    "lore": true,
-    "desc": "Frontiere montagneuse separant Lumethia de Vaeloria et Hadeir, marquee par les conflits de clans de lions.",
-    "x": 0.4614,
-    "y": 0.3626
-   },
-   {
-    "name": "Pierre du Sage Sacree",
-    "lore": true,
-    "desc": "Site sacre au sud de Lumethia, point de depart traditionnel de tout pelerinage.",
-    "x": 0.5253,
-    "y": 0.7111
-   },
-   {
-    "name": "Ports de Lumethia",
-    "lore": true,
-    "desc": "Cites portuaires reputees pour leur peche de Fleurmarines, mets delicat local.",
-    "x": 0.5078,
-    "y": 0.463
-   },
-   {
-    "name": "Cotes interdites",
-    "lore": true,
-    "desc": "Plages de l'ouest infestees d'algues et de Fleurmarines agressives venues de l'Ocean des Profondeurs.",
-    "x": 0.5833,
-    "y": 0.2977
-   }
-  ],
+  "points": [],
   "slug": "lumethia",
   "polygon": [
    [
@@ -1512,36 +1480,7 @@ export const MAP_REGIONS = {
  "emeldarion": {
   "name": "Emeldarion",
   "description": "Vaste continent meridional de savanes, jungles tropicales et marecages, domine par la cite-etat marchande d'Abondance. Ne du sacrifice des dragons jumeaux Aldrin et Emeraldoth, il abrite tribus chamaniques et un riche folklore artistique.",
-  "points": [
-   {
-    "name": "Abondance",
-    "lore": true,
-    "desc": "Capitale economique et culturelle, ville-toile de la Maitresse des Teintes, dirigee par un conseil de clans et de marchands.",
-    "x": 0.8656,
-    "y": 0.5718
-   },
-   {
-    "name": "Marais'Cage",
-    "lore": true,
-    "desc": "Marais sacre ou repose le dragon Emeraldoth, garde selon des regles strictes de pelerinage.",
-    "x": 0.7385,
-    "y": 0.542
-   },
-   {
-    "name": "Jungle de Presolda",
-    "lore": true,
-    "desc": "Jungle tropicale infestee des redoutables Tisseuses de Mots geantes.",
-    "x": 0.796,
-    "y": 0.5942
-   },
-   {
-    "name": "Chutes d'Ether",
-    "lore": true,
-    "desc": "Site garde par le Scruteur de sommets, protecteur des ruines d'un ancien chantier.",
-    "x": 0.8853,
-    "y": 0.5271
-   }
-  ],
+  "points": [],
   "slug": "emeldarion",
   "polygon": [
    [
@@ -1821,29 +1760,7 @@ export const MAP_REGIONS = {
  "shalzaar": {
   "name": "Shalzaar",
   "description": "Desert vaste et ancien, jadis coeur du royaume le plus riche de l'ere antique sous le Roi de la Terre. Aujourd'hui terre de tribus de chasseurs de monstres affrontant Wyrms des dunes et Abyssaux remontes des profondeurs.",
-  "points": [
-   {
-    "name": "Temple de Zaar'Phahl",
-    "lore": true,
-    "desc": "Site d'une expedition Oniyx tragique dans les Abysses, aujourd'hui scelle et garde par un golem Oniyx.",
-    "x": 0.7235,
-    "y": 0.4789
-   },
-   {
-    "name": "Shal'Azd'Hun, Dunes Cornues",
-    "lore": true,
-    "desc": "Mines de cristal formees par l'activite des Wyrms des sables.",
-    "x": 0.6535,
-    "y": 0.5859
-   },
-   {
-    "name": "Ruines de Phahl'Aon",
-    "lore": true,
-    "desc": "Ancienne cite-royaume disparue, siege du Roi de la Terre, dechue apres le Grand Cataclysme.",
-    "x": 0.6741,
-    "y": 0.519
-   }
-  ],
+  "points": [],
   "slug": "shalzaar",
   "polygon": [
    [
@@ -2075,36 +1992,7 @@ export const MAP_REGIONS = {
  "aelther": {
   "name": "Aelther",
   "description": "Continent montagneux centre sur le Mont Celeste, abandonne par le Roi de la Lumiere. Desormais terre sacree de pelerinage strictement reglementee pour proteger sa faune et sa flore rares.",
-  "points": [
-   {
-    "name": "Mont Celeste",
-    "lore": true,
-    "desc": "Plus haute montagne, but ultime du grand pelerinage, ou reside une mysterieuse Fleur de vie geante jamais ouverte.",
-    "x": 0.3982,
-    "y": 0.92
-   },
-   {
-    "name": "Villages d'Okaemi",
-    "lore": true,
-    "desc": "Sentiers et villages traverses avant la grande ascension du Mont Celeste.",
-    "x": 0.3775,
-    "y": 0.8574
-   },
-   {
-    "name": "Territoire de la Meute",
-    "lore": true,
-    "desc": "Zone frappee par la foudre constante, gardee par Vivy et ses Shinobi a travers des failles spatiales.",
-    "x": 0.5122,
-    "y": 0.92
-   },
-   {
-    "name": "Cotes de l'Ouest",
-    "lore": true,
-    "desc": "Plages isolees ou apparait le mysterieux Gamin des Etoiles, combattant des Abyssaux venus de la Mer Etoilee.",
-    "x": 0.3283,
-    "y": 0.92
-   }
-  ],
+  "points": [],
   "slug": "aelther",
   "polygon": [
    [
@@ -2360,36 +2248,7 @@ export const MAP_REGIONS = {
  "nyevielh": {
   "name": "Nyevielh",
   "description": "Terres maudites et cauchemardesques nees de la rupture entre les Rois de l'Ombre et de la Lumiere apres le Grand Cataclysme, livrees a un combat perpetuel contre les cauchemars vivants.",
-  "points": [
-   {
-    "name": "Port Rhyezeal",
-    "lore": true,
-    "desc": "Port abritant une statue de l'Esprit de l'Ombre, idole protectrice contre les abominations.",
-    "x": 0.2384,
-    "y": 0.92
-   },
-   {
-    "name": "Foret Reveuse",
-    "lore": true,
-    "desc": "Foret cauchemardesque ou un environnement trop agreable signale un danger mortel imminent.",
-    "x": 0.7519,
-    "y": 0.92
-   },
-   {
-    "name": "Manoir de Vladislaus",
-    "lore": true,
-    "desc": "Demeure aux pieces mobiles construite pour proteger des fragments du Codex Primordial.",
-    "x": 0.6927,
-    "y": 0.814
-   },
-   {
-    "name": "Montagnes de l'Est",
-    "lore": true,
-    "desc": "Repaire des Renards masques, fideles gardiens du Roi de l'Ombre face aux Abyssaux.",
-    "x": 0.6547,
-    "y": 0.92
-   }
-  ],
+  "points": [],
   "slug": "nyevielh",
   "polygon": [
    [
@@ -2627,25 +2486,36 @@ export const MAP_REGIONS = {
   "description": "Petite ile glaciaire isolee, terre des tribus guerrieres des Nords et des Hibernatus. Sa population s'est fortement militarisee en soutien de Hadeir apres la disparition du Roi du Feu.",
   "points": [
    {
-    "name": "Lac de l'Esprit de l'Eau",
+    "name": "Village tribal de Nordvint",
     "lore": true,
-    "desc": "Grand lac ou l'Esprit de l'Eau est visible de tous, surveille par l'Eternelle Lycaria pour preserver sa tranquillite.",
-    "x": 0.5473,
-    "y": 0.08
+    "desc": "",
+    "x": 0.5754,
+    "y": 0.0819,
+    "locked": true
    },
    {
-    "name": "Monts Nomades",
+    "name": "Village d'accueil Dögghreach",
     "lore": true,
-    "desc": "Chaine montagneuse abritant les villages tribaux des Hibernatus, peuple a l'intellect superieur.",
-    "x": 0.6272,
-    "y": 0.6627
+    "desc": "",
+    "x": 0.6389,
+    "y": 0.5719,
+    "locked": true
    },
    {
-    "name": "Camp des Tribus des Nords",
+    "name": "Ville militaire Dragheïr",
     "lore": true,
-    "desc": "Territoire de la grande tribu guerriere dont est issu le heros Frost, ancetre des Guerriers des Neiges.",
-    "x": 0.211,
-    "y": 0.08
+    "desc": "",
+    "x": 0.7473,
+    "y": 0.8439,
+    "locked": true
+   },
+   {
+    "name": "Champ de Bataille Ignatus",
+    "lore": true,
+    "desc": "",
+    "x": 1,
+    "y": 1,
+    "locked": true
    }
   ],
   "slug": "nordvinter",

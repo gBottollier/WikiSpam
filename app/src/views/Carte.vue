@@ -233,7 +233,7 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
             v-for="(p, i) in r.points"
             :key="'m-' + r.key + '-' + i"
             class="poi-marker"
-            :class="{ shown: revealed === r.key, active: currentSlug === r.key && activePoi === i, invented: !p.lore }"
+            :class="{ shown: revealed === r.key, active: currentSlug === r.key && activePoi === i, invented: !p.lore, unplaced: !p.locked }"
             :style="markerStyle(r, p)"
             :title="p.name"
             @click="selectPoi(i)"
@@ -320,6 +320,9 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
 .poi-marker:hover .poi-dot { transform: scale(1.4); }
 .poi-marker.active .poi-dot { background: #fff; transform: scale(1.6); box-shadow: 0 0 16px var(--cyan); }
 .poi-marker.invented .poi-dot { background: var(--accent-bright); box-shadow: 0 0 10px var(--accent-bright); }
+/* Unplaced (not yet locked) points stay green until confirmed. */
+.poi-marker.unplaced .poi-dot { background: #17c637; box-shadow: 0 0 10px #40ff5a; }
+.poi-marker.active.unplaced .poi-dot { background: #fff; box-shadow: 0 0 16px #40ff5a; }
 
 /* Panneau d'info unifié : même position en survol et en zoom */
 .info-panel {
