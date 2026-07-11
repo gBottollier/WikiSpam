@@ -242,6 +242,17 @@ document.addEventListener('click', () => {
   document.querySelectorAll('.poi-chip.hovered').forEach((c) => c.classList.remove('hovered'));
 });
 
+// A region's polygon is either a single ring [[x,y],...] or, for the seas that
+// end up in several water pieces, a multipolygon [[[x,y],...], ...]. These two
+// helpers normalize that so the rest of the code doesn't care which it is.
+function regionRings(region) {
+  const p = region.polygon;
+  return (p.length && Array.isArray(p[0][0])) ? p : [p];
+}
+function regionVertices(region) {
+  return regionRings(region).flat();
+}
+
 // ---------- Bounding boxes (8% padded), matching the offline crop export ----------
 function computeBbox(polygon) {
   let minX = 1, minY = 1, maxX = 0, maxY = 0;
@@ -289,6 +300,11 @@ Object.entries(poiEdits).forEach(([slug, pts]) => {
 if (EDIT_MODE) document.body.classList.add('edit-mode');
 
 // ---------- Build world overlay: polygons, detail images, POI markers ----------
+// Seas (region.sea) are "areas": no detail crop, and their polygons are
+// painted *behind* land so a land region overlapping a sea stays the one
+// that hovers/clicks. region.noCrop (e.g. the Îles Esseulés island) is a
+// real land region that just doesn't have a region-<slug>.webp crop yet.
+const fragSvgSea = document.createDocumentFragment();
 const fragSvg = document.createDocumentFragment();
 const fragDetail = document.createDocumentFragment();
 const fragPoi = document.createDocumentFragment();
@@ -296,13 +312,23 @@ const polyBySlug = {};
 const markersBySlug = {}; // slug -> [<div class="poi-marker">, ...] in region.points order
 
 Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
-  const bbox = computeBbox(region.polygon);
+  // region.bbox (when present) is the frozen box the detail crop + POI dots were
+  // authored against; the polygon may be a more accurate coastline that would
+  // otherwise grow the box and shift the crop. Fall back to computing it.
+  const bb = region.bbox;
+  const bbox = bb
+    ? { x0: bb[0], y0: bb[1], w: bb[2], h: bb[3], cx: bb[0] + bb[2] / 2, cy: bb[1] + bb[3] / 2 }
+    : computeBbox(regionVertices(region));
   bboxes[slug] = bbox;
+  const noCrop = !!(region.sea || region.noCrop);
 
-  // Hoverable/clickable polygon (world view)
-  const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-  poly.setAttribute('points', region.polygon.map(p => p.join(',')).join(' '));
+  // Hoverable/clickable shape (world view). A <path> with one subpath per ring
+  // lets a multi-piece sea stay a single hoverable/clickable element.
+  const poly = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  poly.setAttribute('d', regionRings(region)
+    .map((ring) => 'M' + ring.map((p) => p.join(',')).join('L') + 'Z').join(''));
   poly.classList.add('region-shape');
+  if (region.sea) poly.classList.add('sea-shape');
   poly.dataset.slug = slug;
   polyBySlug[slug] = poly;
   attachHoverTooltip(poly, () => region.name, () => region.description, () => false);
@@ -312,18 +338,21 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
     if (panDidDrag) return;
     activateRegion(slug);
   });
-  fragSvg.appendChild(poly);
+  (region.sea ? fragSvgSea : fragSvg).appendChild(poly);
 
-  // High-detail crop, lazily sourced, positioned over its own footprint
-  const detail = document.createElement('img');
-  detail.className = 'region-detail';
-  detail.alt = region.name;
-  detail.style.left = `${bbox.x0 * 100}%`;
-  detail.style.top = `${bbox.y0 * 100}%`;
-  detail.style.width = `${bbox.w * 100}%`;
-  detail.style.height = `${bbox.h * 100}%`;
-  detailImgs[slug] = detail;
-  fragDetail.appendChild(detail);
+  // High-detail crop, lazily sourced, positioned over its own footprint.
+  // Skipped for seas / crop-less regions, which zoom over the plain world map.
+  if (!noCrop) {
+    const detail = document.createElement('img');
+    detail.className = 'region-detail';
+    detail.alt = region.name;
+    detail.style.left = `${bbox.x0 * 100}%`;
+    detail.style.top = `${bbox.y0 * 100}%`;
+    detail.style.width = `${bbox.w * 100}%`;
+    detail.style.height = `${bbox.h * 100}%`;
+    detailImgs[slug] = detail;
+    fragDetail.appendChild(detail);
+  }
 
   // Points of interest, placed in world-space via the region bbox
   const markers = [];
@@ -333,6 +362,14 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
     marker.dataset.slug = slug;
     marker.style.left = `${(bbox.x0 + pt.x * bbox.w) * 100}%`;
     marker.style.top = `${(bbox.y0 + pt.y * bbox.h) * 100}%`;
+    // Edit mode: a persistent name label so the (many, identical-looking)
+    // green dots can be told apart while dragging them into place.
+    if (EDIT_MODE) {
+      const lbl = document.createElement('span');
+      lbl.className = 'poi-label';
+      lbl.textContent = pt.name;
+      marker.appendChild(lbl);
+    }
     // No tapToShow here: on mobile the dots are too small to reliably hit,
     // so the POI chip list built in activateRegion is the only way in on
     // touch — tapping a chip highlights the matching marker below instead
@@ -345,6 +382,7 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
   markersBySlug[slug] = markers;
 });
 
+regionSvg.appendChild(fragSvgSea); // seas first = painted behind land
 regionSvg.appendChild(fragSvg);
 detailLayer.appendChild(fragDetail);
 poiLayer.appendChild(fragPoi);
@@ -360,7 +398,8 @@ const cardNameEl = document.getElementById('continent-card-name');
 const cardDescEl = document.getElementById('continent-card-desc');
 const cardProgressEl = document.getElementById('continent-card-progress');
 const zoomInBtn = document.getElementById('continent-zoom-in');
-const regionSlugs = Object.keys(MAP_REGIONS);
+// Seas are areas, not continents — keep them out of the mobile swipe deck.
+const regionSlugs = Object.keys(MAP_REGIONS).filter((s) => !MAP_REGIONS[s].sea);
 let cardIndex = 0;
 
 function renderContinentCard() {
@@ -529,13 +568,15 @@ function activateRegion(slug) {
   // laggy reveal. Waiting for decode() (cheap no-op on repeat visits, since
   // it's already cached/decoded by then) guarantees the fade-in itself is
   // just a plain compositor opacity change.
+  // Seas / crop-less regions have no detailImgs entry — they zoom over the
+  // plain world map, revealing just their markers (if any).
   const detail = detailImgs[slug];
-  if (!detail.src) detail.src = `img/map/region-${slug}.webp`;
-  const ready = detail.decode ? detail.decode().catch(() => {}) : Promise.resolve();
+  if (detail && !detail.src) detail.src = `img/map/region-${slug}.webp`;
+  const ready = (detail && detail.decode) ? detail.decode().catch(() => {}) : Promise.resolve();
 
   const reveal = () => {
     if (currentSlug !== slug) return;
-    detail.classList.add('active');
+    if (detail) detail.classList.add('active');
     poiLayer.querySelectorAll(`.poi-marker[data-slug="${slug}"]`).forEach((m) => {
       m.style.setProperty('--poi-scale', 1 / scale);
       m.classList.add('active');
@@ -550,7 +591,7 @@ function activateRegion(slug) {
 
 function deactivateCurrent() {
   if (!currentSlug) return;
-  detailImgs[currentSlug].classList.remove('active');
+  detailImgs[currentSlug]?.classList.remove('active');
   poiLayer.querySelectorAll(`.poi-marker[data-slug="${currentSlug}"]`).forEach((m) => m.classList.remove('active', 'hovered'));
   hidePoiDetailCard();
   currentSlug = null;

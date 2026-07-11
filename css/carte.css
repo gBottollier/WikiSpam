@@ -88,6 +88,7 @@ html, body {
 
 .region-shape {
   fill: rgba(0, 180, 255, 0.0);
+  fill-rule: evenodd; /* multi-ring shapes: inner rings cut holes (e.g. Mer Nimbe / Îles Esseulés) */
   stroke: rgba(166, 240, 255, 0.9);
   stroke-width: 0.0022;
   stroke-opacity: 0;
@@ -115,6 +116,12 @@ html, body {
     stroke-width: 0.0022;
   }
 }
+/* Sea polygons run a little past the image edges (so no straight border line
+   shows); clip them to the map's own box. */
+#region-svg {
+  overflow: hidden;
+}
+
 /* Fully removed from rendering (not just faded) while zoomed in: an SVG
    stroke layer repainting under an animating ancestor transform is a heavy,
    non-compositor-only operation and was a main source of zoom jank. */
@@ -315,6 +322,34 @@ html, body {
 /* ---------- Drag-to-place edit mode (?edit=1) ---------- */
 body.edit-mode .poi-marker.active { cursor: grab; }
 body.edit-mode .poi-marker.dragging { cursor: grabbing; animation: none; }
+
+/* Edit mode: name labels next to each dot so identical-looking markers
+   can be told apart while dragging; faint outlines on every area. */
+.poi-label {
+  position: absolute;
+  left: 13px;
+  top: -7px;
+  white-space: nowrap;
+  font: 11px/1.2 system-ui, sans-serif;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.62);
+  padding: 2px 5px;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+}
+body.edit-mode .poi-marker.active .poi-label { opacity: 1; }
+body.edit-mode .region-shape { stroke-opacity: 0.35; }
+
+/* Seas are areas painted behind land; tint their hover a touch differently. */
+.sea-shape:hover,
+.sea-shape.hovered {
+  fill: rgba(120, 200, 255, 0.20);
+}
+body.edit-mode .sea-shape {
+  stroke-opacity: 0.5;
+  stroke: rgba(150, 220, 255, 0.8);
+}
 
 #poi-editor {
   position: fixed;

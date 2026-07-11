@@ -20,8 +20,28 @@ function computeBbox(polygon) {
   const w = x1 - x0, h = y1 - y0
   return { x0, y0, w, h, cx: x0 + w / 2, cy: y0 + h / 2 }
 }
+// A polygon is either a single ring [[x,y],...] or a multipolygon
+// [[[x,y],...], ...] (used by seas split into several water pieces).
+function regionRings(r) {
+  const p = r.polygon
+  return (p.length && Array.isArray(p[0][0])) ? p : [p]
+}
 const bboxes = {}
-regions.forEach((r) => { bboxes[r.key] = computeBbox(r.polygon) })
+regions.forEach((r) => {
+  // r.bbox (when present) is frozen so the detail crop + POI dots stay put even
+  // if the polygon is a more accurate coastline; otherwise compute it.
+  bboxes[r.key] = r.bbox
+    ? { x0: r.bbox[0], y0: r.bbox[1], w: r.bbox[2], h: r.bbox[3], cx: r.bbox[0] + r.bbox[2] / 2, cy: r.bbox[1] + r.bbox[3] / 2 }
+    : computeBbox(regionRings(r).flat())
+})
+
+// Seas (r.sea) are areas: no detail crop, painted behind land, and kept out
+// of the continent list. r.noCrop (the Îles Esseulés island) is land with no
+// region-<slug>.webp crop yet, so it also skips the detail image.
+const landRegions = regions.filter((r) => !r.sea)
+const seaRegions = regions.filter((r) => r.sea)
+const svgRegions = [...seaRegions, ...landRegions] // seas first = behind land
+const cropRegions = regions.filter((r) => !r.sea && !r.noCrop)
 
 const ZOOM_IN_MS = 1400
 const ZOOM_OUT_MS = 500
@@ -69,8 +89,10 @@ const contentStyle = computed(() => ({
   transitionDuration: transMs.value + 'ms',
 }))
 
-function polyPoints(r) {
-  return r.polygon.map((p) => `${(p[0] * 100).toFixed(2)},${(p[1] * 100).toFixed(2)}`).join(' ')
+function pathD(r) {
+  return regionRings(r)
+    .map((ring) => 'M' + ring.map((p) => `${(p[0] * 100).toFixed(2)},${(p[1] * 100).toFixed(2)}`).join('L') + 'Z')
+    .join('')
 }
 function regionImg(r) { return asset(`img/map/region-${r.slug || r.key}.webp`) }
 function detailStyle(r) {
@@ -205,7 +227,7 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
         <img ref="worldImgEl" :src="worldImg" alt="Carte du monde" class="world-img" draggable="false" @load="layoutWorld">
 
         <img
-          v-for="r in regions"
+          v-for="r in cropRegions"
           :key="'d-' + r.key"
           class="region-detail"
           :class="{ active: revealed === r.key }"
@@ -216,12 +238,12 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
         >
 
         <svg class="region-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <polygon
-            v-for="r in regions"
+          <path
+            v-for="r in svgRegions"
             :key="'p-' + r.key"
-            :points="polyPoints(r)"
+            :d="pathD(r)"
             class="region-poly"
-            :class="{ hot: hoveredKey === r.key && r.key !== currentSlug, current: r.key === currentSlug }"
+            :class="{ hot: hoveredKey === r.key && r.key !== currentSlug, current: r.key === currentSlug, sea: r.sea }"
             @mouseenter="hoveredKey = r.key"
             @mouseleave="hoveredKey = null"
             @click="activateRegion(r.key)"
@@ -253,7 +275,7 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
     <!-- Barre de pastilles (hauteur constante) : continents / lieux -->
     <div class="chips-bar">
       <template v-if="!current">
-        <button v-for="r in regions" :key="r.key" class="chip" @click="activateRegion(r.key)">{{ r.name }}</button>
+        <button v-for="r in landRegions" :key="r.key" class="chip" @click="activateRegion(r.key)">{{ r.name }}</button>
       </template>
       <template v-else>
         <button
@@ -309,10 +331,11 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
 
 .region-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .region-svg.hidden { pointer-events: none; opacity: 0; }
-.region-poly { fill: rgba(0, 180, 255, 0); stroke: rgba(0, 180, 255, 0); stroke-width: 0.4; cursor: pointer; transition: fill 0.2s, stroke 0.2s; }
+.region-poly { fill: rgba(0, 180, 255, 0); fill-rule: evenodd; stroke: rgba(0, 180, 255, 0); stroke-width: 0.4; cursor: pointer; transition: fill 0.2s, stroke 0.2s; }
 .region-poly.hot { fill: rgba(0, 180, 255, 0.22); stroke: var(--cyan); }
 .region-poly:hover:not(.current) { fill: rgba(0, 180, 255, 0.22); stroke: var(--cyan); }
 .region-poly.current { pointer-events: none; }  /* la région en cours ne capte pas le survol */
+.region-poly.sea:hover:not(.current), .region-poly.sea.hot { fill: rgba(120, 200, 255, 0.18); }  /* mers = zones, teinte distincte */
 
 .poi-marker { position: absolute; width: 26px; height: 26px; background: none; border: none; padding: 0; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
 .poi-marker.shown { opacity: 1; pointer-events: auto; }
