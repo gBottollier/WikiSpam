@@ -249,6 +249,17 @@ function regionRings(region) {
   const p = region.polygon;
   return (p.length && Array.isArray(p[0][0])) ? p : [p];
 }
+// Polygon points are densely sampled from the source outline, so a plain
+// point-by-point polyline follows the drawn coastline exactly (a spline would
+// round the sharp capes / overshoot at edges). Straight segments read smooth
+// at map scale because the vertices are ~1px apart.
+function smoothRingPath(ring) {
+  const n = ring.length;
+  if (n < 2) return '';
+  let d = 'M' + ring[0].join(',');
+  for (let i = 1; i < n; i++) d += 'L' + ring[i].join(',');
+  return d + 'Z';
+}
 function regionVertices(region) {
   return regionRings(region).flat();
 }
@@ -325,8 +336,7 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
   // Hoverable/clickable shape (world view). A <path> with one subpath per ring
   // lets a multi-piece sea stay a single hoverable/clickable element.
   const poly = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  poly.setAttribute('d', regionRings(region)
-    .map((ring) => 'M' + ring.map((p) => p.join(',')).join('L') + 'Z').join(''));
+  poly.setAttribute('d', regionRings(region).map(smoothRingPath).join(''));
   poly.classList.add('region-shape');
   if (region.sea) poly.classList.add('sea-shape');
   poly.dataset.slug = slug;
@@ -358,10 +368,31 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
   const markers = [];
   region.points.forEach((pt) => {
     const marker = document.createElement('div');
-    marker.className = 'poi-marker' + (pt.lore ? '' : ' invented') + (pt.locked ? '' : ' unplaced');
+    marker.className = 'poi-marker' + (pt.lore ? '' : ' invented') + (pt.locked ? '' : ' unplaced') + (pt.icon ? ' has-icon' : '');
     marker.dataset.slug = slug;
-    marker.style.left = `${(bbox.x0 + pt.x * bbox.w) * 100}%`;
-    marker.style.top = `${(bbox.y0 + pt.y * bbox.h) * 100}%`;
+    
+    if (pt.icon) {
+      // City icons carry their own absolute position/size over the full map
+      // (extracted from the artist's per-icon layer), independent of the
+      // region bbox — so re-tracing region shapes never moves them.
+      const wPct = pt.iconW;
+      const hPct = pt.iconH;
+      marker.style.left = `${(pt.iconX - wPct / 200.0) * 100}%`;
+      marker.style.top = `${(pt.iconY - hPct / 200.0) * 100}%`;
+      marker.style.width = `${wPct}%`;
+      marker.style.height = `${hPct}%`;
+      marker.style.margin = '0';
+      
+      const iconImg = document.createElement('img');
+      iconImg.className = 'poi-icon';
+      iconImg.src = `img/map/icons/${pt.icon}`;
+      iconImg.draggable = false;
+      marker.appendChild(iconImg);
+    } else {
+      marker.style.left = `${(bbox.x0 + pt.x * bbox.w) * 100}%`;
+      marker.style.top = `${(bbox.y0 + pt.y * bbox.h) * 100}%`;
+    }
+
     // Edit mode: a persistent name label so the (many, identical-looking)
     // green dots can be told apart while dragging them into place.
     if (EDIT_MODE) {
@@ -376,6 +407,18 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
     // (reusing .hovered, the same look the click handler above already
     // clears on an outside tap).
     attachHoverTooltip(marker, () => pt.name, () => pt.desc, () => !pt.lore);
+    // Some POIs reveal a hidden map layer (e.g. the sunken city) when selected —
+    // only reachable while zoomed in (markers are inert until then), so the
+    // layer stays hidden until the point is picked.
+    if (pt.reveals) {
+      const layer = document.getElementById('layer-' + pt.reveals);
+      marker.classList.add('reveal-poi');
+      marker.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (layer) layer.classList.toggle('revealed');
+        marker.classList.toggle('active-reveal');
+      });
+    }
     fragPoi.appendChild(marker);
     markers.push(marker);
   });
@@ -571,7 +614,7 @@ function activateRegion(slug) {
   // Seas / crop-less regions have no detailImgs entry — they zoom over the
   // plain world map, revealing just their markers (if any).
   const detail = detailImgs[slug];
-  if (detail && !detail.src) detail.src = `img/map/region-${slug}.webp`;
+  if (detail && !detail.src) detail.src = `img/map/regions/${slug}.webp`;
   const ready = (detail && detail.decode) ? detail.decode().catch(() => {}) : Promise.resolve();
 
   const reveal = () => {
@@ -581,6 +624,15 @@ function activateRegion(slug) {
       m.style.setProperty('--poi-scale', 1 / scale);
       m.classList.add('active');
     });
+    // Once the zoom has settled, bring the region shapes back so a neighbour can
+    // be clicked to jump straight there; the current region's own shape is kept
+    // inert. (They stay hidden only during the transform animation, which is
+    // where repainting the SVG under it caused jank.)
+    regionSvg.classList.remove('zoomed-in');
+    polyBySlug[currentSlug]?.classList.add('current');
+    // Show every city icon while zoomed (not the dots), so neighbouring regions'
+    // icons are visible and invite navigating over to them.
+    mapStage.classList.add('poi-icons-on');
   };
   // Wait for the transform to fully settle before popping the overlay in:
   // revealing it while the map is still visibly scaling makes an instant,
@@ -592,7 +644,10 @@ function activateRegion(slug) {
 function deactivateCurrent() {
   if (!currentSlug) return;
   detailImgs[currentSlug]?.classList.remove('active');
-  poiLayer.querySelectorAll(`.poi-marker[data-slug="${currentSlug}"]`).forEach((m) => m.classList.remove('active', 'hovered'));
+  polyBySlug[currentSlug]?.classList.remove('current');
+  poiLayer.querySelectorAll(`.poi-marker[data-slug="${currentSlug}"]`).forEach((m) => m.classList.remove('active', 'hovered', 'active-reveal'));
+  // Leaving a region hides any layer a POI here had revealed (e.g. the sunken city).
+  document.querySelectorAll('.map-layer.revealed').forEach((l) => l.classList.remove('revealed'));
   hidePoiDetailCard();
   currentSlug = null;
 }
@@ -610,7 +665,8 @@ function resetZoom() {
   }
   deactivateCurrent();
   if (EDIT_MODE) updateEditorPanel(null);
-  mapStage.classList.remove('zoomed');
+  mapStage.classList.remove('zoomed', 'poi-icons-on');
+  regionSvg.classList.add('zoomed-in');   // hide shapes again during the zoom-out animation
   worldContent.style.transitionDuration = `${ZOOM_OUT_MS}ms`;
   worldContent.style.transform = 'scale(1)';
   // Bring the hoverable overlay back, and re-highlight the current card's

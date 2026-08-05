@@ -4,7 +4,11 @@ import { MAP_REGIONS } from '../data/mapData.js'
 import { asset } from '../lib/assets.js'
 
 const regions = Object.entries(MAP_REGIONS).map(([key, v]) => ({ key, ...v }))
-const worldImg = asset('img/map/world.webp')
+const oceanImg = asset('img/map/layers/1_Ocean.webp')
+const villeEngloutieImg = asset('img/map/layers/2_Ville_Engloutie.webp')
+const ondesEauImg = asset('img/map/layers/3_Ondes_Eau.webp')
+const continentsImg = asset('img/map/layers/4_Continents.webp')
+const signatureImg = asset('img/map/layers/6_Signature.webp')
 
 function computeBbox(polygon) {
   let minX = 1, minY = 1, maxX = 0, maxY = 0
@@ -89,17 +93,37 @@ const contentStyle = computed(() => ({
   transitionDuration: transMs.value + 'ms',
 }))
 
-function pathD(r) {
-  return regionRings(r)
-    .map((ring) => 'M' + ring.map((p) => `${(p[0] * 100).toFixed(2)},${(p[1] * 100).toFixed(2)}`).join('L') + 'Z')
-    .join('')
+// Points are densely sampled from the source outline, so a plain polyline
+// follows the drawn coastline exactly (a spline would round capes / overshoot).
+// Coords scaled to the 0..100 viewBox.
+function smoothRingPath(ring) {
+  const n = ring.length
+  const S = (v) => (v * 100).toFixed(3)
+  if (n < 2) return ''
+  let d = `M${S(ring[0][0])},${S(ring[0][1])}`
+  for (let i = 1; i < n; i++) d += `L${S(ring[i][0])},${S(ring[i][1])}`
+  return d + 'Z'
 }
-function regionImg(r) { return asset(`img/map/region-${r.slug || r.key}.webp`) }
+function pathD(r) {
+  return regionRings(r).map(smoothRingPath).join('')
+}
+function regionImg(r) { return asset(`img/map/regions/${r.slug || r.key}.webp`) }
 function detailStyle(r) {
   const b = bboxes[r.key]
   return { left: b.x0 * 100 + '%', top: b.y0 * 100 + '%', width: b.w * 100 + '%', height: b.h * 100 + '%' }
 }
 function markerStyle(r, p) {
+  if (p.icon) {
+    // City icons: absolute position/size over the full map, independent of bbox.
+    return {
+      left: (p.iconX - p.iconW / 200.0) * 100 + '%',
+      top: (p.iconY - p.iconH / 200.0) * 100 + '%',
+      width: p.iconW + '%',
+      height: p.iconH + '%',
+      margin: '0',
+      transform: 'none'
+    }
+  }
   const b = bboxes[r.key]
   const s = r.key === currentSlug.value ? 1 / curScale.value : 1
   return {
@@ -224,7 +248,11 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
     <!-- Fenêtre de carte -->
     <div ref="paneEl" class="world-pane" @wheel.prevent="onWheel">
       <div class="world-content" :style="contentStyle">
-        <img ref="worldImgEl" :src="worldImg" alt="Carte du monde" class="world-img" draggable="false" @load="layoutWorld">
+        <img ref="worldImgEl" :src="oceanImg" alt="Carte du monde" class="world-img" draggable="false" @load="layoutWorld">
+        <img :src="villeEngloutieImg" class="map-layer ville-engloutie" :class="{ revealed: activePoiObj && activePoiObj.reveals === 'ville-engloutie' }" draggable="false">
+        <img :src="ondesEauImg" class="map-layer" draggable="false">
+        <img :src="continentsImg" class="map-layer" draggable="false">
+        <img :src="signatureImg" class="map-layer" draggable="false">
 
         <img
           v-for="r in cropRegions"
@@ -243,7 +271,7 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
             :key="'p-' + r.key"
             :d="pathD(r)"
             class="region-poly"
-            :class="{ hot: hoveredKey === r.key && r.key !== currentSlug, current: r.key === currentSlug, sea: r.sea }"
+            :class="{ hot: hoveredKey === r.key && r.key !== currentSlug, current: r.key === currentSlug, sea: r.sea, 'sea-locked': r.sea && !!currentSlug }"
             @mouseenter="hoveredKey = r.key"
             @mouseleave="hoveredKey = null"
             @click="activateRegion(r.key)"
@@ -255,11 +283,21 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
             v-for="(p, i) in r.points"
             :key="'m-' + r.key + '-' + i"
             class="poi-marker"
-            :class="{ shown: revealed === r.key, active: currentSlug === r.key && activePoi === i, invented: !p.lore, unplaced: !p.locked }"
+            :class="{
+              shown: revealed === r.key,
+              active: currentSlug === r.key && activePoi === i,
+              invented: !p.lore,
+              unplaced: !p.locked,
+              'has-icon': p.icon,
+              'icon-shown': !!currentSlug && !!p.icon
+            }"
             :style="markerStyle(r, p)"
             :title="p.name"
             @click="selectPoi(i)"
-          ><span class="poi-dot"></span></button>
+          >
+            <span v-if="!p.icon" class="poi-dot"></span>
+            <img v-else :src="asset('img/map/icons/' + p.icon)" class="poi-icon" draggable="false">
+          </button>
         </template>
       </div>
 
@@ -326,6 +364,20 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
 }
 .world-img { width: 100%; height: 100%; display: block; user-select: none; }
 
+.map-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+/* Sunken city: hidden until its POI is selected while zoomed in. */
+.ville-engloutie { opacity: 0; transition: opacity 0.5s ease; }
+.ville-engloutie.revealed { opacity: 1; }
+
 .region-detail { position: absolute; object-fit: fill; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
 .region-detail.active { opacity: 1; }
 
@@ -336,12 +388,36 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
 .region-poly:hover:not(.current) { fill: rgba(0, 180, 255, 0.22); stroke: var(--cyan); }
 .region-poly.current { pointer-events: none; }  /* la région en cours ne capte pas le survol */
 .region-poly.sea:hover:not(.current), .region-poly.sea.hot { fill: rgba(120, 200, 255, 0.18); }  /* mers = zones, teinte distincte */
+.region-poly.sea-locked { pointer-events: none; }  /* zoomé : les mers ne captent plus le survol */
 
 .poi-marker { position: absolute; width: 26px; height: 26px; background: none; border: none; padding: 0; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
 .poi-marker.shown { opacity: 1; pointer-events: auto; }
+/* Zoomed in: every city icon shows (neighbours included), inviting navigation. */
+.poi-marker.icon-shown { opacity: 1; pointer-events: auto; }
 .poi-dot { display: block; width: 14px; height: 14px; margin: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); transition: transform 0.2s, background 0.2s; }
 .poi-marker:hover .poi-dot { transform: scale(1.4); }
 .poi-marker.active .poi-dot { background: #fff; transform: scale(1.6); box-shadow: 0 0 16px var(--cyan); }
+
+.poi-marker.has-icon {
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+.poi-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.poi-marker.has-icon:hover .poi-icon {
+  filter: drop-shadow(0 0 8px rgba(126, 63, 242, 0.9));
+  transform: scale(1.1);
+}
+.poi-marker.has-icon.active .poi-icon {
+  filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.9));
+  transform: scale(1.15);
+}
 .poi-marker.invented .poi-dot { background: var(--accent-bright); box-shadow: 0 0 10px var(--accent-bright); }
 /* Unplaced (not yet locked) points stay green until confirmed. */
 .poi-marker.unplaced .poi-dot { background: #17c637; box-shadow: 0 0 10px #40ff5a; }

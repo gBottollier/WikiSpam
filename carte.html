@@ -7,7 +7,7 @@
   <title>SPAM LORE</title>
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/background_stars.css">
-  <link rel="stylesheet" href="css/carte.css?v=7">
+  <link rel="stylesheet" href="css/carte.css?v=12">
 </head>
 <body>
 
@@ -23,7 +23,11 @@
 
     <div id="world-pane">
       <div id="world-content">
-        <img id="world-img" src="img/map/world.webp" alt="Carte du monde" draggable="false">
+        <img id="world-img" src="img/map/layers/1_Ocean.webp" alt="Carte du monde" draggable="false">
+        <img id="layer-ville-engloutie" class="map-layer" src="img/map/layers/2_Ville_Engloutie.webp" alt="Ville Engloutie" draggable="false">
+        <img class="map-layer" src="img/map/layers/3_Ondes_Eau.webp" alt="Ondes de l'eau" draggable="false">
+        <img class="map-layer" src="img/map/layers/4_Continents.webp" alt="Continents" draggable="false">
+        <img class="map-layer" src="img/map/layers/6_Signature.webp" alt="Signature" draggable="false">
         <div id="region-detail-layer"></div>
         <svg id="region-svg" viewBox="0 0 1 1" preserveAspectRatio="none"></svg>
         <div id="poi-layer"></div>
@@ -91,9 +95,9 @@
   <!-- CARTE -->
 
   <!-- Script -->
-  <script src="js/map-data.js?v=14"></script>
+  <script src="js/map-data.js?v=19"></script>
   <script src="js/drag-swipe.js?v=5"></script>
-  <script src="js/carte.js?v=8"></script>
+  <script src="js/carte.js?v=14"></script>
   <script src="js/navbar.js"></script>
   <script src="js/background_stars.js"></script>
   <!-- Script -->
