@@ -6,9 +6,7 @@ import { asset } from '../lib/assets.js'
 const regions = Object.entries(MAP_REGIONS).map(([key, v]) => ({ key, ...v }))
 const oceanImg = asset('img/map/layers/1_Ocean.webp')
 const villeEngloutieImg = asset('img/map/layers/2_Ville_Engloutie.webp')
-const ondesEauImg = asset('img/map/layers/3_Ondes_Eau.webp')
-const continentsImg = asset('img/map/layers/4_Continents.webp')
-const signatureImg = asset('img/map/layers/6_Signature.webp')
+const topImg = asset('img/map/layers/top.webp')  // ondes + continents + signature combined (fewer images = lighter on mobile)
 
 function computeBbox(polygon) {
   let minX = 1, minY = 1, maxX = 0, maxY = 0
@@ -250,9 +248,7 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
       <div class="world-content" :style="contentStyle">
         <img ref="worldImgEl" :src="oceanImg" alt="Carte du monde" class="world-img" draggable="false" @load="layoutWorld">
         <img :src="villeEngloutieImg" class="map-layer ville-engloutie" :class="{ revealed: activePoiObj && activePoiObj.reveals === 'ville-engloutie' }" draggable="false">
-        <img :src="ondesEauImg" class="map-layer" draggable="false">
-        <img :src="continentsImg" class="map-layer" draggable="false">
-        <img :src="signatureImg" class="map-layer" draggable="false">
+        <img :src="topImg" class="map-layer" draggable="false">
 
         <img
           v-for="r in cropRegions"
@@ -274,7 +270,7 @@ onBeforeUnmount(() => { ro && ro.disconnect(); clearTimeout(revealTimer) })
             :class="{ hot: hoveredKey === r.key && r.key !== currentSlug, current: r.key === currentSlug, sea: r.sea, 'sea-locked': r.sea && !!currentSlug }"
             @mouseenter="hoveredKey = r.key"
             @mouseleave="hoveredKey = null"
-            @click="activateRegion(r.key)"
+            @click="!r.sea && activateRegion(r.key)"
           />
         </svg>
 

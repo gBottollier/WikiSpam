@@ -346,6 +346,9 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
     // A pan gesture that happened to end over a polygon shouldn't also
     // zoom into it.
     if (panDidDrag) return;
+    // Seas are hover-only "areas" (their tooltip), not zoom destinations —
+    // tapping the water shouldn't zoom into an empty region.
+    if (region.sea) return;
     activateRegion(slug);
   });
   (region.sea ? fragSvgSea : fragSvg).appendChild(poly);
@@ -415,6 +418,10 @@ Object.entries(MAP_REGIONS).forEach(([slug, region]) => {
       marker.classList.add('reveal-poi');
       marker.addEventListener('click', (e) => {
         e.stopPropagation();
+        // Deferred load: the sunken-city image is only fetched/decoded the first
+        // time it's revealed, so it doesn't cost memory on the world view (this
+        // matters on mobile, where too many full-res layers can break rendering).
+        if (layer && !layer.getAttribute('src') && layer.dataset.src) layer.src = layer.dataset.src;
         if (layer) layer.classList.toggle('revealed');
         marker.classList.toggle('active-reveal');
       });
@@ -624,15 +631,17 @@ function activateRegion(slug) {
       m.style.setProperty('--poi-scale', 1 / scale);
       m.classList.add('active');
     });
-    // Once the zoom has settled, bring the region shapes back so a neighbour can
-    // be clicked to jump straight there; the current region's own shape is kept
-    // inert. (They stay hidden only during the transform animation, which is
-    // where repainting the SVG under it caused jank.)
-    regionSvg.classList.remove('zoomed-in');
-    polyBySlug[currentSlug]?.classList.add('current');
-    // Show every city icon while zoomed (not the dots), so neighbouring regions'
-    // icons are visible and invite navigating over to them.
-    mapStage.classList.add('poi-icons-on');
+    // Desktop only: once the zoom has settled, bring the region shapes back so a
+    // neighbour can be clicked to jump straight there (its own shape kept inert),
+    // and show every city icon so neighbours invite navigating over. On mobile
+    // the shapes must stay hidden while zoomed — exploration there goes through
+    // the POI chips, and live shapes would swallow every touch — so the whole
+    // block is skipped, keeping the pre-existing mobile behaviour intact.
+    if (!isMobile()) {
+      regionSvg.classList.remove('zoomed-in');
+      polyBySlug[currentSlug]?.classList.add('current');
+      mapStage.classList.add('poi-icons-on');
+    }
   };
   // Wait for the transform to fully settle before popping the overlay in:
   // revealing it while the map is still visibly scaling makes an instant,
