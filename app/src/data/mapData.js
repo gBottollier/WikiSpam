@@ -16,8 +16,8 @@ export const MAP_REGIONS = {
     "icon": "Logaïr.webp",
     "iconW": 3.894,
     "iconH": 10.542,
-    "iconX": 0.1661,
-    "iconY": 0.1267
+    "iconX": 0.1593,
+    "iconY": 0.1321
    },
    {
     "name": "Forêt enflammée Détwin",
@@ -29,8 +29,8 @@ export const MAP_REGIONS = {
     "icon": "Foret_en_feu.webp",
     "iconW": 5.884,
     "iconH": 7.229,
-    "iconX": 0.1277,
-    "iconY": 0.2108
+    "iconX": 0.1292,
+    "iconY": 0.2148
    },
    {
     "name": "Ruines Oniyx",
@@ -57,9 +57,9 @@ export const MAP_REGIONS = {
     "name": "Champ de Bataille Ignatus",
     "lore": true,
     "desc": "",
-    "x": 0.5,
-    "y": 0.5,
-    "locked": false
+    "x": 0.2767,
+    "y": 0.4229,
+    "locked": true
    }
   ],
   "slug": "hadeir",
@@ -550,8 +550,8 @@ export const MAP_REGIONS = {
     "icon": "Cimetière_du_Néant.webp",
     "iconW": 3.979,
     "iconH": 7.266,
-    "iconX": 0.3268,
-    "iconY": 0.1786
+    "iconX": 0.3234,
+    "iconY": 0.181
    },
    {
     "name": "Les Pentes du Souvenir",
@@ -571,8 +571,8 @@ export const MAP_REGIONS = {
     "icon": "Alween.webp",
     "iconW": 1.868,
     "iconH": 3.276,
-    "iconX": 0.3456,
-    "iconY": 0.0906
+    "iconX": 0.3516,
+    "iconY": 0.1008
    }
   ],
   "slug": "azeel",
@@ -967,8 +967,8 @@ export const MAP_REGIONS = {
     "icon": "Grotte.webp",
     "iconW": 3.796,
     "iconH": 5.49,
-    "iconX": 0.6461,
-    "iconY": 0.0495
+    "iconX": 0.6647,
+    "iconY": 0.0562
    },
    {
     "name": "Lac de l'esprit",
@@ -988,8 +988,8 @@ export const MAP_REGIONS = {
     "icon": "Pic_Glace.webp",
     "iconW": 5.371,
     "iconH": 8.346,
-    "iconX": 0.8741,
-    "iconY": 0.096
+    "iconX": 0.8758,
+    "iconY": 0.0941
    },
    {
     "name": "Terre des Loups",
@@ -1726,8 +1726,8 @@ export const MAP_REGIONS = {
     "icon": "Hyppolis.webp",
     "iconW": 6.079,
     "iconH": 10.029,
-    "iconX": 0.5318,
-    "iconY": 0.5092
+    "iconX": 0.5348,
+    "iconY": 0.5011
    }
   ],
   "slug": "vaeloria",
@@ -2686,8 +2686,8 @@ export const MAP_REGIONS = {
     "icon": "Undalys.webp",
     "iconW": 6.567,
     "iconH": 9.187,
-    "iconX": 0.2735,
-    "iconY": 0.6655
+    "iconX": 0.2889,
+    "iconY": 0.6616
    },
    {
     "name": "Pierre Sacrée",
@@ -2723,8 +2723,8 @@ export const MAP_REGIONS = {
     "icon": "Azerin.webp",
     "iconW": 4.639,
     "iconH": 5.637,
-    "iconX": 0.2514,
-    "iconY": 0.3231
+    "iconX": 0.2607,
+    "iconY": 0.3312
    },
    {
     "name": "Luthidia",
@@ -2736,8 +2736,8 @@ export const MAP_REGIONS = {
     "icon": "Luthidia.webp",
     "iconW": 6.042,
     "iconH": 10.688,
-    "iconX": 0.3475,
-    "iconY": 0.5147
+    "iconX": 0.3542,
+    "iconY": 0.4944
    }
   ],
   "slug": "lumethia",
@@ -3384,8 +3384,8 @@ export const MAP_REGIONS = {
     "icon": "Ouroboros.webp",
     "iconW": 6.006,
     "iconH": 11.658,
-    "iconX": 0.6304,
-    "iconY": 0.6373
+    "iconX": 0.6412,
+    "iconY": 0.6196
    },
    {
     "name": "Territoire de la Meute",
@@ -3397,8 +3397,8 @@ export const MAP_REGIONS = {
     "icon": "Loup_Foret.webp",
     "iconW": 2.271,
     "iconH": 8.163,
-    "iconX": 0.9678,
-    "iconY": 0.326
+    "iconX": 0.9657,
+    "iconY": 0.3394
    },
    {
     "name": "Jungle de Presolda",
@@ -3418,8 +3418,8 @@ export const MAP_REGIONS = {
     "icon": "Villages_chamaniques.webp",
     "iconW": 1.99,
     "iconH": 5.179,
-    "iconX": 0.8632,
-    "iconY": 0.2681
+    "iconX": 0.8599,
+    "iconY": 0.2762
    },
    {
     "name": "Abondance",
@@ -3431,8 +3431,8 @@ export const MAP_REGIONS = {
     "icon": "Abondance.webp",
     "iconW": 7.434,
     "iconH": 8.712,
-    "iconX": 0.7295,
-    "iconY": 0.4593
+    "iconX": 0.7403,
+    "iconY": 0.4595
    },
    {
     "name": "Marais'Cages d'Emeraldoth",
@@ -4243,8 +4243,8 @@ export const MAP_REGIONS = {
     "icon": "Vortex.webp",
     "iconW": 6.335,
     "iconH": 5.454,
-    "iconX": 0.8424,
-    "iconY": 0.9648
+    "iconX": 0.8362,
+    "iconY": 0.9621
    },
    {
     "name": "Shal'Az d'Hun",
@@ -4272,8 +4272,8 @@ export const MAP_REGIONS = {
     "icon": "Shal_Diz.webp",
     "iconW": 3.137,
     "iconH": 3.111,
-    "iconX": 0.7883,
-    "iconY": 0.6654
+    "iconX": 0.7804,
+    "iconY": 0.6601
    },
    {
     "name": "Temple de Zaar'Phahl",
@@ -4285,8 +4285,8 @@ export const MAP_REGIONS = {
     "icon": "Temple_de_Zaar_Phahl.webp",
     "iconW": 8.325,
     "iconH": 6.589,
-    "iconX": 0.796,
-    "iconY": 0.8667
+    "iconX": 0.7731,
+    "iconY": 0.848
    },
    {
     "name": "Ruines de Shal'eil",
@@ -4298,8 +4298,8 @@ export const MAP_REGIONS = {
     "icon": "Shal_eil.webp",
     "iconW": 3.955,
     "iconH": 4.85,
-    "iconX": 0.8992,
-    "iconY": 0.8851
+    "iconX": 0.8908,
+    "iconY": 0.8753
    }
   ],
   "slug": "shalzaar",
@@ -4934,8 +4934,8 @@ export const MAP_REGIONS = {
     "icon": "Plage_Etoilee.webp",
     "iconW": 2.185,
     "iconH": 4.887,
-    "iconX": 0.6121,
-    "iconY": 0.7139
+    "iconX": 0.6145,
+    "iconY": 0.726
    },
    {
     "name": "Port de Shal'ael Shala Nord",
@@ -4955,8 +4955,8 @@ export const MAP_REGIONS = {
     "icon": "Telecabine.webp",
     "iconW": 4.041,
     "iconH": 12.866,
-    "iconX": 0.6919,
-    "iconY": 0.8503
+    "iconX": 0.6854,
+    "iconY": 0.8475
    }
   ],
   "slug": "aelther",
@@ -5559,8 +5559,8 @@ export const MAP_REGIONS = {
     "icon": "Manoir.webp",
     "iconW": 3.809,
     "iconH": 5.728,
-    "iconX": 0.2123,
-    "iconY": 0.9711
+    "iconX": 0.2271,
+    "iconY": 0.9577
    },
    {
     "name": "Port de Rhiezeal",
@@ -5572,8 +5572,8 @@ export const MAP_REGIONS = {
     "icon": "Zaun.webp",
     "iconW": 3.992,
     "iconH": 8.053,
-    "iconX": 0.3176,
-    "iconY": 0.7669
+    "iconX": 0.333,
+    "iconY": 0.7593
    },
    {
     "name": "Forêt Rêveuse",
@@ -5964,8 +5964,8 @@ export const MAP_REGIONS = {
     "icon": "Nordvint.webp",
     "iconW": 2.429,
     "iconH": 2.507,
-    "iconX": 0.0675,
-    "iconY": 0.0242
+    "iconX": 0.0618,
+    "iconY": 0.0166
    },
    {
     "name": "Village d'accueil Dögghreach",
@@ -5977,8 +5977,8 @@ export const MAP_REGIONS = {
     "icon": "Dögghreach.webp",
     "iconW": 1.66,
     "iconH": 3.093,
-    "iconX": 0.0684,
-    "iconY": 0.0692
+    "iconX": 0.0697,
+    "iconY": 0.0606
    },
    {
     "name": "Ville militaire Dragheïr",
@@ -5990,8 +5990,8 @@ export const MAP_REGIONS = {
     "icon": "Dragheïr.webp",
     "iconW": 5.811,
     "iconH": 7.577,
-    "iconX": 0.0866,
-    "iconY": 0.1072
+    "iconX": 0.0927,
+    "iconY": 0.1228
    }
   ],
   "slug": "nordvinter",
@@ -6211,8 +6211,8 @@ export const MAP_REGIONS = {
     "icon": "Village_Reptilien.webp",
     "iconW": 3.503,
     "iconH": 3.587,
-    "iconX": 0.5319,
-    "iconY": 0.5978
+    "iconX": 0.5298,
+    "iconY": 0.5846
    },
    {
     "name": "Ville Engloutie",
@@ -13159,9 +13159,9 @@ export const MAP_REGIONS = {
     "name": "Faille Abyssale / Vortex",
     "lore": true,
     "desc": "",
-    "x": 0.5,
-    "y": 0.5,
-    "locked": false
+    "x": 0.5215,
+    "y": 0.6921,
+    "locked": true
    }
   ],
   "slug": "ile-oubliee",
