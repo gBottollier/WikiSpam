@@ -49,9 +49,17 @@ const MAP_REGIONS = {
     "name": "Chaines Drako'vish",
     "lore": true,
     "desc": "",
-    "x": 0.7336,
-    "y": 0.6918,
+    "x": 0.7755,
+    "y": 0.8484,
     "locked": true
+   },
+   {
+    "name": "Champ de Bataille Ignatus",
+    "lore": true,
+    "desc": "",
+    "x": 0.5,
+    "y": 0.5,
+    "locked": false
    }
   ],
   "slug": "hadeir",
@@ -528,8 +536,8 @@ const MAP_REGIONS = {
     "name": "Le Bouha",
     "lore": true,
     "desc": "",
-    "x": 0.738,
-    "y": 0.2334,
+    "x": 0.4791,
+    "y": 0.1921,
     "locked": true
    },
    {
@@ -549,8 +557,8 @@ const MAP_REGIONS = {
     "name": "Les Pentes du Souvenir",
     "lore": true,
     "desc": "",
-    "x": 0.2795,
-    "y": 0.7115,
+    "x": 0.3196,
+    "y": 0.6649,
     "locked": true
    },
    {
@@ -966,8 +974,8 @@ const MAP_REGIONS = {
     "name": "Lac de l'esprit",
     "lore": true,
     "desc": "",
-    "x": 0.4314,
-    "y": 0.4048,
+    "x": 0.4063,
+    "y": 0.4059,
     "locked": true
    },
    {
@@ -1680,32 +1688,32 @@ const MAP_REGIONS = {
     "name": "Fleuve Endormi",
     "lore": true,
     "desc": "",
-    "x": 0.5168,
-    "y": 0.6474,
+    "x": 0.497,
+    "y": 0.7411,
     "locked": true
    },
    {
     "name": "La Clairière",
     "lore": true,
     "desc": "",
-    "x": 0.3515,
-    "y": 0.3442,
+    "x": 0.304,
+    "y": 0.4007,
     "locked": true
    },
    {
     "name": "Forêt de Vaelor",
     "lore": true,
     "desc": "",
-    "x": 0.3837,
-    "y": 0.4342,
+    "x": 0.395,
+    "y": 0.4851,
     "locked": true
    },
    {
     "name": "Falaises de l'Aube",
     "lore": true,
     "desc": "",
-    "x": 0.2582,
-    "y": 0.5222,
+    "x": 0.213,
+    "y": 0.6053,
     "locked": true
    },
    {
@@ -2685,24 +2693,24 @@ const MAP_REGIONS = {
     "name": "Pierre Sacrée",
     "lore": true,
     "desc": "",
-    "x": 0.5402,
-    "y": 0.8167,
+    "x": 0.6203,
+    "y": 0.7845,
     "locked": true
    },
    {
     "name": "Les Plaines du Souvenir",
     "lore": true,
     "desc": "",
-    "x": 0.5618,
-    "y": 0.159,
+    "x": 0.5833,
+    "y": 0.2373,
     "locked": true
    },
    {
     "name": "Récif de corail Alphilan",
     "lore": true,
     "desc": "",
-    "x": 0.6945,
-    "y": 0.119,
+    "x": 0.6634,
+    "y": 0.1367,
     "locked": true
    },
    {
@@ -3396,8 +3404,8 @@ const MAP_REGIONS = {
     "name": "Jungle de Presolda",
     "lore": true,
     "desc": "",
-    "x": 0.9156,
-    "y": 0.7034,
+    "x": 0.9141,
+    "y": 0.721,
     "locked": true
    },
    {
@@ -3430,8 +3438,8 @@ const MAP_REGIONS = {
     "name": "Marais'Cages d'Emeraldoth",
     "lore": true,
     "desc": "",
-    "x": 0.535,
-    "y": 0.7414,
+    "x": 0.5404,
+    "y": 0.7818,
     "locked": true
    }
   ],
@@ -4242,16 +4250,16 @@ const MAP_REGIONS = {
     "name": "Shal'Az d'Hun",
     "lore": true,
     "desc": "",
-    "x": 0.8607,
-    "y": 0.3733,
+    "x": 0.8802,
+    "y": 0.2633,
     "locked": true
    },
    {
     "name": "Shal'Irhba",
     "lore": true,
     "desc": "",
-    "x": 0.2895,
-    "y": 0.3753,
+    "x": 0.2799,
+    "y": 0.2849,
     "locked": true
    },
    {
@@ -4904,16 +4912,16 @@ const MAP_REGIONS = {
     "name": "Okaemi / Vallée des Eclats",
     "lore": true,
     "desc": "",
-    "x": 0.6562,
-    "y": 0.911,
+    "x": 0.6385,
+    "y": 0.9151,
     "locked": true
    },
    {
     "name": "Mont Céleste",
     "lore": true,
     "desc": "",
-    "x": 0.7866,
-    "y": 0.8337,
+    "x": 0.7806,
+    "y": 0.7496,
     "locked": true
    },
    {
@@ -5571,16 +5579,16 @@ const MAP_REGIONS = {
     "name": "Forêt Rêveuse",
     "lore": true,
     "desc": "",
-    "x": 0.3881,
-    "y": 0.7431,
+    "x": 0.3716,
+    "y": 0.6699,
     "locked": true
    },
    {
     "name": "La Toundra",
     "lore": true,
     "desc": "",
-    "x": 0.589,
-    "y": 0.6325,
+    "x": 0.6111,
+    "y": 0.6537,
     "locked": true
    }
   ],
@@ -5984,14 +5992,6 @@ const MAP_REGIONS = {
     "iconH": 7.577,
     "iconX": 0.0866,
     "iconY": 0.1072
-   },
-   {
-    "name": "Champ de Bataille Ignatus",
-    "lore": true,
-    "desc": "",
-    "x": 1,
-    "y": 1,
-    "locked": true
    }
   ],
   "slug": "nordvinter",
@@ -6197,8 +6197,8 @@ const MAP_REGIONS = {
     "name": "Nid d'Aldrin",
     "lore": true,
     "desc": "",
-    "x": 0.6344,
-    "y": 0.6326,
+    "x": 0.6751,
+    "y": 0.6447,
     "locked": true
    },
    {
@@ -6215,19 +6215,11 @@ const MAP_REGIONS = {
     "iconY": 0.5978
    },
    {
-    "name": "Faille Abyssale / Vortex",
-    "lore": true,
-    "desc": "",
-    "x": 0.4237,
-    "y": 1.0,
-    "locked": true
-   },
-   {
     "name": "Ville Engloutie",
     "lore": true,
     "desc": "",
-    "x": 0.3652,
-    "y": 0.7074,
+    "x": 0.3325,
+    "y": 0.821,
     "locked": true,
     "reveals": "ville-engloutie"
    }
@@ -13162,7 +13154,16 @@ const MAP_REGIONS = {
  "ile-oubliee": {
   "name": "Île Oubliée",
   "description": "",
-  "points": [],
+  "points": [
+   {
+    "name": "Faille Abyssale / Vortex",
+    "lore": true,
+    "desc": "",
+    "x": 0.5,
+    "y": 0.5,
+    "locked": false
+   }
+  ],
   "slug": "ile-oubliee",
   "noCrop": true,
   "bbox": [

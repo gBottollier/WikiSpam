@@ -305,7 +305,9 @@ Object.entries(poiEdits).forEach(([slug, pts]) => {
   if (!region) return;
   pts.forEach((saved) => {
     const pt = region.points.find((p) => p.name === saved.name);
-    if (pt) { pt.x = saved.x; pt.y = saved.y; }
+    if (!pt) return;
+    if (saved.iconX != null) { pt.iconX = saved.iconX; pt.iconY = saved.iconY; }  // icon POIs move by absolute coords
+    else { pt.x = saved.x; pt.y = saved.y; }
   });
 });
 if (EDIT_MODE) document.body.classList.add('edit-mode');
@@ -709,6 +711,13 @@ function pointLocalFromClient(slug, clientX, clientY) {
 }
 
 function placeMarker(marker, slug, pt) {
+  if (pt.icon) {
+    // Icons carry absolute iconX/iconY (over the whole map) and are centred on
+    // that point via the iconW/iconH offset — same as the build-time placement.
+    marker.style.left = `${(pt.iconX - pt.iconW / 200) * 100}%`;
+    marker.style.top = `${(pt.iconY - pt.iconH / 200) * 100}%`;
+    return;
+  }
   const bbox = bboxes[slug];
   marker.style.left = `${(bbox.x0 + pt.x * bbox.w) * 100}%`;
   marker.style.top = `${(bbox.y0 + pt.y * bbox.h) * 100}%`;
@@ -717,9 +726,12 @@ function placeMarker(marker, slug, pt) {
 function persistPoint(slug, pt) {
   const edits = loadPoiEdits();
   const list = edits[slug] || (edits[slug] = []);
+  const rec = pt.icon
+    ? { name: pt.name, iconX: pt.iconX, iconY: pt.iconY }
+    : { name: pt.name, x: pt.x, y: pt.y };
   const existing = list.find((p) => p.name === pt.name);
-  if (existing) { existing.x = pt.x; existing.y = pt.y; }
-  else list.push({ name: pt.name, x: pt.x, y: pt.y });
+  if (existing) Object.assign(existing, rec);
+  else list.push(rec);
   savePoiEdits(edits);
 }
 
@@ -733,8 +745,11 @@ function updateEditorPanel(slug) {
   }
   const region = MAP_REGIONS[slug];
   poiEditorTitle.textContent = `Mode édition — ${region.name}`;
-  const lines = region.points.map(
-    (pt) => `${pt.name}\t${pt.x.toFixed(4)}\t${pt.y.toFixed(4)}`
+  // Icons export their absolute iconX/iconY; dots export bbox-relative x/y.
+  const lines = region.points.map((pt) =>
+    pt.icon
+      ? `${pt.name}\t${pt.iconX.toFixed(4)}\t${pt.iconY.toFixed(4)}\ticon`
+      : `${pt.name}\t${pt.x.toFixed(4)}\t${pt.y.toFixed(4)}`
   );
   poiEditorTextarea.value = `# ${slug}\n` + lines.join('\n');
   poiEditorStatus.textContent = '';
@@ -751,8 +766,15 @@ function attachMarkerDrag(marker, slug, pt) {
     marker.setPointerCapture(e.pointerId);
 
     const onMove = (ev) => {
-      const { x, y } = pointLocalFromClient(slug, ev.clientX, ev.clientY);
-      pt.x = x; pt.y = y;
+      if (pt.icon) {
+        // Icons move by absolute map coords (their centre follows the cursor).
+        const r = worldContent.getBoundingClientRect();
+        pt.iconX = Math.min(1, Math.max(0, (ev.clientX - r.left) / r.width));
+        pt.iconY = Math.min(1, Math.max(0, (ev.clientY - r.top) / r.height));
+      } else {
+        const { x, y } = pointLocalFromClient(slug, ev.clientX, ev.clientY);
+        pt.x = x; pt.y = y;
+      }
       placeMarker(marker, slug, pt);
       if (poiEditor) {
         // Live-update just this point's line in the textarea.
@@ -766,7 +788,8 @@ function attachMarkerDrag(marker, slug, pt) {
       marker.removeEventListener('pointerup', onUp);
       persistPoint(slug, pt);
       updateEditorPanel(slug);
-      if (poiEditorStatus) poiEditorStatus.textContent = `« ${pt.name} » placé (${pt.x.toFixed(4)}, ${pt.y.toFixed(4)})`;
+      const coord = pt.icon ? `${pt.iconX.toFixed(4)}, ${pt.iconY.toFixed(4)}` : `${pt.x.toFixed(4)}, ${pt.y.toFixed(4)}`;
+      if (poiEditorStatus) poiEditorStatus.textContent = `« ${pt.name} » placé (${coord})`;
     };
     marker.addEventListener('pointermove', onMove);
     marker.addEventListener('pointerup', onUp);
@@ -778,7 +801,7 @@ function buildEditorPanel() {
   poiEditor.id = 'poi-editor';
   poiEditor.innerHTML =
     '<h4></h4>' +
-    '<p class="hint">Glissez les points verts pour les placer. Copiez les coordonnées et renvoyez-les.</p>' +
+    '<p class="hint">Glissez les points et les icônes pour les placer. Copiez les coordonnées et renvoyez-les.</p>' +
     '<textarea readonly spellcheck="false"></textarea>' +
     '<div class="poi-editor-btns">' +
     '<button type="button" data-act="copy">Copier</button>' +
