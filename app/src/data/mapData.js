@@ -4938,7 +4938,7 @@ export const MAP_REGIONS = {
     "iconY": 0.726
    },
    {
-    "name": "Port de Shal'ael Shala Nord",
+    "name": "Traversée Nord",
     "lore": true,
     "desc": "",
     "x": 0.6107,
@@ -4946,7 +4946,7 @@ export const MAP_REGIONS = {
     "locked": true
    },
    {
-    "name": "Port de Shal'ael Shala Sud",
+    "name": "Traversée Sud",
     "lore": true,
     "desc": "",
     "x": 0.5825,
