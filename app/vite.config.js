@@ -15,8 +15,9 @@ const MIME = {
   '.otf': 'font/otf', '.ttf': 'font/ttf', '.woff': 'font/woff', '.woff2': 'font/woff2',
 }
 
-// In dev, the shared static assets (img/, etc.) live at the repo root and are
-// deployed at /WikiSpam/ in prod. Serve them locally so `npm run dev` shows them.
+// In dev, the shared assets (img/, sound/, font.otf) live at the repo root and
+// are deployed at /WikiSpam/ in prod. Serve them locally so `npm run dev` shows
+// them (the Vue app itself is now served at the site root, /WikiSpam/).
 function serveRootAssets() {
   return {
     name: 'serve-root-assets-dev',
@@ -26,7 +27,7 @@ function serveRootAssets() {
           const url = decodeURIComponent((req.url || '').split('?')[0])
           // font.otf (la police Oniyx) vit a la racine du site, pas dans un
           // dossier : on la sert explicitement en plus des dossiers partages.
-          const m = url.match(/^\/WikiSpam\/((?:img|css|js|fonts)\/.*|font\.otf)$/)
+          const m = url.match(/^\/WikiSpam\/((?:img|sound)\/.*|font\.otf)$/)
           if (m) {
             const filePath = path.join(repoRoot, m[1])
             if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
@@ -42,8 +43,9 @@ function serveRootAssets() {
   }
 }
 
-// Servi depuis https://gbottollier.github.io/WikiSpam/  (app dans /app/).
+// Servi directement depuis https://gbottollier.github.io/WikiSpam/ (l'app Vue
+// est desormais a la racine du site ; il n'y a plus de site statique).
 export default defineConfig({
-  base: '/WikiSpam/app/',
+  base: '/WikiSpam/',
   plugins: [vue(), serveRootAssets()],
 })
