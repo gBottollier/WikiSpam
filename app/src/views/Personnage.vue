@@ -173,11 +173,14 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.b
   inset: -10%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  grid-auto-rows: 1fr;
+  align-content: start;
   gap: 18px;
   opacity: 0.5;
 }
 .teaser-tile {
+  /* Meme silhouette que les vraies cartes (.char-media) : on reconnait une
+     galerie de personnages sans qu'il y ait quoi que ce soit a voir. */
+  aspect-ratio: 3 / 4;
   border-radius: 16px;
   border: 1px solid var(--glass-border);
   background: linear-gradient(160deg, rgba(126, 63, 242, 0.16), rgba(0, 180, 255, 0.05));
