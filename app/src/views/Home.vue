@@ -33,6 +33,7 @@ const mapper = {
 }
 
 const illustrators = [
+  { name: 'Embers', links: [{ type: 'instagram', url: 'https://www.instagram.com/salty_embers/' }, { type: 'twitch', url: 'https://www.twitch.tv/salty_embers' }] },
   { name: 'Nao', links: [{ type: 'artstation', url: 'https://www.artstation.com/noadumas' }] },
   { name: 'Daerun', links: [{ type: 'artstation', url: 'https://www.artstation.com/daerun' }] },
   { name: 'Atto', links: [] },
