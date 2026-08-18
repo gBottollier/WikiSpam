@@ -4,6 +4,28 @@ import { regions } from '../data/personnages.js'
 import { REGION_BANNERS } from '../data/regionBanners.js'
 import { asset } from '../lib/assets.js'
 
+// ===== Voile de teasing =====
+// Le jeu n'est pas sorti et les illustrations de cartes ne doivent pas fuiter :
+// tant que TEASER vaut true, la page entiere est remplacee par le voile. Le
+// reste de la page (regions, bandeaux, fiches) est intact dessous, il suffit de
+// repasser TEASER a false le jour de la sortie.
+//
+// Important : les illustrations ne sont pas simplement floutees, elles ne sont
+// PAS chargees. Un flou CSS se retire en deux clics dans les outils de
+// developpement, et les images seraient quand meme telechargees ; ici il n'y a
+// rien a devoiler dans la page.
+const TEASER = true
+
+// Phrase en clair, puis la meme intention en Oniyx (la police du lore) : qui
+// veut la lire doit retrouver la police. Oniyx ne contient que les lettres,
+// l'espace et le point, donc pas d'accents, pas d'apostrophes, pas de tirets.
+const TEASER_CLEAR = 'Ils existent deja. Vous ne les verrez pas encore.'
+const TEASER_RUNES = 'Six clefs dorment encore. Un seul sceau les retient toutes.'
+
+// Le texte code ne s'affiche qu'une fois la police chargee : sinon il
+// apparaitrait en clair et le secret tomberait tout seul.
+const runesReady = ref(false)
+
 const activeKey = ref(regions[0].key)
 const current = computed(() => regions.find((r) => r.key === activeKey.value))
 const selected = ref(null)   // personnage ouvert dans la fiche
@@ -33,12 +55,43 @@ function onKey(e) { if (e.key === 'Escape') closeChar() }
 watch(selected, (v) => {
   document.body.style.overflow = v ? 'hidden' : ''
 })
-onMounted(() => window.addEventListener('keydown', onKey))
+// La police vit a la racine du site (partagee avec chronologie.html), donc on la
+// charge via asset() plutot qu'avec un @font-face en dur : le chemin de base
+// change entre le dev et GitHub Pages.
+async function loadRunes() {
+  if (!('FontFace' in window)) return
+  try {
+    const f = new FontFace('Oniyx', `url(${asset('font.otf')})`)
+    await f.load()
+    document.fonts.add(f)
+    runesReady.value = true
+  } catch {
+    runesReady.value = false   // pas de police, pas de texte en clair
+  }
+}
+
+onMounted(() => {
+  if (TEASER) loadRunes()
+  window.addEventListener('keydown', onKey)
+})
 onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.body.style.overflow = '' })
 </script>
 
 <template>
-  <div class="perso">
+  <section v-if="TEASER" class="teaser" aria-label="Personnages a venir">
+    <!-- Page voilee tant que le jeu n'est pas sorti. Les tuiles du fond sont
+         vides : elles donnent la silhouette d'une galerie sans rien en montrer. -->
+    <div class="teaser-grid" aria-hidden="true">
+      <span v-for="n in 24" :key="n" class="teaser-tile"></span>
+    </div>
+    <div class="teaser-veil" aria-hidden="true"></div>
+    <div class="teaser-text">
+      <p class="teaser-clear">{{ TEASER_CLEAR }}</p>
+      <p v-if="runesReady" class="teaser-runes">{{ TEASER_RUNES }}</p>
+    </div>
+  </section>
+
+  <div v-else class="perso">
     <!-- Sélecteur de régions -->
     <nav class="emblem-bar" aria-label="Régions">
       <button
@@ -103,6 +156,67 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.b
 </template>
 
 <style scoped>
+/* ===== Voile de teasing =====
+   Aucun filtre CSS ni backdrop-filter : les tuiles du fond sont deja vides,
+   un simple aplat sombre par-dessus suffit et ne coute rien a repeindre. */
+.teaser {
+  position: relative;
+  min-height: calc(100vh - var(--nav-h) - 40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(20px, 6vw, 60px);
+}
+.teaser-grid {
+  position: absolute;
+  inset: -10%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 18px;
+  opacity: 0.5;
+}
+.teaser-tile {
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  background: linear-gradient(160deg, rgba(126, 63, 242, 0.16), rgba(0, 180, 255, 0.05));
+}
+.teaser-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(10, 0, 40, 0.86), rgba(4, 0, 16, 0.97) 70%);
+}
+.teaser-text {
+  position: relative;
+  text-align: center;
+  max-width: 880px;
+}
+.teaser-clear {
+  margin: 0 0 clamp(20px, 4vw, 36px);
+  color: var(--text);
+  font-size: clamp(0.95rem, 2.4vw, 1.35rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+/* Le texte code est la piece maitresse : nettement plus grand que la phrase en
+   clair, et lisible seulement pour qui retrouve la police du lore. */
+.teaser-runes {
+  margin: 0;
+  font-family: 'Oniyx', serif;
+  font-size: clamp(1.9rem, 6.5vw, 4rem);
+  line-height: 1.5;
+  color: #d9ecff;
+  text-shadow: 0 0 18px rgba(126, 63, 242, 0.75), 0 0 42px rgba(0, 180, 255, 0.35);
+  animation: rune-pulse 7s ease-in-out infinite;
+}
+@keyframes rune-pulse {
+  0%, 100% { opacity: 0.72; }
+  50% { opacity: 1; }
+}
+
 .perso {
   max-width: 1400px;
   margin: 0 auto;

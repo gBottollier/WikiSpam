@@ -12,6 +12,7 @@ const MIME = {
   '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon', '.css': 'text/css', '.js': 'text/javascript',
   '.json': 'application/json', '.webm': 'video/webm', '.mp4': 'video/mp4',
+  '.otf': 'font/otf', '.ttf': 'font/ttf', '.woff': 'font/woff', '.woff2': 'font/woff2',
 }
 
 // In dev, the shared static assets (img/, etc.) live at the repo root and are
@@ -23,7 +24,9 @@ function serveRootAssets() {
       server.middlewares.use((req, res, next) => {
         try {
           const url = decodeURIComponent((req.url || '').split('?')[0])
-          const m = url.match(/^\/WikiSpam\/((?:img|css|js|fonts)\/.*)$/)
+          // font.otf (la police Oniyx) vit a la racine du site, pas dans un
+          // dossier : on la sert explicitement en plus des dossiers partages.
+          const m = url.match(/^\/WikiSpam\/((?:img|css|js|fonts)\/.*|font\.otf)$/)
           if (m) {
             const filePath = path.join(repoRoot, m[1])
             if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
