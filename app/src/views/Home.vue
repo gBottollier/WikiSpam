@@ -26,7 +26,6 @@ const socialIcons = {
 
 const mapper = {
   name: 'Embers',
-  role: 'Cartographe — cartes du monde',
   links: [
     { type: 'instagram', url: 'https://www.instagram.com/salty_embers/' },
     { type: 'twitch', url: 'https://www.twitch.tv/salty_embers' },
@@ -44,9 +43,8 @@ const illustrators = [
   { name: 'Trinity', links: [] },
   { name: 'La Lune Rouge', links: [{ type: 'instagram', url: 'https://www.instagram.com/thelunerouge' }] },
   { name: 'San', links: [{ type: 'instagram', url: 'https://www.instagram.com/vincent__ricci/' }] },
+  { name: 'Nenaosu', links: [{ type: 'artstation', url: 'https://www.artstation.com/nenaosuart' }] },
 ]
-
-const fontCredit = { name: 'Nenaosu', url: 'https://www.artstation.com/nenaosuart' }
 </script>
 
 <template>
@@ -78,38 +76,45 @@ const fontCredit = { name: 'Nenaosu', url: 'https://www.artstation.com/nenaosuar
           <img :src="asset(`img/avatar/${m.img}.webp`)" :alt="m.name" loading="lazy">
           <div class="member-info">
             <h3>{{ m.name }}</h3>
-            <p>{{ m.role }}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="credits-section">
-      <h2>🗺️ Cartographie</h2>
-      <div class="credit-featured">
-        <h3>{{ mapper.name }}</h3>
-        <p>{{ mapper.role }}</p>
-        <div class="socials">
-          <a
-            v-for="l in mapper.links"
-            :key="l.url"
-            class="social"
-            :href="l.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            :aria-label="`${mapper.name} sur ${l.type}`"
-          >
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path :d="socialIcons[l.type]" /></svg>
-          </a>
+    <section class="credits">
+      <h2>🎨 Illustrations</h2>
+
+      <p class="credit-group-label">Cartographie</p>
+      <div class="illus-grid">
+        <div class="illus-card">
+          <span class="avatar">
+            <img v-if="mapper.img" :src="asset(`img/illus/${mapper.img}.webp`)" :alt="mapper.name" loading="lazy">
+            <svg v-else class="avatar-default" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>
+          </span>
+          <span class="illus-name">{{ mapper.name }}</span>
+          <span class="illus-links">
+            <a
+              v-for="l in mapper.links"
+              :key="l.url"
+              class="social"
+              :href="l.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              :aria-label="`${mapper.name} sur ${l.type}`"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path :d="socialIcons[l.type]" /></svg>
+            </a>
+          </span>
         </div>
       </div>
-    </section>
 
-    <section class="illustrators">
-      <h2>🎨 Illustrateurs des cartes</h2>
-      <p class="section-sub">Merci aux artistes qui ont donné vie aux cartes.</p>
+      <p class="credit-group-label">Illustrateurs des cartes</p>
       <div class="illus-grid">
         <div v-for="a in illustrators" :key="a.name" class="illus-card">
+          <span class="avatar">
+            <img v-if="a.img" :src="asset(`img/illus/${a.img}.webp`)" :alt="a.name" loading="lazy">
+            <svg v-else class="avatar-default" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>
+          </span>
           <span class="illus-name">{{ a.name }}</span>
           <span v-if="a.links.length" class="illus-links">
             <a
@@ -126,11 +131,6 @@ const fontCredit = { name: 'Nenaosu', url: 'https://www.artstation.com/nenaosuar
           </span>
         </div>
       </div>
-      <p class="font-credit">
-        Police typographique par
-        <a :href="fontCredit.url" target="_blank" rel="noopener noreferrer">{{ fontCredit.name }}</a>
-        — merci !
-      </p>
     </section>
   </div>
 </template>
@@ -216,34 +216,56 @@ const fontCredit = { name: 'Nenaosu', url: 'https://www.artstation.com/nenaosuar
 .member-card h3 { color: var(--accent); font-size: 1.2rem; margin: 0; }
 .member-card p { color: #b9dfff; font-size: 0.9rem; margin: 4px 0 0; }
 
-/* ---------- Credits: cartographer + illustrators ---------- */
-.credits-section h2, .illustrators h2 {
+/* ---------- Credits: cartography + illustrators ---------- */
+.credits h2 {
   font-size: 2rem;
   text-shadow: 0 0 10px var(--accent);
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
-.credit-featured {
-  display: inline-flex;
+.credit-group-label {
+  color: #9fc4ec;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: 28px 0 16px;
+}
+.credit-group-label:first-of-type { margin-top: 0; }
+
+.illus-grid { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+.illus-card {
+  display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  width: 140px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--glass-border);
-  border-radius: 18px;
-  padding: 24px 40px;
-  transition: all 0.3s ease;
+  border-radius: 16px;
+  padding: 18px 14px;
+  transition: all 0.25s ease;
 }
-.credit-featured:hover { transform: translateY(-4px); box-shadow: 0 0 18px rgba(126, 63, 242, 0.4); }
-.credit-featured h3 { color: var(--accent); font-size: 1.3rem; margin: 0; }
-.credit-featured p { color: #b9dfff; font-size: 0.92rem; margin: 0; }
-
-.socials, .illus-links { display: inline-flex; gap: 10px; }
-.socials { margin-top: 6px; }
+.illus-card:hover { transform: translateY(-4px); box-shadow: 0 0 16px rgba(126, 63, 242, 0.4); }
+.avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(126, 63, 242, 0.15);
+  flex-shrink: 0;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-default { width: 56%; height: 56%; fill: #9fc4ec; opacity: 0.85; }
+.illus-name { color: var(--accent); font-weight: 600; text-align: center; }
+.illus-links { display: inline-flex; gap: 8px; }
 .social {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px; height: 34px;
+  width: 30px; height: 30px;
   border-radius: 50%;
   color: #b9dfff;
   border: 1px solid var(--glass-border);
@@ -256,26 +278,6 @@ const fontCredit = { name: 'Nenaosu', url: 'https://www.artstation.com/nenaosuar
   box-shadow: 0 0 12px rgba(0, 180, 255, 0.4);
   transform: translateY(-2px);
 }
-
-.section-sub { color: #b9dfff; margin: -6px 0 28px; }
-.illus-grid { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
-.illus-card {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--glass-border);
-  border-radius: 30px;
-  padding: 9px 18px;
-  transition: all 0.25s ease;
-}
-.illus-card:hover { transform: translateY(-3px); box-shadow: 0 0 14px rgba(126, 63, 242, 0.4); }
-.illus-name { color: var(--accent); font-weight: 600; }
-.illus-links .social { width: 28px; height: 28px; }
-
-.font-credit { margin-top: 34px; color: #c8e8ff; }
-.font-credit a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(0, 180, 255, 0.4); }
-.font-credit a:hover { color: #fff; }
 
 @media (max-width: 900px) {
   .team-lore { gap: 36px; padding: 40px 5%; }
@@ -295,8 +297,7 @@ const fontCredit = { name: 'Nenaosu', url: 'https://www.artstation.com/nenaosuar
   .member-info { text-align: left; }
   .member-card h3 { font-size: 1.05rem; }
 
-  .credits-section h2, .illustrators h2 { font-size: 1.5rem; }
-  .credit-featured { padding: 18px 24px; }
-  .illus-card { padding: 8px 14px; }
+  .credits h2 { font-size: 1.5rem; }
+  .illus-card { width: 120px; padding: 14px 10px; }
 }
 </style>
