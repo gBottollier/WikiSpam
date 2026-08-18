@@ -1,11 +1,25 @@
 <script setup>
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { regions } from '../data/personnages.js'
+import { REGION_BANNERS } from '../data/regionBanners.js'
 import { asset } from '../lib/assets.js'
 
 const activeKey = ref(regions[0].key)
 const current = computed(() => regions.find((r) => r.key === activeKey.value))
 const selected = ref(null)   // personnage ouvert dans la fiche
+
+// Bandeau de region : un decoupage de la carte du monde (genere par
+// tools/make_region_banners.py), pas une illustration hors-carte. Deux formats
+// figes dans le fichier — le navigateur n'en telecharge qu'un et n'a qu'une
+// image a decoder, aucun calque ni filtre a recomposer a l'affichage.
+const banner = computed(() => {
+  const key = current.value.key
+  if (!REGION_BANNERS.has(key)) return null
+  return {
+    desktop: asset(`img/region/banner/${key}.webp`),
+    mobile: asset(`img/region/banner/${key}-m.webp`),
+  }
+})
 
 function selectRegion(key) {
   activeKey.value = key
@@ -42,7 +56,14 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.b
 
     <!-- En-tête région -->
     <header class="region-header">
-      <img v-if="current.bg" :src="asset(current.bg)" :alt="current.name" class="region-bg" loading="lazy">
+      <!-- :key force le remplacement de <picture> au changement de region :
+           modifier le srcset d'un <source> en place n'est pas toujours
+           re-evalue par les navigateurs. -->
+      <picture v-if="banner" :key="current.key">
+        <source :srcset="banner.mobile" media="(max-width: 900px)">
+        <img :src="banner.desktop" :alt="'Carte de ' + current.name" class="region-bg" decoding="async">
+      </picture>
+      <img v-else-if="current.bg" :src="asset(current.bg)" :alt="current.name" class="region-bg" loading="lazy">
       <div class="region-header-inner">
         <h1>{{ current.name }}</h1>
         <span class="region-count">{{ current.characters.length }} personnage{{ current.characters.length > 1 ? 's' : '' }}</span>
@@ -122,12 +143,14 @@ onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); document.b
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid var(--glass-border);
-  min-height: 150px;
+  min-height: 180px;
   display: flex; align-items: center; justify-content: center;
   text-align: center;
   margin: 16px 0 30px;
 }
-.region-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+/* Le bandeau est deja desature/assombri a la generation : pas d'opacite ni de
+   filtre CSS ici, qui se repaieraient a chaque repaint. */
+.region-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .region-header-inner { position: relative; width: 100%; padding: 28px 20px; background: radial-gradient(ellipse at center, rgba(10, 0, 40, 0.7), rgba(10, 0, 40, 0.35)); }
 .region-header h1 { font-size: clamp(1.8rem, 5vw, 3rem); margin: 0; text-shadow: 0 0 16px var(--accent-bright); letter-spacing: 1px; }
 .region-count { color: var(--accent); font-weight: 600; }
