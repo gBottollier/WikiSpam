@@ -26,27 +26,30 @@ const socialIcons = {
   web: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.99 7.99 0 0 1 5.08 16zm2.95-8H5.08a7.99 7.99 0 0 1 4.33-3.56A15.65 15.65 0 0 0 7.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z',
 }
 
+const linkOrder = ['artstation', 'instagram', 'x', 'twitch', 'web']
+const orderedLinks = (links) => [...links].sort((a, b) => linkOrder.indexOf(a.type) - linkOrder.indexOf(b.type))
+
 const mapper = {
   name: 'Embers',
   img: 'embers',
   links: [
-    { type: 'instagram', url: 'https://www.instagram.com/salty_embers/' },
+    { type: 'instagram', url: 'https://www.instagram.com/_3mbers/' },
     { type: 'twitch', url: 'https://www.twitch.tv/salty_embers' },
   ],
 }
 
 const illustrators = [
-  { name: 'Embers', img: 'embers', links: [{ type: 'instagram', url: 'https://www.instagram.com/salty_embers/' }, { type: 'twitch', url: 'https://www.twitch.tv/salty_embers' }] },
+  { name: 'Embers', img: 'embers', links: [{ type: 'instagram', url: 'https://www.instagram.com/_3mbers/' }, { type: 'twitch', url: 'https://www.twitch.tv/salty_embers' }] },
   { name: 'Nao', img: 'nao', links: [{ type: 'artstation', url: 'https://www.artstation.com/noadumas' }] },
-  { name: 'Daerun', img: 'daerun', links: [{ type: 'artstation', url: 'https://www.artstation.com/daerun' }, { type: 'instagram', url: 'https://www.instagram.com/daerun_/' }] },
-  { name: 'Atto', img: 'atto', links: [{ type: 'web', url: 'https://linktr.ee/atto_wnd' }] },
-  { name: 'Saki', img: 'saki', links: [{ type: 'instagram', url: 'https://www.instagram.com/frozen.redemption/' }, { type: 'web', url: 'https://sakiga.carrd.co/' }] },
+  { name: 'Daerun', img: 'daerun', links: [{ type: 'artstation', url: 'https://www.artstation.com/daerun' }, { type: 'instagram', url: 'https://www.instagram.com/daerun_/' }, { type: 'x', url: 'https://x.com/Daerun1' }] },
+  { name: 'Atto', img: 'atto', links: [{ type: 'instagram', url: 'https://www.instagram.com/Atto.ink' }, { type: 'x', url: 'https://x.com/Atto_Wnd' }, { type: 'web', url: 'https://linktr.ee/atto_wnd' }] },
+  { name: 'Saki', img: 'saki', links: [{ type: 'instagram', url: 'https://www.instagram.com/frozen.redemption/' }, { type: 'twitch', url: 'https://www.twitch.tv/saki_gd' }, { type: 'web', url: 'https://sakiga.carrd.co/' }] },
   { name: 'Lugalabdubur', img: 'lugalabdubur', links: [] },
   { name: 'Euphy', img: 'euphy', links: [{ type: 'artstation', url: 'https://www.artstation.com/euphyart' }, { type: 'x', url: 'https://x.com/ArtEuphy' }, { type: 'web', url: 'https://euphy.carrd.co/' }] },
   { name: 'Takoo', img: 'takoo', links: [{ type: 'instagram', url: 'https://www.instagram.com/takoo.real/' }, { type: 'x', url: 'https://x.com/Takoo_real' }, { type: 'web', url: 'https://avely.me/takoo' }] },
   { name: 'Trinity', img: 'trinity', links: [] },
   { name: 'La Lune Rouge', links: [{ type: 'instagram', url: 'https://www.instagram.com/thelunerouge' }] },
-  { name: 'San', img: 'san', links: [{ type: 'instagram', url: 'https://www.instagram.com/vincent__ricci/' }, { type: 'artstation', url: 'https://www.artstation.com/vincent_ricci' }] },
+  { name: 'San', img: 'san', links: [{ type: 'instagram', url: 'https://www.instagram.com/vincent__ricci/' }, { type: 'artstation', url: 'https://www.artstation.com/vincent_ricci' }, { type: 'x', url: 'https://x.com/Ricci963' }] },
   { name: 'Nenaosu', img: 'nenaosu', links: [{ type: 'artstation', url: 'https://www.artstation.com/nenaosuart' }, { type: 'instagram', url: 'https://www.instagram.com/nenaosuart/' }, { type: 'x', url: 'https://x.com/nenaosu' }] },
 ]
 </script>
@@ -98,7 +101,7 @@ const illustrators = [
           <span class="illus-name">{{ mapper.name }}</span>
           <span class="illus-links">
             <a
-              v-for="l in mapper.links"
+              v-for="l in orderedLinks(mapper.links)"
               :key="l.url"
               class="social"
               :href="l.url"
@@ -122,7 +125,7 @@ const illustrators = [
           <span class="illus-name">{{ a.name }}</span>
           <span v-if="a.links.length" class="illus-links">
             <a
-              v-for="l in a.links"
+              v-for="l in orderedLinks(a.links)"
               :key="l.url"
               class="social"
               :href="l.url"
