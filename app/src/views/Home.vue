@@ -10,7 +10,7 @@ const projects = [
 
 const team = [
   { name: '@AncestralZ', role: "L'Architecte", img: 'AncestralZ' },
-  { name: '@Aonoa', role: 'Le Conteur', img: 'Aonoa' },
+  { name: '@Bisdea', role: 'Le Conteur', img: 'Aonoa' },
   { name: '@Blacotte', role: "L'archiviste", img: 'Blacotte' },
   { name: '@Chelonia', role: "L'Aède", img: 'Chelonia' },
   { name: '@ERY', role: 'Le Naturaliste', img: 'ERY' },
@@ -26,6 +26,7 @@ const socialIcons = {
 
 const mapper = {
   name: 'Embers',
+  img: 'embers',
   links: [
     { type: 'instagram', url: 'https://www.instagram.com/salty_embers/' },
     { type: 'twitch', url: 'https://www.twitch.tv/salty_embers' },
@@ -33,7 +34,7 @@ const mapper = {
 }
 
 const illustrators = [
-  { name: 'Embers', links: [{ type: 'instagram', url: 'https://www.instagram.com/salty_embers/' }, { type: 'twitch', url: 'https://www.twitch.tv/salty_embers' }] },
+  { name: 'Embers', img: 'embers', links: [{ type: 'instagram', url: 'https://www.instagram.com/salty_embers/' }, { type: 'twitch', url: 'https://www.twitch.tv/salty_embers' }] },
   { name: 'Nao', links: [{ type: 'artstation', url: 'https://www.artstation.com/noadumas' }] },
   { name: 'Daerun', links: [{ type: 'artstation', url: 'https://www.artstation.com/daerun' }] },
   { name: 'Atto', links: [] },
