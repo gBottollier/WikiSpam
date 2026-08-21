@@ -42,11 +42,11 @@ const illustrators = [
   { name: 'Atto', img: 'atto', links: [{ type: 'web', url: 'https://linktr.ee/atto_wnd' }] },
   { name: 'Saki', img: 'saki', links: [{ type: 'instagram', url: 'https://www.instagram.com/frozen.redemption/' }, { type: 'web', url: 'https://sakiga.carrd.co/' }] },
   { name: 'Lugalabdubur', img: 'lugalabdubur', links: [] },
-  { name: 'Euphy', img: 'euphy', links: [{ type: 'artstation', url: 'https://www.artstation.com/euphyart' }, { type: 'instagram', url: 'https://www.instagram.com/euphy.art' }, { type: 'web', url: 'https://euphy.carrd.co/' }] },
-  { name: 'Takoo', img: 'takoo', links: [{ type: 'web', url: 'https://avely.me/takoo' }] },
+  { name: 'Euphy', img: 'euphy', links: [{ type: 'artstation', url: 'https://www.artstation.com/euphyart' }, { type: 'x', url: 'https://x.com/ArtEuphy' }, { type: 'web', url: 'https://euphy.carrd.co/' }] },
+  { name: 'Takoo', img: 'takoo', links: [{ type: 'instagram', url: 'https://www.instagram.com/takoo.real/' }, { type: 'x', url: 'https://x.com/Takoo_real' }, { type: 'web', url: 'https://avely.me/takoo' }] },
   { name: 'Trinity', img: 'trinity', links: [] },
   { name: 'La Lune Rouge', links: [{ type: 'instagram', url: 'https://www.instagram.com/thelunerouge' }] },
-  { name: 'San', links: [{ type: 'instagram', url: 'https://www.instagram.com/vincent__ricci/' }] },
+  { name: 'San', img: 'san', links: [{ type: 'instagram', url: 'https://www.instagram.com/vincent__ricci/' }, { type: 'artstation', url: 'https://www.artstation.com/vincent_ricci' }] },
   { name: 'Nenaosu', img: 'nenaosu', links: [{ type: 'artstation', url: 'https://www.artstation.com/nenaosuart' }, { type: 'instagram', url: 'https://www.instagram.com/nenaosuart/' }, { type: 'x', url: 'https://x.com/nenaosu' }] },
 ]
 </script>
